@@ -8,12 +8,16 @@ Vagrant.configure(2) do |config|
 	config.vm.provision "shell", inline: <<-SHELL
 	    PASSWORD='root'
 	    sudo apt-get update
+		sudo apt-get -y upgrade
 	    sudo apt-get install -y apache2
 	    sudo apt-get install -y php5
 	    sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
 	    sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $PASSWORD"
 	    sudo apt-get -y install mysql-server
 	    sudo apt-get -y install php5-mysql
+		sudo a2enmod rewrite
 	    service apache2 restart
+		curl -s https://getcomposer.org/installer | php
+		mv composer.phar /usr/local/bin/composer
     SHELL
 end
