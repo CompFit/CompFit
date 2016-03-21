@@ -10,6 +10,9 @@
 
 ##How to Run the Server
 1. SSH into the vagrant box
-2. Run 'cd /var/www/html/CompFit'
+2. Run 'cd /var/www/html/app'
 3. Run 'gulp'
-4. In the browser, navigate to http://192.168.30.25:8080/
+4. In the browser, navigate to http://localhost:8080/
+5. Edit files
+6. Ctrl-C to stop server
+7. Run 'gulp' to start again to see edits
