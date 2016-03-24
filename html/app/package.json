@@ -29,6 +29,7 @@
     "file-loader": "0.8.4",
     "gulp": "3.9.0",
     "gulp-clean": "0.3.1",
+    "gulp-hot-reload": "^1.2.4",
     "gulp-imagemin": "2.3.0",
     "gulp-livereload": "^3.8.1",
     "gulp-stylus": "2.0.6",
@@ -43,6 +44,8 @@
     "stylus-loader": "1.2.1",
     "url-loader": "0.5.6",
     "webpack": "1.12.1",
-    "webpack-dev-server": "1.10.1"
+    "webpack-dev-server": "1.10.1",
+    "webpack-hot-middleware": "^2.10.0",
+    "webpack-stream": "^3.1.0"
   }
 }
