@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "babel-loader": "5.3.2",
+    "bootstrap": "twbs/bootstrap#v4-dev",
     "compression-webpack-plugin": "0.2.0",
     "css-loader": "0.17.0",
     "file-loader": "0.8.4",
