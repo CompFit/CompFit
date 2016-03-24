@@ -25,6 +25,7 @@ gulp.task( 'webpack-dev-server', function ( callback ) {
     new WebpackDevServer( webpack( config ), {
         contentBase: path.join( __dirname, 'build' ),
         publicPath: config.output.publicPath,
+        watch: true,
         hot: true,
         historyApiFallback: true,
         stats: {

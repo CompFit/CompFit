@@ -1,5 +1,5 @@
 import './style.styl';
-import template from 'directives/footer/template.html';
+import template from 'directives/sidebar/template.html';
 
 export default function() {
     return {
@@ -8,4 +8,3 @@ export default function() {
         templateUrl: template
     };
 }
-

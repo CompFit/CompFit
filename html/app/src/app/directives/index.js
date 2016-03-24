@@ -1,10 +1,10 @@
 import angular from 'angular';
 
-import footer from './footer';
+import sidebar from './sidebar';
 import navbar from './navbar';
 
 export default angular
     .module( 'app.directives', [] )
-    .directive( 'seedFooter', footer )
+    .directive( 'seedSidebar', sidebar )
     .directive( 'seedNavbar', navbar )
     .name;
