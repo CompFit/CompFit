@@ -393,3 +393,24 @@ $app->delete('/team/{team_id}',
     return $response->write('Deleting <br />' . $strToReturn);
   }
 );
+
+$app->get('/teams/{user_id}',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $user_id = $request->getAttribute('user_id');
+    $users = '';
+
+    $sql = 'SELECT team.team_name, user.team_id, user.first_name, user.last_name, user.username FROM teams team, (SELECT u.first_name, u.last_name, u.user_id, u.username, tp.team_id FROM team_participation tp, (SELECT * FROM users WHERE user_id = "'.$user_id.'") as u WHERE u.user_id = tp.user_id) as user WHERE team.team_id = user.team_id';
+
+      try {
+        $stmt = $db->query($sql);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    $test = json_encode($users);
+    return $response->write('' . $test);
+  }
+);
