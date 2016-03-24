@@ -435,3 +435,73 @@ $app->get('/teams/search/{captain_id}',
     return $response->write('' . $test);
   }
 );
+
+$app->get('/challenge/{challenge_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->post('/challenge',
+  function ($request, $response, $args){
+  }
+);
+
+$app->delete('/challenge/{challenge_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/challenges/{team_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/challenges/search/{end_date}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/exercise/{exercise_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->post('/exercise',
+  function ($request, $response, $args){
+  }
+);
+
+$app->put('/exercise/{exercise_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->delete('/exercise/{exercise_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/exercises/{user_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/exercises/search/{team_id}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/exercises/exercise/{exercise_name}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/exercises/startdate/{start_date}',
+  function ($request, $response, $args){
+  }
+);
+
+$app->get('/exercises/enddate/{end_date}',
+  function ($request, $response, $args){
+  }
+);
