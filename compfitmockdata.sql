@@ -125,10 +125,15 @@ insert into team_participation(team_id, user_id, created) values (48, 8293, '201
 
 
 #inserting data into challenges
-insert into challenges (challenge_id, start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units, task_type, status, created) values (1, '');  
+insert into challenges (challenge_id, start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units, task_type, status, created) values (1, '2016-10-02', '2016-17-02', 36, 24, 'Run', 10, 'miles', 'run', 'pending', '2016-10-02');  
+insert into challenges (challenge_id, start_data, end_data, to_team_id, from_team_id, task_name, repetitions, units, task_type, status, created) values (2, '2016-11-02', '2016-18-02', 36, 48, 'Pushups', '5', 'pushups', 'do', 'pending', '2016-11-02');
+insert into challenges (challenge_id, start_data, end_data, to_team_id, from_team_id, task_name, repetitions, units, task_type, status, created) values (3, '2016-12-02', '2016-19-02', 48, 24, 'Burpees', '500', 'burpees', 'do', 'pending', '2016-12-02');
+insert into challenges (challenge_id, start_data, end_data, to_team_id, from_team_id, task_name, repetitions, units, task_type, status, created) values (4, '2016-13-02', '2016-20-02', 48, 36, 'Benchpress 200,000 pounds', '200', 'pounds', 'benchpress', 'pending', '2016-13-02');
+insert into challenges (challenge_id, start_data, end_data, to_team_id, from_team_id, task_name, repetitions, units, task_type, status, created) values (5, '2016-14-02', '2016-21-02', 24, 36, 'Squats', '3000000', 'squats', 'do', 'pending', '2016-14-02');
+insert into challenges (challenge_id, start_data, end_data, to_team_id, from_team_id, task_name, repetitions, units, task_type, status, created) values (6, '2016-15-02', '2016-22-02', 24, 48, 'Run' '100,000', 'meters', 'run', 'pending', '2016-15-02');
 
 #inserting data into exercises
-insert into exercises(exercise_id, user_id, date_completed, exercise_name, repetitions, units, created) values ();
+insert into exercises(exercise_id, user_id, date_completed, exercise_name, repetitions, units, created) values (1, 1938, '2016-11-02', 'Run', 2, 'miles', '2016-');
 
 
 #inserting data into challenge_progress
