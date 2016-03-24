@@ -1,5 +1,7 @@
 require( 'assets/main.css' );
 
+
+
 import angular from 'angular';
 import angularUIRouter from 'angular-ui-router';
 
@@ -20,7 +22,7 @@ export default angular
     ] )
     .config( routes );
 
-    
+
 
     // var sideEffectNode = document.createElement('div');
     // sideEffectNode.textContent = 'Side Effect';
