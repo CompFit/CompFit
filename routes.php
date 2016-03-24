@@ -291,6 +291,20 @@ $app->get('/team/{team_id}',
   }
 );
 
+$app->get('/team/search/{team_name}',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $team_name = $request->getAttribute('team_name');
+
+    foreach($db->query('select * from teams where team_name = "'.$team_name.'"') as $row){
+      $strToReturn .= '<br /> team_id: ' . $row['team_id'] .' <br /> team_name: ' . $row['team_name'];
+      $strToReturn .= '<br /> captain_id: ' . $row['captain_id'] . '<br />';
+    }
+
+    return $response->write('' . $strToReturn);
+  }
+);
 
 $app->get('/team/{team_id}/{captain_id}',
   function ($request, $response, $args){
