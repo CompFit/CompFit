@@ -37,6 +37,7 @@ $app->get('/user',
     return $response->write('' . $strToReturn);
   }
 );
+
 $app->get('/user/{user_id}',
   function ($request, $response, $args){
     $db = $this->dbConn;
@@ -61,6 +62,32 @@ $app->get('/user/{user_id}',
     return $response->write('' . $test);
   }
 );
+
+$app->get('/user/search/{username}',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $username = $request->getAttribute('username');
+    $users = '';
+
+    $sql = 'select * from users where username = "'.$username.'"';
+      try {
+        $stmt = $db->query($sql);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    //foreach($db->query('select * from users where user_id = "'.$user_id.'"') as $row){
+      //$strToReturn .= '<br /> user_id: ' . $row['user_id'] .' <br /> username: ' . $row['username'];
+      //$strToReturn .= '<br /> first_name: ' . $row['first_name'] .' <br /> last_name: ' . $row['last_name'];
+
+    //}
+    $test = json_encode($users);
+    return $response->write('' . $test);
+  }
+);
+
 /*$app->post('/user',
   function ($request, $response, $args){
     $db = $this->dbConn;
