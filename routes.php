@@ -414,3 +414,24 @@ $app->get('/teams/{user_id}',
     return $response->write('' . $test);
   }
 );
+
+$app->get('/teams/search/{captain_id}',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $captain_id = $request->getAttribute('captain_id');
+    $users = '';
+
+    $sql = 'SELECT DISTINCT team.team_name, team.captain_id, user.user_id, user.first_name, user.last_name, user.username FROM users user, (SELECT t.team_name, t.captain_id, tp.team_id FROM team_participation tp, (SELECT * FROM teams WHERE captain_id = "'.$captain_id.'") as t WHERE t.captain_id = tp.user_id) as team WHERE team.captain_id = user.user_id';
+
+      try {
+        $stmt = $db->query($sql);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    $test = json_encode($users);
+    return $response->write('' . $test);
+  }
+);
