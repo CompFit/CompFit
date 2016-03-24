@@ -88,6 +88,31 @@ $app->get('/user/search/{username}',
   }
 );
 
+$app->get('/user/{email}/search',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $email = $request->getAttribute('email');
+    $users = '';
+
+    $sql = 'select * from users where email = "'.$email.'"';
+      try {
+        $stmt = $db->query($sql);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    //foreach($db->query('select * from users where user_id = "'.$user_id.'"') as $row){
+      //$strToReturn .= '<br /> user_id: ' . $row['user_id'] .' <br /> username: ' . $row['username'];
+      //$strToReturn .= '<br /> first_name: ' . $row['first_name'] .' <br /> last_name: ' . $row['last_name'];
+
+    //}
+    $test = json_encode($users);
+    return $response->write('' . $test);
+  }
+);
+
 /*$app->post('/user',
   function ($request, $response, $args){
     $db = $this->dbConn;
@@ -216,6 +241,27 @@ $app->get('/users/{team_id}',
   }
 );
 
+$app->get('/users/search/{team_name}',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $team_name = $request->getAttribute('team_name');
+    $users = '';
+
+    $sql = 'SELECT team.team_name, team.team_id, user.first_name, user.last_name, user.username FROM users user, (SELECT t.team_name, t.team_id, tp.user_id FROM team_participation tp, (SELECT * FROM teams WHERE team_name = "'.$team_name.'") as t WHERE t.team_id = tp.team_id) as team WHERE team.user_id = user.user_id';
+
+      try {
+        $stmt = $db->query($sql);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    $test = json_encode($users);
+    return $response->write('' . $test);
+  }
+);
+
 $app->get('/team',
   function ($request, $response, $args){
     $db = $this->dbConn;
@@ -244,6 +290,7 @@ $app->get('/team/{team_id}',
     return $response->write('' . $strToReturn);
   }
 );
+
 
 $app->get('/team/{team_id}/{captain_id}',
   function ($request, $response, $args){
