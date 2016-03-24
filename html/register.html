@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            CompFit Registration
+        </title>
+
+    </head>
+
+    <body>
+        <h1>CompFit</h1>
+        <h2>Register</h2>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+        <div ng-controller="">
+            <form class="register">
+                <input type="text" ng-model="newUser.fullName" placeholder="Full Name" required/></br>
+                <input type="text" ng-model="newUser.username" placeholder="Username" required/></br>
+                <input type="email" ng-model="newUser.email" placeholder="leela@planetexpress.com" required></br>
+                <input type="password" ng-model="newUser.password" placeholder="password" required></br>
+                <input type="submit" ng-click="update(newUser)" value="Submit"/>
+            </form>
+            Already have an account? <a href="login.html">Log in.</a>
+        </div>
+    </body>
+</html>
