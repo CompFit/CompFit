@@ -11,8 +11,7 @@ if(!mysql_select_db("dbtest")){
 
 <?php
 session_start();
-if(isset($_SESSION['user'])!="")
-{
+if(isset($_SESSION['user'])!=""){
  header("Location: home.php");
 }
 include_once 'dbconnect.php';
