@@ -156,20 +156,20 @@ gulp.task( 'build:webpack', function () {
         .pipe( gulp.dest( 'build/' ) );
 } );
 
-gulp.task('build-backend', () => {
-  gulp
-    .src('./src/index.js')
-    .pipe(webpackStream(serverConfig, webpack, buildDone))
-    .pipe(reload({
-      port: 8080,
-      react: false,
-      config: path.join(__dirname, 'webpack.config.js')
-    }))
-});
-
-gulp.task('watch', function () {
-  gulp.watch('src/**/*.js', ['build-backend'])
-});
+// gulp.task('build-backend', () => {
+//   gulp
+//     .src('./src/index.js')
+//     .pipe(webpackStream(serverConfig, webpack, buildDone))
+//     .pipe(reload({
+//       port: 8080,
+//       react: false,
+//       config: path.join(__dirname, 'webpack.config.js')
+//     }))
+// });
+//
+// gulp.task('watch', function () {
+//   gulp.watch('src/**/*.js', ['build-backend'])
+// });
 
 
 
