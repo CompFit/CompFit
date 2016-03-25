@@ -8,7 +8,7 @@ var webpackDevConfig = {
         entry: {
             app: [
                 'webpack/hot/dev-server',
-                'webpack-dev-server/client?' + location,
+                'webpack-dev-server/client?http://localhost:8080/',
                 './src/app/index.js'
             ]
         }
