@@ -19,6 +19,7 @@
 
 	Looks like this:
 	
+
 	```
 	<Directory /var/www/>
 	Options Indexes FollowSymLinks
@@ -28,7 +29,7 @@
 8. then restart apache by running `sudo service apache2 restart`
 
 ##How to Run the Server
-1. `vagrant ssh`
+1. SSH into the vagrant box
 2. Run `cd /var/www/html/app`
 3. Run `gulp`
 4. In the browser, navigate to `http://localhost:8080/`

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html ng-app="app" ng-strict-di lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html ng-app="app" ng-strict-di lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html ng-app="app" ng-strict-di lang="en" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html ng-app="app" ng-strict-di lang="en" class="no-js"> <!--<![endif]-->
+<html ng-app="app" ng-strict-di lang="en" class="no-js">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AngularJS Seed - Change Me</title>
+    <title>CompFit</title>
     <meta name="description" content="description - change my">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='shortcut icon' type='image/png' href='/favicon.png' />
@@ -15,13 +13,29 @@
 
     <seed-navbar></seed-navbar>
 
-    <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <seed-logbutton></seed-logbutton>
+            <br/>
+            <seed-sidebar></seed-sidebar>
+          </div>
+          <div class="col-sm-9">
+            <div ui-view></div>
+          </div>
+        </div>
+    </div>
 
-    <div ui-view></div>
+    <!-- <div class="row">
+        <div class="col-md-2">
 
-    <seed-footer></seed-footer>
+        </div>
+        <div class="col-md-10">
+
+        </div>
+    </div> -->
+
+
 
 </body>
 </html>
