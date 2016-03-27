@@ -6,7 +6,7 @@ export default function( $scope, $http ) {
     $scope.greeting = 'oh haita';
     $http({
       method: 'GET',
-      url: '../../api/index.php/users'
+      url: '/api/index.php/users'
     }).then(function successCallback(response) {
         console.log(response);
       }, function errorCallback(response) {
