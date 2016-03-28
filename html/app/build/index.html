@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-strict-di lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CompFit</title>
+    <meta name="description" content="description - change my">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='shortcut icon' type='image/png' href='/favicon.png' />
+</head>
+<body id="root">
+
+    <seed-navbar></seed-navbar>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <seed-logbutton></seed-logbutton>
+            <br/>
+            <seed-sidebar></seed-sidebar>
+          </div>
+          <div class="col-sm-9">
+            <div ui-view></div>
+          </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-10">
+
+        </div>
+    </div> -->
+
+
+
+<script src="js/vendor-bcb6635c89e55452456b.js"></script><script src="js/app-bcb6635c89e55452456b.js"></script></body>
+</html>
