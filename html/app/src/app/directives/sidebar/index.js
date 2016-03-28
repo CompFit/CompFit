@@ -11,7 +11,6 @@ export default function(Teams) {
                 console.log(response.data);
                 scope.teams = response.data;
             });
-            // scope.name = ;
         },
         templateUrl: template
     };
