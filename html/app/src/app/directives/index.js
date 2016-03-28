@@ -6,7 +6,7 @@ import logbutton from './logbutton';
 
 export default angular
     .module( 'app.directives', [] )
-    .directive( 'seedSidebar', sidebar )
+    .directive( 'seedSidebar', ['Teams', sidebar] )
     .directive( 'seedNavbar', navbar )
     .directive( 'seedLogbutton', logbutton )
     .name;

@@ -1,26 +1,21 @@
 import './style.styl';
 
-export default function( $scope, $http ) {
+export default function( $scope, $http, Teams ) {
     'ngInject';
 
     $scope.greeting = 'oh haita';
-    $http({
-      method: 'GET',
-      url: '/api/index.php/users'
-    }).then(function successCallback(response) {
-        console.log(response);
-      }, function errorCallback(response) {
-        console.log("Error",response);
-    });
 
-    var loc = window.location.pathname;
-    var dir = loc.substring(0, loc.lastIndexOf('/'));
-    console.log(loc,dir);
+
+    // $http({
+    //       method: 'GET',
+    //       url: 'http://private-c84bfb-compfit.apiary-mock.com/users/1'
+    //     }).then(function successCallback(response) {
+    //         console.log(response);
+    //       }, function errorCallback(response) {}
+    //   );
 
 
 
-}
+    // console.log(Teams.getTeamsForUser(1).data);
 
-if(module.hot) {
-  module.hot.accept();
 }
