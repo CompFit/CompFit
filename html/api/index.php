@@ -8,11 +8,11 @@ use Psr\Http\Message\ResponseInterface;
 session_start();
 $app = new \Slim\App;
 
-// $database = new mysqli("localhost", "DrawMaster", "Dr4wtrav1!", "DrawingDB");
+//$database = new mysqli("localhost", "DrawMaster", "Dr4wtrav1!", "DrawingDB");
 
 // $app->post('/admin',function(){
 //     global $database;
-
+//
 //     $parsedBody = $request->getParsedBody();
 // });
 
@@ -29,7 +29,9 @@ $app = new \Slim\App;
 $app->post('/users',function($request, $response){
     // global $database;
 
-	// if( isset($_POST['user_name']) )
+	if( isset($_POST['name']) ){
+    return $response->write( json_encode( array("name" => $_POST['name']) ) );
+  }
 	// {
 	// 	$user_name = $_POST['user_name'];
 	//
