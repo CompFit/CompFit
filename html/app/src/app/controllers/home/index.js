@@ -8,10 +8,12 @@ export default function( $scope, $http, Teams ) {
 
     // $http({
     //       method: 'GET',
-    //       url: 'http://private-c84bfb-compfit.apiary-mock.com/users/1'
+    //       url: '/api/index.php/users'
     //     }).then(function successCallback(response) {
     //         console.log(response);
-    //       }, function errorCallback(response) {}
+    //       }, function errorCallback(response) {
+    //           console.log(response);
+    //       }
     //   );
 
 

@@ -135,7 +135,7 @@ gulp.task( 'webpack-dev-server', function ( callback ) {
 gulp.task( 'stylus:compile', function () {
     return gulp.src( './src/assets/stylus/main.styl' )
         .pipe( stylus().on( 'error', handleError( 'stylus:compile' ) ) )
-        .pipe( gulp.dest( './src/assets' ) );
+        .pipe( gulp.dest( 'build/' ) );
 } );
 
 gulp.task( 'clean:build', function () {
