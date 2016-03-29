@@ -1,5 +1,5 @@
 require( 'assets/main.css' );
-alert("Hello"); 
+
 import angular from 'angular';
 import angularUIRouter from 'angular-ui-router';
 

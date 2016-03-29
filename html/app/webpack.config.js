@@ -36,7 +36,7 @@ module.exports = function ( options ) {
         output: {
             path: path.join( __dirname, 'build' ),
             filename: 'js/[name]-[hash].js',
-            publicPath: '/'
+            publicPath: ''
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
