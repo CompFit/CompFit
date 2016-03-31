@@ -2,6 +2,16 @@ html {
   position: relative;
   min-height: 100%;
 }
+#challenge .topSection {
+  height: 200px;
+  background-color: #d3d3d3;
+}
+#challenge .topSection img {
+  width: 130px;
+  height: 130px;
+  float: left;
+  margin-top: 20px;
+}
 #my-profile .btn {
   margin-bottom: 10px;
 }
@@ -30,11 +40,21 @@ html {
   margin: -1px;
 }
 @media (min-width: 768px) {
-  .sidebar-nav .navbar .navbar-collapse {
+  .challenges-sidebar .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
   }
-  .sidebar-nav h3 {
+  .challenges-sidebar h3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media (min-width: 768px) {
+  .teams-sidebar .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .teams-sidebar h3 {
     padding-left: 10px;
     padding-right: 10px;
   }
