@@ -14,8 +14,10 @@ CREATE TABLE users
   password VARCHAR(30),
   #salt
   avatar BLOB NOT NULL,
-  created DATE,
-  last_login DATE,
+  created VARCHAR(19),
+  last_login VARCHAR(19),
+  token CHAR(16) NULL,
+  token_expire DATETIME NULL,
   PRIMARY KEY(user_id)
 );
 
@@ -50,7 +52,7 @@ CREATE TABLE challenges
   units VARCHAR(20),
   task_type VARCHAR(20),
   status  VARCHAR(20),
-  created DATE,
+  created VARCHAR(19),
   PRIMARY KEY(challenge_id)
 );
 
@@ -77,3 +79,27 @@ CREATE TABLE challenge_progress
   created DATE,
   PRIMARY KEY(challenge_progress_id)
 );
+
+
+INSERT INTO users (first_name, last_name, username, email, password)
+VALUES ('bob', 'Joe', 'billybob', 'bbob@gmail.com', 'harpoon');
+INSERT INTO users (first_name, last_name, username)
+VALUES ('Jane', 'doe', 'jjdoe');
+
+INSERT INTO teams (team_name, captain_id)
+VALUES ('Tigers', '1');
+INSERT INTO teams (team_name, captain_id)
+VALUES ('Ligers', '2');
+INSERT INTO teams (team_name, captain_id)
+VALUES ('Ligons', '2');
+INSERT INTO teams (team_name, captain_id)
+VALUES ('Lions', '2');
+INSERT INTO teams (team_name, captain_id)
+VALUES ('Sabertooths', '2');
+
+INSERT INTO team_participation (team_id, user_id)
+VALUES ('1', '1');
+INSERT INTO team_participation (team_id, user_id)
+VALUES ('2', '1');
+INSERT INTO team_participation (team_id, user_id)
+VALUES ('1', '2');
