@@ -12,3 +12,4 @@ CREATE TABLE teams
   created NOW(), #NOW stamps with current date and time
   PRIMARY KEY(team_id)
 );
+
