@@ -5,11 +5,25 @@ html {
 #my-profile .btn {
   margin-bottom: 10px;
 }
+#register .topSection {
+  height: 200px;
+  background-color: #d3d3d3;
+}
+#register .topSection img {
+  display: inline-block;
+  width: 140px;
+  height: 140px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+#register .topSection h1 {
+  display: inline-block;
+}
 #team .topSection {
   height: 200px;
   background-color: #d3d3d3;
 }
-
 #team .topSection img {
   display: inline-block;
   width: 140px;

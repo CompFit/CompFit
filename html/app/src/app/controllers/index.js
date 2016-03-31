@@ -8,6 +8,7 @@ import LoginController from './login';
 import MyProfileController from './myProfile';
 import Page1Controller from './page1';
 import Page2Controller from './page2';
+import RegisterController from './register';
 import TeamController from './team';
 
 export default angular
@@ -19,5 +20,6 @@ export default angular
     .controller( 'MyProfileController', MyProfileController )
     .controller( 'Page1Controller', Page1Controller )
     .controller( 'Page2Controller', Page2Controller )
+    .controller( 'RegisterController', RegisterController )
     .controller( 'TeamController', TeamController )
     .name;
