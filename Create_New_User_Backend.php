@@ -117,9 +117,5 @@ if(isset($_POST['submitted'])){
 // ]]>
 </script>
 
-<!--
-Form Code End (see html-form-guide.com for more info.)
--->
-
 </body>
 </html>
