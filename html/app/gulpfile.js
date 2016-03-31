@@ -129,7 +129,7 @@ gulp.task( 'webpack-dev-server', function ( callback ) {
         } );
 
     //setup stylus watcher
-    gulp.watch( [ 'src/assets/stylus/*.styl', 'src/assets/stylus/**/*.styl' ], [ 'stylus:compile' ] );
+    gulp.watch( [ 'src/assets/stylus/*.styl', 'src/assets/stylus/**/*.styl', 'src/app/controllers/**/style' ], [ 'stylus:compile' ] );
 } );
 
 gulp.task( 'stylus:compile', function () {
