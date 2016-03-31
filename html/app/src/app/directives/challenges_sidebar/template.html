@@ -1,0 +1,14 @@
+
+<div class="challenges-sidebar">
+  <div class="navbar navbar-default" role="navigation">
+    <div>
+        <h3>Your Challenges</h3>
+
+        <div class="nav list-group" >
+            <div ng-repeat="challenge in challenges">
+                <a class="list-group-item" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">{{challenge.challenge_name}}</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
