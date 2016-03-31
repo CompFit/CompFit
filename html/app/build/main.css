@@ -25,13 +25,32 @@ html {
   background-color: #d3d3d3;
 }
 #team .topSection img {
-  display: inline-block;
-  width: 140px;
-  height: 140px;
-  margin-left: 20px;
+  width: 130px;
+  height: 130px;
+  float: left;
   margin-top: 20px;
-  margin-right: 20px;
 }
-#team .topSection h1 {
-  display: inline-block;
+#team .topSection .players_dropdown_btn {
+  display: block;
+}
+#team .topSection .players_dropdown {
+  width: 100px;
+}
+#team .topSection .players_dropdown .list-group-item {
+  display: block;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: -1px;
+}
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav h3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }

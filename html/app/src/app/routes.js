@@ -1,5 +1,5 @@
+import aboutTemplate from 'controllers/about/template.html';
 import applicationTemplate from 'controllers/application/template.html';
-
 import authenticationTemplate from 'controllers/authentication/template.html';
 import homeTemplate from 'controllers/home/template.html';
 import loginTemplate from 'controllers/login/template.html';
@@ -27,6 +27,12 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
             abstract: true,
             templateUrl: applicationTemplate,
             controller: 'ApplicationController'
+        } )
+        .state( 'app.about', {
+            url: '',
+            abstract: true,
+            templateUrl: aboutTemplate,
+            controller: 'aboutController'
         } )
         .state( 'app.home', {
             url: '/',
