@@ -8,6 +8,7 @@ import page1Template from 'controllers/page1/template.html';
 import page2Template from 'controllers/page2/template.html';
 import teamTemplate from 'controllers/team/template.html';
 import challengeTemplate from 'controllers/challenge/template.html';
+import exerciseTemplate from 'controllers/exercise/template.html';
 
 export default function ( $stateProvider, $urlRouterProvider, $locationProvider ) {
     'ngInject';
@@ -42,6 +43,11 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
             url: '/challenge/:id',
             templateUrl: challengeTemplate,
             controller: 'ChallengeController'
+        } )
+        .state( 'app.exercise', {
+            url: '/exercise/:id',
+            templateUrl: exerciseTemplate,
+            controller: 'ExerciseController'
         } )
         .state( 'app.page1', {
             url: '/page1',

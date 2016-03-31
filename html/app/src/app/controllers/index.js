@@ -10,6 +10,7 @@ import Page1Controller from './page1';
 import Page2Controller from './page2';
 import TeamController from './team';
 import ChallengeController from './challenge';
+import ExerciseController from './exercise';
 
 export default angular
     .module( 'app.controllers', [] )
@@ -22,4 +23,5 @@ export default angular
     .controller( 'Page2Controller', Page2Controller )
     .controller( 'TeamController', TeamController )
     .controller( 'ChallengeController', ChallengeController )
+    .controller( 'ExerciseController', ExerciseController )
     .name;

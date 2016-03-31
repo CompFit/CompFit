@@ -12,6 +12,16 @@ html {
   float: left;
   margin-top: 20px;
 }
+#exercise .topSection {
+  height: 200px;
+  background-color: #d3d3d3;
+}
+#exercise .topSection img {
+  width: 130px;
+  height: 130px;
+  float: left;
+  margin-top: 20px;
+}
 #my-profile .btn {
   margin-bottom: 10px;
 }
@@ -45,6 +55,16 @@ html {
     max-height: none;
   }
   .challenges-sidebar h3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media (min-width: 768px) {
+  .exercises-sidebar .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .exercises-sidebar h3 {
     padding-left: 10px;
     padding-right: 10px;
   }
