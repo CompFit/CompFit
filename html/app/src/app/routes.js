@@ -7,6 +7,8 @@ import myProfileTemplate from 'controllers/myProfile/template.html';
 import teamTemplate from 'controllers/team/template.html';
 import challengeTemplate from 'controllers/challenge/template.html';
 import exerciseTemplate from 'controllers/exercise/template.html';
+import aboutTemplate from 'controllers/about/template.html';
+import registerTemplate from 'controllers/register/template.html';
 
 export default function ( $stateProvider, $urlRouterProvider, $locationProvider ) {
     'ngInject';
@@ -26,6 +28,16 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
             abstract: true,
             templateUrl: applicationTemplate,
             controller: 'ApplicationController'
+        } )
+        .state( 'app.about', {
+            url: '/about/',
+            templateUrl: aboutTemplate,
+            controller: 'AboutController'
+        } )
+        .state( 'app.register', {
+            url: '/register/',
+            templateUrl: registerTemplate,
+            controller: 'RegisterController'
         } )
         .state( 'app.home', {
             url: '/',

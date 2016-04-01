@@ -9,6 +9,8 @@ import MyProfileController from './myProfile';
 import TeamController from './team';
 import ChallengeController from './challenge';
 import ExerciseController from './exercise';
+import AboutController from './about';
+import RegisterController from './register';
 
 export default angular
     .module( 'app.controllers', [] )
@@ -20,4 +22,6 @@ export default angular
     .controller( 'TeamController', TeamController )
     .controller( 'ChallengeController', ChallengeController )
     .controller( 'ExerciseController', ExerciseController )
+    .controller( 'AboutController', AboutController )
+    .controller( 'RegisterController', RegisterController )
     .name;
