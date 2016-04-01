@@ -18,7 +18,8 @@
 	```
 
 	Looks like this:
-	
+
+
 	```
 	<Directory /var/www/>
 	Options Indexes FollowSymLinks
@@ -28,10 +29,20 @@
 8. then restart apache by running `sudo service apache2 restart`
 
 ##How to Run the Server
-1. `vagrant ssh`
+1. SSH into the vagrant box
 2. Run `cd /var/www/html/app`
 3. Run `gulp`
 4. In the browser, navigate to `http://localhost:8080/`
 5. Edit files
 6. Ctrl-C to stop server
 7. Run `gulp` to start again to see edits
+
+##Building the App
+Building the app creates static files, so webpack-dev-server does not have to be running.
+You will build the server to run the API calls. As of now, you cannot make API calls without building.
+1. Run `cd /var/www/html/app`
+2. Run `gulp build`
+3. In the browser, navigate to `http://localhost:9000/app/build`
+
+##Make API calls
+For now, when making api calls, you want to go to `/api/index.php/endpoint`

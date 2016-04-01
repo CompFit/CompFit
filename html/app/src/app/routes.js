@@ -4,8 +4,11 @@ import authenticationTemplate from 'controllers/authentication/template.html';
 import homeTemplate from 'controllers/home/template.html';
 import loginTemplate from 'controllers/login/template.html';
 import myProfileTemplate from 'controllers/myProfile/template.html';
-import page1Template from 'controllers/page1/template.html';
-import page2Template from 'controllers/page2/template.html';
+import teamTemplate from 'controllers/team/template.html';
+import challengeTemplate from 'controllers/challenge/template.html';
+import exerciseTemplate from 'controllers/exercise/template.html';
+import aboutTemplate from 'controllers/about/template.html';
+import registerTemplate from 'controllers/register/template.html';
 
 export default function ( $stateProvider, $urlRouterProvider, $locationProvider ) {
     'ngInject';
@@ -17,6 +20,8 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
 
     $urlRouterProvider.otherwise( '/' );
 
+
+
     $stateProvider
         .state( 'app', {
             url: '',
@@ -24,20 +29,35 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
             templateUrl: applicationTemplate,
             controller: 'ApplicationController'
         } )
+        .state( 'app.about', {
+            url: '/about/',
+            templateUrl: aboutTemplate,
+            controller: 'AboutController'
+        } )
+        .state( 'app.register', {
+            url: '/register/',
+            templateUrl: registerTemplate,
+            controller: 'RegisterController'
+        } )
         .state( 'app.home', {
             url: '/',
             templateUrl: homeTemplate,
             controller: 'HomeController'
         } )
-        .state( 'app.page1', {
-            url: '/page1',
-            templateUrl: page1Template,
-            controller: 'Page1Controller'
+        .state( 'app.team', {
+            url: '/team/:id',
+            templateUrl: teamTemplate,
+            controller: 'TeamController'
         } )
-        .state( 'app.page2', {
-            url: '/page2',
-            templateUrl: page2Template,
-            controller: 'Page2Controller'
+        .state( 'app.challenge', {
+            url: '/challenge/:id',
+            templateUrl: challengeTemplate,
+            controller: 'ChallengeController'
+        } )
+        .state( 'app.exercise', {
+            url: '/exercise/:id',
+            templateUrl: exerciseTemplate,
+            controller: 'ExerciseController'
         } )
         .state( 'app.login', {
             url: '/login',

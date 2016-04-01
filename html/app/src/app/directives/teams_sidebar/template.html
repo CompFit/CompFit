@@ -1,0 +1,14 @@
+
+<div class="teams-sidebar">
+  <div class="navbar navbar-default" role="navigation">
+    <div>
+        <h3>Your Teams <a ui-sref-active="active" ui-sref="app.page1"><i class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
+
+        <div class="nav list-group" >
+            <div ng-repeat="team in teams">
+                <a class="list-group-item" ui-sref-active="active" ui-sref="app.team({id:{{team.team_id}}})">{{team.team_name}}</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
