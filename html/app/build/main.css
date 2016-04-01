@@ -2,6 +2,17 @@ html {
   position: relative;
   min-height: 100%;
 }
+#about .topSection {
+  height: 200px;
+  background-color: #d3d3d3;
+}
+#about img {
+  width: 20%;
+  height: auto;
+}
+#about .topSection h1 {
+  display: inline-block;
+}
 #challenge .topSection {
   height: 200px;
   background-color: #d3d3d3;
@@ -14,6 +25,21 @@ html {
 }
 #my-profile .btn {
   margin-bottom: 10px;
+}
+#register .topSection {
+  height: 200px;
+  background-color: #d3d3d3;
+}
+#register .topSection img {
+  display: inline-block;
+  width: 140px;
+  height: 140px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+#register .topSection h1 {
+  display: inline-block;
 }
 #team .topSection {
   height: 200px;
