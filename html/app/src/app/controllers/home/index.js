@@ -3,8 +3,6 @@ import './style.styl';
 export default function( $scope, $http, Teams ) {
     'ngInject';
 
-    $scope.greeting = 'oh haita';
-
 
     // $http({
     //       method: 'GET',
