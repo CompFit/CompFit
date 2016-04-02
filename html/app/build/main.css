@@ -74,7 +74,7 @@ html {
 }
 @media (min-width: 768px) {
   .col-sm-3 {
-    width: 20%;
+    width: 20% !important;
   }
   .challenges-sidebar {
     position: fixed;
@@ -97,7 +97,7 @@ html {
 }
 @media (min-width: 768px) {
   .col-sm-3 {
-    width: 20%;
+    width: 20% !important;
   }
   .exercises-sidebar {
     position: fixed;
@@ -120,13 +120,13 @@ html {
 }
 @media (min-width: 768px) {
   .navbar {
-    margin-bottom: 0px;
-    border-radius: 0;
+    margin-bottom: 0px !important;
+    border-radius: 0px !important;
   }
 }
 @media (min-width: 768px) {
   .col-sm-3 {
-    width: 20%;
+    width: 20% !important;
   }
   .teams-sidebar {
     position: fixed;
