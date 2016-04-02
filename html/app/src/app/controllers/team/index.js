@@ -4,6 +4,11 @@ export default function($scope, $stateParams, Teams) {
     'ngInject';
 
 
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    };
+
     $scope.team_id = -1;
     $scope.avatar = "/img/team_avatars/default-avatar.png";
     $scope.players = [];
