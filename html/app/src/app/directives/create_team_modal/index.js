@@ -5,8 +5,6 @@ export default function(Teams) {
 
     return {
         restrict: 'E',
-        replace: true,
-        transclude: true,
         replace:true,
         scope:true,
         link: function (scope, element, attrs) {

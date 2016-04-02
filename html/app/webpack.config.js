@@ -17,7 +17,7 @@ module.exports = function ( options ) {
             vendor: [
                 'font-awesome/css/font-awesome.min.css',
 
-                'jquery',
+                // 'jquery',
                 'bluebird',
                 'lodash',
 
