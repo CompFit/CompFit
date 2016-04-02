@@ -15,7 +15,6 @@ html {
 }
 #challenge .topSection {
   height: 200px;
-  background-color: #d3d3d3;
 }
 #challenge .topSection img {
   width: 130px;
@@ -25,7 +24,6 @@ html {
 }
 #exercise .topSection {
   height: 200px;
-  background-color: #d3d3d3;
 }
 #exercise .topSection img {
   width: 130px;
@@ -53,7 +51,6 @@ html {
 }
 #team .topSection {
   height: 200px;
-  background-color: #d3d3d3;
 }
 #team .topSection img {
   width: 130px;
@@ -76,6 +73,15 @@ html {
   margin: -1px;
 }
 @media (min-width: 768px) {
+  .col-sm-3 {
+    width: 20% !important;
+  }
+  .challenges-sidebar {
+    position: fixed;
+    left: 0px;
+    height: 100%;
+    min-width: 250px;
+  }
   .challenges-sidebar .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -84,8 +90,21 @@ html {
     padding-left: 10px;
     padding-right: 10px;
   }
+  .navbar {
+    height: 100%;
+    border-radius: 0;
+  }
 }
 @media (min-width: 768px) {
+  .col-sm-3 {
+    width: 20% !important;
+  }
+  .exercises-sidebar {
+    position: fixed;
+    left: 0px;
+    height: 100%;
+    min-width: 250px;
+  }
   .exercises-sidebar .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -94,8 +113,27 @@ html {
     padding-left: 10px;
     padding-right: 10px;
   }
+  .navbar {
+    height: 100%;
+    border-radius: 0;
+  }
 }
 @media (min-width: 768px) {
+  .navbar {
+    margin-bottom: 0px !important;
+    border-radius: 0px !important;
+  }
+}
+@media (min-width: 768px) {
+  .col-sm-3 {
+    width: 20% !important;
+  }
+  .teams-sidebar {
+    position: fixed;
+    left: 0px;
+    height: 100%;
+    min-width: 250px;
+  }
   .teams-sidebar .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -103,5 +141,9 @@ html {
   .teams-sidebar h3 {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .navbar {
+    height: 100%;
+    border-radius: 0;
   }
 }
