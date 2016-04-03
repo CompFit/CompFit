@@ -1,6 +1,6 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Teams, $rootScope) {
+export default function($scope, $stateParams, Teams) {
     'ngInject';
 
     $scope.toggleModal = function(){
