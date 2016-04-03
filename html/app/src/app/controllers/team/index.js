@@ -1,12 +1,10 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Teams) {
+export default function($scope, $stateParams, Teams, $rootScope) {
     'ngInject';
 
-
-    $scope.showModal = false;
     $scope.toggleModal = function(){
-        $scope.showModal = !$scope.showModal;
+          $('#createteammodal').modal('show');
     };
 
     $scope.team_id = -1;

@@ -7,31 +7,34 @@ export default function(Teams) {
         restrict: 'E',
         replace:true,
         scope:true,
-        link: function (scope, element, attrs) {
+        // transclude:true,
+        link: function postLink(scope, element, attrs) {
             scope.title = attrs.title;
 
-            scope.$watch(attrs.visible, function(value){
-              if(value == true) {
-                $(element).modal('show');
-                console.log("Show");
-              }
-              else {
-                $(element).modal('hide');
-                console.log("Hide");
-              }
-            });
+            // scope.$watch(attrs.visible, function(value){
+            //   if(value == true) {
+            //     $(element).modal('show');
+            //     console.log("Show");
+            //   }
+            //   else {
+            //     $(element).modal('hide');
+            //     console.log("Hide");
+            //   }
+            // });
 
-            $(element).on('shown.bs.modal', function(){
-              scope.$apply(function(){
-                scope.$parent[attrs.visible] = true;
-              });
-            });
-
-            $(element).on('hidden.bs.modal', function(){
-              scope.$apply(function(){
-                scope.$parent[attrs.visible] = false;
-              });
-            });
+            // $(element).on('shown.bs.modal', function(){
+            //     console.log("Show!!");
+            //   scope.$apply(function(){
+            //     scope.$parent[attrs.visible] = true;
+            //   });
+            // });
+            //
+            // $(element).on('hidden.bs.modal', function(){
+            //     console.log("Hide!!");
+            //   scope.$apply(function(){
+            //     scope.$parent[attrs.visible] = false;
+            //   });
+            // });
         },
         templateUrl: template
     };

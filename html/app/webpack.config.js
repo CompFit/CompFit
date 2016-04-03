@@ -18,16 +18,16 @@ module.exports = function ( options ) {
                 'font-awesome/css/font-awesome.min.css',
 
                 // 'jquery',
-                'bluebird',
-                'lodash',
+                // 'bluebird',
+                // 'lodash',
 
                 'angular',
-                'angular-animate',
-                'angular-aria',
+                // 'angular-animate',
+                // 'angular-aria',
                 'angular-ui-router',
 
-                'angular-strap/dist/angular-strap.min.js',
-                'angular-strap/dist/angular-strap.tpl.min.js'
+                'angular-strap/dist/angular-strap.min.js'
+                // 'angular-strap/dist/angular-strap.tpl.min.js'
             ]
         },
 
