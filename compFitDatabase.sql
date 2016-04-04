@@ -14,8 +14,10 @@ CREATE TABLE users
   password VARCHAR(30),
   #salt
   avatar BLOB NOT NULL,
-  created DATE,
-  last_login DATE,
+  created VARCHAR(19),
+  last_login VARCHAR(19),
+  token CHAR(16) NULL,
+  token_expire DATETIME NULL,
   PRIMARY KEY(user_id)
 );
 
@@ -35,9 +37,7 @@ CREATE TABLE team_participation
   team_id INT,
   user_id INT,
   created DATE,
-  PRIMARY KEY(team_participation_id),
-  FOREIGN KEY(team_id) REFERENCES teams(team_id),
-  FOREIGN KEY(user_id) REFERENCES users(user_id)
+  PRIMARY KEY(team_participation_id)
 );
 
 CREATE TABLE challenges
@@ -52,10 +52,8 @@ CREATE TABLE challenges
   units VARCHAR(20),
   task_type VARCHAR(20),
   status  VARCHAR(20),
-  created DATE,
-  PRIMARY KEY(challenge_id),
-  FOREIGN KEY(to_team_id) REFERENCES teams(team_id),
-  FOREIGN KEY(from_team_id) REFERENCES teams(team_id)
+  created VARCHAR(19),
+  PRIMARY KEY(challenge_id)
 );
 
 CREATE TABLE exercises
@@ -67,8 +65,7 @@ CREATE TABLE exercises
   repetitions INT,
   units VARCHAR(20),
   created DATE,
-  PRIMARY KEY(exercise_id),
-  FOREIGN KEY(user_id) REFERENCES users(user_id)
+  PRIMARY KEY(exercise_id)
 );
 
 CREATE TABLE challenge_progress
@@ -80,14 +77,12 @@ CREATE TABLE challenge_progress
   repetitions INT,
   units VARCHAR(20),
   created DATE,
-  PRIMARY KEY(challenge_progress_id),
-  FOREIGN KEY(exercise_id) REFERENCES exercises(exercise_id),
-  FOREIGN KEY(challenge_id) REFERENCES challenges(challenge_id)
+  PRIMARY KEY(challenge_progress_id)
 );
 
 
-INSERT INTO users (first_name, last_name, username)
-VALUES ('bob', 'Joe', 'billybob');
+INSERT INTO users (first_name, last_name, username, email, password)
+VALUES ('bob', 'Joe', 'billybob', 'bbob@gmail.com', 'harpoon');
 INSERT INTO users (first_name, last_name, username)
 VALUES ('Jane', 'doe', 'jjdoe');
 
@@ -101,8 +96,6 @@ INSERT INTO teams (team_name, captain_id)
 VALUES ('Lions', '2');
 INSERT INTO teams (team_name, captain_id)
 VALUES ('Sabertooths', '2');
-INSERT INTO teams (team_name, captain_id)
-VALUES ('Cheetah', '1');
 
 INSERT INTO team_participation (team_id, user_id)
 VALUES ('1', '1');
@@ -110,28 +103,3 @@ INSERT INTO team_participation (team_id, user_id)
 VALUES ('2', '1');
 INSERT INTO team_participation (team_id, user_id)
 VALUES ('1', '2');
-
-INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name)
-VALUES ('2016-3-30', '2016-4-06', '1', '4', 'The 3 Ups');
-INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name)
-VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Just Keep Swimming');
-INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name)
-VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Run Forrest Run');
-
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Pushups');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Pullups');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Situps');
-
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Run');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('2', '2016-4-07', 'Run');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-15', 'Swim');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('2', '2016-4-07', 'Swim');
-
-
