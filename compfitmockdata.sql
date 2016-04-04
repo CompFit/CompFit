@@ -83,31 +83,31 @@ CREATE TABLE challenge_progress
 
 
 
-#Inserting data into my Categories table
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (2468, 'Jackson', 'Teller', 'jteller34', 'jacksteller@gmail.com', '94%$yT3v', '2016-18-03', '2016-22-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (1938, 'Filip', 'Telford', 'fipsy888', 'ftelford@gmail.com', 'password1234', '2016-24-02', '2016-18-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (5834, 'Gemma', 'Teller', 'mommaofdacrew66', 'gteller@aol.com', '1a2b3c4d', '2016-10-03', '2016-20-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (2835, 'Alex', 'Trager', 'atrain48', 'alextrager@hotmail.com', '1234ABCD', '2016-12-03', '2016-15-03');
+#Inserting data into my categories table
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (2468, 'Jackson', 'Teller', 'jteller34', 'jacksteller@gmail.com', '94%$yT3v', '2016-18-03', '2016-22-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (1938, 'Filip', 'Telford', 'fipsy888', 'ftelford@gmail.com', 'password1234', '2016-24-02', '2016-18-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (5834, 'Gemma', 'Teller', 'mommaofdacrew66', 'gteller@aol.com', '1a2b3c4d', '2016-10-03', '2016-20-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (2835, 'Alex', 'Trager', 'atrain48', 'alextrager@hotmail.com', '1234ABCD', '2016-12-03', '2016-15-03');
 
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (9388, 'Clay', 'Morrow', 'bigdaddy99', 'claymorrow10@aol.com', 'mysonsandI22', '2016-27-02', '2016-20-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (3454, 'Tara', 'Knowles', 'tKnowles10', 'taraknowles@gmail.com', 'pa$$word', '2016-26-02', '2016-21-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (9934, 'Lyla', 'Dvorak', 'ldvor11', 'lDvorak@aol.com', 'il0vepug$24', '2016-18-02', '2016-22-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (3904, 'Nero', 'Padilla', 'npaddles', 'neropadilla@gmail.com', 'mYpAsSwOrD10', '2016-02-02', '2016-23-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (9388, 'Clay', 'Morrow', 'bigdaddy99', 'claymorrow10@aol.com', 'mysonsandI22', '2016-27-02', '2016-20-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (3454, 'Tara', 'Knowles', 'tKnowles10', 'taraknowles@gmail.com', 'pa$$word', '2016-26-02', '2016-21-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (9934, 'Lyla', 'Dvorak', 'ldvor11', 'lDvorak@aol.com', 'il0vepug$24', '2016-18-02', '2016-22-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (3904, 'Nero', 'Padilla', 'npaddles', 'neropadilla@gmail.com', 'mYpAsSwOrD10', '2016-02-02', '2016-23-03');
 
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (8293, 'Ally', 'Lowen', 'alowen3', 'allylowen@hotmail.com', '123456789', '2016-08-02', '2016-20-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (6477, 'Henry', 'Lin', 'linsanity11', 'henrylin@gmail.com', 'qwerty10', '2016-01-03', '2016-18-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (1244, 'Romero', 'Parada', 'theRparade', 'rparada@aol.com', 'drAgonking24', '2016-13-02', '2016-10-03');
-insert into Users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (3332, 'Luann', 'Delaney', 'ldelaney', 'ldelaney@gmail.com', 'loveme33', '2016-16-02', '2016-14-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (8293, 'Ally', 'Lowen', 'alowen3', 'allylowen@hotmail.com', '123456789', '2016-08-02', '2016-20-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (6477, 'Henry', 'Lin', 'linsanity11', 'henrylin@gmail.com', 'qwerty10', '2016-01-03', '2016-18-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (1244, 'Romero', 'Parada', 'theRparade', 'rparada@aol.com', 'drAgonking24', '2016-13-02', '2016-10-03');
+insert into users (user_id, first_name, last_name, username, email, password, created_Timestamp, last_login) values (3332, 'Luann', 'Delaney', 'ldelaney', 'ldelaney@gmail.com', 'loveme33', '2016-16-02', '2016-14-03');
 
 
 
-#inserting data into my Teams
+#inserting data into my teams
 insert into teams (team_id, team_name, captain_id, created) values (24, 'hodbodmommas', 10001, '2016-18-02');
 insert into teams (team_id, team_name, captain_id, created) values (36, 'fitfunfresh', 20002, '2016-18-02');
 insert into teams (team_id, team_name, captain_id, created) values (48, 'thunder', 30003, '2016-18-02');
 
 
-#inserting data into Team Participation
+#inserting data into team participation
 insert into team_participation(team_id, user_id, created) values (24, 1938, '2016-18-03');
 insert into team_participation(team_id, user_id, created) values (24, 2468, '2016-22-03');
 insert into team_participation(team_id, user_id, created) values (24, 2835, '2016-15-03');
