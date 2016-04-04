@@ -1,40 +1,33 @@
 import './style.styl';
 import template from 'directives/create_team_modal/template.html';
 
-export default function(Teams) {
+export default function(Teams, Users) {
 
     return {
         restrict: 'E',
         replace:true,
         scope:true,
         // transclude:true,
-        link: function postLink(scope, element, attrs) {
-            scope.title = attrs.title;
+        link: function postLink($scope, element, attrs) {
+            $scope.title = attrs.title;
 
-            // scope.$watch(attrs.visible, function(value){
-            //   if(value == true) {
-            //     $(element).modal('show');
-            //     console.log("Show");
-            //   }
-            //   else {
-            //     $(element).modal('hide');
-            //     console.log("Hide");
-            //   }
-            // });
+            $scope.new_team.name = "";
+            $scope.new_team.players = [];
 
-            // $(element).on('shown.bs.modal', function(){
-            //     console.log("Show!!");
-            //   scope.$apply(function(){
-            //     scope.$parent[attrs.visible] = true;
-            //   });
-            // });
-            //
-            // $(element).on('hidden.bs.modal', function(){
-            //     console.log("Hide!!");
-            //   scope.$apply(function(){
-            //     scope.$parent[attrs.visible] = false;
-            //   });
-            // });
+            $scope.test_player_name = "";
+
+            $scope.addPlayerForNewTeam = function() {
+                Users.getUserByUsername($scope.test_player_name).then(function(response){
+                    console.log(response.data);
+                    $scope.new_team.players.push(response.data);
+                });
+            };
+
+            $scope.removeProspectivePlayer = function(player) {
+                var index = $scope.new_team.players.indexOf(player);
+                $scope.new_team.players.splice(index,1);
+            };
+
         },
         templateUrl: template
     };
