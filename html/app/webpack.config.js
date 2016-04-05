@@ -16,20 +16,18 @@ module.exports = function ( options ) {
         entry: {
             vendor: [
                 'font-awesome/css/font-awesome.min.css',
-                'bootstrap/dist/css/bootstrap.min.css',
-                'bootstrap/dist/css/bootstrap-theme.min.css',
 
-                'jquery',
-                'bluebird',
-                'lodash',
+                // 'jquery',
+                // 'bluebird',
+                // 'lodash',
 
                 'angular',
-                'angular-animate',
-                'angular-aria',
+                // 'angular-animate',
+                // 'angular-aria',
                 'angular-ui-router',
 
-                'angular-strap/dist/angular-strap.min.js',
-                'angular-strap/dist/angular-strap.tpl.min.js'
+                'angular-strap/dist/angular-strap.min.js'
+                // 'angular-strap/dist/angular-strap.tpl.min.js'
             ]
         },
 
@@ -41,11 +39,11 @@ module.exports = function ( options ) {
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoErrorsPlugin(),
-            new webpack.ProvidePlugin( {
-                jQuery: 'jquery',
-                $: 'jquery',
-                'window.jQuery': 'jquery'
-            } ),
+            // new webpack.ProvidePlugin( {
+            //     jQuery: 'jquery',
+            //     $: 'jquery',
+            //     'window.jQuery': 'jquery'
+            // } ),
             new HtmlWebpackPlugin( {
                 template: './src/assets/index.html',
                 inject: 'body'

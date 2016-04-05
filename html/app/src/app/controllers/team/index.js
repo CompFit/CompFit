@@ -1,8 +1,11 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Teams) {
+export default function($scope, $stateParams, Teams, $rootScope) {
     'ngInject';
 
+    $scope.toggleModal = function(){
+          $('#createteammodal').modal('show');
+    };
 
     $scope.team_id = -1;
     $scope.avatar = "/img/team_avatars/default-avatar.png";
