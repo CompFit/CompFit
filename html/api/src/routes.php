@@ -117,11 +117,12 @@ $app->group('/user', function(){
         $hash = crypt($password, $salt);
         $stmt->bindParam(':password', $hash);
         $stmt->execute();
+        $user_id = $db->lastInsertId();
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-        return $response->write(json_encode(array("Working" => 1)));
+        return $response->write(json_encode(array("user_id" => $user_id)));
     }
   });
   $this->get('/{user_id}', function($request, $response, $args){
@@ -229,7 +230,6 @@ $app->put('/user/{user_id}',
   }
 );
 
-// Use curl –i –X DELETE http://zero-to-slim.dev/user/{user_id} in console
 $app->delete('/user/{user_id}',
   function ($request, $response, $args){
     $db = $this->dbConn;
