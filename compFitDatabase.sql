@@ -13,7 +13,7 @@ CREATE TABLE users
   email VARCHAR(255),
   password VARCHAR(30),
   #salt
-  avatar BLOB NOT NULL,
+  avatar VARCHAR(255) NOT NULL,
   created VARCHAR(19),
   last_login VARCHAR(19),
   token CHAR(16) NULL,
@@ -26,7 +26,7 @@ CREATE TABLE teams
   team_id INT NOT NULL AUTO_INCREMENT,
   team_name VARCHAR(20),
   captain_id INT,
-  avatar BLOB NOT NULL,
+  avatar VARCHAR (255) NOT NULL,
   created DATE,
   PRIMARY KEY(team_id)
 );
@@ -81,19 +81,19 @@ CREATE TABLE challenge_progress
 );
 
 
-INSERT INTO users (first_name, last_name, username, email, password)
-VALUES ('bob', 'Joe', 'billybob', 'bbob@gmail.com', 'harpoon');
-INSERT INTO users (first_name, last_name, username)
-VALUES ('Jane', 'doe', 'jjdoe');
+INSERT INTO users (first_name, last_name, username, email, password, avatar)
+VALUES ('bob', 'Joe', 'billybob', 'bbob@gmail.com', 'harpoon', '/img/user_avatars/default-avatar.png');
+INSERT INTO users (first_name, last_name, username, avatar)
+VALUES ('Jane', 'doe', 'jjdoe', '/img/user_avatars/default-avatar.png');
 
-INSERT INTO teams (team_name, captain_id)
-VALUES ('Tigers', '1');
-INSERT INTO teams (team_name, captain_id)
-VALUES ('Ligers', '2');
-INSERT INTO teams (team_name, captain_id)
-VALUES ('Ligons', '2');
-INSERT INTO teams (team_name, captain_id)
-VALUES ('Lions', '2');
+INSERT INTO teams (team_name, captain_id, avatar)
+VALUES ('Tigers', '1', '/img/team_avatars/default-avatar.png');
+INSERT INTO teams (team_name, captain_id, avatar)
+VALUES ('Ligers', '2', '/img/team_avatars/default-avatar.png');
+INSERT INTO teams (team_name, captain_id, avatar)
+VALUES ('Ligons', '2', '/img/team_avatars/default-avatar.png');
+INSERT INTO teams (team_name, captain_id, avatar)
+VALUES ('Lions', '2', '/img/team_avatars/default-avatar.png');
 INSERT INTO teams (team_name, captain_id)
 VALUES ('Sabertooths', '2');
 

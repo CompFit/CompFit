@@ -1,6 +1,12 @@
 <?php
 // Routes
 
+//Error Codes
+  //-1 => Sent when no users are found from a get
+  //-2 => Sent when no teams are found from a get
+  //-3 => Returns for POST user, when the username is not unique
+  //-4 => Returns for POST user when the user's email has already been used
+
 // Function to check if a password hashes to the same thing as str2
 function hash_equals($str1, $str2) {
     if(strlen($str1) != strlen($str2)) {
@@ -47,7 +53,7 @@ $app->group('/user', function(){
         $db = $this->dbConn;
         $strToReturn = '';
         $users = '';
-        $sql = 'SELECT user_id, first_name, last_name, email, avatar, created
+        $sql = 'SELECT user_id, username, first_name, last_name, email, avatar, created
                 FROM users';
         try {
           $stmt = $db->query($sql);
@@ -66,6 +72,38 @@ $app->group('/user', function(){
       $db = $this->dbConn;
       $strToReturn = '';
 
+      $checkUniqueUserSql = 'SELECT * FROM users WHERE `username` = :username';
+
+      try {
+        $stmt = $db->prepare($checkUniqueUserSql);
+        $stmt->bindParam(':username', $decode->username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+      $test = json_encode($user);
+      if($test != 'false'){
+        return $response->write(json_encode(array("Not a unique username" => -3)));
+      }
+
+      $checkUniqueEmailSql = 'SELECT * FROM users WHERE `email` = :email';
+
+      try {
+        $stmt = $db->prepare($checkUniqueEmailSql);
+        $stmt->bindParam(':email', $decode->email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+      $test = json_encode($user);
+      if($test != 'false'){
+        return $response->write(json_encode(array("Not a unique email" => -4)));
+      }
+
       $sql = 'INSERT INTO users (`first_name`, `last_name`, `username`, `email`, `password`, `created`)
               VALUES (:first_name, :last_name, :username, :email, :password, UTC_TIMESTAMP())';
       try {
@@ -83,7 +121,7 @@ $app->group('/user', function(){
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-          //return $response->write('' . $);
+        return $response->write(json_encode(array("Working" => 1)));
     }
   });
   $this->get('/{user_id}', function($request, $response, $args){
@@ -103,7 +141,12 @@ $app->group('/user', function(){
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   });
 });
 
@@ -125,7 +168,12 @@ $app->get('/username/{username}',
       echo json_encode($e->getMessage());
     }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
@@ -147,7 +195,12 @@ $app->get('/useremail/{email}',
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 //This is technically a put request, but I was using HTML forms to test, and they don't support put so I made it a post instead
@@ -157,9 +210,9 @@ $app->put('/user/{user_id}',
     $strToReturn = '';
 
     $user_id = $request->getAttribute('user_id');
-    $first_name = $_POST["first_name"];
-    $last_name = $_POST["last_name"];
-    $username = $_POST["username"];
+    $first_name = $_PUT["first_name"];
+    $last_name = $_PUT["last_name"];
+    $username = $_PUT["username"];
 
     $db->query('UPDATE users
                 SET first_name = "'.$first_name.'",
@@ -235,7 +288,12 @@ $app->group('/users', function(){
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   });
   $this->get('/team_name/{team_name}', function ($request, $response, $args){
     $db = $this->dbConn;
@@ -258,7 +316,12 @@ $app->group('/users', function(){
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   });
 });
 
@@ -267,7 +330,7 @@ $app->get('/team',
     $db = $this->dbConn;
     $strToReturn = '';
     $teams = '';
-    $sql = 'SELECT team_id, team_name, captain_id
+    $sql = 'SELECT team_id, team_name, captain_id, avatar
             FROM teams';
     try {
       $stmt = $db->query($sql);
@@ -277,7 +340,7 @@ $app->get('/team',
       echo json_encode($e->getMessage());
     }
     $strToReturn = json_encode($teams);
-      return $response->write('' . $strToReturn);
+    return $response->write('' . $strToReturn);
     }
 );
 
@@ -322,7 +385,12 @@ $app->get('/team/{team_id}',
       }
 
     $test = json_encode($new);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No teams found" => -2)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
@@ -369,7 +437,12 @@ function ($request, $response, $args){
     }
 
   $test = json_encode($new);
-  return $response->write('' . $test);
+  if($test == '[]'){
+    return $response->write(json_encode(array("No teams found" => -2)));
+  }
+  else {
+    return $response->write('' . $test);
+  }
 }
 );
 
@@ -397,22 +470,40 @@ $app->post('/team',
   function ($request, $response, $args){
     $body = $request->getBody();
     $decode = json_decode($body);
+    $players = $decode->players;
     $db = $this->dbConn;
     $strToReturn = '';
 
-    $sql = 'INSERT INTO teams (`team_name`, `captain_id`, `avatar`) VALUES (:team_name, :captain_id, :avatar)';
+    $sql = 'INSERT INTO teams (`team_name`, `captain_id`, `avatar`, `created`)
+            VALUES (:team_name, :captain_id, :avatar, UTC_TIMESTAMP())';
     try {
       $stmt = $db->prepare($sql);
         $stmt->bindParam(':team_name', $decode->team_name);
         $stmt->bindParam(':captain_id', $decode->captain_id);
         $stmt->bindParam(':avatar', $decode->avatar);
         $stmt->execute();
+        $team_id = $db->lastInsertId();
     }
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
+
+    $sql2 = 'INSERT INTO team_participation (`team_id`, `user_id`, `created`)
+             VALUES (:team_id, :user_id, UTC_TIMESTAMP())';
+    foreach($players as $player){
+      try {
+        $stmt = $db->prepare($sql2);
+          $stmt->bindParam(':team_id', $team_id);
+          $stmt->bindParam(':user_id', $player->user_id);
+          $stmt->execute();
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    }
     //Need to find a way to return team_id
     //return $response->write('' . $);
+    return $response->write( json_encode( array("team_id" => $team_id) ) );
   }
 );
 
@@ -516,7 +607,12 @@ $app->get('/teams/captain_id/{captain_id}',
         echo json_encode($e->getMessage());
       }
     $test = json_encode($new);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No teams found" => -2)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
 });
 
 $app->get('/challenge/{challenge_id}',
