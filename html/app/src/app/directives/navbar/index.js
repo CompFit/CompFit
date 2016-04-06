@@ -1,3 +1,4 @@
+import './style.styl';
 import template from 'directives/navbar/template.html';
 
 export default function() {
