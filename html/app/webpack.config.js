@@ -15,7 +15,7 @@ module.exports = function ( options ) {
     var config = _.merge( {}, {
         entry: {
             vendor: [
-                'font-awesome/css/font-awesome.min.css',
+                // 'font-awesome/css/font-awesome.min.css',
 
                 // 'jquery',
                 // 'bluebird',

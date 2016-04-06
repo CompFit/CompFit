@@ -2,7 +2,7 @@ var path = require( 'path' );
 var gulp = require( 'gulp' );
 var gutil = require( 'gulp-util' );
 var webpack = require( 'webpack' );
-var webpackStream = require( 'webpack-stream');
+// var webpackStream = require( 'webpack-stream');
 // var reload = require('gulp-hot-reload');
 var gulpWebpack = require( 'gulp-webpack' );
 var WebpackDevServer = require( 'webpack-dev-server' );
@@ -114,7 +114,6 @@ gulp.task( 'webpack-dev-server', function ( callback ) {
     new WebpackDevServer( webpack( config ), {
         contentBase: "http://localhost:8080/",
         publicPath: config.output.publicPath,
-        watch: true,
         hot: true,
         historyApiFallback: true,
         stats: {
