@@ -31,7 +31,7 @@ $app->post('/auth', function($request, $response){
     echo json_encode($e->getMessage());
   }
   if(hash_equals($user->password, crypt($password, $user->password))) //email and password match a user
-	{
+  {
     return $response->write( json_encode(array("username" => $user->username)));
   }
 });
@@ -157,9 +157,9 @@ $app->put('/user/{user_id}',
     $strToReturn = '';
 
     $user_id = $request->getAttribute('user_id');
-    $first_name = $_POST["first_name"];
-    $last_name = $_POST["last_name"];
-    $username = $_POST["username"];
+    $first_name = $_PUT["first_name"];
+    $last_name = $_PUT["last_name"];
+    $username = $_PUT["username"];
 
     $db->query('UPDATE users
                 SET first_name = "'.$first_name.'",
@@ -267,7 +267,7 @@ $app->get('/team',
     $db = $this->dbConn;
     $strToReturn = '';
     $teams = '';
-    $sql = 'SELECT team_id, team_name, captain_id
+    $sql = 'SELECT team_id, team_name, captain_id, avatar
             FROM teams';
     try {
       $stmt = $db->query($sql);
@@ -397,6 +397,7 @@ $app->post('/team',
   function ($request, $response, $args){
     $body = $request->getBody();
     $decode = json_decode($body);
+    echo 
     $db = $this->dbConn;
     $strToReturn = '';
 
@@ -519,54 +520,256 @@ $app->get('/teams/captain_id/{captain_id}',
     return $response->write('' . $test);
 });
 
+/*
 $app->get('/challenge/{challenge_id}',
   function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $challenge_id = $request->getAttribute('challenge_id');
+
+    foreach($db->query('select * from challenges where challenge_id = "'.$challenge_id.'"') as $row){
+      $strToReturn .= '<br /> challenge_id: ' . $row['challenge_id'] .' <br /> task_name: ' . $row['task_name'];
+      $strToReturn .= '<br /> end_date: ' . $row['end_date'];
+      $strToReturn .= '<br /> to_team_id: ' . $row['to_team_id'] .' <br /> from_team_id: ' . $row['from_team_id'];
+    }
+
+    return $response->write('' . $strToReturn);
   }
 );
+*/
 
-$app->post('/challenge',
+//GOOD BUT DO WE NEED AN ARRAY??
+$app->get('/challenge',
   function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $challenges = '';
+    $sql = 'SELECT challenge_id, task_name, end_date, to_team_id, from_team_id
+            FROM challenges';
+    try {
+      $stmt = $db->query($sql);
+      $challenges = $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+    catch(PDOException $e) {
+      echo json_encode($e->getMessage());
+    }
+    $strToReturn = json_encode($challenges);
+      return $response->write('' . $strToReturn);
+    }
+);
+
+//GOOD
+$app->get('/challenge/{challenge_id}',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $challenge_id = $request->getAttribute('challenge_id');
+
+    $sql = 'SELECT * 
+            FROM challenges 
+            WHERE challenge_id = "'.$challenge_id.'"';
+
+    try { 
+      $stmt = $db->query($sql);
+      $challenge = $stmt -> fetchALL(PDO::FETCH_OBJ);
+    }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($challenge);
+    return $response -> write('' . $test);
   }
 );
 
+//NEED TO CREATE A POST FOR /challenge
+
+
+//NEED TO TEST
 $app->delete('/challenge/{challenge_id}',
-  function ($request, $response, $args){
+  function ($request, $response, $args){ $db = $this->dbConn;
+    $strToReturn = '';
+    $challenge_id = $request->getAttribute('challenge_id');
+
+    foreach($db->query('select * from challenges where challenge_id = "'.$challenge_id.'"') as $row){
+      $strToReturn .= '<br /> challenge_id: ' . $row['challenge_id'] .' <br /> task_name: ' . $row['task_name'];
+    }
+
+    $db->query('DELETE FROM challenges WHERE challenge_id = "'.$challenge_id.'"');
+
+    return $response->write('Deleting <br />' . $strToReturn);
   }
+  
 );
 
+//GOOD
 $app->get('/challenges/{team_id}',
   function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $team_id = $request->getAttribute('team_id');
+    $challenges = '';
+
+    $sql = 'SELECT * from challenges WHERE to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id;
+      
+      try { 
+      $stmt = $db->query($sql);
+      $challenges = $stmt -> fetchALL(PDO::FETCH_OBJ);
+      }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+      }
+    $test = json_encode($challenges);
+    return $response -> write('' . $test);
+    }
+  );
+        /*
+        $stmt = $db->query($sql);
+        $challenges = $stmt->fetchAll(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    $test = json_encode($challenges);
+    return $response->write('' . $test);
+   
   }
 );
+*/
 
-$app->get('/challenges/end_date/{end_date}',
+$app->get('/challenges/search/{end_date}',
   function ($request, $response, $args){
-  }
+     $db = $this->dbConn;
+    $strToReturn = '';
+    $end_date = $request->getAttribute('end_date');
+    $challenges = '';
+
+    $sql = 'SELECT * FROM challenges WHERE end_date = "'.$end_date.'"';
+      
+    try { 
+      $stmt = $db->query($sql);
+      $challenges = $stmt -> fetchALL(PDO::FETCH_OBJ);
+      }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($challenges);
+    return $response -> write('' . $test);
+    }
+    );
+
+$app->get('/exercise',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $exercises = '';
+    $sql = 'SELECT exercise_id, exercise_name, user_id, date_completed
+            FROM exercises';
+    try {
+      $stmt = $db->query($sql);
+      $exercises = $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+    catch(PDOException $e) {
+      echo json_encode($e->getMessage());
+    }
+    $strToReturn = json_encode($exercises);
+      return $response->write('' . $strToReturn);
+    }
 );
 
 $app->get('/exercise/{exercise_id}',
   function ($request, $response, $args){
-  }
+     $db = $this->dbConn;
+    $strToReturn = '';
+    $exercise_id = $request->getAttribute('exercise_id');
+    $exercise = '';
+    $sql = 'SELECT * 
+            FROM exercises 
+            WHERE exercise_id = "'.$exercise_id.'"';
+
+    try { 
+      $stmt = $db->query($sql);
+      $exercise = $stmt -> fetchALL(PDO::FETCH_OBJ);
+      }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($exercise);
+    return $response -> write('' . $test);
+    }
 );
 
+//NEED TO DO THIS ONE
 $app->post('/exercise',
   function ($request, $response, $args){
+    $body = $request->getBody();
+    $decode = json_decode($body);
+    $db = $this->dbConn;
+    $strToReturn = '';
+
+    $sql = 'INSERT INTO exercises (`exercise_name`, `user_id`, `date_completed`) 
+    VALUES (:exercise_name, :user_id, :date_completed)';
+    try {
+      $stmt = $db->prepare($sql);
+        $stmt->bindParam(':exercise_name', $decode->exercise_name);
+        $stmt->bindParam(':user_id', $decode->user_id);
+        $stmt->bindParam(':date_completed', $decode->date_completed);
+        $stmt->execute();
+        $exercise_id = $db->lastInsertId();
+    }
+    catch(PDOException $e) {
+      echo json_encode($e->getMessage());
+    }
+    //Need to find a way to return team_id
+    //return $response->write('Successfully added exercise ' . $exercise_id);
+    return $response->write(json_encode(array("exercise_id" => $exercise_id)));
   }
 );
 
+//DO WE NEED THIS ENDPOINT? WHEN WOULD YOU UPDATE AN EXERCISE??
 $app->put('/exercise/{exercise_id}',
   function ($request, $response, $args){
   }
 );
-
+//STILL NEED TO CREATE AND TEST
 $app->delete('/exercise/{exercise_id}',
   function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $exercise_id = $request->getAttribute('exercise_id');
+
+    foreach($db->query('SELECT * FROM exercises WHERE exercise_id = "'.$exercise_id.'"') as $row){
+      $strToReturn .= '<br /> exercise_id: ' . $row['exercise_id'] .' <br /> exercise_name: ' . $row['exercise_name'];
+    }
+
+    $db->query('DELETE FROM exercises WHERE exercise_id = "'.$exercise_id.'"');
+
+    return $response->write('Deleting <br />' . $strToReturn);
   }
+
 );
 
+//ERROR
 $app->get('/exercises/{user_id}',
   function ($request, $response, $args){
-  }
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $user_id = $request->getAttribute('user_id');
+    $exercises = '';
+
+    $sql = 'SELECT exercises.exercise_name, exercises.exercise_id, exercises.date_completed, exercises.repetitions, exercises.units 
+            FROM exercises 
+            WHERE  "'.$user_id.'" = exercises.user_id';
+
+    try { 
+      $stmt = $db->query($sql);
+      $exercises = $stmt -> fetchALL(PDO::FETCH_OBJ);
+      }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($exercises);
+    return $response -> write('' . $test);
+    }
 );
 
 $app->get('/exercises/search/{team_id}',
@@ -576,15 +779,24 @@ $app->get('/exercises/search/{team_id}',
 
 $app->get('/exercises/exercise/{exercise_name}',
   function ($request, $response, $args){
-  }
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $exercise_name = $request->getAttribute('exercise_name');
+    $exercises = '';
+
+    $sql = 'SELECT exercises.exercise_name, exercises.exercise_id, exercises.user_id, exercises.date_completed, exercises.repetitions, exercises.units
+    FROM exercises WHERE  "'.$exercise_name.'" = exercises.exercise_name';
+
+      try { 
+      $stmt = $db->query($sql);
+      $exercises = $stmt -> fetchALL(PDO::FETCH_OBJ);
+      }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($exercises);
+    return $response -> write('' . $test);
+    }
 );
 
-$app->get('/exercises/startdate/{start_date}',
-  function ($request, $response, $args){
-  }
-);
 
-$app->get('/exercises/enddate/{end_date}',
-  function ($request, $response, $args){
-  }
-);
