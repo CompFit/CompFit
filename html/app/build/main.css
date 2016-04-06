@@ -95,9 +95,12 @@ html {
     border-radius: 0;
   }
 }
-.badge-danger {
+#create_team_modal .badge-danger {
   background-color: #d9534f;
   float: right;
+}
+#create_team_modal .addPlayerFormErrorMsg {
+  color: #f00;
 }
 @media (min-width: 768px) {
   .col-sm-3 {
