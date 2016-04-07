@@ -37,8 +37,8 @@ export default function(Teams, Users, $timeout) {
                     Users.getUserByUsername(test_player_name).then(function(response){
                         console.log(response.data);
 
-                        if (response.data < 0) {
-                            console.log("ERROR! in getting userbyusername in create_team_modal");
+                        if (response.data.error != undefined) {
+                            console.log("ERROR! in getting userbyusername in create_team_modal", response.data.error);
                         }
                         else {
                             $scope.new_team.players.push(response.data);
@@ -76,18 +76,23 @@ export default function(Teams, Users, $timeout) {
                 else {
                     var captain_id = Users.user_id;
 
+                    var players = [];
+                    for(var i = 0; i < $scope.new_team.players.length; i++) {
+                      players.push($scope.new_team.players[i].user_id);
+                    }
+
                     // $scope.new_team.players.push(captain_id);
-                    Teams.createTeam($scope.new_team.name,captain_id,[0,1,2]).then(function (response) {
+                    Teams.createTeam($scope.new_team.name,captain_id,players).then(function (response) {
                         console.log(response.data);
-                        alert("Team_id =",response.data["team_id"]);
+                        // alert("Team_id =",response.data["team_id"]);
                         $(element).modal('hide');
 
                         //update teams
                         Teams.getTeamsForUser(Users.user_id);
 
-                        $timeout(function(){
-                            
-                        }, 500);
+                        // $timeout(function(){
+                        //
+                        // }, 500);
                     });
                 }
 

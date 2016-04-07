@@ -170,7 +170,7 @@ $app->get('/username/{username}',
     }
     $test = json_encode($users);
     if($test == 'false'){
-      return $response->write(json_encode(array("No users found" => -1)));
+      return $response->write(json_encode(array("error" => -1)));
     }
     else {
       return $response->write('' . $test);
@@ -364,7 +364,7 @@ $app->get('/team/{team_id}',
         $new;
         $array_loop = 0;
         $stmt = $db->query($sql2);
-        $users = $stmt->fetch(PDO::FETCH_OBJ);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
         //$d = array('players' => $users);
 
         $stmt2 = $db->query($sql1);
@@ -485,11 +485,11 @@ $app->post('/team',
 
     $sql2 = 'INSERT INTO team_participation (`team_id`, `user_id`, `created`)
              VALUES (:team_id, :user_id, UTC_TIMESTAMP())';
-    foreach($players as $player){
+    foreach($players as $playerid){
       try {
         $stmt = $db->prepare($sql2);
           $stmt->bindParam(':team_id', $team_id);
-          $stmt->bindParam(':user_id', $player->user_id);
+          $stmt->bindParam(':user_id', $playerid);
           $stmt->execute();
       }
       catch(PDOException $e) {
