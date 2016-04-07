@@ -7,6 +7,13 @@ export default class {
         self.teams = [];
     }
 
+    createTeam(team_name,captain_id,players,avatar="/img/team_avatars/default-avatar.png") {
+        var data = {"team_name":team_name,"captain_id":captain_id,"players":players,"avatar":avatar};
+        return this.$http.post("http://private-c84bfb-compfit.apiary-mock.com/team",data).then(function (response) {
+            return response;
+        });
+    }
+
     getTeamById(team_id) {
         return this.$http({
               method: 'GET',

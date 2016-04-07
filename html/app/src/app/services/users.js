@@ -2,6 +2,7 @@ export default class {
 
     constructor($http) {
         this.$http = $http;
+        this.user_id = 1;
         var self = this;
 
     }
@@ -33,7 +34,7 @@ export default class {
               method: 'GET',
               url: 'http://localhost:9000/api/users/'+team_id
             }).then(function successCallback(response) {
-                self.teams = response.data;
+                // self.teams = response.data;
                 return response;
               }, function errorCallback(response) {
                 return response;
