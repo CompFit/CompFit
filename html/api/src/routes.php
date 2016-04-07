@@ -26,7 +26,7 @@ $app->post('/auth', function($request, $response, $args){
   $password = $decode->password;
   $strToReturn = '';
 
-  $sql = 'SELECT username, password FROM users WHERE email = :email';
+  $sql = 'SELECT username, password, salt FROM users WHERE email = :email';
   try {
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':email', $decode->email);
@@ -36,9 +36,18 @@ $app->post('/auth', function($request, $response, $args){
   catch(PDOException $e) {
     echo json_encode($e->getMessage());
   }
-  if(hash_equals($user->password, crypt($password, $user->password))) //email and password match a user
-	{
-    return $response->write( json_encode(array("username" => $user->username)));
+  if ($user) {
+      # code...
+      if(hash_equals($user->password, crypt($password, $user->salt))) //email and password match a user
+    	{
+        return $response->write( json_encode(array("username" => $user->username)));
+      }
+      else {
+          return $response->write( json_encode(array("error" => -2, "user" => $user, "attempted_password" => crypt($password, $user->salt))));
+      }
+  }
+  else {
+      return $response->write( json_encode(array("error" => -1)));
   }
   else{
     return $response->write( json_encode( array("error" => -1) ) );
@@ -107,8 +116,8 @@ $app->group('/user', function(){
         return $response->write(json_encode(array("error" => -4)));
       }
 
-      $sql = 'INSERT INTO users (`first_name`, `last_name`, `username`, `email`, `password`, `created`)
-              VALUES (:first_name, :last_name, :username, :email, :password, UTC_TIMESTAMP())';
+      $sql = 'INSERT INTO users (`first_name`, `last_name`, `username`, `email`, `password`, `salt`, `created` )
+              VALUES (:first_name, :last_name, :username, :email, :password, :salt, UTC_TIMESTAMP())';
       try {
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':first_name', $decode->first_name);
@@ -119,6 +128,7 @@ $app->group('/user', function(){
         $salt = sprintf("$2a$%02d$", 10) . $salt;
         $hash = crypt($password, $salt);
         $stmt->bindParam(':password', $hash);
+        $stmt->bindParam(':salt', $salt);
         $stmt->execute();
         $user_id = $db->lastInsertId();
       }
