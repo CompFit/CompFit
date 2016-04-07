@@ -8,7 +8,7 @@ export default class {
     }
     createUser(newUser) {
         var data = newUser;
-        return this.$http.post("http://private-c84bfb-compfit.apiary-mock.com/user",data).then(function (response) {
+        return this.$http.post("http://localhost:9000/api/user",data).then(function (response) {
             return response;
         });
     }
@@ -16,7 +16,7 @@ export default class {
     getUserById(user_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://private-c84bfb-compfit.apiary-mock.com/user/'+user_id
+              url: 'http://localhost:9000/api/user/'+user_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
@@ -27,7 +27,7 @@ export default class {
     getUserByUsername(username) {
         return this.$http({
               method: 'GET',
-              url: 'http://private-c84bfb-compfit.apiary-mock.com/username/'+username
+              url: 'http://localhost:9000/api/username/'+username
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
@@ -38,7 +38,7 @@ export default class {
     getUsersForTeam(team_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://private-c84bfb-compfit.apiary-mock.com/users/'+team_id
+              url: 'http://localhost:9000/api/users/'+team_id
             }).then(function successCallback(response) {
                 // self.teams = response.data;
                 return response;
