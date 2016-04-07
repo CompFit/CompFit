@@ -57,7 +57,7 @@ $app->group('/user', function(){
                 FROM users';
         try {
           $stmt = $db->query($sql);
-          $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+          $users = $stmt->fetch(PDO::FETCH_OBJ);
         }
         catch(PDOException $e) {
           echo json_encode($e->getMessage());
@@ -136,7 +136,7 @@ $app->group('/user', function(){
             WHERE user_id = "'.$user_id.'"';
       try {
         $stmt = $db->query($sql);
-        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $users = $stmt->fetch(PDO::FETCH_OBJ);
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
@@ -158,18 +158,18 @@ $app->get('/username/{username}',
     $username = $request->getAttribute('username');
     $users = '';
 
-    $sql = 'SELECT user_id, first_name, last_name, email, avatar
+    $sql = 'SELECT user_id, username, first_name, last_name, email, avatar
             FROM users
             WHERE username = "'.$username.'"';
     try {
       $stmt = $db->query($sql);
-      $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $users = $stmt->fetch(PDO::FETCH_OBJ);
     }
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
     $test = json_encode($users);
-    if($test == '[]'){
+    if($test == 'false'){
       return $response->write(json_encode(array("No users found" => -1)));
     }
     else {
@@ -190,7 +190,7 @@ $app->get('/useremail/{email}',
             WHERE email = "'.$email.'"';
       try {
         $stmt = $db->query($sql);
-        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $users = $stmt->fetch(PDO::FETCH_OBJ);
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
@@ -361,29 +361,24 @@ $app->get('/team/{team_id}',
                  WHERE team_id = "'.$team_id.'") as t
              WHERE t.user_id = u.user_id';
       try {
-        $new = array();
+        $new;
         $array_loop = 0;
         $stmt = $db->query($sql2);
-        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $users = $stmt->fetch(PDO::FETCH_OBJ);
         //$d = array('players' => $users);
 
         $stmt2 = $db->query($sql1);
-        $users2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($users2 as $val){
-          $new[$array_loop]['team_id'] = $val['team_id'];
-          $new[$array_loop]['team_name'] = $val['team_name'];
-          $new[$array_loop]['captain_id'] = $val['captain_id'];
-          $new[$array_loop]['players'] = $users;
-          $new[$array_loop]['avatar'] = $val['avatar'];
-          $new[$array_loop]['created'] = $val['created'];
-          $array_loop++;
-
-        }
+        $users2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+        $new['team_id'] = $users2['team_id'];
+        $new['team_name'] = $users2['team_name'];
+        $new['captain_id'] = $users2['captain_id'];
+        $new['players'] = $users;
+        $new['avatar'] = $users2['avatar'];
+        $new['created'] = $users2['created'];
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-
     $test = json_encode($new);
     if($test == '[]'){
       return $response->write(json_encode(array("No teams found" => -2)));
@@ -416,7 +411,7 @@ function ($request, $response, $args){
       $new = array();
       $array_loop = 0;
       $stmt = $db->query($sql2);
-      $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $users = $stmt->fetch(PDO::FETCH_OBJ);
       //$d = array('players' => $users);
 
       $stmt2 = $db->query($sql1);
