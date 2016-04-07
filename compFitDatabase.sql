@@ -172,6 +172,124 @@ VALUES ('2', '1');
 INSERT INTO team_participation (team_id, user_id)
 VALUES ('1', '2');
 
+insert into team_participation (team_id, user_id) values (1, 41);
+insert into team_participation (team_id, user_id) values (1, 37);
+insert into team_participation (team_id, user_id) values (1, 16);
+insert into team_participation (team_id, user_id) values (1, 13);
+insert into team_participation (team_id, user_id) values (1, 18);
+insert into team_participation (team_id, user_id) values (1, 11);
+
+insert into team_participation (team_id, user_id) values (2, 2);
+insert into team_participation (team_id, user_id) values (2, 34);
+insert into team_participation (team_id, user_id) values (2, 20);
+insert into team_participation (team_id, user_id) values (2, 7);
+insert into team_participation (team_id, user_id) values (2, 20);
+insert into team_participation (team_id, user_id) values (2, 21);
+insert into team_participation (team_id, user_id) values (2, 39);
+
+insert into team_participation (team_id, user_id) values (3, 2);
+insert into team_participation (team_id, user_id) values (3, 3);
+insert into team_participation (team_id, user_id) values (3, 30);
+insert into team_participation (team_id, user_id) values (3, 3);
+insert into team_participation (team_id, user_id) values (3, 6);
+insert into team_participation (team_id, user_id) values (3, 25);
+insert into team_participation (team_id, user_id) values (3, 41);
+insert into team_participation (team_id, user_id) values (3, 36);
+
+insert into team_participation (team_id, user_id) values (4, 2);
+insert into team_participation (team_id, user_id) values (4, 32);
+insert into team_participation (team_id, user_id) values (4, 28);
+insert into team_participation (team_id, user_id) values (4, 42);
+insert into team_participation (team_id, user_id) values (4, 3);
+insert into team_participation (team_id, user_id) values (4, 26);
+insert into team_participation (team_id, user_id) values (4, 5);
+insert into team_participation (team_id, user_id) values (4, 8);
+
+insert into team_participation (team_id, user_id) values (5, 2);
+insert into team_participation (team_id, user_id) values (5, 29);
+insert into team_participation (team_id, user_id) values (5, 34);
+insert into team_participation (team_id, user_id) values (5, 27);
+insert into team_participation (team_id, user_id) values (5, 37);
+insert into team_participation (team_id, user_id) values (5, 14);
+insert into team_participation (team_id, user_id) values (5, 37);
+insert into team_participation (team_id, user_id) values (5, 2);
+
+insert into team_participation (team_id, user_id) values (6, 1);
+insert into team_participation (team_id, user_id) values (6, 12);
+insert into team_participation (team_id, user_id) values (6, 24);
+insert into team_participation (team_id, user_id) values (6, 4);
+insert into team_participation (team_id, user_id) values (6, 24);
+insert into team_participation (team_id, user_id) values (6, 40);
+insert into team_participation (team_id, user_id) values (6, 1);
+insert into team_participation (team_id, user_id) values (6, 31);
+
+insert into team_participation (team_id, user_id) values (7, 4);
+insert into team_participation (team_id, user_id) values (7, 7);
+insert into team_participation (team_id, user_id) values (7, 24);
+insert into team_participation (team_id, user_id) values (7, 42);
+insert into team_participation (team_id, user_id) values (7, 19);
+insert into team_participation (team_id, user_id) values (7, 21);
+insert into team_participation (team_id, user_id) values (7, 34);
+insert into team_participation (team_id, user_id) values (7, 38);
+
+insert into team_participation (team_id, user_id) values (8, 37);
+insert into team_participation (team_id, user_id) values (8, 11);
+insert into team_participation (team_id, user_id) values (8, 10);
+insert into team_participation (team_id, user_id) values (8, 2);
+insert into team_participation (team_id, user_id) values (8, 18);
+insert into team_participation (team_id, user_id) values (8, 1);
+insert into team_participation (team_id, user_id) values (8, 36);
+insert into team_participation (team_id, user_id) values (8, 28);
+
+insert into team_participation (team_id, user_id) values (9, 32);
+insert into team_participation (team_id, user_id) values (9, 34);
+insert into team_participation (team_id, user_id) values (9, 29);
+insert into team_participation (team_id, user_id) values (9, 22);
+insert into team_participation (team_id, user_id) values (9, 7);
+insert into team_participation (team_id, user_id) values (9, 4);
+insert into team_participation (team_id, user_id) values (9, 11);
+insert into team_participation (team_id, user_id) values (9, 31);
+
+insert into team_participation (team_id, user_id) values (11, 2);
+insert into team_participation (team_id, user_id) values (11, 21);
+insert into team_participation (team_id, user_id) values (11, 13);
+insert into team_participation (team_id, user_id) values (11, 25);
+insert into team_participation (team_id, user_id) values (11, 38);
+
+insert into team_participation (team_id, user_id) values (12, 33);
+insert into team_participation (team_id, user_id) values (12, 17);
+insert into team_participation (team_id, user_id) values (12, 41);
+insert into team_participation (team_id, user_id) values (12, 21);
+insert into team_participation (team_id, user_id) values (12, 40);
+
+insert into team_participation (team_id, user_id) values (13, 18);
+insert into team_participation (team_id, user_id) values (13, 30);
+insert into team_participation (team_id, user_id) values (13, 19);
+insert into team_participation (team_id, user_id) values (13, 21);
+insert into team_participation (team_id, user_id) values (13, 41);
+insert into team_participation (team_id, user_id) values (13, 33);
+
+insert into team_participation (team_id, user_id) values (14, 7);
+insert into team_participation (team_id, user_id) values (14, 28);
+insert into team_participation (team_id, user_id) values (14, 7);
+insert into team_participation (team_id, user_id) values (14, 37);
+insert into team_participation (team_id, user_id) values (14, 39);
+insert into team_participation (team_id, user_id) values (14, 26);
+insert into team_participation (team_id, user_id) values (14, 41);
+
+insert into team_participation (team_id, user_id) values (15, 25);
+insert into team_participation (team_id, user_id) values (15, 39);
+insert into team_participation (team_id, user_id) values (15, 39);
+insert into team_participation (team_id, user_id) values (15, 29);
+insert into team_participation (team_id, user_id) values (15, 37);
+insert into team_participation (team_id, user_id) values (15, 15);
+insert into team_participation (team_id, user_id) values (15, 41);
+
+insert into team_participation (team_id, user_id) values (16, 7);
+insert into team_participation (team_id, user_id) values (16, 22);
+insert into team_participation (team_id, user_id) values (16, 32);
+
+
 INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name)
 VALUES ('2016-3-30', '2016-4-06', '1', '4', 'The 3 Ups');
 INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name)
