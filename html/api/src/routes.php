@@ -49,9 +49,6 @@ $app->post('/auth', function($request, $response, $args){
   else {
       return $response->write( json_encode(array("error" => -1)));
   }
-  else{
-    return $response->write( json_encode( array("error" => -1) ) );
-  }
 });
 
 $app->get('/users',function($request, $response){
