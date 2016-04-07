@@ -1,14 +1,11 @@
+import aboutTemplate from 'controllers/about/template.html';
 import applicationTemplate from 'controllers/application/template.html';
-
 import authenticationTemplate from 'controllers/authentication/template.html';
 import homeTemplate from 'controllers/home/template.html';
 import loginTemplate from 'controllers/login/template.html';
 import myProfileTemplate from 'controllers/myProfile/template.html';
-import teamTemplate from 'controllers/team/template.html';
-import challengeTemplate from 'controllers/challenge/template.html';
-import exerciseTemplate from 'controllers/exercise/template.html';
-import aboutTemplate from 'controllers/about/template.html';
 import registerTemplate from 'controllers/register/template.html';
+import teamTemplate from 'controllers/team/template.html';
 
 export default function ( $stateProvider, $urlRouterProvider, $locationProvider ) {
     'ngInject';
@@ -30,14 +27,10 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
             controller: 'ApplicationController'
         } )
         .state( 'app.about', {
-            url: '/about/',
+            url: '',
+            abstract: true,
             templateUrl: aboutTemplate,
-            controller: 'AboutController'
-        } )
-        .state( 'app.register', {
-            url: '/register/',
-            templateUrl: registerTemplate,
-            controller: 'RegisterController'
+            controller: 'aboutController'
         } )
         .state( 'app.home', {
             url: '/',
@@ -48,16 +41,6 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
             url: '/team/:id',
             templateUrl: teamTemplate,
             controller: 'TeamController'
-        } )
-        .state( 'app.challenge', {
-            url: '/challenge/:id',
-            templateUrl: challengeTemplate,
-            controller: 'ChallengeController'
-        } )
-        .state( 'app.exercise', {
-            url: '/exercise/:id',
-            templateUrl: exerciseTemplate,
-            controller: 'ExerciseController'
         } )
         .state( 'app.login', {
             url: '/login',
@@ -73,5 +56,10 @@ export default function ( $stateProvider, $urlRouterProvider, $locationProvider 
             url: '/profile',
             templateUrl: myProfileTemplate,
             controller: 'MyProfileController'
+        } )
+        .state( 'app.register', {
+            url: '/register',
+            templateUrl: registerTemplate,
+            controller: 'RegisterController'
         } );
 }
