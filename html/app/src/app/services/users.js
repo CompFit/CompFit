@@ -6,6 +6,12 @@ export default class {
         var self = this;
 
     }
+    createUser(newUser) {
+        var data = newUser;
+        return this.$http.post("http://private-c84bfb-compfit.apiary-mock.com/user",data).then(function (response) {
+            return response;
+        });
+    }
 
     getUserById(user_id) {
         return this.$http({
