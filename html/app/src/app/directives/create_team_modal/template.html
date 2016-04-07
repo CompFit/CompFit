@@ -13,6 +13,9 @@
                     <label for="team_name">Team Name</label>
                     <input type="text" class="form-control" placeholder="Team Name" ng-model="new_team.name" required>
                 </div>
+                <div ng-show="teamNameFormError" class="formErrorMsg">
+                    {{teamNameFormError}}
+                </div>
               </form>
               <form role="form" ng-submit="addPlayerForNewTeam()" name="addPlayerForm">
                 <div class="form-group">
@@ -25,7 +28,7 @@
                         </span>
                     </div>
                 </div>
-                <div ng-show="addPlayerFormError" class="addPlayerFormErrorMsg">
+                <div ng-show="addPlayerFormError" class="formErrorMsg">
                     {{addPlayerFormError}}
                 </div>
               </form>
@@ -35,7 +38,7 @@
                         <p class="list-group-item">{{player.username}} <button class="btn badge badge-danger" ng-click="removeProspectivePlayer(player)"><i class="fa fa-times"></i></button></p>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success">Create</button>
+                <button ng-click="submitTeam()" type="button" class="btn btn-success">Create</button>
           </div>
 
 
