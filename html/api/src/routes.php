@@ -36,8 +36,6 @@ $app->post('/auth', function($request, $response, $args){
   catch(PDOException $e) {
     echo json_encode($e->getMessage());
   }
-  echo $user->password;
-  echo crypt($password, $user->password);
   if(hash_equals($user->password, crypt($password, $user->password))) //email and password match a user
 	{
     return $response->write( json_encode(array("username" => $user->username)));
