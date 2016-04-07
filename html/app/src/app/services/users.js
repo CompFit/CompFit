@@ -9,6 +9,12 @@ export default class {
     createUser(newUser) {
         var data = newUser;
         return this.$http.post("http://localhost:9000/api/user",data).then(function (response) {
+            if (response.data.error != undefined) {
+                console.log("ERROR! in creating User", response.data.error);
+            }
+            else {
+                alert("New User created with id: " + String(response.data.user_id));
+            }
             return response;
         });
     }

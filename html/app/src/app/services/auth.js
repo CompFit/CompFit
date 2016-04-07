@@ -11,6 +11,12 @@ export default class {
         // var data = {"email":email,"password":password};
         this.$http.post("/api/auth",user).then(function(response){
             console.log(response);
+            if (response.data.error != undefined) {
+                console.log("ERROR! in posting Auth", response.data.error);
+            }
+            else {
+                alert("Logged in as " + String(response.data.username));
+            }
         });
     }
 
