@@ -19,7 +19,7 @@ function hash_equals($str1, $str2) {
     }
 }
 
-$app->post('/auth', function($request, $response){
+$app->post('/auth', function($request, $response, $args){
   $body = $request->getBody();
   $decode = json_decode($body);
   $db = $this->dbConn;
@@ -36,9 +36,14 @@ $app->post('/auth', function($request, $response){
   catch(PDOException $e) {
     echo json_encode($e->getMessage());
   }
+  echo $user->password;
+  echo crypt($password, $user->password);
   if(hash_equals($user->password, crypt($password, $user->password))) //email and password match a user
 	{
     return $response->write( json_encode(array("username" => $user->username)));
+  }
+  else{
+    return $response->write( json_encode( array("error" => -1) ) );
   }
 });
 
@@ -408,24 +413,20 @@ function ($request, $response, $args){
                WHERE a.team_id = tp.team_id) as t
            WHERE t.user_id = u.user_id';
     try {
-      $new = array();
+      $new;
       $array_loop = 0;
       $stmt = $db->query($sql2);
       $users = $stmt->fetch(PDO::FETCH_OBJ);
       //$d = array('players' => $users);
 
       $stmt2 = $db->query($sql1);
-      $users2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($users2 as $val){
-        $new[$array_loop]['team_id'] = $val['team_id'];
-        $new[$array_loop]['team_name'] = $val['team_name'];
-        $new[$array_loop]['captain_id'] = $val['captain_id'];
-        $new[$array_loop]['players'] = $users;
-        $new[$array_loop]['avatar'] = $val['avatar'];
-        $new[$array_loop]['created'] = $val['created'];
-        $array_loop++;
-
-      }
+      $users2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+      $new['team_id'] = $users2['team_id'];
+      $new['team_name'] = $users2['team_name'];
+      $new['captain_id'] = $users2['captain_id'];
+      $new['players'] = $users;
+      $new['avatar'] = $users2['avatar'];
+      $new['created'] = $users2['created'];
     }
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
