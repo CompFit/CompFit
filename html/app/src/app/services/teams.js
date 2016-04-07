@@ -21,7 +21,7 @@ export default class {
     getTeamsForUser(user_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://private-c84bfb-compfit.apiary-mock.com/teams/'+user_id
+              url: 'http://localhost:9000/api/teams/'+user_id
             }).then(function successCallback(response) {
                 self.teams = response.data;
                 return response;
