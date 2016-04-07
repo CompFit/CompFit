@@ -6,6 +6,9 @@ html {
   height: 200px;
   background-color: #d3d3d3;
 }
+#about h3 {
+  text-align: center;
+}
 #about img {
   width: 40%;
   height: auto;
