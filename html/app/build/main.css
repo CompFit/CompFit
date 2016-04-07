@@ -31,6 +31,21 @@ html {
   float: left;
   margin-top: 20px;
 }
+#home {
+  background-image: URL('/img/banner.jpg');
+  background-size: cover;
+  min-height: 626px;
+  max-height: 826px;
+  color: #fff;
+  text-align: center;
+}
+#home .jumbotron {
+  background-color: rgba(0,0,0,0.4);
+  height: 425px;
+}
+#home hr {
+  width: 50%;
+}
 #my-profile .btn {
   margin-bottom: 10px;
 }
@@ -129,6 +144,12 @@ html {
   .navbar {
     margin-bottom: 0px !important;
     border-radius: 0px !important;
+  }
+  .navbar-brand {
+    padding: 0px 15px;
+  }
+  .navbar-brand>img {
+    height: 100%;
   }
 }
 @media (min-width: 768px) {
