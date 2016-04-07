@@ -37,8 +37,8 @@ export default function(Teams, Users, $timeout) {
                     Users.getUserByUsername(test_player_name).then(function(response){
                         console.log(response.data);
 
-                        if (response.data < 0) {
-                            console.log("ERROR! in getting userbyusername in create_team_modal");
+                        if (response.data.error != undefined) {
+                            console.log("ERROR! in getting userbyusername in create_team_modal", response.data.error);
                         }
                         else {
                             $scope.new_team.players.push(response.data);
@@ -61,7 +61,7 @@ export default function(Teams, Users, $timeout) {
 
 
             $scope.submitTeam = function() {
-                
+
             };
 
         },
