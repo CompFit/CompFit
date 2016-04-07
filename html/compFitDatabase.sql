@@ -11,8 +11,8 @@ CREATE TABLE users
   last_name VARCHAR(20),
   username VARCHAR(20),
   email VARCHAR(255),
-  password VARCHAR(30),
-  #salt
+  password VARCHAR(64),
+  salt VARCHAR(64),
   avatar VARCHAR(255) NOT NULL,
   created VARCHAR(19),
   last_login VARCHAR(19),
