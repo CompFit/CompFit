@@ -485,6 +485,17 @@ $app->post('/team',
 
     $sql2 = 'INSERT INTO team_participation (`team_id`, `user_id`, `created`)
              VALUES (:team_id, :user_id, UTC_TIMESTAMP())';
+
+    try {
+      $stmt = $db->prepare($sql2);
+        $stmt->bindParam(':team_id', $team_id);
+        $stmt->bindParam(':user_id', $decode->captain_id);
+        $stmt->execute();
+    }
+    catch(PDOException $e) {
+      echo json_encode($e->getMessage());
+    }
+
     foreach($players as $playerid){
       try {
         $stmt = $db->prepare($sql2);
