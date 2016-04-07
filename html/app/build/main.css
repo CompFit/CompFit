@@ -15,7 +15,6 @@ html {
 }
 #challenge .topSection {
   height: 200px;
-  background-color: #d3d3d3;
 }
 #challenge .topSection img {
   width: 130px;
@@ -25,13 +24,27 @@ html {
 }
 #exercise .topSection {
   height: 200px;
-  background-color: #d3d3d3;
 }
 #exercise .topSection img {
   width: 130px;
   height: 130px;
   float: left;
   margin-top: 20px;
+}
+#home {
+  background-image: URL('/img/banner.jpg');
+  background-size: cover;
+  min-height: 626px;
+  max-height: 826px;
+  color: #fff;
+  text-align: center;
+}
+#home .jumbotron {
+  background-color: rgba(0,0,0,0.4);
+  height: 425px;
+}
+#home hr {
+  width: 50%;
 }
 #my-profile .btn {
   margin-bottom: 10px;
@@ -53,7 +66,6 @@ html {
 }
 #team .topSection {
   height: 200px;
-  background-color: #d3d3d3;
 }
 #team .topSection img {
   width: 130px;
@@ -76,6 +88,15 @@ html {
   margin: -1px;
 }
 @media (min-width: 768px) {
+  .col-sm-3 {
+    width: 20% !important;
+  }
+  .challenges-sidebar {
+    position: fixed;
+    left: 0px;
+    height: 100%;
+    min-width: 250px;
+  }
   .challenges-sidebar .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -84,8 +105,28 @@ html {
     padding-left: 10px;
     padding-right: 10px;
   }
+  .navbar {
+    height: 100%;
+    border-radius: 0;
+  }
+}
+#create_team_modal .badge-danger {
+  background-color: #d9534f;
+  float: right;
+}
+#create_team_modal .addPlayerFormErrorMsg {
+  color: #f00;
 }
 @media (min-width: 768px) {
+  .col-sm-3 {
+    width: 20% !important;
+  }
+  .exercises-sidebar {
+    position: fixed;
+    left: 0px;
+    height: 100%;
+    min-width: 250px;
+  }
   .exercises-sidebar .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -94,8 +135,33 @@ html {
     padding-left: 10px;
     padding-right: 10px;
   }
+  .navbar {
+    height: 100%;
+    border-radius: 0;
+  }
 }
 @media (min-width: 768px) {
+  .navbar {
+    margin-bottom: 0px !important;
+    border-radius: 0px !important;
+  }
+  .navbar-brand {
+    padding: 0px 15px;
+  }
+  .navbar-brand>img {
+    height: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .col-sm-3 {
+    width: 20% !important;
+  }
+  .teams-sidebar {
+    position: fixed;
+    left: 0px;
+    height: 100%;
+    min-width: 250px;
+  }
   .teams-sidebar .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
@@ -103,5 +169,9 @@ html {
   .teams-sidebar h3 {
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .navbar {
+    height: 100%;
+    border-radius: 0;
   }
 }
