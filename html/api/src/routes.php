@@ -573,12 +573,18 @@ $app->post('/challenge',
     $db = $this->dbConn;
     $strToReturn = '';
 
-    $sql = 'INSERT INTO challenges (`task_name`, `end_date`) 
-    VALUES (:task_name, :end_date)';
+    $sql = 'INSERT INTO challenges (`task_name`, `start_date`, `end_date`, `to_team_id`, `from_team_id`, `repetitions`, `units`, `task_type`) 
+    VALUES (:task_name, :start_date, :end_date, :to_team_id, :from_team_id, :repetitions, :units, :task_type)';
     try {
       $stmt = $db->prepare($sql);
         $stmt->bindParam(':task_name', $decode->task_name);
+        $stmt->bindParam(':start_date', $decode->start_date);
         $stmt->bindParam(':end_date', $decode->end_date);
+        $stmt->bindParam(':to_team_id', $decode->to_team_id);
+        $stmt->bindParam(':from_team_id', $decode->from_team_id);
+        $stmt->bindParam(':repetitions', $decode->repetitions);
+        $stmt->bindParam(':units', $decode->units);
+        $stmt->bindParam(':task_type', $decode->task_type);
         $stmt->execute();
         $challenge_id = $db->lastInsertId();
     }
