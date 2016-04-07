@@ -1,6 +1,7 @@
 html {
   position: relative;
   min-height: 100%;
+  margin-top: 50px;
 }
 .topSection {
   height: 200px;
