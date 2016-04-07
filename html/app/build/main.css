@@ -31,6 +31,7 @@ html {
   float: left;
   margin-top: 20px;
 }
+<<<<<<< HEAD
 #home {
   background-image: URL('/img/banner.jpg');
   background-size: cover;
@@ -46,6 +47,8 @@ html {
   color: #fff;
   width: 50%;
 }
+=======
+>>>>>>> a08159d7bef96b2d813101d9eae17501e5becdbb
 #my-profile .btn {
   margin-bottom: 10px;
 }
@@ -110,6 +113,7 @@ html {
     border-radius: 0;
   }
 }
+<<<<<<< HEAD
 @media (min-width: 768px) {
   .col-sm-3 {
     width: 20% !important;
@@ -132,6 +136,14 @@ html {
     height: 100%;
     border-radius: 0;
   }
+=======
+#create_team_modal .badge-danger {
+  background-color: #d9534f;
+  float: right;
+}
+#create_team_modal .addPlayerFormErrorMsg {
+  color: #f00;
+>>>>>>> a08159d7bef96b2d813101d9eae17501e5becdbb
 }
 @media (min-width: 768px) {
   .col-sm-3 {
@@ -161,12 +173,15 @@ html {
     margin-bottom: 0px !important;
     border-radius: 0px !important;
   }
+<<<<<<< HEAD
   .navbar-brand {
     padding: 0px 15px;
   }
   .navbar-brand>img {
     height: 100%;
   }
+=======
+>>>>>>> a08159d7bef96b2d813101d9eae17501e5becdbb
 }
 @media (min-width: 768px) {
   .col-sm-3 {
