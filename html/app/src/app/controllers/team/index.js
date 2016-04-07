@@ -1,9 +1,10 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Teams, $rootScope) {
+export default function($scope, $stateParams, Teams) {
     'ngInject';
 
     $scope.toggleModal = function(){
+        console.log($scope.new_team);
           $('#createteammodal').modal('show');
     };
 
@@ -12,6 +13,9 @@ export default function($scope, $stateParams, Teams, $rootScope) {
     $scope.players = [];
     $scope.players_dropdown = false;
     $scope.team_selected = false;
+
+    $scope.new_team = {};
+
 
 
     if ($stateParams.id != "") {
