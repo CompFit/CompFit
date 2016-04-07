@@ -6,7 +6,7 @@
 2. cd into the directory of the cloned repo and run `vagrant up`
 3. Run `vagrant --reload provision`
 4. run `vagrant ssh`
-5. mysql -uroot -p
+5. To add the SQL file as the database, run `mysql -uroot -p compfit < compfitmockdata.sql`	
 6. run `sudo a2enmod rewrite`
 7. edit /etc/apache2/apache2.conf so that this section:
 
