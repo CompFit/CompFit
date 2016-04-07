@@ -3,7 +3,7 @@ import './style.styl';
 export default function($scope, $stateParams, Teams) {
     'ngInject';
     $scope.team_id = $stateParams.id;
-    $scope.avatar = "/img/team_avatars/default-avatar.png";
+    $scope.avatar = "/img/user_avatars/default-avatar.png";
 
 
     Teams.getTeamById($scope.team_id).then(function(response){
