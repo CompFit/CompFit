@@ -85,7 +85,7 @@ $app->group('/user', function(){
       }
       $test = json_encode($user);
       if($test != 'false'){
-        return $response->write(json_encode(array("Not a unique username" => -3)));
+        return $response->write(json_encode(array("error" => -3)));
       }
 
       $checkUniqueEmailSql = 'SELECT * FROM users WHERE `email` = :email';
@@ -101,7 +101,7 @@ $app->group('/user', function(){
       }
       $test = json_encode($user);
       if($test != 'false'){
-        return $response->write(json_encode(array("Not a unique email" => -4)));
+        return $response->write(json_encode(array("error" => -4)));
       }
 
       $sql = 'INSERT INTO users (`first_name`, `last_name`, `username`, `email`, `password`, `created`)
