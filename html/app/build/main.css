@@ -99,7 +99,7 @@ html {
   background-color: #d9534f;
   float: right;
 }
-#create_team_modal .addPlayerFormErrorMsg {
+#create_team_modal .formErrorMsg {
   color: #f00;
 }
 @media (min-width: 768px) {

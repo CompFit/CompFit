@@ -61,7 +61,27 @@ export default function(Teams, Users, $timeout) {
 
 
             $scope.submitTeam = function() {
-                
+                if ($scope.new_team.name == "" || $scope.new_team.players.length < 1) {
+                    
+                    //display errors
+                    if ($scope.new_team.name == "") {
+                        //send error message
+                        $scope.teamNameFormError = "That player is already added.";
+                        $timeout(function(){
+                             $scope.teamNameFormError = "";
+                         }, 1500);
+                    }
+
+                }
+                else {
+                    var captain_id = 0;
+                    // $scope.new_team.players.push(captain_id);
+                    Teams.createTeam($scope.new_team.name,captain_id,[0,1,2]).then(function (response) {
+                        console.log(response.data);
+                        alert("Team_id =",response.data["team_id"]);
+                    });
+                }
+
             };
 
         },
