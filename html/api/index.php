@@ -6,15 +6,20 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 session_start();
-$app = new \Slim\App;
 
-// $database = new mysqli("localhost", "DrawMaster", "Dr4wtrav1!", "DrawingDB");
+// Instantiate the app
+$settings = require __DIR__ . '/src/settings.php';
+$app = new \Slim\App($settings);
 
-// $app->post('/admin',function(){
-//     global $database;
+// Set up dependencies
+require __DIR__ . '/src/dependencies.php';
 
-//     $parsedBody = $request->getParsedBody();
-// });
+// Register routes
+require __DIR__ . '/src/routes.php';
+
+
+// Run app
+$app->run();
 
 
 
@@ -25,11 +30,13 @@ $app = new \Slim\App;
 ////////////////////////////////////////////////////
 
 
-
-$app->post('/users',function($request, $response){
-    // global $database;
-
-	// if( isset($_POST['user_name']) )
+//
+// $app->post('/users',function($request, $response){
+//     // global $database;
+//
+// 	if( isset($_POST['name']) ){
+//     return $response->write( json_encode( array("name" => $_POST['name']) ) );
+//   }
 	// {
 	// 	$user_name = $_POST['user_name'];
 	//
@@ -56,18 +63,15 @@ $app->post('/users',function($request, $response){
 	// 	}
 	// }
 
-		return $response->write( json_encode( array("error" => -3) ) );
-});
-
-$app->get('/users',function($request, $response){
-    return $response->write( json_encode( array("working" => 1) ) );
-
-
-});
-
-
+// 		return $response->write( json_encode( array("error" => -3) ) );
+// });
+//
+// $app->get('/users',function($request, $response){
+//     return $response->write( json_encode( array("working" => 1) ) );
+//
+//
+// });
 
 
-$app->run();
 
 ?>

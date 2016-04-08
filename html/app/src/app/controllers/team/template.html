@@ -5,8 +5,13 @@
           <div class="col-sm-2">
               <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
           </div>
-          <div class="col-sm-10">
-              <h1>Team {{team_id}}</h1>
+          <div class="col-sm-9">
+              <div class="topSection row" ng-show="team_selected">
+                  <div class="col-sm-2">
+                      <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
+                  </div>
+                  <div class="col-sm-10">
+                      <h1>{{team_name}}</h1>
 
               <button class="btn btn-info players_dropdown_btn" ng-click="players_dropdown = !players_dropdown">
                   Players

@@ -9,6 +9,7 @@ export default function($scope, $stateParams, Teams) {
     };
 
     $scope.team_id = -1;
+    $scope.team_name = "";
     $scope.avatar = "/img/team_avatars/default-avatar.png";
     $scope.players = [];
     $scope.players_dropdown = false;
@@ -27,6 +28,7 @@ export default function($scope, $stateParams, Teams) {
             console.log(response.data);
             $scope.avatar = response.data.avatar;
             $scope.players = response.data.players;
+            $scope.team_name = response.data.team_name;
         });
     }
 

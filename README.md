@@ -6,7 +6,7 @@
 2. cd into the directory of the cloned repo and run `vagrant up`
 3. Run `vagrant --reload provision`
 4. run `vagrant ssh`
-5. mysql -uroot -p
+5. To add the SQL file as the database, run `mysql -uroot -p compfit < compfitmockdata.sql`	
 6. run `sudo a2enmod rewrite`
 7. edit /etc/apache2/apache2.conf so that this section:
 
@@ -40,9 +40,10 @@
 ##Building the App
 Building the app creates static files, so webpack-dev-server does not have to be running.
 You will build the server to run the API calls. As of now, you cannot make API calls without building.
+
 1. Run `cd /var/www/html/app`
 2. Run `gulp build`
-3. In the browser, navigate to `http://localhost:9000/app/build`
+3. In the browser, navigate to `http://localhost:9000/`
 
 ##Make API calls
-For now, when making api calls, you want to go to `/api/index.php/endpoint`
+For now, when making api calls, you want to go to `/api/endpoint`
