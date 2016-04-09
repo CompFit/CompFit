@@ -26,7 +26,7 @@ $app->post('/auth', function($request, $response){
   $password = $decode->password;
   $strToReturn = '';
 
-  $sql = 'SELECT username, password, salt FROM users WHERE email = :email';
+  $sql = 'SELECT user_id, username, password, salt FROM users WHERE email = :email';
   try {
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':email', $decode->email);
@@ -40,7 +40,7 @@ $app->post('/auth', function($request, $response){
       # code...
       if(hash_equals($user->password, crypt($password, $user->salt))) //email and password match a user
     	{
-        return $response->write( json_encode(array("username" => $user->username)));
+        return $response->write( json_encode(array("username" => $user->username, "user_id" => $user->user_id)));
       }
       else {
           return $response->write( json_encode(array("error" => -2, "user" => $user, "attempted_password" => crypt($password, $user->salt))));
