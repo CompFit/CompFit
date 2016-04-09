@@ -5,6 +5,8 @@ export default class {
         this.loggedIn = false;
         this.email = "";
         this.password = "";
+
+        this.observerCallbacks = [];
     }
 
     tryLogin(user) {
@@ -16,10 +18,25 @@ export default class {
 
     logIn() {
         this.loggedIn = true;
+        this.notifyObservers();
     }
 
     logOut() {
         this.loggedIn = false;
+        this.notifyObservers();
     }
+
+
+    //register an observer
+   registerObserverCallback(callback){
+      this.observerCallbacks.push(callback);
+    }
+
+     //call this when you know 'foo' has been changed
+    notifyObservers(){
+       angular.forEach(this.observerCallbacks, function(callback){
+         callback();
+       });
+     }
 
 }

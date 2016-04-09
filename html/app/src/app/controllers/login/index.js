@@ -7,10 +7,11 @@ export default function( $scope, $state, Authentication, Users ) {
                 console.log("ERROR! in posting Auth", response.data.error);
             }
             else {
-                Users.user_id = response.data.user_id;
+                Users.setCurrentUser(response.data.user_id);
                 console.log("user id:",Users.user_id);
                 Authentication.logIn();
-                alert("Logged in as " + String(response.data.username));
+
+                // alert("Logged in as " + String(response.data.username));
 
                 // Users.user_id = response.data.user_id;
                 // console.log("user id:",Users.user_id);

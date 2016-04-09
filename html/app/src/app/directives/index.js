@@ -13,6 +13,6 @@ export default angular
     .directive( 'createTeamModal', ['Teams','Users', '$timeout', create_team_modal] )
     .directive( 'challengesSidebar', ['Challenges', challenges_sidebar] )
     .directive( 'exercisesSidebar', ['Exercises', exercises_sidebar] )
-    .directive( 'seedNavbar', navbar )
+    .directive( 'seedNavbar', ['Authentication', navbar] )
     .directive( 'seedLogbutton', logbutton )
     .name;

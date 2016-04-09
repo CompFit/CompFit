@@ -4,8 +4,16 @@ export default class {
         this.$http = $http;
         this.user_id = 1;
         var self = this;
-
+        // self.user_id = 1;
     }
+
+    getCurrentUser() {
+        return this.user_id;
+    }
+    setCurrentUser(new_id) {
+        this.user_id = new_id;
+    }
+
     createUser(newUser) {
         var data = newUser;
         return this.$http.post("http://localhost:9000/api/user",data).then(function (response) {
