@@ -5,27 +5,38 @@ export default class {
         this.loggedIn = false;
         this.email = "";
         this.password = "";
+
+        this.observerCallbacks = [];
     }
 
     tryLogin(user) {
         // var data = {"email":email,"password":password};
-        this.$http.post("/api/auth",user).then(function(response){
-            console.log(response);
-            if (response.data.error != undefined) {
-                console.log("ERROR! in posting Auth", response.data.error);
-            }
-            else {
-                alert("Logged in as " + String(response.data.username));
-            }
+        return this.$http.post("/api/auth",user).then(function(response){
+            return response;
         });
     }
 
     logIn() {
         this.loggedIn = true;
+        this.notifyObservers();
     }
 
     logOut() {
         this.loggedIn = false;
+        this.notifyObservers();
     }
+
+
+    //register an observer
+   registerObserverCallback(callback){
+      this.observerCallbacks.push(callback);
+    }
+
+     //call this when you know 'foo' has been changed
+    notifyObservers(){
+       angular.forEach(this.observerCallbacks, function(callback){
+         callback();
+       });
+     }
 
 }
