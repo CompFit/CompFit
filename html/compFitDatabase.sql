@@ -80,6 +80,7 @@ CREATE TABLE challenge_progress
   team_id INT,
   challenge_id  INT,
   exercise_id INT,
+  exercise_name VARCHAR(40),
   repetitions INT,
   units VARCHAR(20),
   created DATE,
