@@ -9,10 +9,10 @@ import logbutton from './logbutton';
 
 export default angular
     .module( 'app.directives', [] )
-    .directive( 'seedSidebar', ['Teams', teams_sidebar] )
+    .directive( 'seedSidebar', ['Teams', 'Users', teams_sidebar] )
     .directive( 'createTeamModal', ['Teams','Users', '$timeout', create_team_modal] )
     .directive( 'challengesSidebar', ['Challenges', challenges_sidebar] )
     .directive( 'exercisesSidebar', ['Exercises', exercises_sidebar] )
-    .directive( 'seedNavbar', navbar )
+    .directive( 'seedNavbar', ['Authentication', navbar] )
     .directive( 'seedLogbutton', logbutton )
     .name;

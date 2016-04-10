@@ -4,11 +4,25 @@ export default class {
         this.$http = $http;
         this.user_id = 1;
         var self = this;
-
+        // self.user_id = 1;
     }
+
+    getCurrentUser() {
+        return this.user_id;
+    }
+    setCurrentUser(new_id) {
+        this.user_id = new_id;
+    }
+
     createUser(newUser) {
         var data = newUser;
         return this.$http.post("http://localhost:9000/api/user",data).then(function (response) {
+            if (response.data.error != undefined) {
+                console.log("ERROR! in creating User", response.data.error);
+            }
+            else {
+                alert("New User created with id: " + String(response.data.user_id));
+            }
             return response;
         });
     }

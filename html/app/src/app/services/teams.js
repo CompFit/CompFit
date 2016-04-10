@@ -5,6 +5,7 @@ export default class {
         var self = this;
 
         self.teams = [];
+        self.user_for_teams = 1;
     }
 
     createTeam(team_name,captain_id,players,avatar="/img/team_avatars/default-avatar.png") {
@@ -32,6 +33,7 @@ export default class {
               url: 'http://localhost:9000/api/teams/'+user_id
             }).then(function successCallback(response) {
                 self.teams = response.data;
+                self.user_for_teams = user_id;
                 return response;
               }, function errorCallback(response) {
                 return response;

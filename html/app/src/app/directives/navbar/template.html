@@ -8,13 +8,14 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li ui-sref-active="active"><a ui-sref="app.home">Home</a></li>
-                <li ui-sref-active="active"><a ui-sref="app.team">Teams</a></li>
-                <li ui-sref-active="active"><a ui-sref="app.challenge">Challenges</a></li>
-                <li ui-sref-active="active"><a ui-sref="app.exercise">Exercises</a></li>
+                <li ng-show="loggedInTest" ui-sref-active="active"><a ui-sref="app.team">Teams</a></li>
+                <li ng-show="loggedInTest" ui-sref-active="active"><a ui-sref="app.challenge">Challenges</a></li>
+                <li ng-show="loggedInTest" ui-sref-active="active"><a ui-sref="app.exercise">Exercises</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active"><a ui-sref="app.register">Register</a></li>
-                <li ui-sref-active="active"><a ui-sref="app.my.profile">My Profile</a></li>
+                <li ng-show="!loggedIn" ui-sref-active="active"><a ui-sref="app.login">Login</a></li>
+                <li ng-show="!loggedIn" ui-sref-active="active"><a ui-sref="app.register">Register</a></li>
+                <li ng-show="loggedIn" ui-sref-active="active"><a ui-sref="app.my.profile">My Profile</a></li>
                 <li ui-sref-active="active"><a ui-sref="app.about">About</a></li>
             </ul>
         </div>
