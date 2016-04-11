@@ -16,7 +16,7 @@ export default class {
 
     createUser(newUser) {
         var data = newUser;
-        return this.$http.post("http://localhost:9000/api/user",data).then(function (response) {
+        return this.$http.post("/api/user",data).then(function (response) {
             if (response.data.error != undefined) {
                 console.log("ERROR! in creating User", response.data.error);
             }
@@ -30,7 +30,7 @@ export default class {
     getUserById(user_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://localhost:9000/api/user/'+user_id
+              url: '/api/user/'+user_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
@@ -41,7 +41,7 @@ export default class {
     getUserByUsername(username) {
         return this.$http({
               method: 'GET',
-              url: 'http://localhost:9000/api/username/'+username
+              url: '/api/username/'+username
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
@@ -52,7 +52,7 @@ export default class {
     getUsersForTeam(team_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://localhost:9000/api/users/'+team_id
+              url: '/api/users/'+team_id
             }).then(function successCallback(response) {
                 // self.teams = response.data;
                 return response;

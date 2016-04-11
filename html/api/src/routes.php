@@ -40,10 +40,10 @@ $app->post('/auth', function($request, $response, $args){
       # code...
       if(hash_equals($user->password, crypt($password, $user->salt))) //email and password match a user
     	{
-        return $response->write( json_encode(array("username" => $user->username, "user_id" => $user->user_id)));
+        return $response->write(json_encode(array("username" => $user->username, "user_id" => $user->user_id)));
       }
       else {
-          return $response->write( json_encode(array("error" => -2, "user" => $user, "attempted_password" => crypt($password, $user->salt))));
+          return $response->write(json_encode(array("error" => -2, "user" => $user, "attempted_password" => crypt($password, $user->salt))));
       }
   }
   else {
@@ -786,7 +786,7 @@ $app->post('/exercise',
     $strToReturn = '';
 
     $sql = 'INSERT INTO exercises (`exercise_name`, `user_id`, `date_completed`, `repetitions`, `units`)
-    VALUES (:exercise_name, :user_id, :date_completed, :repetitions, :units)';
+            VALUES (:exercise_name, :user_id, :date_completed, :repetitions, :units)';
     try {
       $stmt = $db->prepare($sql);
         $stmt->bindParam(':exercise_name', $decode->exercise_name);
@@ -801,16 +801,47 @@ $app->post('/exercise',
       echo json_encode($e->getMessage());
     }
 
-    $teamsql = 'SELECT to_team_id, from_team_id
+    $teamsql = 'SELECT team_id
                 FROM team_participation
-                WHERE `user_id` = "'.$decode->user_id.'"';
+                WHERE `user_id` = :user_id';
     try {
       $stmt = $db->prepare($teamsql);
         $stmt->bindParam(':user_id', $decode->user_id);
         $stmt->execute();
         $teams = $stmt->fetchALL(PDO::FETCH_OBJ);
         foreach($teams as $team){
-          echo $team['to_team_id'];
+          $challengesql = 'SELECT challenge_id
+                      FROM challenges
+                      WHERE (`status` = "OPEN")
+                        AND (`to_team_id` = :team_id
+                        OR `from_team_id` = :team_id)
+                        AND `task_name` = :exercise_name';
+            $stmt = $db->prepare($challengesql);
+            $stmt->bindParam(':team_id', $team->team_id);
+            $stmt->bindParam(':exercise_name', $decode->exercise_name);
+            $stmt->execute();
+            $challenges = $stmt->fetchALL(PDO::FETCH_OBJ);
+            foreach($challenges as $challenge){
+              //$checkProgress
+
+              $progresssql = 'INSERT INTO challenge_progress(`team_id`, `challenge_id`, `exercise_id`, `exercise_name`, `repetitions`, `units`, `created`)
+                              VALUES (:team_id, :challenge_id, :exercise_id, :exercise_name, :repetitions, :units, UTC_TIMESTAMP())';
+              try {
+                $stmt = $db->prepare($progresssql);
+                $stmt->bindParam(':team_id', $team->team_id);
+                $stmt->bindParam(':challenge_id', $challenge->challenge_id);
+                $stmt->bindParam(':exercise_id', $exercise_id);
+                $stmt->bindParam(':exercise_name', $decode->exercise_name);
+                $stmt->bindParam(':repetitions', $decode->repetitions);
+                $stmt->bindParam(':units', $decode->units);
+                $stmt->execute();
+                $exercise_id = $db->lastInsertId();
+          }
+          catch(PDOException $e) {
+            echo json_encode($e->getMessage());
+          }
+          }
+
         }
     }
     catch(PDOException $e) {
