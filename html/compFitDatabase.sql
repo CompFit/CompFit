@@ -27,7 +27,7 @@ CREATE TABLE teams
   team_name VARCHAR(20),
   captain_id INT,
   avatar VARCHAR (255) NOT NULL,
-  created DATE,
+  created VARCHAR(19),
   PRIMARY KEY(team_id),
   FOREIGN KEY(captain_id) REFERENCES users(user_id)
 );
@@ -37,7 +37,7 @@ CREATE TABLE team_participation
   team_participation_id INT NOT NULL AUTO_INCREMENT,
   team_id INT,
   user_id INT,
-  created DATE,
+  created VARCHAR(19),
   PRIMARY KEY(team_participation_id),
   FOREIGN KEY(team_id) REFERENCES teams(team_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id)
@@ -54,7 +54,7 @@ CREATE TABLE challenges
   repetitions INT,
   units VARCHAR(20),
   task_type VARCHAR(20),
-  status  VARCHAR(20),
+  status  VARCHAR(20) DEFAULT 'OPEN',
   created VARCHAR(19),
   PRIMARY KEY(challenge_id),
   FOREIGN KEY(to_team_id) REFERENCES teams(team_id),
@@ -69,7 +69,7 @@ CREATE TABLE exercises
   exercise_name VARCHAR(40),
   repetitions INT,
   units VARCHAR(20),
-  created DATE,
+  created VARCHAR(19),
   PRIMARY KEY(exercise_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
@@ -80,9 +80,10 @@ CREATE TABLE challenge_progress
   team_id INT,
   challenge_id  INT,
   exercise_id INT,
+  exercise_name VARCHAR(40),
   repetitions INT,
   units VARCHAR(20),
-  created DATE,
+  created VARCHAR(19),
   PRIMARY KEY(challenge_progress_id),
   FOREIGN KEY(exercise_id) REFERENCES exercises(exercise_id),
   FOREIGN KEY(challenge_id) REFERENCES challenges(challenge_id)
@@ -286,6 +287,8 @@ INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_nam
 VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Just Keep Swimming');
 INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name)
 VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Run Forrest Run');
+INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name)
+VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Pushups');
 
 INSERT INTO exercises (user_id, date_completed, exercise_name)
 VALUES('1', '2016-4-07', 'Pushups');

@@ -10,7 +10,7 @@ export default class {
     getExerciseById(challenge_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://private-c84bfb-compfit.apiary-mock.com/team/'+team_id
+              url: '/api/team/'+team_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
@@ -21,7 +21,7 @@ export default class {
     getExercisesForUser(user_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://private-c84bfb-compfit.apiary-mock.com/teams/'+user_id
+              url: '/api/teams/'+user_id
             }).then(function successCallback(response) {
                 self.exercises = response.data;
                 return response;
