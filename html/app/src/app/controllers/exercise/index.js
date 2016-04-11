@@ -1,8 +1,12 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Challenges) {
+export default function($scope, $stateParams, Exercises) {
     'ngInject';
 
+    $scope.toggleModal = function(){
+        console.log($scope.new_team);
+          $('#logexercisemodal').modal('show');
+    };
 
     // $scope.team_id = -1;
     // $scope.avatar = "/img/team_avatars/default-avatar.png";
