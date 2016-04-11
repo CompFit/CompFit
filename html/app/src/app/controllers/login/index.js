@@ -1,3 +1,5 @@
+import './style.styl';
+
 export default function( $scope, $state, Authentication ) {
     'ngInject';
 
