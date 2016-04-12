@@ -8,7 +8,7 @@ import users from './users';
 
 export default angular
     .module( 'app.services', [] )
-    .service( 'Authentication', auth )
+    .service( 'Authentication', ['$http',auth] )
     .service( 'Teams', ['$http',teams] )
     .service( 'Challenges', ['$http',challenges] )
     .service( 'Exercises', ['$http',exercises] )

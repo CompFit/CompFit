@@ -1,19 +1,23 @@
-<h1>CompFit</h1>
 <div id="login">
 	<div class="container">
-		<h2>Log in</h2>
-		<form>
-			<div class="form-group row">
-				<input type="email" class="form-control" ng-model="user.email" placeholder="Email" required>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h1>CompFit</h1>
+				<h2>Log in</h2>
+				<hr>
+				<form class="login">
+					<div class="form-group row">
+						<input type="email" class="form-control" ng-model="user.email" placeholder="Email" required>
+					</div>
+					<div class="form-group row">
+						<input type="password" class="form-control" ng-model="user.password" placeholder="Password" required>
+					</div>
+					<div class="form-group row">
+			    		<button class="btn btn-primary pull-right" ng-click="login()">Log in</button>
+			    	</div>
+			    </form>
+			    <p>Don't have an account? <a ui-sref="app.register">Register here.</a></p>
 			</div>
-			<div class="form-group row">
-				<input type="password" class="form-control" ng-model="user.password" placeholder="Password" required>
-			</div>
-			<div class="form-group row">
-	    		<button class="btn btn-primary" ng-click="login()">Log in</button>
-	    	</div>
-	    </form>
+		</div>
 	</div>
 </div>
-
-<p>Don't have an account? <a href="#">Register here.</a></p>

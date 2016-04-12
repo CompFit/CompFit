@@ -1,6 +1,12 @@
 <?php
 // Routes
 
+//Error Codes
+  //-1 => Sent when no users are found from a get
+  //-2 => Sent when no teams are found from a get
+  //-3 => Returns for POST user, when the username is not unique
+  //-4 => Returns for POST user when the user's email has already been used
+
 // Function to check if a password hashes to the same thing as str2
 function hash_equals($str1, $str2) {
     if(strlen($str1) != strlen($str2)) {
@@ -13,14 +19,14 @@ function hash_equals($str1, $str2) {
     }
 }
 
-$app->post('/auth', function($request, $response){
+$app->post('/auth', function($request, $response, $args){
   $body = $request->getBody();
   $decode = json_decode($body);
   $db = $this->dbConn;
   $password = $decode->password;
   $strToReturn = '';
 
-  $sql = 'SELECT username, password FROM users WHERE email = :email';
+  $sql = 'SELECT user_id, username, password, salt FROM users WHERE email = :email';
   try {
     $stmt = $db->prepare($sql);
     $stmt->bindParam(':email', $decode->email);
@@ -30,9 +36,18 @@ $app->post('/auth', function($request, $response){
   catch(PDOException $e) {
     echo json_encode($e->getMessage());
   }
-  if(hash_equals($user->password, crypt($password, $user->password))) //email and password match a user
-  {
-    return $response->write( json_encode(array("username" => $user->username)));
+  if ($user) {
+      # code...
+      if(hash_equals($user->password, crypt($password, $user->salt))) //email and password match a user
+    	{
+        return $response->write(json_encode(array("username" => $user->username, "user_id" => $user->user_id)));
+      }
+      else {
+          return $response->write(json_encode(array("error" => -2, "user" => $user, "attempted_password" => crypt($password, $user->salt))));
+      }
+  }
+  else {
+      return $response->write( json_encode(array("error" => -1)));
   }
 });
 
@@ -47,11 +62,11 @@ $app->group('/user', function(){
         $db = $this->dbConn;
         $strToReturn = '';
         $users = '';
-        $sql = 'SELECT user_id, first_name, last_name, email, avatar, created
+        $sql = 'SELECT user_id, username, first_name, last_name, email, avatar, created
                 FROM users';
         try {
           $stmt = $db->query($sql);
-          $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+          $users = $stmt->fetch(PDO::FETCH_OBJ);
         }
         catch(PDOException $e) {
           echo json_encode($e->getMessage());
@@ -66,8 +81,40 @@ $app->group('/user', function(){
       $db = $this->dbConn;
       $strToReturn = '';
 
-      $sql = 'INSERT INTO users (`first_name`, `last_name`, `username`, `email`, `password`, `created`)
-              VALUES (:first_name, :last_name, :username, :email, :password, UTC_TIMESTAMP())';
+      $checkUniqueUserSql = 'SELECT * FROM users WHERE `username` = :username';
+
+      try {
+        $stmt = $db->prepare($checkUniqueUserSql);
+        $stmt->bindParam(':username', $decode->username);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+      $test = json_encode($user);
+      if($test != 'false'){
+        return $response->write(json_encode(array("error" => -3)));
+      }
+
+      $checkUniqueEmailSql = 'SELECT * FROM users WHERE `email` = :email';
+
+      try {
+        $stmt = $db->prepare($checkUniqueEmailSql);
+        $stmt->bindParam(':email', $decode->email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+      $test = json_encode($user);
+      if($test != 'false'){
+        return $response->write(json_encode(array("error" => -4)));
+      }
+
+      $sql = 'INSERT INTO users (`first_name`, `last_name`, `username`, `email`, `password`, `salt`, `created` )
+              VALUES (:first_name, :last_name, :username, :email, :password, :salt, UTC_TIMESTAMP())';
       try {
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':first_name', $decode->first_name);
@@ -78,12 +125,14 @@ $app->group('/user', function(){
         $salt = sprintf("$2a$%02d$", 10) . $salt;
         $hash = crypt($password, $salt);
         $stmt->bindParam(':password', $hash);
+        $stmt->bindParam(':salt', $salt);
         $stmt->execute();
+        $user_id = $db->lastInsertId();
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-          //return $response->write('' . $);
+        return $response->write(json_encode(array("user_id" => $user_id)));
     }
   });
   $this->get('/{user_id}', function($request, $response, $args){
@@ -97,13 +146,18 @@ $app->group('/user', function(){
             WHERE user_id = "'.$user_id.'"';
       try {
         $stmt = $db->query($sql);
-        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $users = $stmt->fetch(PDO::FETCH_OBJ);
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   });
 });
 
@@ -114,18 +168,23 @@ $app->get('/username/{username}',
     $username = $request->getAttribute('username');
     $users = '';
 
-    $sql = 'SELECT user_id, first_name, last_name, email, avatar
+    $sql = 'SELECT user_id, username, first_name, last_name, email, avatar
             FROM users
             WHERE username = "'.$username.'"';
     try {
       $stmt = $db->query($sql);
-      $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $users = $stmt->fetch(PDO::FETCH_OBJ);
     }
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == 'false'){
+      return $response->write(json_encode(array("error" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
@@ -141,13 +200,18 @@ $app->get('/useremail/{email}',
             WHERE email = "'.$email.'"';
       try {
         $stmt = $db->query($sql);
-        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $users = $stmt->fetch(PDO::FETCH_OBJ);
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 //This is technically a put request, but I was using HTML forms to test, and they don't support put so I made it a post instead
@@ -176,7 +240,6 @@ $app->put('/user/{user_id}',
   }
 );
 
-// Use curl –i –X DELETE http://zero-to-slim.dev/user/{user_id} in console
 $app->delete('/user/{user_id}',
   function ($request, $response, $args){
     $db = $this->dbConn;
@@ -235,7 +298,12 @@ $app->group('/users', function(){
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   });
   $this->get('/team_name/{team_name}', function ($request, $response, $args){
     $db = $this->dbConn;
@@ -258,7 +326,12 @@ $app->group('/users', function(){
         echo json_encode($e->getMessage());
       }
     $test = json_encode($users);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   });
 });
 
@@ -277,7 +350,7 @@ $app->get('/team',
       echo json_encode($e->getMessage());
     }
     $strToReturn = json_encode($teams);
-      return $response->write('' . $strToReturn);
+    return $response->write('' . $strToReturn);
     }
 );
 
@@ -298,31 +371,31 @@ $app->get('/team/{team_id}',
                  WHERE team_id = "'.$team_id.'") as t
              WHERE t.user_id = u.user_id';
       try {
-        $new = array();
+        $new;
         $array_loop = 0;
         $stmt = $db->query($sql2);
         $users = $stmt->fetchAll(PDO::FETCH_OBJ);
         //$d = array('players' => $users);
 
         $stmt2 = $db->query($sql1);
-        $users2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($users2 as $val){
-          $new[$array_loop]['team_id'] = $val['team_id'];
-          $new[$array_loop]['team_name'] = $val['team_name'];
-          $new[$array_loop]['captain_id'] = $val['captain_id'];
-          $new[$array_loop]['players'] = $users;
-          $new[$array_loop]['avatar'] = $val['avatar'];
-          $new[$array_loop]['created'] = $val['created'];
-          $array_loop++;
-
-        }
+        $users2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+        $new['team_id'] = $users2['team_id'];
+        $new['team_name'] = $users2['team_name'];
+        $new['captain_id'] = $users2['captain_id'];
+        $new['players'] = $users;
+        $new['avatar'] = $users2['avatar'];
+        $new['created'] = $users2['created'];
       }
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-
     $test = json_encode($new);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No teams found" => -2)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
@@ -345,31 +418,32 @@ function ($request, $response, $args){
                WHERE a.team_id = tp.team_id) as t
            WHERE t.user_id = u.user_id';
     try {
-      $new = array();
+      $new;
       $array_loop = 0;
       $stmt = $db->query($sql2);
-      $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $users = $stmt->fetch(PDO::FETCH_OBJ);
       //$d = array('players' => $users);
 
       $stmt2 = $db->query($sql1);
-      $users2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($users2 as $val){
-        $new[$array_loop]['team_id'] = $val['team_id'];
-        $new[$array_loop]['team_name'] = $val['team_name'];
-        $new[$array_loop]['captain_id'] = $val['captain_id'];
-        $new[$array_loop]['players'] = $users;
-        $new[$array_loop]['avatar'] = $val['avatar'];
-        $new[$array_loop]['created'] = $val['created'];
-        $array_loop++;
-
-      }
+      $users2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+      $new['team_id'] = $users2['team_id'];
+      $new['team_name'] = $users2['team_name'];
+      $new['captain_id'] = $users2['captain_id'];
+      $new['players'] = $users;
+      $new['avatar'] = $users2['avatar'];
+      $new['created'] = $users2['created'];
     }
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
 
   $test = json_encode($new);
-  return $response->write('' . $test);
+  if($test == '[]'){
+    return $response->write(json_encode(array("No teams found" => -2)));
+  }
+  else {
+    return $response->write('' . $test);
+  }
 }
 );
 
@@ -397,23 +471,51 @@ $app->post('/team',
   function ($request, $response, $args){
     $body = $request->getBody();
     $decode = json_decode($body);
-    echo 
+    $players = $decode->players;
     $db = $this->dbConn;
     $strToReturn = '';
 
-    $sql = 'INSERT INTO teams (`team_name`, `captain_id`, `avatar`) VALUES (:team_name, :captain_id, :avatar)';
+    $sql = 'INSERT INTO teams (`team_name`, `captain_id`, `avatar`, `created`)
+            VALUES (:team_name, :captain_id, :avatar, UTC_TIMESTAMP())';
     try {
       $stmt = $db->prepare($sql);
         $stmt->bindParam(':team_name', $decode->team_name);
         $stmt->bindParam(':captain_id', $decode->captain_id);
         $stmt->bindParam(':avatar', $decode->avatar);
         $stmt->execute();
+        $team_id = $db->lastInsertId();
     }
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
+
+    $sql2 = 'INSERT INTO team_participation (`team_id`, `user_id`, `created`)
+             VALUES (:team_id, :user_id, UTC_TIMESTAMP())';
+
+    try {
+      $stmt = $db->prepare($sql2);
+        $stmt->bindParam(':team_id', $team_id);
+        $stmt->bindParam(':user_id', $decode->captain_id);
+        $stmt->execute();
+    }
+    catch(PDOException $e) {
+      echo json_encode($e->getMessage());
+    }
+
+    foreach($players as $playerid){
+      try {
+        $stmt = $db->prepare($sql2);
+          $stmt->bindParam(':team_id', $team_id);
+          $stmt->bindParam(':user_id', $playerid);
+          $stmt->execute();
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    }
     //Need to find a way to return team_id
     //return $response->write('' . $);
+    return $response->write( json_encode( array("team_id" => $team_id) ) );
   }
 );
 
@@ -517,55 +619,14 @@ $app->get('/teams/captain_id/{captain_id}',
         echo json_encode($e->getMessage());
       }
     $test = json_encode($new);
-    return $response->write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No teams found" => -2)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
 });
 
-
-
-
-//
-//CHALLENGES
-//ENDPOINTS
-//
-
-
-//NEED TO CREATE A POST FOR /challenge
-/*
-$app->post('/challenge',
-  function ($request, $response, $args){
-    $body = $request->getBody();
-    $decode = json_decode($body);
-    $db = $this->dbConn;
-    echo 
-    $strToReturn = '';
-
-    $sql = 'INSERT INTO challenges (`task_name`, `to_team_id`, `from_team_id`, 
-                                    `start_date`, `end_date`,
-                                    `repetitions`, `units`, `task_type`)
-            VALUES (:task_name, :to_team_id, :from_team_id, 
-                    :start_date, :end_date, :repetitions, 
-                    :units, :task_type)';
-    try {
-      $stmt = $db->prepare($sql);
-        $stmt->bindParam(':task_name', $decode->task_name);
-       // $stmt->bindParam(':to_team_id', $decode->to_team_id);
-       // $stmt->bindParam(':from_team_completed', $decode->from_team_id);
-       // $stmt->bindParam(':start_date', $decode->start_date);
-       // $stmt->bindParam(':end_date', $decode->end_date);
-       // $stmt->bindParam(':repetitions', $decode->repetitions);
-       // $stmt->bindParam(':units', $decode->units);
-       // $stmt->bindParam(':task_type', $decode->task_type);
-       // $stmt->execute();
-        $challenge_id = $db->lastInsertId();
-    }
-    catch(PDOException $e) {
-      echo json_encode($e->getMessage());
-    }
-    return $response->write(json_encode(array("challenge_id" => $challenge_id)));
-  }
-);
-*/
-
 $app->post('/challenge',
   function ($request, $response, $args){
     $body = $request->getBody();
@@ -573,7 +634,7 @@ $app->post('/challenge',
     $db = $this->dbConn;
     $strToReturn = '';
 
-    $sql = 'INSERT INTO challenges (`task_name`, `start_date`, `end_date`, `to_team_id`, `from_team_id`, `repetitions`, `units`, `task_type`) 
+    $sql = 'INSERT INTO challenges (`task_name`, `start_date`, `end_date`, `to_team_id`, `from_team_id`, `repetitions`, `units`, `task_type`)
     VALUES (:task_name, :start_date, :end_date, :to_team_id, :from_team_id, :repetitions, :units, :task_type)';
     try {
       $stmt = $db->prepare($sql);
@@ -603,8 +664,8 @@ $app->delete('/challenge/{challenge_id}',
     $strToReturn = '';
     $challenge_id = $request->getAttribute('challenge_id');
 
-    foreach($db->query('SELECT * 
-                        FROM challenges 
+    foreach($db->query('SELECT *
+                        FROM challenges
                         WHERE challenge_id = "'.$challenge_id.'"') as $row){
       $strToReturn .= '<br /> challenge_id: ' . $row['challenge_id'] .' <br /> task_name: ' . $row['task_name'];
     }
@@ -613,7 +674,7 @@ $app->delete('/challenge/{challenge_id}',
 
     return $response->write('Deleting <br />' . $strToReturn);
   }
-  
+
 );
 
 
@@ -644,11 +705,11 @@ $app->get('/challenge/{challenge_id}',
     $strToReturn = '';
     $challenge_id = $request->getAttribute('challenge_id');
 
-    $sql = 'SELECT * 
-            FROM challenges 
+    $sql = 'SELECT *
+            FROM challenges
             WHERE challenge_id = "'.$challenge_id.'"';
 
-    try { 
+    try {
       $stmt = $db->query($sql);
       $challenge = $stmt -> fetchALL(PDO::FETCH_OBJ);
     }
@@ -669,8 +730,8 @@ $app->get('/challenges/{team_id}',
     $challenges = '';
 
     $sql = 'SELECT * from challenges WHERE to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id;
-      
-      try { 
+
+      try {
       $stmt = $db->query($sql);
       $challenges = $stmt -> fetchALL(PDO::FETCH_OBJ);
       }
@@ -691,8 +752,8 @@ $app->get('/challenges/search/{end_date}',
     $challenges = '';
 
     $sql = 'SELECT * FROM challenges WHERE end_date = "'.$end_date.'"';
-      
-    try { 
+
+    try {
       $stmt = $db->query($sql);
       $challenges = $stmt -> fetchALL(PDO::FETCH_OBJ);
       }
@@ -724,21 +785,69 @@ $app->post('/exercise',
     $db = $this->dbConn;
     $strToReturn = '';
 
-    $sql = 'INSERT INTO exercises (`exercise_name`, `user_id`, `date_completed`) 
-    VALUES (:exercise_name, :user_id, :date_completed)';
+    $sql = 'INSERT INTO exercises (`exercise_name`, `user_id`, `date_completed`, `repetitions`, `units`)
+            VALUES (:exercise_name, :user_id, :date_completed, :repetitions, :units)';
     try {
       $stmt = $db->prepare($sql);
         $stmt->bindParam(':exercise_name', $decode->exercise_name);
         $stmt->bindParam(':user_id', $decode->user_id);
         $stmt->bindParam(':date_completed', $decode->date_completed);
+        $stmt->bindParam(':repetitions', $decode->repetitions);
+        $stmt->bindParam(':units', $decode->units);
         $stmt->execute();
         $exercise_id = $db->lastInsertId();
     }
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    //Need to find a way to return team_id
-    //return $response->write('Successfully added exercise ' . $exercise_id);
+
+    $teamsql = 'SELECT team_id
+                FROM team_participation
+                WHERE `user_id` = :user_id';
+    try {
+      $stmt = $db->prepare($teamsql);
+        $stmt->bindParam(':user_id', $decode->user_id);
+        $stmt->execute();
+        $teams = $stmt->fetchALL(PDO::FETCH_OBJ);
+        foreach($teams as $team){
+          $challengesql = 'SELECT challenge_id
+                      FROM challenges
+                      WHERE (`status` = "OPEN")
+                        AND (`to_team_id` = :team_id
+                        OR `from_team_id` = :team_id)
+                        AND `task_name` = :exercise_name';
+            $stmt = $db->prepare($challengesql);
+            $stmt->bindParam(':team_id', $team->team_id);
+            $stmt->bindParam(':exercise_name', $decode->exercise_name);
+            $stmt->execute();
+            $challenges = $stmt->fetchALL(PDO::FETCH_OBJ);
+            foreach($challenges as $challenge){
+              //$checkProgress
+
+              $progresssql = 'INSERT INTO challenge_progress(`team_id`, `challenge_id`, `exercise_id`, `exercise_name`, `repetitions`, `units`, `created`)
+                              VALUES (:team_id, :challenge_id, :exercise_id, :exercise_name, :repetitions, :units, UTC_TIMESTAMP())';
+              try {
+                $stmt = $db->prepare($progresssql);
+                $stmt->bindParam(':team_id', $team->team_id);
+                $stmt->bindParam(':challenge_id', $challenge->challenge_id);
+                $stmt->bindParam(':exercise_id', $exercise_id);
+                $stmt->bindParam(':exercise_name', $decode->exercise_name);
+                $stmt->bindParam(':repetitions', $decode->repetitions);
+                $stmt->bindParam(':units', $decode->units);
+                $stmt->execute();
+                $exercise_id = $db->lastInsertId();
+          }
+          catch(PDOException $e) {
+            echo json_encode($e->getMessage());
+          }
+          }
+
+        }
+    }
+    catch(PDOException $e) {
+      echo json_encode($e->getMessage());
+    }
+
     return $response->write(json_encode(array("exercise_id" => $exercise_id)));
   }
 );
@@ -786,11 +895,11 @@ $app->get('/exercise/{exercise_id}',
     $strToReturn = '';
     $exercise_id = $request->getAttribute('exercise_id');
     $exercise = '';
-    $sql = 'SELECT * 
-            FROM exercises 
+    $sql = 'SELECT *
+            FROM exercises
             WHERE exercise_id = "'.$exercise_id.'"';
 
-    try { 
+    try {
       $stmt = $db->query($sql);
       $exercise = $stmt -> fetchALL(PDO::FETCH_OBJ);
       }
@@ -818,11 +927,11 @@ $app->get('/exercises/{user_id}',
     $user_id = $request->getAttribute('user_id');
     $exercises = '';
 
-    $sql = 'SELECT exercises.exercise_name, exercises.exercise_id, exercises.date_completed, exercises.repetitions, exercises.units 
-            FROM exercises 
+    $sql = 'SELECT exercises.exercise_name, exercises.exercise_id, exercises.date_completed, exercises.repetitions, exercises.units
+            FROM exercises
             WHERE  "'.$user_id.'" = exercises.user_id';
 
-    try { 
+    try {
       $stmt = $db->query($sql);
       $exercises = $stmt -> fetchALL(PDO::FETCH_OBJ);
       }
@@ -849,7 +958,7 @@ $app->get('/exercises/exercise/{exercise_name}',
     $sql = 'SELECT exercises.exercise_name, exercises.exercise_id, exercises.user_id, exercises.date_completed, exercises.repetitions, exercises.units
     FROM exercises WHERE  "'.$exercise_name.'" = exercises.exercise_name';
 
-      try { 
+      try {
       $stmt = $db->query($sql);
       $exercises = $stmt -> fetchALL(PDO::FETCH_OBJ);
       }
@@ -860,5 +969,3 @@ $app->get('/exercises/exercise/{exercise_name}',
     return $response -> write('' . $test);
     }
 );
-
-

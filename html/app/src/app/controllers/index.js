@@ -6,9 +6,11 @@ import AuthenticationController from './authentication';
 import HomeController from './home';
 import LoginController from './login';
 import MyProfileController from './myProfile';
+import TeamController from './team';
+import ChallengeController from './challenge';
+import ExerciseController from './exercise';
 import AboutController from './about';
 import RegisterController from './register';
-import TeamController from './team';
 
 export default angular
     .module( 'app.controllers', [] )
@@ -17,7 +19,9 @@ export default angular
     .controller( 'HomeController', HomeController )
     .controller( 'LoginController', LoginController )
     .controller( 'MyProfileController', MyProfileController )
+    .controller( 'TeamController', TeamController )
+    .controller( 'ChallengeController', ChallengeController )
+    .controller( 'ExerciseController', ExerciseController )
     .controller( 'AboutController', AboutController )
     .controller( 'RegisterController', RegisterController )
-    .controller( 'TeamController', TeamController )
     .name;
