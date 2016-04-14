@@ -11,21 +11,19 @@ export default function(Exercises, Users, $timeout) {
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
 
-            $scope.new_log.name = "";
-            $scope.new_log.repetitions = "";
-            $scope.new_log.units = "";
-
             $scope.exerciseList = [];
-            $scope.selected_exercise = null;
-            $scope.selected_units = null;
             $scope.unitsForExercise = [];
+
+            $scope.selected_exercise = null;
+            $scope.selected_repetitions = null;
+            $scope.selected_units = null;
 
             Exercises.getExerciseList().then(function(response){
                 $scope.exerciseList = response.data;
             });
 
             $scope.submitLog = function() {
-                if ($scope.selected_exercise == null || $scope.new_log.repetitions == "" || $scope.selected_units == "") {
+                if ($scope.selected_exercise == null || $scope.selected_repetitions == null || $scope.selected_units == null) {
 
                     //display errors
                     if ($scope.selected_exercise == null) {
@@ -35,14 +33,14 @@ export default function(Exercises, Users, $timeout) {
                              $scope.logFormError = "";
                          }, 1500);
                     }
-                    else if ($scope.new_log.repetitions == "") {
+                    else if ($scope.selected_repetitions == null) {
                         //send error message
                         $scope.logFormError = "No amount for repetitions has been added";
                         $timeout(function(){
                              $scope.logFormError = "";
                          }, 1500);
                     }
-                    else if ($scope.new_log.units == "") {
+                    else if ($scope.selected_units == null) {
                         //send error message
                         $scope.logFormError = "No units have been selected";
                         $timeout(function(){
@@ -52,14 +50,14 @@ export default function(Exercises, Users, $timeout) {
 
                 }
                 else {
-                    var user_id = Users.user_id;
+                    $scope.new_log.user_id = Users.user_id;
                     var dateObj = new Date();
-                    var date = dateObj.getUTCFullYear() + "-" + (dateObj.getUTCMonth() + 1) + "-" + dateObj.getUTCDate();
-                    
-                    $scope.new_log.name = $scope.selected_exercise.exercise_name;
+                    $scope.new_log.date = dateObj.getUTCFullYear() + "-" + (dateObj.getUTCMonth() + 1) + "-" + dateObj.getUTCDate();  
+                    $scope.new_log.exercise_name = $scope.selected_exercise.exercise_name;
+                    $scope.new_log.repetitions = $scope.selected_repetitions;
                     $scope.new_log.units = $scope.selected_units.unit_name;
 
-                    Exercises.logExercise(user_id,date,$scope.new_log.name,$scope.new_log.repetitions,$scope.new_log.units).then(function (response) {
+                    Exercises.logExercise($scope.new_log).then(function (response) {
                         console.log(response.data);
                         $(element).modal('hide');
 
