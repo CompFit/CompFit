@@ -634,19 +634,12 @@ $app->get('/teams/opponents/{captain_id}',
     $captain_id = $request->getAttribute('captain_id');
     $users = '';
 
-    $sql = 'SELECT t.team_id
-            FROM teams t
-            WHERE captain_id = "'.$captain_id.'"';
+    $sql2 = 'SELECT team_id, team_name FROM teams WHERE team_id NOT IN (SELECT DISTINCT t.team_id FROM team_participation t WHERE t.user_id IN (SELECT DISTINCT u.user_id FROM users u, (SELECT user_id from team_participation tp, (SELECT t.team_id FROM teams t WHERE captain_id = "'.$captain_id.'") as ti WHERE tp.team_id = ti.team_id) as t WHERE t.user_id = u.user_id))';
 
       try {
-        $new = array();
-        $newUsers = array();
-        $array_loop = 0;
-        $stmt = $db->query($sql);
-        $teams = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $sql2 = 'SELECT team_id, team_name FROM teams WHERE team_id NOT IN (SELECT DISTINCT t.team_id FROM team_participation t WHERE t.user_id IN (SELECT DISTINCT u.user_id FROM users u, (SELECT user_id from team_participation tp, (SELECT t.team_id FROM teams t WHERE captain_id = 1) as ti WHERE tp.team_id = ti.team_id) as t WHERE t.user_id = u.user_id))';
+        $sql2 = 'SELECT team_id, team_name FROM teams WHERE team_id NOT IN (SELECT DISTINCT t.team_id FROM team_participation t WHERE t.user_id IN (SELECT DISTINCT u.user_id FROM users u, (SELECT user_id from team_participation tp, (SELECT t.team_id FROM teams t WHERE captain_id = "'.$captain_id.'") as ti WHERE tp.team_id = ti.team_id) as t WHERE t.user_id = u.user_id))';
         $stmt2 = $db->query($sql2);
-         $users = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        $users = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
       }
       catch(PDOException $e) {
