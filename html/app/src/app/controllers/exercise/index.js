@@ -4,7 +4,7 @@ export default function($scope, $stateParams, Exercises) {
     'ngInject';
 
     $scope.toggleModal = function(){
-        console.log($scope.new_team);
+        console.log($scope.log_exercise);
           $('#logexercisemodal').modal('show');
     };
 

@@ -7,9 +7,29 @@
       </div>
       <div class="modal-body">
           <div id="log_exercise_modal">
-              <h2> HI HI HI HI</h2>
-              <button ng-click="submitLog()" type="button" class="btn btn-success pull-right">Create</button>
+              <form role="form">
+                <div class="form-group">
+                    <label for="exercise_name">Exercise Name</label>
+                    <select class="form-control" ng-model="new_log.name" ng-options="exercise.exercise_name for exercise in exercises" required>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exercise_repetitions">Repetitions</label>
+                    <input type="text" class="form-control" placeholder="Enter an amount" ng-model="new_log.repetitions" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="exercise_units">Units</label>
+                    <select class="form-control" ng-model="new_log.units" ng-options="exercise.unit for exercise in exercises" required>
+                    </select>
+                </div>
+              </form>
           </div>
+      </div>
+      <div class="modal-footer">
+        <button ng-click="submitLog()" type="button" class="btn btn-success pull-right">Create</button>
+        <button data-dismiss="modal" type="button" class="btn btn-default pull-right" style="margin-right: 10px;">Cancel</button>
       </div>
     </div>
   </div>

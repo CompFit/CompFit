@@ -7,15 +7,13 @@ export default class {
         self.exercises = [];
     }
 
-    /*
-    logExercise() {
-        var data = {};
+    logExercise(user_id,date,exercise_name,repetitions,units) {
+        var data = {"user_id":user_id,"date":date,"exercise_name":exercise_name,"repetitions":repetitions,"units":units};
         console.log(data);
-        return this.$http.post("http://localhost:9000/api/team",data).then(function (response) {
+        return this.$http.post("/api/exercise",data).then(function (response) {
             return response;
         });
     }
-    */
 
     getExerciseById(challenge_id) {
         return this.$http({
