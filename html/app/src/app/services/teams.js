@@ -27,6 +27,17 @@ export default class {
             });
     }
 
+    getTeamsByCaptianId(captain_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/teams/captain_id/'+captain_id
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     getTeamsForUser(user_id) {
         return this.$http({
               method: 'GET',

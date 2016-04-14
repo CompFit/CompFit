@@ -7,6 +7,12 @@ export default class {
         self.challenges = [];
     }
 
+    createChallenge(challenge) {
+        return this.$http.post("/api/challenge",challenge).then(function(response){
+            return response;
+        });
+    }
+
     getChallengeById(challenge_id) {
         return this.$http({
               method: 'GET',
