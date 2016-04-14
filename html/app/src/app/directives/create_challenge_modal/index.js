@@ -1,7 +1,7 @@
 import './style.styl';
 import template from 'directives/create_challenge_modal/template.html';
 
-export default function(Teams, Users, Challenges, $timeout) {
+export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
     return {
         restrict: 'E',
@@ -15,6 +15,16 @@ export default function(Teams, Users, Challenges, $timeout) {
             $scope.new_challenge.from_team_id = null;
 
             $scope.selected_team = null;
+
+            $scope.exerciseList = [];
+
+            $scope.selected_exercise = null;
+
+            $scope.unitsForExercise = [];
+
+            Exercises.getExerciseList().then(function(response){
+                $scope.exerciseList = response.data;
+            });
 
             Teams.getTeamsByCaptianId(Users.getCurrentUser()).then(function(response) {
                 console.log(response);
@@ -71,7 +81,14 @@ export default function(Teams, Users, Challenges, $timeout) {
             $scope.clearOpponent = function() {
                 $scope.selected_opponent = null;
                 document.getElementById("teamsearch").focus();
-            }
+            };
+
+            $scope.updateUnits = function() {
+                Exercises.getUnitsForExercise($scope.selected_exercise.exercise_list_id).then(function(response){
+                    console.log(response);
+                    $scope.unitsForExercise = response.data;
+                });
+            };
 
         },
         templateUrl: template
