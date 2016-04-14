@@ -27,12 +27,10 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
             });
 
             Teams.getTeamsByCaptianId(Users.getCurrentUser()).then(function(response) {
-                console.log(response);
                 $scope.usersTeams = response.data;
             });
 
             Teams.getAllTeams().then(function(response) {
-                console.log(response);
                 $scope.all_teams = response.data;
             })
 
@@ -46,9 +44,14 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
             });
 
             $(document).ready( function() {
-                $('#startDatePicker').val(new Date().toDateInputValue());
-                $scope.minChallengeDate = new Date().toDateInputValue();
+                $scope.new_challenge.start_date = new Date();
+                $scope.minChallengeStartDate = new Date().toDateInputValue();
+                $scope.minChallengeEndDate = new Date().toDateInputValue();
             });
+
+            $scope.updateStartDate = function() {
+                $scope.minChallengeEndDate = $scope.new_challenge.start_date.toDateInputValue();
+            };
 
             $scope.submitChallenge = function() {
                 if ($scope.selected_team == null || $scope.selected_opponent == null) {
@@ -56,17 +59,20 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
                 }
                 else {
                     // var team_id = $scope.new_challenge.from_team_id;
-                    $scope.new_challenge.from_id = $scope.selected_team.team_id;
-                    $scope.new_challenge.to_id = $scope.selected_opponent.team_id;
-
-                    $scope.new_challenge.task_name = "Running";
-                    $scope.new_challenge.units = "miles";
-                    $scope.new_challenge.repetitions = "10";
+                    console.log($scope.selected_team, $scope.selected_opponent);
+                    $scope.new_challenge.from_team_id = $scope.selected_team.team_id;
+                    $scope.new_challenge.to_team_id = $scope.selected_opponent.team_id;
+                    $scope.new_challenge.task_name = $scope.selected_exercise.exercise_name;
+                    $scope.new_challenge.units = $scope.selected_units.unit_name;
                     $scope.new_challenge.task_type = "Group";
 
                     console.log($scope.new_challenge);
                     Challenges.createChallenge($scope.new_challenge).then(function (response) {
                         console.log(response);
+
+
+
+                        Challenges.getChallengesForUser(Users.getCurrentUser());
 
                         $(element).modal('hide');
 
