@@ -792,6 +792,55 @@ $app->get('/challenges/{team_id}',
     }
   );
 
+$app->get('/challenges/user_id/{user_id}',
+  function ($request, $response, $args){
+    $new = array();
+    $array_loop = 0;
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $user_id = $request->getAttribute('user_id');
+    $team_id = '';
+    $challenges = '';
+
+    $sql = 'SELECT team_id FROM team_participation WHERE user_id = '. $user_id;
+    $sql2 = 'SELECT * FROM challenges WHERE to_team_id = :team_id OR from_team_id = :team_id';
+
+    try {
+      $stmt = $db->query($sql);
+      $teams = $stmt->fetchAll(PDO::FETCH_OBJ);
+      foreach($teams as $team){
+        $team_id = $team->team_id;
+        $stmt2 = $db->prepare($sql2);
+        $stmt2->bindParam(':team_id', $team_id);
+        $stmt2->execute();
+        $challenges = $stmt2->fetchAll(PDO::FETCH_OBJ);
+        foreach($challenges as $challenge){
+          $new[$array_loop]['challenge_id'] = $challenge->challenge_id;
+          $new[$array_loop]['task_name'] = $challenge->task_name;
+          $new[$array_loop]['start_date'] = $challenge->start_date;
+          $new[$array_loop]['end_date'] = $challenge->end_date;
+          $new[$array_loop]['repetitions'] = $challenge->repetitions;
+          $new[$array_loop]['units'] = $challenge->units;
+          $new[$array_loop]['task_type'] = $challenge->task_type;
+          if($team_id == $challenge->to_team_id){
+            $new[$array_loop]['user_team'] = $challenge->to_team_id;
+            $new[$array_loop]['oppo_team'] = $challenge->from_team_id;
+          }
+          else{
+            $new[$array_loop]['user_team'] = $challenge->from_team_id;
+            $new[$array_loop]['oppo_team'] = $challenge->to_team_id;
+          }
+          $array_loop++;
+        }
+      }
+    }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($new);
+    return $response -> write('' . $test);
+  }
+);
 
 $app->get('/challenges/search/{end_date}',
   function ($request, $response, $args){
