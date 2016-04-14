@@ -38,6 +38,17 @@ export default class {
             });
     }
 
+    getExercisesList() {
+        return this.$http({
+              method: 'GET',
+              url: '/api/exercise_list'
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     getExercises() {
         return self.exercise;
     }
