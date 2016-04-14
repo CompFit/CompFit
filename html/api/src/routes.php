@@ -258,23 +258,6 @@ $app->delete('/user/{user_id}',
   }
 );
 
-/*$app->delete('/user/{username}',
-  function ($request, $response, $args){
-    $db = $this->dbConn;
-    $strToReturn = '';
-    $username = $request->getAttribute('username');
-
-    foreach($db->query('select * from users where user_id = "'.$user_id.'"') as $row){
-      $strToReturn .= '<br /> user_id: ' . $row['user_id'] .' <br /> username: ' . $row['username'];
-      $strToReturn .= '<br /> first_name: ' . $row['first_name'] .' <br /> last_name: ' . $row['last_name'];
-    }
-
-    $db->query('DELETE FROM users WHERE user_id = "'.$user_id.'"');
-
-    return $response->write('Deleting <br />' . $strToReturn);
-  }
-);*/
-
 $app->group('/users', function(){
   $this->get('/{team_id}', function ($request, $response, $args){
     $db = $this->dbConn;
@@ -881,6 +864,7 @@ $app->post('/exercise',
     $decode = json_decode($body);
     $user_id =  $decode->user_id;
     $eRepetitions = $decode->repetitions;
+    $eUnits = $decode->units;
     $db = $this->dbConn;
     $strToReturn = '';
 
@@ -909,7 +893,7 @@ $app->post('/exercise',
         $stmt->execute();
         $teams = $stmt->fetchALL(PDO::FETCH_OBJ);
         foreach($teams as $team){
-           $challengesql = 'SELECT challenge_id, to_team_id, from_team_id
+           $challengesql = 'SELECT challenge_id, to_team_id, from_team_id, units
                       FROM challenges
                       WHERE (`status` = "OPEN")
                         AND (`to_team_id` = :team_id
@@ -921,6 +905,35 @@ $app->post('/exercise',
             $stmt->execute();
             $challenges = $stmt->fetchALL(PDO::FETCH_OBJ);
             foreach($challenges as $challenge){
+                if($eUnits != $challenge->units){
+                  if($challenge->units == 'miles'){
+                    if($eUnits == 'meters'){
+                      $nRepetitions = $eRepetitions * 0.000621371;
+                    }
+                    else if($eUnits == 'kilometers'){
+                      $nRepetitions = $eRepetitions * 0.621371;
+                    }
+                  }
+                  else if($challenge->units == 'meters'){
+                    if($eUnits == 'miles'){
+                      $nRepetitions = $eRepetitions * 1609.34;
+                    }
+                    else if($eUnits == 'kilometers'){
+                      $nRepetitions = $eRepetitions * 1000;
+                    }
+                  }
+                  else if($challenge->units == 'kilometers'){
+                    if($eUnits == 'miles'){
+                      $nRepetitions = $eRepetitions * 1.60934;
+                    }
+                    else if($eUnits == 'meters'){
+                      $nRepetitions = $eRepetitions * 0.001;
+                    }
+                  }
+                }
+                else{
+                  $nRepetitions = $eRepetitions;
+                }
               $indiProgress = 'INSERT INTO individual_progress (`team_id`, `user_id`, `challenge_id`, `exercise_id`, `exercise_name`, `repetitions`, `units`, `created`)
                                VALUES (:team_id, :user_id, :challenge_id, :exercise_id, :exercise_name, :repetitions, :units, UTC_TIMESTAMP())';
               try {
@@ -930,8 +943,8 @@ $app->post('/exercise',
                 $stmt->bindParam(':challenge_id', $challenge->challenge_id);
                 $stmt->bindParam(':exercise_id', $exercise_id);
                 $stmt->bindParam(':exercise_name', $decode->exercise_name);
-                $stmt->bindParam(':repetitions', $eRepetitions);
-                $stmt->bindParam(':units', $decode->units);
+                $stmt->bindParam(':repetitions', $nRepetitions);
+                $stmt->bindParam(':units', $challenge->units);
                 $stmt->execute();
               }
               catch(PDOException $e) {
@@ -957,7 +970,7 @@ $app->post('/exercise',
                                 WHERE `challenge_id` = :challenge_id
                                 AND `team_id` = :team_id';
                 try {
-                  $newRepetitions = $progress->repetitions + $eRepetitions;
+                  $newRepetitions = $progress->repetitions + $nRepetitions;
                   $stmt = $db->prepare($progresssql);
                   $stmt->bindParam(':team_id', $team->team_id);
                   $stmt->bindParam(':challenge_id', $challenge->challenge_id);
