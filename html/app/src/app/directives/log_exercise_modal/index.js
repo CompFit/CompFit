@@ -11,7 +11,7 @@ export default function(Exercises, Users, $timeout) {
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
 
-            Exercises.getExercisesList().then(function(response){
+            Exercises.getExerciseList().then(function(response){
                 console.log(response);
             });
 

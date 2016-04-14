@@ -38,7 +38,7 @@ export default class {
             });
     }
 
-    getExercisesList() {
+    getExerciseList() {
         return this.$http({
               method: 'GET',
               url: '/api/exercise_list'
