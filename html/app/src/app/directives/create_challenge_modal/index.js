@@ -1,7 +1,7 @@
 import './style.styl';
 import template from 'directives/create_challenge_modal/template.html';
 
-export default function(Teams, Users, Challenges, $timeout) {
+export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
     return {
         restrict: 'E',
@@ -16,10 +16,25 @@ export default function(Teams, Users, Challenges, $timeout) {
 
             $scope.selected_team = null;
 
+            $scope.exerciseList = [];
+
+            $scope.selected_exercise = null;
+
+            $scope.unitsForExercise = [];
+
+            Exercises.getExerciseList().then(function(response){
+                $scope.exerciseList = response.data;
+            });
+
             Teams.getTeamsByCaptianId(Users.getCurrentUser()).then(function(response) {
                 console.log(response);
                 $scope.usersTeams = response.data;
             });
+
+            Teams.getAllTeams().then(function(response) {
+                console.log(response);
+                $scope.all_teams = response.data;
+            })
 
 
 
@@ -36,16 +51,22 @@ export default function(Teams, Users, Challenges, $timeout) {
             });
 
             $scope.submitChallenge = function() {
-                console.log($scope.selected_team);
-                if ($scope.new_challenge.team == null) {
+                if ($scope.selected_team == null || $scope.selected_opponent == null) {
 
                 }
                 else {
                     // var team_id = $scope.new_challenge.from_team_id;
+                    $scope.new_challenge.from_id = $scope.selected_team.team_id;
+                    $scope.new_challenge.to_id = $scope.selected_opponent.team_id;
 
+                    $scope.new_challenge.task_name = "Running";
+                    $scope.new_challenge.units = "miles";
+                    $scope.new_challenge.repetitions = "10";
+                    $scope.new_challenge.task_type = "Group";
 
+                    console.log($scope.new_challenge);
                     Challenges.createChallenge($scope.new_challenge).then(function (response) {
-                        console.log(response.data);
+                        console.log(response);
 
                         $(element).modal('hide');
 
@@ -55,10 +76,19 @@ export default function(Teams, Users, Challenges, $timeout) {
 
             $scope.selectOpponent = function(team) {
                 $scope.selected_opponent = team;
+                $scope.query = '';
             };
             $scope.clearOpponent = function() {
                 $scope.selected_opponent = null;
-            }
+                document.getElementById("teamsearch").focus();
+            };
+
+            $scope.updateUnits = function() {
+                Exercises.getUnitsForExercise($scope.selected_exercise.exercise_list_id).then(function(response){
+                    console.log(response);
+                    $scope.unitsForExercise = response.data;
+                });
+            };
 
         },
         templateUrl: template
