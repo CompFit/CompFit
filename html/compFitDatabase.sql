@@ -181,7 +181,7 @@ INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Cheetah', '1', '/img/
 insert into teams (team_name, captain_id, avatar) values ('Matou', 39, '/img/team_avatars/team_avatar6.png');
 insert into teams (team_name, captain_id, avatar) values ('Sananrejo', 37, '/img/team_avatars/team_avatar7.png');
 insert into teams (team_name, captain_id, avatar) values ('Kerrobert', 32, '/img/team_avatars/team_avatar8.png');
-insert into teams (team_name, captain_id, avatar) values ('Guantun', 2, '/img/team_avatars/team_avatar9.png');
+insert into teams (team_name, captain_id, avatar) values ('Guantun', 5, '/img/team_avatars/team_avatar9.png');
 insert into teams (team_name, captain_id, avatar) values ('Buchou', 35, '/img/team_avatars/team_avatar10.png');
 insert into teams (team_name, captain_id, avatar) values ('Odiongan', 33, '/img/team_avatars/team_avatar11.png');
 insert into teams (team_name, captain_id, avatar) values ('Sumbergayam', 18, '/img/team_avatars/team_avatar0.png');
@@ -271,6 +271,12 @@ insert into team_participation (team_id, user_id) values (9, 7);
 insert into team_participation (team_id, user_id) values (9, 4);
 insert into team_participation (team_id, user_id) values (9, 11);
 insert into team_participation (team_id, user_id) values (9, 31);
+
+  insert into team_participation (team_id, user_id) values (10, 32);
+  insert into team_participation (team_id, user_id) values (10, 34);
+  insert into team_participation (team_id, user_id) values (10, 29);
+  insert into team_participation (team_id, user_id) values (10, 22);
+  insert into team_participation (team_id, user_id) values (10, 7);
 
 insert into team_participation (team_id, user_id) values (11, 2);
 insert into team_participation (team_id, user_id) values (11, 21);
