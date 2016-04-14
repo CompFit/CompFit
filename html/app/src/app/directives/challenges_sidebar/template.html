@@ -5,7 +5,9 @@
 
         <div class="nav list-group" >
             <div ng-repeat="challenge in challenges">
-                <a class="list-group-item" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">{{challenge.challenge_name}}</a>
+                <a class="list-group-item" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
+                    {{challenge.task_name}}
+                </a>
             </div>
         </div>
     </div>

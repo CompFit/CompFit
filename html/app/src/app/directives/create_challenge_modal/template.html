@@ -33,46 +33,46 @@
                     </ul>
                 </div>
 
-                <div class="form-group">
-                    <label for="exercise_name">Task Name</label>
-                    <select class="form-control" name="exercise_name" ng-model="selected_exercise"
-                        ng-options="exercise.exercise_name for exercise in exerciseList" ng-change="updateUnits()" required>
-                    </select>
-                </div>
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label for="exercise_name">Task Name</label>
+                        <select class="form-control" name="exercise_name" ng-model="selected_exercise"
+                            ng-options="exercise.exercise_name for exercise in exerciseList" ng-change="updateUnits()" required>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label for="exercise_repetitions">Repetitions</label>
-                    <input type="text" class="form-control" placeholder="Enter an amount" ng-model="new_challenge.repetitions" required>
-                </div>
+                    <div class="form-group col-sm-4">
+                        <label for="exercise_repetitions">Repetitions</label>
+                        <input type="text" class="form-control" placeholder="Enter an amount" ng-model="new_challenge.repetitions" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="exercise_units">Units</label>
-                    <select class="form-control" ng-model="new_challenge.units" ng-options="unit.unit_name for unit in unitsForExercise" required>
-                    </select>
+                    <div class="form-group col-sm-4">
+                        <label for="exercise_units">Units</label>
+                        <select class="form-control" ng-model="selected_units" ng-options="unit.unit_name for unit in unitsForExercise" required>
+                        </select>
+                    </div>
                 </div>
 
 
                 <div class="form-group">
                     <label for="start_date"> Start date: </label>
-                    <input id="startDatePicker" type="date" name="start_date" ng-model="new_challenge.start_date" min="{{minChallengeDate}}" required>
+                    <input id="startDatePicker" type="date" name="start_date" ng-change="updateStartDate()"
+                        ng-model="new_challenge.start_date" min="{{minChallengeStartDate}}" required>
                 </div>
                 <div class="form-group">
                     <label for="end_date"> End date: </label>
-                    <input type="date" name="end_date" ng-model="new_challenge.end_date" min="{{minChallengeDate}}" required>
+                    <input type="date" name="end_date" ng-model="new_challenge.end_date" min="{{minChallengeEndDate}}" required>
                 </div>
                 <button type="submit" class="btn btn-success">Create</button>
               </form>
-
-                <!-- <div class="list-group" >
-                    <div ng-repeat="player in new_team.players">
-                        <p class="list-group-item">{{player.username}} <button class="btn badge badge-danger" ng-click="removeProspectivePlayer(player)"><i class="fa fa-times"></i></button></p>
-                    </div>
-                </div>
-            -->
           </div>
 
 
       </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" type="button" class="btn btn-default pull-right" style="margin-right: 10px;">Cancel</button>
+      </div>
+
     </div>
   </div>
 </div>
