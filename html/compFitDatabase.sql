@@ -63,6 +63,14 @@ CREATE TABLE challenges
   FOREIGN KEY(from_team_id) REFERENCES teams(team_id)
 );
 
+CREATE TABLE exercise_list
+(
+  exercise_list_id INT NOT NULL AUTO_INCREMENT,
+  exercise_name VARCHAR(40),
+  units VARCHAR(20) DEFAULT 'repetitions',
+  PRIMARY KEY(exercise_list_id)
+);
+
 CREATE TABLE exercises
 (
   exercise_id INT NOT NULL AUTO_INCREMENT,
@@ -106,72 +114,80 @@ CREATE TABLE challenge_progress
   PRIMARY KEY(challenge_progress_id),
   FOREIGN KEY(challenge_id) REFERENCES challenges(challenge_id)
 );
+CREATE TABLE units
+(
+  unit_id INT NOT NULL AUTO_INCREMENT,
+  unit_name VARCHAR(20),
+  exercise_list_id INT,
+  PRIMARY KEY(unit_id),
+  FOREIGN KEY(exercise_list_id) REFERENCES exercise_list(exercise_list_id)
+);
 
 
-INSERT INTO users (first_name, last_name, username) VALUES ('bob', 'Joe', 'billybob');
-INSERT INTO users (first_name, last_name, username) VALUES ('Jane', 'doe', 'jjdoe');
-insert into users (first_name, last_name, email, password, username) values ('Annie', 'Allen', 'aallen0@accuweather.com', 'GZq0qt2VL', 'aallen0');
-insert into users (first_name, last_name, email, password, username) values ('Fred', 'Hicks', 'fhicks1@edublogs.org', 'IDHOvLjkY8', 'fhicks1');
-insert into users (first_name, last_name, email, password, username) values ('Ruth', 'Frazier', 'rfrazier2@bing.com', 'BP35m3sGJj', 'rfrazier2');
-insert into users (first_name, last_name, email, password, username) values ('Laura', 'Moore', 'lmoore3@buzzfeed.com', 'EorXgDZzMcA', 'lmoore3');
-insert into users (first_name, last_name, email, password, username) values ('Wanda', 'Price', 'wprice4@usgs.gov', 'nVeA2UNc5h1', 'wprice4');
-insert into users (first_name, last_name, email, password, username) values ('Rebecca', 'Torres', 'rtorres5@msu.edu', 'TEpO7nrChBA', 'rtorres5');
-insert into users (first_name, last_name, email, password, username) values ('Virginia', 'Bailey', 'vbailey6@princeton.edu', 'V4bSeJNO', 'vbailey6');
-insert into users (first_name, last_name, email, password, username) values ('Ruth', 'Harper', 'rharper7@dell.com', 'xRAVdkH9', 'rharper7');
-insert into users (first_name, last_name, email, password, username) values ('Russell', 'Garrett', 'rgarrett8@bigcartel.com', 'IibF6kDQq', 'rgarrett8');
-insert into users (first_name, last_name, email, password, username) values ('Henry', 'Medina', 'hmedina9@mediafire.com', 'LI1LvMSprtL', 'hmedina9');
-insert into users (first_name, last_name, email, password, username) values ('Bobby', 'Hall', 'bhalla@boston.com', 'ypRCDJa24', 'bhalla');
-insert into users (first_name, last_name, email, password, username) values ('Phyllis', 'Kelley', 'pkelleyb@state.tx.us', 'oh7UXx', 'pkelleyb');
-insert into users (first_name, last_name, email, password, username) values ('Rebecca', 'Kennedy', 'rkennedyc@rediff.com', 'vNgwOk9EuqM', 'rkennedyc');
-insert into users (first_name, last_name, email, password, username) values ('Wanda', 'Fowler', 'wfowlerd@lulu.com', 'TdemKPVjqCQ', 'wfowlerd');
-insert into users (first_name, last_name, email, password, username) values ('Kathleen', 'Garza', 'kgarzae@parallels.com', 'Q0C0DiHepe', 'kgarzae');
-insert into users (first_name, last_name, email, password, username) values ('George', 'Thomas', 'gthomasf@feedburner.com', '300bFUH2ZDY', 'gthomasf');
-insert into users (first_name, last_name, email, password, username) values ('Carl', 'Wagner', 'cwagnerg@printfriendly.com', '1a0t3GhL', 'cwagnerg');
-insert into users (first_name, last_name, email, password, username) values ('Sara', 'Johnson', 'sjohnsonh@taobao.com', 'qOWytzCmZ', 'sjohnsonh');
-insert into users (first_name, last_name, email, password, username) values ('Jean', 'Perez', 'jperezi@apple.com', 'P5DoAP', 'jperezi');
-insert into users (first_name, last_name, email, password, username) values ('Jason', 'Bennett', 'jbennettj@noaa.gov', 'mr8sEMHZty', 'jbennettj');
-insert into users (first_name, last_name, email, password, username) values ('Alice', 'Gordon', 'agordonk@google.ru', 'Bs8ciP13', 'agordonk');
-insert into users (first_name, last_name, email, password, username) values ('Scott', 'Wallace', 'swallacel@goodreads.com', 'sJRE3KhafoSa', 'swallacel');
-insert into users (first_name, last_name, email, password, username) values ('Jacqueline', 'Clark', 'jclarkm@bloglines.com', 'KdAGRD', 'jclarkm');
-insert into users (first_name, last_name, email, password, username) values ('Anna', 'Green', 'agreenn@chron.com', 'jIAn83KPL', 'agreenn');
-insert into users (first_name, last_name, email, password, username) values ('Catherine', 'Richardson', 'crichardsono@sfgate.com', 'R0pLaCvUC', 'crichardsono');
-insert into users (first_name, last_name, email, password, username) values ('Johnny', 'Duncan', 'jduncanp@census.gov', '86sE5SsPlp3q', 'jduncanp');
-insert into users (first_name, last_name, email, password, username) values ('Joyce', 'Watson', 'jwatsonq@cloudflare.com', 'juNRGy', 'jwatsonq');
-insert into users (first_name, last_name, email, password, username) values ('Patrick', 'Garcia', 'pgarciar@bizjournals.com', 'Rbx1Ke', 'pgarciar');
-insert into users (first_name, last_name, email, password, username) values ('Beverly', 'Turner', 'bturners@oakley.com', 'Aqz1sAj', 'bturners');
-insert into users (first_name, last_name, email, password, username) values ('Irene', 'Walker', 'iwalkert@microsoft.com', '4ZQhzkuDr7v', 'iwalkert');
-insert into users (first_name, last_name, email, password, username) values ('Kathryn', 'Powell', 'kpowellu@canalblog.com', 'RZNroXOb3', 'kpowellu');
-insert into users (first_name, last_name, email, password, username) values ('Jesse', 'Larson', 'jlarsonv@ovh.net', 'ZUyUUys', 'jlarsonv');
-insert into users (first_name, last_name, email, password, username) values ('George', 'Reed', 'greedw@google.cn', 'R5tnXAD5na', 'greedw');
-insert into users (first_name, last_name, email, password, username) values ('Christina', 'Day', 'cdayx@indiatimes.com', 'fLYYFgI7Sy', 'cdayx');
-insert into users (first_name, last_name, email, password, username) values ('Kelly', 'Moreno', 'kmorenoy@hexun.com', 'QIRVyjy', 'kmorenoy');
-insert into users (first_name, last_name, email, password, username) values ('David', 'Gutierrez', 'dgutierrezz@scientificamerican.com', 'AW2YUtY', 'dgutierrezz');
-insert into users (first_name, last_name, email, password, username) values ('Michael', 'Day', 'mday10@newyorker.com', 'EsGojX', 'mday10');
-insert into users (first_name, last_name, email, password, username) values ('Carl', 'Johnson', 'cjohnson11@blog.com', 'Ep3OCnXcgO', 'cjohnson11');
-insert into users (first_name, last_name, email, password, username) values ('Frances', 'Mason', 'fmason12@liveinternet.ru', 'M3dhmuphA', 'fmason12');
-insert into users (first_name, last_name, email, password, username) values ('Steve', 'Gordon', 'sgordon13@merriam-webster.com', 'LBHzuXrOS', 'sgordon13');
+INSERT INTO users (first_name, last_name, email, username, password, avatar) VALUES ('bob', 'Joe', 'billbob@gmail.com', 'billybob', 'hatchets', '/img/user_avatars/basic_avatar0.png');
+INSERT INTO users (first_name, last_name, email, username, password, avatar) VALUES ('Jane', 'doe', 'jjdoe@gmail.com', 'jjdoe', 'Poasd89', '/img/user_avatars/basic_avatar3.png');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Annie', 'Allen', 'aallen0@accuweather.com', 'GZq0qt2VL', '/img/user_avatars/basic_avatar0.png', 'aallen0');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Fred', 'Hicks', 'fhicks1@edublogs.org', 'IDHOvLjkY8', '/img/user_avatars/basic_avatar1.png', 'fhicks1');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Ruth', 'Frazier', 'rfrazier2@bing.com', 'BP35m3sGJj', '/img/user_avatars/basic_avatar2.png', 'rfrazier2');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Laura', 'Moore', 'lmoore3@buzzfeed.com', 'EorXgDZzMcA', '/img/user_avatars/basic_avatar3.png', 'lmoore3');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Wanda', 'Price', 'wprice4@usgs.gov', 'nVeA2UNc5h1', '/img/user_avatars/basic_avatar4.png', 'wprice4');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Rebecca', 'Torres', 'rtorres5@msu.edu', 'TEpO7nrChBA', '/img/user_avatars/basic_avatar5.png', 'rtorres5');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Virginia', 'Bailey', 'vbailey6@princeton.edu', 'V4bSeJNO', '/img/user_avatars/basic_avatar6.png', 'vbailey6');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Ruth', 'Harper', 'rharper7@dell.com', 'xRAVdkH9', '/img/user_avatars/basic_avatar7.png', 'rharper7');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Russell', 'Garrett', 'rgarrett8@bigcartel.com', 'IibF6kDQq', '/img/user_avatars/basic_avatar8.png', 'rgarrett8');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Henry', 'Medina', 'hmedina9@mediafire.com', 'LI1LvMSprtL', '/img/user_avatars/basic_avatar9.png', 'hmedina9');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Bobby', 'Hall', 'bhalla@boston.com', 'ypRCDJa24', '/img/user_avatars/basic_avatar10.png', 'bhalla');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Phyllis', 'Kelley', 'pkelleyb@state.tx.us', 'oh7UXx', '/img/user_avatars/basic_avatar11.png', 'pkelleyb');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Rebecca', 'Kennedy', 'rkennedyc@rediff.com', 'vNgwOk9EuqM', '/img/user_avatars/basic_avatar0.png', 'rkennedyc');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Wanda', 'Fowler', 'wfowlerd@lulu.com', 'TdemKPVjqCQ', '/img/user_avatars/basic_avatar1.png', 'wfowlerd');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Kathleen', 'Garza', 'kgarzae@parallels.com', 'Q0C0DiHepe', '/img/user_avatars/basic_avatar2.png', 'kgarzae');
+insert into users (first_name, last_name, email, password, avatar, username) values ('George', 'Thomas', 'gthomasf@feedburner.com', '300bFUH2ZDY', '/img/user_avatars/basic_avatar3.png', 'gthomasf');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Carl', 'Wagner', 'cwagnerg@printfriendly.com', '1a0t3GhL', '/img/user_avatars/basic_avatar4.png', 'cwagnerg');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Sara', 'Johnson', 'sjohnsonh@taobao.com', 'qOWytzCmZ', '/img/user_avatars/basic_avatar5.png', 'sjohnsonh');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Jean', 'Perez', 'jperezi@apple.com', 'P5DoAP', '/img/user_avatars/basic_avatar6.png', 'jperezi');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Jason', 'Bennett', 'jbennettj@noaa.gov', 'mr8sEMHZty', '/img/user_avatars/basic_avatar7.png', 'jbennettj');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Alice', 'Gordon', 'agordonk@google.ru', 'Bs8ciP13', '/img/user_avatars/basic_avatar8.png', 'agordonk');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Scott', 'Wallace', 'swallacel@goodreads.com', 'sJRE3KhafoSa', '/img/user_avatars/basic_avatar9.png', 'swallacel');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Jacqueline', 'Clark', 'jclarkm@bloglines.com', 'KdAGRD', '/img/user_avatars/basic_avatar10.png', 'jclarkm');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Anna', 'Green', 'agreenn@chron.com', 'jIAn83KPL', '/img/user_avatars/basic_avatar11.png', 'agreenn');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Catherine', 'Richardson', 'crichardsono@sfgate.com', 'R0pLaCvUC', '/img/user_avatars/basic_avatar0.png', 'crichardsono');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Johnny', 'Duncan', 'jduncanp@census.gov', '86sE5SsPlp3q', '/img/user_avatars/basic_avatar1.png', 'jduncanp');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Joyce', 'Watson', 'jwatsonq@cloudflare.com', 'juNRGy', '/img/user_avatars/basic_avatar2.png', 'jwatsonq');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Patrick', 'Garcia', 'pgarciar@bizjournals.com', 'Rbx1Ke', '/img/user_avatars/basic_avatar3.png', 'pgarciar');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Beverly', 'Turner', 'bturners@oakley.com', 'Aqz1sAj', '/img/user_avatars/basic_avatar4.png', 'bturners');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Irene', 'Walker', 'iwalkert@microsoft.com', '4ZQhzkuDr7v', '/img/user_avatars/basic_avatar5.png', 'iwalkert');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Kathryn', 'Powell', 'kpowellu@canalblog.com', 'RZNroXOb3', '/img/user_avatars/basic_avatar6.png', 'kpowellu');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Jesse', 'Larson', 'jlarsonv@ovh.net', 'ZUyUUys', '/img/user_avatars/basic_avatar7.png', 'jlarsonv');
+insert into users (first_name, last_name, email, password, avatar, username) values ('George', 'Reed', 'greedw@google.cn', 'R5tnXAD5na', '/img/user_avatars/basic_avatar8.png', 'greedw');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Christina', 'Day', 'cdayx@indiatimes.com', 'fLYYFgI7Sy', '/img/user_avatars/basic_avatar9.png', 'cdayx');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Kelly', 'Moreno', 'kmorenoy@hexun.com', 'QIRVyjy', '/img/user_avatars/basic_avatar10.png', 'kmorenoy');
+insert into users (first_name, last_name, email, password, avatar, username) values ('David', 'Gutierrez', 'dgutierrezz@scientificamerican.com', 'AW2YUtY', '/img/user_avatars/basic_avatar11.png', 'dgutierrezz');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Michael', 'Day', 'mday10@newyorker.com', 'EsGojX', '/img/user_avatars/basic_avatar0.png', 'mday10');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Carl', 'Johnson', 'cjohnson11@blog.com', 'Ep3OCnXcgO', '/img/user_avatars/basic_avatar1.png', 'cjohnson11');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Frances', 'Mason', 'fmason12@liveinternet.ru', 'M3dhmuphA', '/img/user_avatars/basic_avatar2.png', 'fmason12');
+insert into users (first_name, last_name, email, password, avatar, username) values ('Steve', 'Gordon', 'sgordon13@merriam-webster.com', 'LBHzuXrOS', '/img/user_avatars/basic_avatar3.png', 'sgordon13');
 
 
 
 
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Tigers', '1', '/img/team_avatars/default-avatar.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Ligers', '2', '/img/team_avatars/default-avatar.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Ligons', '2', '/img/team_avatars/default-avatar.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Lions', '2', '/img/team_avatars/default-avatar.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Sabertooths', '2', '/img/team_avatars/default-avatar.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Cheetah', '1', '/img/team_avatars/default-avatar.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Tigers', '1', '/img/team_avatars/team_avatar0.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Ligers', '2', '/img/team_avatars/team_avatar1.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Ligons', '2', '/img/team_avatars/team_avatar2.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Lions', '2', '/img/team_avatars/team_avatar3.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Sabertooths', '2', '/img/team_avatars/team_avatar4.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Cheetah', '1', '/img/team_avatars/team_avatar5.png');
 
 
-insert into teams (team_name, captain_id, avatar) values ('Matou', 39, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Sananrejo', 37, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Kerrobert', 32, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Guantun', 2, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Buchou', 35, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Odiongan', 33, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Sumbergayam', 18, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Orlovskiy', 7, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Capim Grosso', 25, '/img/team_avatars/default-avatar.png');
-insert into teams (team_name, captain_id, avatar) values ('Niugan', 7, '/img/team_avatars/default-avatar.png');
+insert into teams (team_name, captain_id, avatar) values ('Matou', 39, '/img/team_avatars/team_avatar6.png');
+insert into teams (team_name, captain_id, avatar) values ('Sananrejo', 37, '/img/team_avatars/team_avatar7.png');
+insert into teams (team_name, captain_id, avatar) values ('Kerrobert', 32, '/img/team_avatars/team_avatar8.png');
+insert into teams (team_name, captain_id, avatar) values ('Guantun', 2, '/img/team_avatars/team_avatar9.png');
+insert into teams (team_name, captain_id, avatar) values ('Buchou', 35, '/img/team_avatars/team_avatar10.png');
+insert into teams (team_name, captain_id, avatar) values ('Odiongan', 33, '/img/team_avatars/team_avatar11.png');
+insert into teams (team_name, captain_id, avatar) values ('Sumbergayam', 18, '/img/team_avatars/team_avatar0.png');
+insert into teams (team_name, captain_id, avatar) values ('Orlovskiy', 7, '/img/team_avatars/team_avatar1.png');
+insert into teams (team_name, captain_id, avatar) values ('Capim Grosso', 25, '/img/team_avatars/team_avatar2.png');
+insert into teams (team_name, captain_id, avatar) values ('Niugan', 7, '/img/team_avatars/team_avatar3.png');
 
 
 INSERT INTO team_participation (team_id, user_id) VALUES ('1', '1');
@@ -365,3 +381,59 @@ INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, ex
 VALUES (2, 2, 2, 7, 'Swim', .5, 'miles', UTC_TIMESTAMP());
 INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
 VALUES (1, 2, 2, 7, 'Swim', .5, 'miles', UTC_TIMESTAMP());
+
+INSERT INTO exercise_list (exercise_name, units)
+VALUES( 'Running', 'NULL');
+INSERT INTO exercise_list (exercise_name, units)
+VALUES( 'Swimming', 'NULL');
+INSERT INTO exercise_list (exercise_name, units)
+VALUES( 'Cycling', 'NULL');
+INSERT INTO exercise_list (exercise_name, units)
+VALUES( 'Rowing', 'NULL');
+INSERT INTO exercise_list (exercise_name, units)
+VALUES( 'Planks', 'seconds');
+INSERT INTO exercise_list (exercise_name, units)
+VALUES( 'Yoga', 'minutes');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Pullups');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Pushups');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Situps');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Crunches');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Russian Twists');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Lunges');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Burpees');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Squats');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Wall Sits');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Planks');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Mountain Climbers');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Box Jumps');
+INSERT INTO exercise_list (exercise_name)
+VALUES( 'Stairs');
+
+INSERT INTO units (unit_name, exercise_list_id)
+VALUES( 'miles', 1);
+INSERT INTO units (unit_name, exercise_list_id)
+VALUES( 'kilometers', 1);
+INSERT INTO units (unit_name, exercise_list_id)
+VALUES( 'meters', 1);
+INSERT INTO units (unit_name, exercise_list_id)
+VALUES( 'miles', 2);
+INSERT INTO units (unit_name, exercise_list_id)
+VALUES( 'kilometers', 2);
+INSERT INTO units (unit_name, exercise_list_id) VALUES( 'meters', 2);
+INSERT INTO units (unit_name, exercise_list_id) VALUES( 'miles', 3);
+INSERT INTO units (unit_name, exercise_list_id) VALUES( 'kilometers', 3);
+INSERT INTO units (unit_name, exercise_list_id) VALUES( 'miles', 4);
+INSERT INTO units (unit_name, exercise_list_id) VALUES( 'kilometers', 4);
+INSERT INTO units (unit_name, exercise_list_id) VALUES( 'meters', 4);
