@@ -38,10 +38,21 @@ export default class {
             });
     }
 
-    getExercisesList() {
+    getExerciseList() {
         return this.$http({
               method: 'GET',
               url: '/api/exercise_list'
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
+    getUnitsForExercise(exercise_list_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/units/'+exercise_list_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
