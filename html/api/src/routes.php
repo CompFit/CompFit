@@ -1143,3 +1143,41 @@ $app->get('/exercises/exercise/{exercise_name}',
     return $response -> write('' . $test);
     }
 );
+$app->get('/exercise_list', function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+
+    $sql = 'SELECT exercise_list_id, exercise_name
+            FROM exercise_list';
+    try {
+      $stmt = $db->query($sql);
+      $exercises = $stmt -> fetchALL(PDO::FETCH_OBJ);
+    }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($exercises);
+    return $response -> write('' . $test);
+});
+
+$app->get('/units/{exercise_list_id}', function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $exercise_list_id = $request->getAttribute('exercise_list_id');
+
+    $sql = 'SELECT unit_name
+            FROM units
+            WHERE `exercise_list_id` = '. $exercise_list_id;
+    try {
+      $stmt = $db->query($sql);
+      $exercises = $stmt -> fetchALL(PDO::FETCH_OBJ);
+    }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($exercises);
+    if($test == '[]'){
+      $test = json_encode(array("unit_name" => "repetitions"));
+    }
+    return $response -> write('' . $test);
+});
