@@ -11,19 +11,24 @@ export default function(Exercises, Users, $timeout) {
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
 
-            Exercises.getExerciseList().then(function(response){
-                console.log(response);
-            });
-
             $scope.new_log.name = "";
             $scope.new_log.repetitions = "";
             $scope.new_log.units = "";
 
+            $scope.exerciseList = [];
+            $scope.selected_exercise = null;
+            $scope.selected_units = null;
+            $scope.unitsForExercise = [];
+
+            Exercises.getExerciseList().then(function(response){
+                $scope.exerciseList = response.data;
+            });
+
             $scope.submitLog = function() {
-                if ($scope.new_log.name == "" || $scope.new_log.repetitions == "" || $scope.new_log.units == "") {
+                if ($scope.selected_exercise == null || $scope.new_log.repetitions == "" || $scope.selected_units == "") {
 
                     //display errors
-                    if ($scope.new_log.name == "") {
+                    if ($scope.selected_exercise == null) {
                         //send error message
                         $scope.logFormError = "No exercise has been selected";
                         $timeout(function(){
@@ -50,10 +55,12 @@ export default function(Exercises, Users, $timeout) {
                     var user_id = Users.user_id;
                     var dateObj = new Date();
                     var date = dateObj.getUTCFullYear() + "-" + (dateObj.getUTCMonth() + 1) + "-" + dateObj.getUTCDate();
+                    
+                    $scope.new_log.name = $scope.selected_exercise.exercise_name;
+                    $scope.new_log.units = $scope.selected_units.unit_name;
 
                     Exercises.logExercise(user_id,date,$scope.new_log.name,$scope.new_log.repetitions,$scope.new_log.units).then(function (response) {
                         console.log(response.data);
-                        // alert("Team_id =",response.data["team_id"]);
                         $(element).modal('hide');
 
                         //update teams
@@ -64,6 +71,13 @@ export default function(Exercises, Users, $timeout) {
                         // }, 500);
                     });
                 }
+            };
+
+            $scope.updateUnits = function() {
+                Exercises.getUnitsForExercise($scope.selected_exercise.exercise_list_id).then(function(response){
+                    console.log(response);
+                    $scope.unitsForExercise = response.data;
+                });
             };
 
         },

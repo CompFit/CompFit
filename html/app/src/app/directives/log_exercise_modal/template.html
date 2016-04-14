@@ -10,7 +10,7 @@
               <form role="form">
                 <div class="form-group">
                     <label for="exercise_name">Exercise Name</label>
-                    <select class="form-control" ng-model="new_log.name" ng-options="exercise.exercise_name for exercise in exercises" required>
+                    <select class="form-control" ng-model="selected_exercise" ng-options="exercise.exercise_name for exercise in exerciseList" ng-change="updateUnits()" required>
                     </select>
                 </div>
 
@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label for="exercise_units">Units</label>
-                    <select class="form-control" ng-model="new_log.units" ng-options="exercise.unit for exercise in exercises" required>
+                    <select class="form-control" ng-model="selected_units" ng-options="unit.unit_name for unit in unitsForExercise" required>
                     </select>
                 </div>
               </form>
