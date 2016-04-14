@@ -27,8 +27,8 @@
 
                     <input id="teamsearch" type="text" class="searchBar" placeholder="Find team" ng-model="query">
                     <ul class='{{state}}' ng-show='query'>
-                        <li ng-click='selectOpponent(team)' ng-repeat='team in usersTeams | filter: query | limitTo:5'>
-                          {{team.team_name}} {{team.captain_name}}
+                        <li ng-click='selectOpponent(team)' ng-repeat='team in all_teams | filter: query | limitTo:5'>
+                          <div class="teamNameInSearch">{{team.team_name}}</div> <div class="captainNameInSearch">{{team.captain_name}}</div>
                         </li>
                     </ul>
                 </div>

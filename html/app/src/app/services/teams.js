@@ -53,6 +53,17 @@ export default class {
             });
     }
 
+    getAllTeams() {
+        return this.$http({
+              method: 'GET',
+              url: '/api/teams'
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     getTeams() {
         return self.teams;
     }

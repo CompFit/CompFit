@@ -21,6 +21,11 @@ export default function(Teams, Users, Challenges, $timeout) {
                 $scope.usersTeams = response.data;
             });
 
+            Teams.getAllTeams().then(function(response) {
+                console.log(response);
+                $scope.all_teams = response.data;
+            })
+
 
 
             //correct for timezone
@@ -55,9 +60,11 @@ export default function(Teams, Users, Challenges, $timeout) {
 
             $scope.selectOpponent = function(team) {
                 $scope.selected_opponent = team;
+                $scope.query = '';
             };
             $scope.clearOpponent = function() {
                 $scope.selected_opponent = null;
+                document.getElementById("teamsearch").focus();
             }
 
         },
