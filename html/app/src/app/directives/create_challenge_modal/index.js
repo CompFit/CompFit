@@ -27,12 +27,10 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
             });
 
             Teams.getTeamsByCaptianId(Users.getCurrentUser()).then(function(response) {
-                console.log(response);
                 $scope.usersTeams = response.data;
             });
 
             Teams.getAllTeams().then(function(response) {
-                console.log(response);
                 $scope.all_teams = response.data;
             })
 
@@ -63,8 +61,8 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
                     // var team_id = $scope.new_challenge.from_team_id;
                     $scope.new_challenge.from_id = $scope.selected_team.team_id;
                     $scope.new_challenge.to_id = $scope.selected_opponent.team_id;
-
-                    $scope.new_challenge.task_name = selected_exercise.exercise_name;
+                    $scope.new_challenge.task_name = $scope.selected_exercise.exercise_name;
+                    $scope.new_challenge.units = $scope.selected_units.unit_name;
                     $scope.new_challenge.task_type = "Group";
 
                     console.log($scope.new_challenge);
