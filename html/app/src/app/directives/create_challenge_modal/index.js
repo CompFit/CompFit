@@ -41,16 +41,22 @@ export default function(Teams, Users, Challenges, $timeout) {
             });
 
             $scope.submitChallenge = function() {
-                console.log($scope.selected_team);
-                if ($scope.new_challenge.team == null) {
+                if ($scope.selected_team == null || $scope.selected_opponent == null) {
 
                 }
                 else {
                     // var team_id = $scope.new_challenge.from_team_id;
+                    $scope.new_challenge.from_id = $scope.selected_team.team_id;
+                    $scope.new_challenge.to_id = $scope.selected_opponent.team_id;
 
+                    $scope.new_challenge.task_name = "Running";
+                    $scope.new_challenge.units = "miles";
+                    $scope.new_challenge.repetitions = "10";
+                    $scope.new_challenge.task_type = "Group";
 
+                    console.log($scope.new_challenge);
                     Challenges.createChallenge($scope.new_challenge).then(function (response) {
-                        console.log(response.data);
+                        console.log(response);
 
                         $(element).modal('hide');
 
