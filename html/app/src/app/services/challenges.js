@@ -7,6 +7,12 @@ export default class {
         self.challenges = [];
     }
 
+    createChallenge(challenge) {
+        return this.$http.post("/api/challenge",challenge).then(function(response){
+            return response;
+        });
+    }
+
     getChallengeById(challenge_id) {
         return this.$http({
               method: 'GET',
@@ -21,7 +27,7 @@ export default class {
     getChallengesForUser(user_id) {
         return this.$http({
               method: 'GET',
-              url: '/api/teams/'+user_id
+              url: '/api/challenges/user_id/'+user_id
             }).then(function successCallback(response) {
                 self.challenges = response.data;
                 return response;

@@ -3,11 +3,12 @@ import './style.styl';
 export default function($scope, $stateParams, Challenges) {
     'ngInject';
 
+    $scope.new_challenge = {};
+    $scope.toggleModal = function(){
+        console.log($scope.new_challenge);
+          $('#createchallengemodal').modal('show');
+    };
 
-    // $scope.team_id = -1;
-    // $scope.avatar = "/img/team_avatars/default-avatar.png";
-    // $scope.players = [];
-    // $scope.players_dropdown = false;
     $scope.challenge_selected = false;
 
 

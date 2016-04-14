@@ -27,10 +27,11 @@ export default class {
             });
     }
 
-    getTeamById(team_id) {
+
+    getTeamsByCaptianId(captain_id) {
         return this.$http({
               method: 'GET',
-              url: 'http://private-c84bfb-compfit.apiary-mock.com/team/'+team_id
+              url: '/api/teams/captain_id/'+captain_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
@@ -47,6 +48,28 @@ export default class {
                 self.user_for_teams = user_id;
 
                 console.log(response);
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
+    getAllTeams() {
+        return this.$http({
+              method: 'GET',
+              url: '/api/teams'
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
+    getAllOpponentTeams(captain_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/teams/opponents'+captain_id
+            }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
                 return response;
