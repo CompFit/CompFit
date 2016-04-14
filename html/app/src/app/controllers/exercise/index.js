@@ -4,15 +4,13 @@ export default function($scope, $stateParams, Exercises) {
     'ngInject';
 
     $scope.toggleModal = function(){
-        console.log($scope.log_exercise);
+        console.log($scope.new_log);
           $('#logexercisemodal').modal('show');
     };
 
-    // $scope.team_id = -1;
-    // $scope.avatar = "/img/team_avatars/default-avatar.png";
-    // $scope.players = [];
-    // $scope.players_dropdown = false;
     $scope.exercise_selected = false;
+
+    $scope.new_log = {};
 
 
     // if ($stateParams.id != "") {
