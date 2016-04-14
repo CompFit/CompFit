@@ -53,6 +53,28 @@ export default class {
             });
     }
 
+    getAllTeams() {
+        return this.$http({
+              method: 'GET',
+              url: '/api/teams'
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
+    getAllOpponentTeams(captain_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/teams/opponents'+captain_id
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     getTeams() {
         return self.teams;
     }

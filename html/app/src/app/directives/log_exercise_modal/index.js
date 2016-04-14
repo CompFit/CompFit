@@ -11,6 +11,10 @@ export default function(Exercises, Users, $timeout) {
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
 
+            Exercises.getExerciseList().then(function(response){
+                console.log(response);
+            });
+
             $scope.new_log.name = "";
             $scope.new_log.repetitions = "";
             $scope.new_log.units = "";
