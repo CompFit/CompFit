@@ -1143,3 +1143,19 @@ $app->get('/exercises/exercise/{exercise_name}',
     return $response -> write('' . $test);
     }
 );
+$app->get('/exercise_list', function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+
+    $sql = 'SELECT exercise_list_id, exercise_name
+            FROM exercise_list';
+    try {
+      $stmt = $db->query($sql);
+      $exercises = $stmt -> fetchALL(PDO::FETCH_OBJ);
+    }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($exercises);
+    return $response -> write('' . $test);
+});
