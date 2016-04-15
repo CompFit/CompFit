@@ -1,4 +1,3 @@
-
 <div class="teams-sidebar">
   <div class="navbar navbar-default sidebar" role="navigation">
     <div>
@@ -6,7 +5,12 @@
 
         <div class="nav list-group" >
             <div ng-repeat="team in teams">
-                <a class="list-group-item" ui-sref-active="active" ui-sref="app.team({id:{{team.team_id}}})">{{team.team_name}}</a>
+                <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.team({id:{{team.team_id}}})">
+                    <img src="{{team.avatar}}" alt="/img/team_avatars/default-avatar.png" class="side-thumbnail">
+                    <b>{{team.team_name}}</b> <br/>
+                    Team Captain: <br/>
+                    No. of members:
+                </a>
             </div>
         </div>
     </div>
