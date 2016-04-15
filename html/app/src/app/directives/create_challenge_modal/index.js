@@ -30,7 +30,7 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
                 $scope.usersTeams = response.data;
             });
 
-            Teams.getAllTeams().then(function(response) {
+            Teams.getAllOpponentTeams(Users.getCurrentUser()).then(function(response) {
                 $scope.all_teams = response.data;
             })
 

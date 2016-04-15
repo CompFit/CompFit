@@ -17,21 +17,24 @@
 
 
                 <div class="form-group searchTeam">
-                    <label for="teamSearch"> Search opponent team: </label>
+                    <label> Search opponent team: </label>
                     <span class="opponentSelected">
                         {{selected_opponent.team_name}}
                         <i class='fa fa-close' ng-click='clearOpponent()' ng-show='selected_opponent'></i>
                     </span>
                     <br>
-                    <!-- <span class="fa fa-search"/> -->
-
-                    <input id="teamsearch" type="text" class="searchBar" placeholder="Find team" ng-model="query">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input id="teamsearch" type="text" class="form-control" placeholder="Find team" autocomplete="off" ng-model="query">
+                    </div>
                     <ul class='{{state}}' ng-show='query'>
                         <li ng-click='selectOpponent(team)' ng-repeat='team in all_teams | filter: query | limitTo:5'>
                           <div class="teamNameInSearch">{{team.team_name}}</div> <div class="captainNameInSearch">{{team.captain_name}}</div>
                         </li>
                     </ul>
                 </div>
+
+
 
                 <div class="row">
                     <div class="form-group col-sm-4">
