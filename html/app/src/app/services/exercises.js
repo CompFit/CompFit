@@ -7,10 +7,9 @@ export default class {
         self.exercises = [];
     }
 
-    logExercise(user_id,date,exercise_name,repetitions,units) {
-        var data = {"user_id":user_id,"date":date,"exercise_name":exercise_name,"repetitions":repetitions,"units":units};
-        console.log(data);
-        return this.$http.post("/api/exercise",data).then(function (response) {
+    logExercise(log) {
+        console.log(log);
+        return this.$http.post("/api/exercise",log).then(function (response) {
             return response;
         });
     }
