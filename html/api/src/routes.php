@@ -549,6 +549,9 @@ $app->get('/teams/{user_id}',
                   (SELECT * FROM users WHERE user_id = "'.$user_id.'") as u
                WHERE u.user_id = tp.user_id) as user
              WHERE team.team_id = user.team_id';
+    $cName = 'SELECT user_id, username
+              FROM users
+              WHERE user_id = :captain_id';
 
 
              try {
@@ -560,6 +563,11 @@ $app->get('/teams/{user_id}',
                  $new[$array_loop]['team_id'] = $val->team_id;
                  $new[$array_loop]['team_name'] = $val->team_name;
                  $new[$array_loop]['captain_id'] = $val->captain_id;
+                 $stmt3 = $db->prepare($cName);
+                 $stmt3->bindParam(':captain_id', $val->captain_id);
+                 $stmt3->execute();
+                 $captain = $stmt3->fetch(PDO::FETCH_OBJ);
+                 $new[$array_loop]['captain_name'] = $captain->username;
                  $sql2 = 'SELECT u.user_id, u.username
                           FROM users u,
                            (SELECT * from team_participation
