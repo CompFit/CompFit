@@ -82,11 +82,15 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
             $scope.selectOpponent = function(team) {
                 $scope.selected_opponent = team;
-                $scope.query = '';
+                $scope.query = team.team_name;
             };
             $scope.clearOpponent = function() {
                 $scope.selected_opponent = null;
                 document.getElementById("teamsearch").focus();
+            };
+
+            $scope.showQuery = function() {
+                return query && !selected_opponent;
             };
 
             $scope.updateUnits = function() {
