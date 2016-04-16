@@ -42,7 +42,7 @@
 
                 <div class="row">
                     <div class="form-group col-sm-4">
-                        <label for="exercise_name">Task Name</label>
+                        <label for="exercise_name">Task name</label>
                         <select class="form-control" name="exercise_name" ng-model="selected_exercise"
                             ng-options="exercise.exercise_name for exercise in exerciseList" ng-change="updateUnits()" required>
                         </select>
@@ -63,6 +63,25 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-sm-2"> </div>
+                    <div class="form-group col-sm-4 radioBtnList">
+                        <label for="individual_radio">
+                        <input type="radio" name="individual_radio"
+                            ng-model="new_challenge.task_type" value="Individual">
+                            Individual Task
+                        </label>
+                    </div>
+                    <div class="form-group col-sm-4 radioBtnList">
+                        <label for="group_radio">
+                        <input type="radio" name="group_radio"
+                            ng-model="new_challenge.task_type" value="Group">
+                            Group Task
+                        </label>
+                    </div>
+                    <div class="col-sm-2"> </div>
+                </div>
+
+                <div class="row">
                     <div class="form-group col-sm-6">
                         <label for="start_date"> Start date </label><br>
                         <input class="form-control" id="startDatePicker" type="date" name="start_date" ng-change="updateStartDate()"
@@ -74,6 +93,23 @@
                             min="{{minChallengeEndDate}}" required>
                     </div>
                 </div>
+
+
+
+                <div class="row formSummary">
+                    <div class="col-sm-12">
+                        <h5>{{selected_team.team_name}} vs. {{selected_opponent.team_name ? selected_opponent.team_name : fill_in_opponent}}</h5>
+                        <p> Each player will do <b>{{new_challenge.repetitions ? new_challenge.repetitions : fill_in_repetitions}}</b>
+                            <b>{{selected_exercise.exercise_name ? selected_units.unit_name : fill_in_units}}</b> of
+                            <b>{{selected_exercise.exercise_name ? selected_exercise.exercise_name : fill_in_exercise}}</b>
+                            from <b>{{new_challenge.start_date | date: 'shortDate'}}</b> to <b>{{new_challenge.end_date | date:'shortDate'}}</b>.
+                        </p>
+                    </div>
+
+                </div>
+
+
+
                 <button type="submit" class="btn btn-success">Create</button>
               </form>
           </div>
