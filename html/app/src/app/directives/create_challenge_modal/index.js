@@ -1,7 +1,7 @@
 import './style.styl';
 import template from 'directives/create_challenge_modal/template.html';
 
-export default function(Teams, Users, Challenges, Exercises, $timeout) {
+export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
 
     return {
         restrict: 'E',
@@ -87,12 +87,16 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
                     console.log($scope.new_challenge);
                     Challenges.createChallenge($scope.new_challenge).then(function (response) {
                         console.log(response);
-
-
-
-                        Challenges.getChallengesForUser(Users.getCurrentUser());
-
+                        var challenge_id =  response.data.challenge_id;
                         $(element).modal('hide');
+                        $(".modal-backdrop").fadeOut("slow");
+                        Challenges.getChallengesForUser(Users.getCurrentUser()).then(function(response){
+
+
+                            $state.go('app.challenge', {'id': challenge_id});
+                        });
+
+
 
                     });
                 }

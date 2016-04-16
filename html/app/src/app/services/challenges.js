@@ -2,7 +2,15 @@ export default class {
 
     constructor($http) {
         this.$http = $http;
+        // this.observerCallbacks = [];
         var self = this;
+
+        // self.notifyObservers = function(){
+        //    angular.forEach(this.observerCallbacks, function(callback){
+        //      callback();
+        //    });
+        //  };
+
 
         self.challenges = [];
     }
@@ -25,11 +33,20 @@ export default class {
     }
 
     getChallengesForUser(user_id) {
+        // self.notifyObservers = function(){
+        //    angular.forEach(this.observerCallbacks, function(callback){
+        //      callback();
+        //    });
+        //  };
+        // var notify = this.notifyObservers;
         return this.$http({
               method: 'GET',
               url: '/api/challenges/user_id/'+user_id
             }).then(function successCallback(response) {
                 self.challenges = response.data;
+                // console.log(self);
+                // self.notifyObservers();
+                // notify();
                 return response;
               }, function errorCallback(response) {
                 return response;
@@ -39,5 +56,20 @@ export default class {
     getChallenges() {
         return self.challenges;
     }
+
+
+
+
+   //  //register an observer
+   // registerObserverCallback(callback){
+   //    self.observerCallbacks.push(callback);
+   //  }
+   //
+   //  notifyObservers(){
+   //     angular.forEach(self.observerCallbacks, function(callback){
+   //       callback();
+   //     });
+   //   };
+
 
 }
