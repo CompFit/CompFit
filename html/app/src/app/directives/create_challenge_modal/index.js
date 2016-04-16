@@ -16,6 +16,9 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
             $scope.selected_team = null;
 
+            $scope.selected_units = {};
+            $scope.selected_units.unit_name = "Amount";
+
             $scope.exerciseList = [];
 
             $scope.selected_exercise = null;
@@ -28,6 +31,7 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
             Teams.getTeamsByCaptianId(Users.getCurrentUser()).then(function(response) {
                 $scope.usersTeams = response.data;
+                $scope.selected_team = $scope.usersTeams[0];
             });
 
             Teams.getAllOpponentTeams(Users.getCurrentUser()).then(function(response) {
@@ -55,7 +59,13 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
             $scope.submitChallenge = function() {
                 if ($scope.selected_team == null || $scope.selected_opponent == null) {
-
+                    if($scope.selected_opponent == null) {
+                        $scope.opponentSelectedFormError = "Please select an opponent team.";
+                        $timeout(function(){
+                             $scope.opponentSelectedFormError = "";
+                         }, 1500);
+                     }
+                     
                 }
                 else {
                     // var team_id = $scope.new_challenge.from_team_id;
@@ -86,17 +96,20 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
             };
             $scope.clearOpponent = function() {
                 $scope.selected_opponent = null;
+                $scope.query = '';
+                document.getElementById("teamsearch").disabled=false;
                 document.getElementById("teamsearch").focus();
             };
 
             $scope.showQuery = function() {
-                return query && !selected_opponent;
+                return $scope.query && !$scope.selected_opponent;
             };
 
             $scope.updateUnits = function() {
                 Exercises.getUnitsForExercise($scope.selected_exercise.exercise_list_id).then(function(response){
                     // console.log(response);
                     $scope.unitsForExercise = response.data;
+                    $scope.selected_units = $scope.unitsForExercise[0];
                 });
             };
 
