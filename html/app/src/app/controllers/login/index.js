@@ -10,6 +10,7 @@ export default function( $scope, $state, Authentication, Users ) {
             }
             else {
                 Users.setCurrentUser(response.data.user_id);
+                Users.username = response.data.username;
                 console.log("user id:",Users.user_id);
                 Authentication.logIn();
 

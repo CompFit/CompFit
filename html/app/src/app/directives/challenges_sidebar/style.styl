@@ -4,20 +4,26 @@
   	left: 0px;
   	height: 100%;
   	min-width: 250px;
-  }
 
-  .challenges-sidebar .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-  }
+    h3 {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
 
-  .challenges-sidebar h3 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+    .navbar {
+    	border-radius: 0;
 
-  .navbar {
-  	border-radius: 0;
+        .navbar-collapse {
+          padding: 0;
+          max-height: none;
+        }
+    }
+
+    .list-group {
+        overflow-y: auto;
+        max-height: 670px;
+        overflow-x: hidden;
+    }
   }
 
 }
