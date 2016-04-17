@@ -22,14 +22,15 @@
                     <label for="players">Add Players</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Search username..." ng-model="test_player_name" required>
+                        <input type="text" class="form-control" placeholder="Search username..."
+                                ng-model="test_player_name" required>
                         <span class="input-group-btn">
                           <button class="btn btn-primary" type="submit">Add</button>
                         </span>
                     </div>
                     <ul class='{{state}}' ng-show='showQuery()'>
-                        <li ng-click='addPlayerForNewTeam(user)' ng-repeat='user in all_users | filter: query | limitTo:5'>
-                          <div class="playerNameInSearch">{{team.team_name}}</div> <div class="captainNameInSearch">{{team.captain_name}}</div>
+                        <li ng-click='addPlayerForNewTeam(user.username)' ng-repeat='user in all_users | filter: {"username" : test_player_name} | limitTo:5'>
+                          <div class="playerNameInSearch">{{user.username}}</div>
                         </li>
                     </ul>
                 </div>

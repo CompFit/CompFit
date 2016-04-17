@@ -16,9 +16,10 @@ export default function(Teams, Users, $timeout) {
             $scope.test_player_name = "";
 
             $scope.addPlayerFormError = "";
+            $scope.all_users = [];
 
             Users.getAllUsers().then(function(response){
-                console.log(response);
+                $scope.all_users = response.data;
             });
 
             $scope.showQuery = function() {
