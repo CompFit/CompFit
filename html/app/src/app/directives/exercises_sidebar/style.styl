@@ -4,20 +4,29 @@
   	left: 0px;
   	height: 100%;
   	min-width: 250px;
-  }
 
-  .exercises-sidebar .navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-  }
+    .navbar {
+    	border-radius: 0;
 
-  .exercises-sidebar h3 {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+        .navbar-collapse {
+          padding: 0;
+          max-height: none;
+        }
+    }
 
-  .navbar {
-  	border-radius: 0;
-  }
+    h3 {
+      padding-left: 10px;
+      padding-right: 10px;
 
+      i {
+        cursor: pointer;
+      }
+    }
+
+    .list-group {
+        overflow-y: auto;
+        max-height: 670px;
+        overflow-x: hidden;
+    }
+  }
 }
