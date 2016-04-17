@@ -1,20 +1,31 @@
 import './style.styl';
 import template from 'directives/create_challenge_modal/template.html';
 
-export default function(Teams, Users, Challenges, Exercises, $timeout) {
+export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
 
     return {
         restrict: 'E',
         replace:true,
         scope:true,
-        // transclude:true,
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
+
+            $scope.fill_in_opponent = "[opponent team]";
+            $scope.fill_in_exercise = "[task name]";
+            $scope.fill_in_units = "[units]";
+            $scope.fill_in_repetitions = "[amount]";
+
+            $scope.new_challenge = {};
 
             $scope.new_challenge.to_team_id = null;
             $scope.new_challenge.from_team_id = null;
 
             $scope.selected_team = null;
+
+            $scope.new_challenge.task_type = "Individual";
+
+            $scope.selected_units = {};
+            $scope.selected_units.unit_name = "Amount";
 
             $scope.exerciseList = [];
 
@@ -28,6 +39,7 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
             Teams.getTeamsByCaptianId(Users.getCurrentUser()).then(function(response) {
                 $scope.usersTeams = response.data;
+                $scope.selected_team = $scope.usersTeams[0];
             });
 
             Teams.getAllOpponentTeams(Users.getCurrentUser()).then(function(response) {
@@ -45,6 +57,7 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
             $(document).ready( function() {
                 $scope.new_challenge.start_date = new Date();
+                $scope.new_challenge.end_date = new Date(+new Date + 6048e5);
                 $scope.minChallengeStartDate = new Date().toDateInputValue();
                 $scope.minChallengeEndDate = new Date().toDateInputValue();
             });
@@ -55,44 +68,52 @@ export default function(Teams, Users, Challenges, Exercises, $timeout) {
 
             $scope.submitChallenge = function() {
                 if ($scope.selected_team == null || $scope.selected_opponent == null) {
-
+                    if($scope.selected_opponent == null) {
+                        $scope.opponentSelectedFormError = "Please select an opponent team.";
+                        $timeout(function(){
+                             $scope.opponentSelectedFormError = "";
+                         }, 1500);
+                     }
                 }
                 else {
-                    // var team_id = $scope.new_challenge.from_team_id;
-                    // console.log($scope.selected_team, $scope.selected_opponent);
                     $scope.new_challenge.from_team_id = $scope.selected_team.team_id;
                     $scope.new_challenge.to_team_id = $scope.selected_opponent.team_id;
                     $scope.new_challenge.task_name = $scope.selected_exercise.exercise_name;
                     $scope.new_challenge.units = $scope.selected_units.unit_name;
-                    $scope.new_challenge.task_type = "Group";
 
                     console.log($scope.new_challenge);
                     Challenges.createChallenge($scope.new_challenge).then(function (response) {
                         console.log(response);
-
-
-
-                        Challenges.getChallengesForUser(Users.getCurrentUser());
-
+                        var challenge_id =  response.data.challenge_id;
                         $(element).modal('hide');
-
+                        $(".modal-backdrop").fadeOut("slow");
+                        Challenges.getChallengesForUser(Users.getCurrentUser()).then(function(response){
+                            $state.go('app.challenge', {'id': challenge_id});
+                        });
                     });
+
                 }
             };
 
             $scope.selectOpponent = function(team) {
                 $scope.selected_opponent = team;
-                $scope.query = '';
+                $scope.query = team.team_name;
             };
             $scope.clearOpponent = function() {
                 $scope.selected_opponent = null;
+                $scope.query = '';
+                document.getElementById("teamsearch").disabled=false;
                 document.getElementById("teamsearch").focus();
+            };
+
+            $scope.showQuery = function() {
+                return $scope.query && !$scope.selected_opponent;
             };
 
             $scope.updateUnits = function() {
                 Exercises.getUnitsForExercise($scope.selected_exercise.exercise_list_id).then(function(response){
-                    // console.log(response);
                     $scope.unitsForExercise = response.data;
+                    $scope.selected_units = $scope.unitsForExercise[0];
                 });
             };
 
