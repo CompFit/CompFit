@@ -7,15 +7,6 @@ export default function(Challenges, Users) {
         restrict: 'E',
         replace: true,
         link: function ($scope, $element, $attrs) {
-            // var updateChallenges = function(){
-            //     // Challenges.getChallengesForUser(Users.getCurrentUser()).then( function(response) {
-            //     //     console.log(response.data);
-            //     //     $scope.challenges = response.data;
-            //     // });
-            //     console.log("update challenges");
-            //     $scope.challenges = Challenges.getChallenges();
-            //   };
-
               $scope.challenges = Challenges.getChallenges();
               if (!$scope.challenges) {
                   Challenges.getChallengesForUser(Users.getCurrentUser()).then( function(response) {
@@ -23,8 +14,6 @@ export default function(Challenges, Users) {
                       $scope.challenges = response.data;
                   });
               }
-
-            // Challenges.registerObserverCallback(updateChallenges);
         },
         templateUrl: template
     };

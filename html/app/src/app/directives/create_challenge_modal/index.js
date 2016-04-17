@@ -7,7 +7,6 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
         restrict: 'E',
         replace:true,
         scope:true,
-        // transclude:true,
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
 
@@ -77,8 +76,6 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
                      }
                 }
                 else {
-                    // var team_id = $scope.new_challenge.from_team_id;
-                    // console.log($scope.selected_team, $scope.selected_opponent);
                     $scope.new_challenge.from_team_id = $scope.selected_team.team_id;
                     $scope.new_challenge.to_team_id = $scope.selected_opponent.team_id;
                     $scope.new_challenge.task_name = $scope.selected_exercise.exercise_name;
@@ -91,14 +88,10 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
                         $(element).modal('hide');
                         $(".modal-backdrop").fadeOut("slow");
                         Challenges.getChallengesForUser(Users.getCurrentUser()).then(function(response){
-
-
                             $state.go('app.challenge', {'id': challenge_id});
                         });
-
-
-
                     });
+
                 }
             };
 
@@ -119,7 +112,6 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
 
             $scope.updateUnits = function() {
                 Exercises.getUnitsForExercise($scope.selected_exercise.exercise_list_id).then(function(response){
-                    // console.log(response);
                     $scope.unitsForExercise = response.data;
                     $scope.selected_units = $scope.unitsForExercise[0];
                 });

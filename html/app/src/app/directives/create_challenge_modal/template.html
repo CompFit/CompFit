@@ -98,16 +98,14 @@
 
                 <div class="row formSummary">
                     <div class="col-sm-12">
-                        <h5>{{selected_team.team_name}} vs. {{selected_opponent.team_name ? selected_opponent.team_name : fill_in_opponent}}</h5>
+                        <h4>{{selected_team.team_name}} vs. {{selected_opponent.team_name ? selected_opponent.team_name : fill_in_opponent}}</h4>
                         <p> Each player will do <b>{{new_challenge.repetitions ? new_challenge.repetitions : fill_in_repetitions}}</b>
                             <b>{{selected_exercise.exercise_name ? selected_units.unit_name : fill_in_units}}</b> of
                             <b>{{selected_exercise.exercise_name ? selected_exercise.exercise_name : fill_in_exercise}}</b>
                             from <b>{{new_challenge.start_date | date: 'shortDate'}}</b> to <b>{{new_challenge.end_date | date:'shortDate'}}</b>.
                         </p>
                     </div>
-
                 </div>
-
 
 
                 <button type="submit" class="btn btn-success">Create</button>
