@@ -17,7 +17,7 @@
                 </div>
               </form>
 
-              <form role="form" ng-submit="addPlayerForNewTeam()" name="addPlayerForm">
+              <form role="form" autocomplete="off" ng-submit="addPlayerForNewTeam(test_player_name)" name="addPlayerForm">
                 <div class="form-group">
                     <label for="players">Add Players</label>
                     <div class="input-group">
@@ -27,6 +27,11 @@
                           <button class="btn btn-primary" type="submit">Add</button>
                         </span>
                     </div>
+                    <ul class='{{state}}' ng-show='showQuery()'>
+                        <li ng-click='addPlayerForNewTeam(user)' ng-repeat='user in all_users | filter: query | limitTo:5'>
+                          <div class="playerNameInSearch">{{team.team_name}}</div> <div class="captainNameInSearch">{{team.captain_name}}</div>
+                        </li>
+                    </ul>
                 </div>
                 <div ng-show="addPlayerFormError" class="formErrorMsg">
                     {{addPlayerFormError}}

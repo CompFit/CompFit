@@ -17,13 +17,19 @@ export default function(Teams, Users, $timeout) {
 
             $scope.addPlayerFormError = "";
 
-            $scope.addPlayerForNewTeam = function() {
+            Users.getAllUsers().then(function(response){
+                console.log(response);
+            });
+
+            $scope.showQuery = function() {
+                return $scope.test_player_name;
+            };
+
+            $scope.addPlayerForNewTeam = function(test_player_name) {
                 $scope.addPlayerFormError = "";
 
-                var test_player_name = $scope.test_player_name;
                 $scope.test_player_name = "";
                 var spot = -1;
-
 
 
                 //check if the player entered is in the players list

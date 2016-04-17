@@ -15,6 +15,17 @@ export default class {
         this.user_id = new_id;
     }
 
+    getAllUsers() {
+        return this.$http({
+              method: 'GET',
+              url: '/api/user'
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     createUser(newUser) {
         var data = newUser;
         return this.$http.post("/api/user",data).then(function (response) {
