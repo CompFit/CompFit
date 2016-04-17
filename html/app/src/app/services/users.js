@@ -3,6 +3,7 @@ export default class {
     constructor($http) {
         this.$http = $http;
         this.user_id = 1;
+        this.username = "billybob";
         var self = this;
         // self.user_id = 1;
     }

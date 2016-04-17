@@ -34,13 +34,20 @@ export default function(Teams, Users, $timeout) {
                     }
                 }
 
-                if (spot == -1) {
+                if (test_player_name == Users.username) {
+                    //send error message
+                    $scope.addPlayerFormError = "You are already a member of this team.";
+                    $timeout(function(){
+                         $scope.addPlayerFormError = "";
+                     }, 1500);
+                }
+                else if (spot == -1) {
                     Users.getUserByUsername(test_player_name).then(function(response){
                         console.log(response.data);
 
                         if (response.data.error != undefined) {
                             console.log("ERROR! in getting userbyusername in create_team_modal", response.data.error);
-                            
+
                             $scope.test_player_name = test_player_name;
                             $scope.addPlayerFormError = "Player not found.";
                             $timeout(function(){
