@@ -40,6 +40,7 @@ export default function(Teams, Users, $timeout) {
 
                         if (response.data.error != undefined) {
                             console.log("ERROR! in getting userbyusername in create_team_modal", response.data.error);
+                            
                             $scope.test_player_name = test_player_name;
                             $scope.addPlayerFormError = "Player not found.";
                             $timeout(function(){
