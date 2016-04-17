@@ -1,20 +1,30 @@
 <div id="team">
     <seed-sidebar></seed-sidebar>
     <div class="container">
-        <div class="topSection row" ng-show="team_selected">
-            <div class="col-sm-2">
-                <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
+        <div class="topSection" ng-show="team_selected">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
+                </div>
+                <div class="col-md-10">
+                    <h1>{{team_name}}</h1>
+                    <h3>Team Captain: {{team.captain_name}}</h3>
+                    <h3>No. of members: {{players.length}}</h3>
+                </div>
             </div>
-            <div class="col-sm-10">
-                <h1>{{team_name}}</h1>
-                <button class="btn btn-info players_dropdown_btn" ng-click="players_dropdown = !players_dropdown">
-                    Players
-                    <span class="caret"></span>
-               </button>
-                <div class="list-group players_dropdown" ng-show="players_dropdown" >
-                    <div ng-repeat="player in players">
-                        <a class="list-group-item">{{player.username}}</a>
-                    </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Members</h2>
+                    <ul class="list-group" ng-repeat="player in players">
+                         <li class="list-group-item">{{player.username}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Challenges</h2>
                 </div>
             </div>
         </div>
