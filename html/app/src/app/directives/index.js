@@ -12,7 +12,7 @@ import logbutton from './logbutton';
 export default angular
     .module( 'app.directives', [] )
     .directive( 'seedSidebar', ['Teams', 'Users', teams_sidebar] )
-    .directive( 'createChallengeModal', ['Teams','Users','Challenges','Exercises', '$timeout', create_challenge_modal] )
+    .directive( 'createChallengeModal', ['Teams','Users','Challenges','Exercises', '$timeout', '$state', create_challenge_modal] )
     .directive( 'createTeamModal', ['Teams','Users', '$timeout', create_team_modal] )
     .directive( 'challengesSidebar', ['Challenges','Users', challenges_sidebar] )
     .directive( 'exercisesSidebar', ['Exercises', exercises_sidebar] )
