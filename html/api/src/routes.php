@@ -66,7 +66,7 @@ $app->group('/user', function(){
                 FROM users';
         try {
           $stmt = $db->query($sql);
-          $users = $stmt->fetch(PDO::FETCH_OBJ);
+          $users = $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         catch(PDOException $e) {
           echo json_encode($e->getMessage());
@@ -549,6 +549,9 @@ $app->get('/teams/{user_id}',
                   (SELECT * FROM users WHERE user_id = "'.$user_id.'") as u
                WHERE u.user_id = tp.user_id) as user
              WHERE team.team_id = user.team_id';
+    $cName = 'SELECT user_id, username
+              FROM users
+              WHERE user_id = :captain_id';
 
 
              try {
@@ -560,6 +563,11 @@ $app->get('/teams/{user_id}',
                  $new[$array_loop]['team_id'] = $val->team_id;
                  $new[$array_loop]['team_name'] = $val->team_name;
                  $new[$array_loop]['captain_id'] = $val->captain_id;
+                 $stmt3 = $db->prepare($cName);
+                 $stmt3->bindParam(':captain_id', $val->captain_id);
+                 $stmt3->execute();
+                 $captain = $stmt3->fetch(PDO::FETCH_OBJ);
+                 $new[$array_loop]['captain_name'] = $captain->username;
                  $sql2 = 'SELECT u.user_id, u.username
                           FROM users u,
                            (SELECT * from team_participation
@@ -592,6 +600,9 @@ $app->get('/teams/captain_id/{captain_id}',
     $sql = 'SELECT t.team_id, t.team_name, t.captain_id, t.avatar, t.created
             FROM teams t
             WHERE captain_id = "'.$captain_id.'"';
+    $cName = 'SELECT user_id, username
+          FROM users
+          WHERE user_id = :captain_id';
 
       try {
         $new = array();
@@ -644,9 +655,9 @@ $app->get('/teams/opponents/{captain_id}',
         $array_loop = 0;
         $stmt = $db->query($sql);
         $teams = $stmt->fetchAll(PDO::FETCH_OBJ);
-        $sql2 = 'SELECT team_id, team_name FROM teams WHERE team_id NOT IN (SELECT DISTINCT t.team_id FROM team_participation t WHERE t.user_id IN (SELECT DISTINCT u.user_id FROM users u, (SELECT user_id from team_participation tp, (SELECT t.team_id FROM teams t WHERE captain_id = 1) as ti WHERE tp.team_id = ti.team_id) as t WHERE t.user_id = u.user_id))';
+        $sql2 = 'SELECT team_id, team_name FROM teams WHERE team_id NOT IN (SELECT DISTINCT t.team_id FROM team_participation t WHERE t.user_id IN (SELECT DISTINCT u.user_id FROM users u, (SELECT user_id from team_participation tp, (SELECT t.team_id FROM teams t WHERE captain_id = "'.$captain_id.'") as ti WHERE tp.team_id = ti.team_id) as t WHERE t.user_id = u.user_id))';
         $stmt2 = $db->query($sql2);
-         $users = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        $users = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
       }
       catch(PDOException $e) {
@@ -660,6 +671,52 @@ $app->get('/teams/opponents/{captain_id}',
       return $response->write('' . $test);
     }
 });
+
+// $app->get('/teams/opponents/{team_id}',
+//   function ($request, $response, $args){
+//     $db = $this->dbConn;
+//     $strToReturn = '';
+//     $team_id = $request->getAttribute('team_id');
+//     $users = '';
+//     $sql = 'SELECT u.username, u.user_id
+//             FROM users u,
+//             (SELECT d.user_id
+//               FROM team_participation d, (SELECT captain_id FROM teams WHERE `team_id` = :team_id) as t
+//               WHERE d.user_id = t.captain_id) as tp
+//             WHERE tp.user_id = u.user_id';
+//
+//       try {
+//         $new = array();
+//         $newUsers = array();
+//         $array_loop = 0;
+//         $sql2 = 'SELECT team_id, team_name FROM teams WHERE team_id NOT IN (SELECT DISTINCT t.team_id FROM team_participation t WHERE t.user_id IN (SELECT DISTINCT u.user_id FROM users u, (SELECT user_id from team_participation tp WHERE tp.team_id = "'.$team_id.'") as t WHERE t.user_id = u.user_id))';
+//         $stmt2 = $db->query($sql2);
+//         $teams = $stmt2->fetchAll(PDO::FETCH_OBJ);
+//         foreach($teams as $team){
+//           $new[$array_loop]['team_id'] = $team->team_id;
+//           $new[$array_loop]['team_name'] = $team->team_name;
+//           $stmt = $db->prepare($sql);
+//           $stmt->bindParam(':team_id', $team->team_id);
+//           $stmt->execute();
+//           $captain = $stmt2->fetch(PDO::FETCH_OBJ);
+//           print_r($captain);
+//           $new[$array_loop]['captain_id'] = $captain->user_id;
+//           $new[$array_loop]['captain_name'] = $captain->username;
+//           $array_loop++;
+//         }
+//
+//       }
+//       catch(PDOException $e) {
+//         echo json_encode($e->getMessage());
+//       }
+//     $test = json_encode($new);
+//     if($test == '[]'){
+//       return $response->write(json_encode(array("No teams found" => -2)));
+//     }
+//     else {
+//       return $response->write('' . $test);
+//     }
+// });
 
 $app->post('/challenge',
   function ($request, $response, $args){

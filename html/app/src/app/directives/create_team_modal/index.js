@@ -7,7 +7,6 @@ export default function(Teams, Users, $timeout) {
         restrict: 'E',
         replace:true,
         scope:true,
-        // transclude:true,
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
 
@@ -17,13 +16,22 @@ export default function(Teams, Users, $timeout) {
             $scope.test_player_name = "";
 
             $scope.addPlayerFormError = "";
+            $scope.all_users = [];
 
-            $scope.addPlayerForNewTeam = function() {
+            Users.getAllUsers().then(function(response){
+                $scope.all_users = response.data;
+            });
+
+            $scope.showQuery = function() {
+                return $scope.test_player_name;
+            };
+
+            $scope.addPlayerForNewTeam = function(test_player_name) {
                 $scope.addPlayerFormError = "";
 
-                var test_player_name = $scope.test_player_name;
                 $scope.test_player_name = "";
                 var spot = -1;
+
 
                 //check if the player entered is in the players list
                 for(var i = 0; i<$scope.new_team.players.length; i++) {
@@ -33,12 +41,25 @@ export default function(Teams, Users, $timeout) {
                     }
                 }
 
-                if (spot == -1) {
+                if (test_player_name == Users.username) {
+                    //send error message
+                    $scope.addPlayerFormError = "You are already a member of this team.";
+                    $timeout(function(){
+                         $scope.addPlayerFormError = "";
+                     }, 1500);
+                }
+                else if (spot == -1) {
                     Users.getUserByUsername(test_player_name).then(function(response){
                         console.log(response.data);
 
                         if (response.data.error != undefined) {
                             console.log("ERROR! in getting userbyusername in create_team_modal", response.data.error);
+
+                            $scope.test_player_name = test_player_name;
+                            $scope.addPlayerFormError = "Player not found.";
+                            $timeout(function(){
+                                 $scope.addPlayerFormError = "";
+                             }, 1500);
                         }
                         else {
                             $scope.new_team.players.push(response.data);
@@ -66,9 +87,15 @@ export default function(Teams, Users, $timeout) {
                     //display errors
                     if ($scope.new_team.name == "") {
                         //send error message
-                        $scope.teamNameFormError = "That player is already added.";
+                        $scope.teamNameFormError = "Please name your team.";
                         $timeout(function(){
                              $scope.teamNameFormError = "";
+                         }, 1500);
+                    }
+                    else if ($scope.new_team.players.length < 1) {
+                        $scope.addPlayerFormError = "Not enough players.";
+                        $timeout(function(){
+                             $scope.addPlayerFormError = "";
                          }, 1500);
                     }
 
