@@ -3,6 +3,7 @@ export default class {
     constructor($http) {
         this.$http = $http;
         this.user_id = 1;
+        this.username = "billybob";
         var self = this;
         // self.user_id = 1;
     }
@@ -12,6 +13,17 @@ export default class {
     }
     setCurrentUser(new_id) {
         this.user_id = new_id;
+    }
+
+    getAllUsers() {
+        return this.$http({
+              method: 'GET',
+              url: '/api/user'
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
     }
 
     createUser(newUser) {

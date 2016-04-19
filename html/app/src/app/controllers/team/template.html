@@ -5,24 +5,20 @@
             <div class="col-sm-2">
                 <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-10" >
                 <h1>{{team_name}}</h1>
-                <button class="btn btn-info players_dropdown_btn" ng-click="players_dropdown = !players_dropdown">
-                    Players
-                    <span class="caret"></span>
-               </button>
-                <div class="list-group players_dropdown" ng-show="players_dropdown" >
-                    <div ng-repeat="player in players">
-                        <a class="list-group-item">{{player.username}}</a>
-                    </div>
-                </div>
+<!--                <h2>Team Captain: {{captain_name}}</h2>-->
+                <br>
+                <ul class="list-group">
+                    <li class="list-group-item disabled">Players</li>
+                    <li class="list-group-item" ng-repeat="player in players">{{player.username}}</li>
+                </ul>
             </div>
         </div>
-
-        <div class="topSection" ng-show="!team_selected">
-            <h2> Select a Team </h2>
-        </div>
-        
-        <create-team-modal id="createteammodal" title="New Team"/>
     </div>
+
+    <div class="topSection" ng-show="!team_selected">
+        <h2> Select a Team </h2>
+    </div>
+    <create-team-modal id="createteammodal" title="New Team"/>
 </div>

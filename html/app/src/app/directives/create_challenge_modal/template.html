@@ -99,7 +99,8 @@
                 <div class="row formSummary">
                     <div class="col-sm-12">
                         <h4>{{selected_team.team_name}} vs. {{selected_opponent.team_name ? selected_opponent.team_name : fill_in_opponent}}</h4>
-                        <p> Each player will do <b>{{new_challenge.repetitions ? new_challenge.repetitions : fill_in_repetitions}}</b>
+                        <p> Each player will do <b ng-show="new_challenge.task_type=='Individual'">{{new_challenge.repetitions ? new_challenge.repetitions : fill_in_repetitions}}</b>
+                            <b ng-show="new_challenge.task_type=='Group'">~{{new_challenge.repetitions ? (new_challenge.repetitions/selected_team.players.length).toFixed(1) : fill_in_repetitions}}</b>
                             <b>{{selected_exercise.exercise_name ? selected_units.unit_name : fill_in_units}}</b> of
                             <b>{{selected_exercise.exercise_name ? selected_exercise.exercise_name : fill_in_exercise}}</b>
                             from <b>{{new_challenge.start_date | date: 'shortDate'}}</b> to <b>{{new_challenge.end_date | date:'shortDate'}}</b>.
