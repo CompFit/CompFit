@@ -1210,6 +1210,34 @@ $app->get('/exercises/user_id/{user_id}',
 
 $app->get('/exercises/search/{team_id}',
   function ($request, $response, $args){
+    $db = $this->dbConn;
+    $strToReturn = '';
+    $team_id = $request->getAttribute('team_id');
+    $users = '';
+
+    $sql = 'SELECT ex.exercise_id, ex.exercise_name, up.user_id, up.username, up.first_name, up.last_name FROM exercises ex, (SELECT user.user_id, user.username, user.first_name, user.last_name, user.email, user.avatar
+            FROM teams team,
+                (SELECT u.user_id, u.username, u.first_name, u.last_name, u.email, u.avatar, t.team_id
+                 FROM users u,
+                    (SELECT * FROM team_participation WHERE team_id = "'.$team_id.'") as t
+                 WHERE t.user_id = u.user_id) as user
+            WHERE team.team_id = user.team_id) as up
+            WHERE ex.user_id = up.user_id';
+
+      try {
+        $stmt = $db->query($sql);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+      }
+      catch(PDOException $e) {
+        echo json_encode($e->getMessage());
+      }
+    $test = json_encode($users);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No users found" => -1)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
