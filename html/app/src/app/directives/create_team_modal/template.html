@@ -16,17 +16,23 @@
                     {{teamNameFormError}}
                 </div>
               </form>
-              
-              <form role="form" ng-submit="addPlayerForNewTeam()" name="addPlayerForm">
+
+              <form role="form" autocomplete="off" ng-submit="addPlayerForNewTeam(test_player_name)" name="addPlayerForm">
                 <div class="form-group">
                     <label for="players">Add Players</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                        <input type="text" class="form-control" placeholder="Search username..." ng-model="test_player_name" required>
+                        <input type="text" class="form-control" placeholder="Search username..."
+                                ng-model="test_player_name" required>
                         <span class="input-group-btn">
                           <button class="btn btn-primary" type="submit">Add</button>
                         </span>
                     </div>
+                    <ul class='{{state}}' ng-show='showQuery()'>
+                        <li ng-click='addPlayerForNewTeam(user.username)' ng-repeat='user in all_users | filter: {"username" : test_player_name} | limitTo:5'>
+                          <div class="playerNameInSearch">{{user.username}}</div>
+                        </li>
+                    </ul>
                 </div>
                 <div ng-show="addPlayerFormError" class="formErrorMsg">
                     {{addPlayerFormError}}
@@ -41,7 +47,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button ng-click="submitLog()" type="button" class="btn btn-success pull-right">Create</button>
+        <button ng-click="submitTeam()" type="button" class="btn btn-success pull-right">Create</button>
         <button data-dismiss="modal" type="button" class="btn btn-default pull-right" style="margin-right: 10px;">Cancel</button>
       </div>
     </div>

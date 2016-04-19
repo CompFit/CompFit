@@ -32,7 +32,6 @@ export default class {
       this.observerCallbacks.push(callback);
     }
 
-     //call this when you know 'foo' has been changed
     notifyObservers(){
        angular.forEach(this.observerCallbacks, function(callback){
          callback();
