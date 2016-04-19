@@ -12,14 +12,31 @@ export default function($scope, $stateParams, Challenges, Teams, Users) {
     $scope.my_team = {};
     $scope.opponent_team = {};
 
+    $scope.days_left = 0;
+
+    $scope.getDayDifference = function(date1_obj,date2_obj) {
+        var date2 = new Date(date2_obj);
+        var date1 = new Date(date1_obj);
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        return diffDays;
+    };
+
     $scope.this_user_id = Users.getCurrentUser();
 
     if ($stateParams.id == '') {
         $scope.challenge_selected = false;
-        
+
     }
     else {
         $scope.challenge_selected = true;
+
+        // var container = $('div'),
+        //     scrollTo = $('#row_8');
+        //
+        // container.scrollTop(
+        //     scrollTo.offset().top - container.offset().top + container.scrollTop()
+        // );
 
         Challenges.getChallengeById($stateParams.id).then(function(response){
             console.log(response);
@@ -61,6 +78,8 @@ export default function($scope, $stateParams, Challenges, Teams, Users) {
                 $scope.opponent_team = response.data;
                 return response;
             });
+
+            $scope.days_left = $scope.getDayDifference($scope.challenge.end_date,new Date())+1;
 
 
 

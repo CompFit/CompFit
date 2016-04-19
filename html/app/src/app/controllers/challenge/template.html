@@ -3,7 +3,7 @@
     <div class="container">
       <div class="topSection row" ng-show="challenge_selected">
           <div class="col-sm-12">
-              <h3> {{challenge.task_name}} : {{challenge.task_type}}</h3>
+              <h3> {{challenge.task_name}} | {{challenge.task_type}} | {{days_left}} days left</h3>
               <h4> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h4>
               <p> Each player will do <b ng-show="challenge.task_type=='Individual'">{{challenge.repetitions}}</b>
                   <b ng-show="challenge.task_type=='Group'">~{{(challenge.repetitions/5).toFixed(1)}}</b>
