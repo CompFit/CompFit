@@ -17,7 +17,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users) {
     $scope.getDayDifference = function(date1_obj,date2_obj) {
         var date2 = new Date(date2_obj);
         var date1 = new Date(date1_obj);
-        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var timeDiff = date2.getTime() - date1.getTime();
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
         return diffDays;
     };
@@ -79,7 +79,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users) {
                 return response;
             });
 
-            $scope.days_left = $scope.getDayDifference($scope.challenge.end_date,new Date())+1;
+            $scope.days_left = $scope.getDayDifference(new Date(),$scope.challenge.end_date)+1;
 
 
 

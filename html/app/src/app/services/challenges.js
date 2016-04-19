@@ -2,9 +2,11 @@ export default class {
 
     constructor($http) {
         this.$http = $http;
+        this.currentSidebarScrollPosition = null;
         var self = this;
 
         self.challenges = [];
+
     }
 
     createChallenge(challenge) {
