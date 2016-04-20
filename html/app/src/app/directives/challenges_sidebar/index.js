@@ -16,14 +16,11 @@ export default function(Challenges, Users, $timeout) {
                       $('#challengelist').animate({
                           scrollTop: $scope.scrollTo
                       });
-                      console.log("scrolling")
-                      console.log($scope.scrollTo)
                   }, 0);
               }
 
               $scope.saveScrollPosition = function() {
                   Challenges.currentSidebarScrollPosition = $('#challengelist').scrollTop();
-                  console.log("saved");
               };
 
               if (!$scope.challenges) {

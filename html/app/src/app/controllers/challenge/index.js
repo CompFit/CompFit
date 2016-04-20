@@ -117,9 +117,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         }
     };
 
-    $timeout(function () {
-        $scope.updateProgress();
-    }, 1000);
+
 
     $scope.this_user_id = Users.getCurrentUser();
 
@@ -136,6 +134,10 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         // container.scrollTop(
         //     scrollTo.offset().top - container.offset().top + container.scrollTop()
         // );
+
+        $timeout(function () {
+            $scope.updateProgress();
+        }, 400);
 
         Challenges.getChallengeById($stateParams.id).then(function(response){
             console.log(response);
@@ -175,6 +177,8 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
                 console.log("Player not in this team", team2_id);
                 $scope.opponent_team = response.data;
+
+
                 return response;
             });
 
