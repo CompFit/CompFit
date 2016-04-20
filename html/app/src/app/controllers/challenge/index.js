@@ -31,8 +31,21 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
             if (tr.dataset.progress > 100) {
                 pr.style.left = (0)+'%';
             }
+            else if(tr.dataset.progress <= 0) {
+                pr.style.left = (-98)+'%';
+            }
             else {
                 pr.style.left = (tr.dataset.progress - 100)+'%';
+            }
+
+            if(tr.dataset.progress < 30) {
+                pr.style.background = "#D7575D";
+            }
+            else if(tr.dataset.progress < 70) {
+                pr.style.background = "#FFCC00";
+            }
+            else {
+                pr.style.background = "#8F8";
             }
 
             pr.style.height = tr.clientHeight + 'px';
