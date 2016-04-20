@@ -1,6 +1,6 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Challenges, Teams, Users) {
+export default function($scope, $stateParams, Challenges, Teams, Users, $timeout) {
     'ngInject';
 
     $scope.new_challenge = {};
@@ -22,6 +22,103 @@ export default function($scope, $stateParams, Challenges, Teams, Users) {
         return diffDays;
     };
 
+    $scope.updateProgress = function () {
+        var trs = document.querySelectorAll('.table-body tr');
+        for (var i=0; i<trs.length; i++) {
+            var tr = trs[i];
+            var pr = tr.querySelector('.progress');
+
+            if (tr.dataset.progress > 100) {
+                pr.style.left = (0)+'%';
+            }
+            else {
+                pr.style.left = (tr.dataset.progress - 100)+'%';
+            }
+
+            pr.style.height = tr.clientHeight + 'px';
+        }
+    };
+
+    $scope.getProgressFraction = function(team, index=0) {
+        if (team == 'my_team')
+        {
+            if( $scope.challenge.task_type == 'Individual') {
+                return String(1)+"/"+String($scope.challenge.repetitions);
+            }
+            else {
+                return String(1)+"/"+String(($scope.challenge.repetitions/$scope.my_team.players.length).toFixed(1));
+            }
+        }
+        else if (team == 'opponent_team')
+        {
+            if( $scope.challenge.task_type == 'Individual') {
+                return String(1)+"/"+String($scope.challenge.repetitions);
+            }
+            else {
+                return String(1)+"/"+String(($scope.challenge.repetitions/$scope.opponent_team.players.length).toFixed(1));
+            }
+        }
+        else if (team == 'all_my_team')
+        {
+            if ($scope.challenge.task_type == 'Individual') {
+                return String(10)+"/"+String(($scope.challenge.repetitions*$scope.my_team.players.length).toFixed(1));
+            }
+            else {
+                return String(10)+"/"+String(($scope.challenge.repetitions));
+            }
+        }
+        else
+        {
+            if ($scope.challenge.task_type == 'Individual') {
+                return String(10)+"/"+String(($scope.challenge.repetitions*$scope.opponent_team.players.length).toFixed(1));
+            }
+            else {
+                return String(10)+"/"+String($scope.challenge.repetitions);
+            }
+        }
+    };
+
+    $scope.getProgress = function(team,index=0) {
+        if (team == 'my_team')
+        {
+            if( $scope.challenge.task_type == 'Individual') {
+                return 100 * 1/$scope.challenge.repetitions;
+            }
+            else {
+                return (100 * 1/$scope.challenge.repetitions*$scope.my_team.players.length).toFixed(0);
+            }
+        }
+        else if (team == 'opponent_team')
+        {
+            if( $scope.challenge.task_type == 'Individual') {
+                return 100 * 1/$scope.challenge.repetitions;
+            }
+            else {
+                return (100 * 1/$scope.challenge.repetitions*$scope.opponent_team.players.length).toFixed(0);
+            }
+        }
+        else if (team == 'all_my_team')
+        {
+            if ($scope.challenge.task_type == 'Individual') {
+                return (100 * 10/$scope.challenge.repetitions/$scope.my_team.players.length).toFixed(0);
+            }
+            else {
+                return (100 * 10/$scope.challenge.repetitions).toFixed(0);
+            }
+        }
+        else
+        {
+            if ($scope.challenge.task_type == 'Individual') {
+                return (100 * 10/$scope.challenge.repetitions/$scope.opponent_team.players.length).toFixed(0);
+            }
+            else {
+                return (100 * 10/$scope.challenge.repetitions).toFixed(0);
+            }
+        }
+    };
+
+
+
     $scope.this_user_id = Users.getCurrentUser();
 
     if ($stateParams.id == '') {
@@ -37,6 +134,10 @@ export default function($scope, $stateParams, Challenges, Teams, Users) {
         // container.scrollTop(
         //     scrollTo.offset().top - container.offset().top + container.scrollTop()
         // );
+
+        $timeout(function () {
+            $scope.updateProgress();
+        }, 400);
 
         Challenges.getChallengeById($stateParams.id).then(function(response){
             console.log(response);
@@ -76,6 +177,8 @@ export default function($scope, $stateParams, Challenges, Teams, Users) {
 
                 console.log("Player not in this team", team2_id);
                 $scope.opponent_team = response.data;
+
+
                 return response;
             });
 
