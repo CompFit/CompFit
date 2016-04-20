@@ -7,7 +7,6 @@ export default function($scope, $stateParams, Teams) {
         console.log($scope.new_team);
           $('#createteammodal').modal('show');
     };
-
     $scope.team_id = -1;
     $scope.team_name = "";
     $scope.avatar = "/img/team_avatars/default-avatar.png";
@@ -22,7 +21,6 @@ export default function($scope, $stateParams, Teams) {
     if ($stateParams.id != "") {
         $scope.team_id = $stateParams.id;
         $scope.team_selected = true;
-
         Teams.getTeamById($scope.team_id).then(function(response){
             $scope.thisTeam = response.data;
             console.log(response.data);
