@@ -1,6 +1,6 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Teams) {
+export default function($scope, $stateParams, Teams, Challenges, Users) {
     'ngInject';
 
     $scope.toggleModal = function(){
@@ -27,6 +27,12 @@ export default function($scope, $stateParams, Teams) {
             $scope.avatar = response.data.avatar;
             $scope.players = response.data.players;
             $scope.team_name = response.data.team_name;
+            $scope.captain_id = response.data.captain_id;
+            $scope.isCaptain = Users.getCurrentUser() == response.data.captain_id;
+            console.log($scope.isCaptain);
+        });
+        Challenges.getChallengesByTeamId($scope.team_id).then(function(response){
+            $scope.challenges = response.data.challenges;
         });
     }
 
