@@ -6,6 +6,7 @@
   //-2 => Sent when no teams are found from a get
   //-3 => Returns for POST user, when the username is not unique
   //-4 => Returns for POST user when the user's email has already been used
+  //-5 => Returns when no current challenges are found
 
 // Function to check if a password hashes to the same thing as str2
 function hash_equals($str1, $str2) {
@@ -828,10 +829,14 @@ $app->get('/challenge',
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    $strToReturn = json_encode($challenges);
-      return $response->write('' . $strToReturn);
+    $test = json_encode($challenges);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
     }
-);
+    else {
+      return $response->write('' . $test);
+    }
+});
 
 $app->get('/challenge/{challenge_id}',
   function ($request, $response, $args){
@@ -850,7 +855,12 @@ $app->get('/challenge/{challenge_id}',
       echo json_encode($e -> getMessage());
     }
     $test = json_encode($challenge);
-    return $response -> write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
@@ -1024,7 +1034,12 @@ $app->get('/team_challenges/{team_id}',
       echo json_encode($e -> getMessage());
     }
     $test = json_encode($final);
-    return $response -> write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
 });
 
 $app->get('/challenges/user_id/{user_id}',
@@ -1073,7 +1088,12 @@ $app->get('/challenges/user_id/{user_id}',
       echo json_encode($e -> getMessage());
     }
     $test = json_encode($new);
-    return $response -> write('' . $test);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
