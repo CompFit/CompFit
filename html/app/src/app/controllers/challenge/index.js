@@ -1,6 +1,6 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Challenges, Teams, Users, $timeout) {
+export default function($scope, $stateParams, Challenges, Teams, Users, $timeout, $state) {
     'ngInject';
 
     $scope.new_challenge = {};
@@ -9,9 +9,11 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
     };
 
     $scope.challenge = {};
-    $scope.my_team = {"players":[]};
+    $scope.my_team = {"players":[],"team_id":null};
     $scope.opponent_team = {"players":[]};
 
+    $scope.current_user_id = Users.getCurrentUser();
+    
     $scope.days_left = 0;
 
     $scope.getDayDifference = function(date1_obj,date2_obj) {
@@ -44,8 +46,11 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
             else if(tr.dataset.progress < 70) {
                 pr.style.background = "#FFCC00";
             }
-            else {
+            else if(tr.dataset.progress < 100){
                 pr.style.background = "#8F8";
+            }
+            else {
+                pr.style.background = "#239DF0";
             }
 
             pr.style.height = tr.clientHeight + 'px';
@@ -130,6 +135,12 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         }
     };
 
+    $scope.isCaptain = function(team,index) {
+        // if (team == 'my_team') {
+        //     return $scope.my_team.captain_id
+        // }
+    };
+
     $timeout(function () {
         $scope.updateProgress();
     }, 700);
@@ -183,6 +194,10 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
             $scope.days_left = $scope.getDayDifference(new Date(),$scope.challenge.end_date)+1;
         });
     }
+
+    $scope.goToMyTeam = function() {
+        $state.go('app.team', {'id': $scope.my_team.team_id});
+    };
 
 
 }

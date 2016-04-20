@@ -20,7 +20,7 @@
       <div class="bottomSection row" ng-show="challenge_selected">
           <div class="col-sm-6">
               <div class="panel panel-default">
-                  <div class="panel-heading my-panel-heading">
+                  <div class="panel-heading my-panel-heading" ng-click="goToMyTeam()">
                       <img src="{{my_team.team_avatar}}" alt="/img/team_avatars/default-avatar.png" class="thumbnail">
                       <p>{{my_team.team_name}}</p>
                   </div>
@@ -46,7 +46,10 @@
                               <th scope="row"><div class="progress"></div>{{$index+1}}</th>
                               <td>{{player.username}}</td>
                               <td>{{getProgressFraction('my_team', $index)}}</td>
-                              <td>{{getProgress('my_team', $index)}}%</td>
+                              <td>{{getProgress('my_team', $index)}}%
+                                  <i class="fa fa-trophy" ng-show="player.user_id==my_team.captain_id"></i>
+                                  <i class="fa fa-user" ng-show="player.user_id==current_user_id"></i>
+                              </td>
                           </tr>
                       </tbody>
                   </table>
@@ -80,7 +83,9 @@
                               <th scope="row"><div class="progress"></div>{{$index+1}}</th>
                               <td>{{player.username}}</td>
                               <td>{{getProgressFraction('opponent_team', $index)}}</td>
-                              <td>{{getProgress('opponent_team', $index)}}%</td>
+                              <td>{{getProgress('opponent_team', $index)}}%
+                                  <i class="fa fa-trophy" ng-show="player.user_id==opponent_team.captain_id"></i>
+                              </td>
                           </tr>
                       </tbody>
                   </table>
