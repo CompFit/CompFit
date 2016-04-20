@@ -8,7 +8,18 @@ export default function(Exercises, Users) {
         replace: true,
         link: function ($scope, $element, $attrs) {
             $scope.exercises = Exercises.getExercises();
-            console.log($scope.exercises);
+            
+            $scope.scrollTo = Exercises.currentSidebarScrollPosition;
+              if ($scope.scrollTo != null) {
+                  $('#exerciselist').scrollTop($scope.scrollTo);
+                  console.log("scrolling")
+              }
+
+            $scope.saveScrollPosition = function() {
+              Exercises.currentSidebarScrollPosition = $('#exerciselist').scrollTop();
+              console.log("saved");
+            };
+
             if (!$scope.exercises) {
                 Exercises.getExercisesForUser(Users.getCurrentUser()).then( function(response) {
                     console.log(response.data);

@@ -11,7 +11,7 @@ export default function($scope, $stateParams, Exercises) {
     $scope.exercise_id = -1;
     $scope.exercise_selected = false;
 
-    $scope.exercises = [{'exercise_id':1}];
+    $scope.exercises = [];
 
     $scope.new_log = {};
 
@@ -19,13 +19,13 @@ export default function($scope, $stateParams, Exercises) {
         $scope.exercise_id = $stateParams.id;
         $scope.exercise_selected = true;
 
-        /*Exercises.getTeamById($scope.team_id).then(function(response){
-            $scope.thisTeam = response.data;
-            console.log(response.data);
-            $scope.avatar = response.data.avatar;
-            $scope.players = response.data.players;
-            $scope.team_name = response.data.team_name;
-        });*/
+        // Exercises.getTeamById($scope.team_id).then(function(response){
+        //     $scope.thisTeam = response.data;
+        //     console.log(response.data);
+        //     $scope.avatar = response.data.avatar;
+        //     $scope.players = response.data.players;
+        //     $scope.team_name = response.data.team_name;
+        // });
     }
 
 }
