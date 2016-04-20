@@ -1125,7 +1125,7 @@ $app->get('/challenge_progress/{challenge_id}',
     $array_loop = 0;
     $challenge_id = $request->getAttribute('challenge_id');
     $sql = 'SELECT to_team_id, from_team_id FROM challenges WHERE `challenge_id` = :challenge_id';
-    $sql2 = 'SELECT team_name FROM teams WHERE `team_id` = :team_id';
+    $sql2 = 'SELECT team_name, avatar FROM teams WHERE `team_id` = :team_id';
     $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
     $sql4 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
     $sql5 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id';
@@ -1140,6 +1140,7 @@ $app->get('/challenge_progress/{challenge_id}',
         $stmt2->execute();
         $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
       $final['user_team']['team_name'] = $team_name->team_name;
+      $final['user_team']['team_avatar'] = $team_name->avatar;
         $stmt3 = $db->prepare($sql3);
         $stmt3->bindParam(':challenge_id', $challenge_id);
         $stmt3->bindParam(':team_id', $teams->to_team_id);
@@ -1174,6 +1175,7 @@ $app->get('/challenge_progress/{challenge_id}',
         $stmt2->execute();
         $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
       $final['oppo_team']['team_name'] = $team_name->team_name;
+      $final['oppo_team']['team_avatar'] = $team_name->avatar;
         $stmt3 = $db->prepare($sql3);
         $stmt3->bindParam(':challenge_id', $challenge_id);
         $stmt3->bindParam(':team_id', $teams->from_team_id);
