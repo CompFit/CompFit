@@ -1172,13 +1172,6 @@ $app->get('/exercise/{exercise_id}',
 );
 
 
-
-//DO WE NEED THIS ENDPOINT? WHEN WOULD YOU UPDATE AN EXERCISE??
-$app->put('/exercise/{exercise_id}',
-  function ($request, $response, $args){
-  }
-);
-
 $app->get('/exercises/user_id/{user_id}',
   function ($request, $response, $args){
     $db = $this->dbConn;
