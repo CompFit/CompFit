@@ -865,7 +865,7 @@ $app->get('/team_challenges/{team_id}',
     $team_id = $request->getAttribute('team_id');
     $challenges = '';
 
-    $sql = 'SELECT challenge_id, to_team_id, from_team_id from challenges WHERE to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id;
+    $sql = 'SELECT challenge_id, to_team_id, from_team_id from challenges WHERE (to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id . ') AND end_date >= CURDATE()';
     $sql2 = 'SELECT team_name FROM teams WHERE `team_id` = :team_id';
     $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
     $sql4 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
