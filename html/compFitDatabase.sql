@@ -342,10 +342,26 @@ VALUES ('2016-4-07', '2016-4-14', '2', '16', 'Pushups', 300, 'repetitions');
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
 VALUES ('2', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('2', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
+VALUES ('16', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
 
 INSERT INTO exercises (user_id, date_completed, exercise_name)
 VALUES('1', '2016-4-07', 'Pushups');
+INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+VALUES ('2', '2', '4', '1', 'Pushups', 10, 'repetitions', UTC_TIMESTAMP());
+INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+VALUES ('2', '2', '4', '1', 'Pushups', 18, 'repetitions', UTC_TIMESTAMP());
+INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+VALUES ('2', '2', '4', '1', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
+UPDATE challenge_progress SET repetitions = 48 WHERE team_id = 2 AND challenge_id = 4;
+INSERT INTO exercises (user_id, date_completed, exercise_name)
+VALUES('22', '2016-4-07', 'Pushups');
+INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+VALUES ('16', '22', '4', '2', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
+INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+VALUES ('16', '22', '4', '2', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
+INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+VALUES ('16', '22', '4', '2', 'Pushups', 30, 'repetitions', UTC_TIMESTAMP());
+UPDATE challenge_progress SET repetitions = 70 WHERE team_id = 16 AND challenge_id = 4;
 INSERT INTO exercises (user_id, date_completed, exercise_name)
 VALUES('1', '2016-4-07', 'Pullups');
 INSERT INTO exercises (user_id, date_completed, exercise_name)
@@ -421,4 +437,3 @@ INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'kilometers', 4);
 INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'meters', 4);
-
