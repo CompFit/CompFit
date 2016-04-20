@@ -19,10 +19,7 @@ export default function(Challenges, Users, $timeout) {
                       console.log("scrolling")
                       console.log($scope.scrollTo)
                   }, 0);
-
               }
-
-
 
               $scope.saveScrollPosition = function() {
                   Challenges.currentSidebarScrollPosition = $('#challengelist').scrollTop();
