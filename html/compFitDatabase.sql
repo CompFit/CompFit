@@ -359,6 +359,10 @@ INSERT INTO exercises (user_id, date_completed, exercise_name)
 VALUES('1', '2016-4-15', 'Swimming');
 INSERT INTO exercises (user_id, date_completed, exercise_name)
 VALUES('2', '2016-4-07', 'Swimming');
+INSERT INTO exercises (user_id, date_completed, exercise_name)
+VALUES('41', '2016-4-07', 'Crunches');
+INSERT INTO exercises (user_id, date_completed, exercise_name)
+VALUES('17', '2016-4-07', 'Rowing');
 
 INSERT INTO exercise_list (exercise_name, units)
 VALUES( 'Running', 'NULL');
