@@ -820,7 +820,7 @@ $app->get('/challenge',
     $strToReturn = '';
     $challenges = '';
     $sql = 'SELECT challenge_id, task_name, end_date, to_team_id, from_team_id
-            FROM challenges';
+            FROM challenges WHERE end_date >= CURDATE()';
     try {
       $stmt = $db->query($sql);
       $challenges = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -837,9 +837,10 @@ $app->get('/challenge/{challenge_id}',
   function ($request, $response, $args){
     $body = $request->getBody();
     $decode = json_decode($body);
+    $challenge_id = $request->getAttribute('challenge_id');
     $db = $this->dbConn;
 
-    $sql = 'SELECT to_team_id, from_team_id FROM challenges WHERE challenge_id = "'.$challenge_id.'"';
+    $sql = 'SELECT * FROM challenges WHERE challenge_id = "'.$challenge_id.'" AND end_date >= CURDATE()';
 
     try {
       $stmt = $db->query($sql);
@@ -1037,7 +1038,7 @@ $app->get('/challenges/user_id/{user_id}',
     $challenges = '';
 
     $sql = 'SELECT team_id FROM team_participation WHERE user_id = '. $user_id;
-    $sql2 = 'SELECT * FROM challenges WHERE to_team_id = :team_id OR from_team_id = :team_id';
+    $sql2 = 'SELECT * FROM challenges WHERE (to_team_id = :team_id OR from_team_id = :team_id) AND end_date >= CURDATE()';
 
     try {
       $stmt = $db->query($sql);
@@ -1078,7 +1079,7 @@ $app->get('/challenges/user_id/{user_id}',
 
 $app->get('/challenges/search/{end_date}',
   function ($request, $response, $args){
-     $db = $this->dbConn;
+    $db = $this->dbConn;
     $strToReturn = '';
     $end_date = $request->getAttribute('end_date');
     $challenges = '';
@@ -1102,7 +1103,6 @@ $app->get('/challenge_progress/{challenge_id}',
     $final = array();
     $new = [];
     $array_loop = 0;
-    $strToReturn = '';
     $challenge_id = $request->getAttribute('challenge_id');
     $sql = 'SELECT to_team_id, from_team_id FROM challenges WHERE `challenge_id` = :challenge_id';
     $sql2 = 'SELECT team_name FROM teams WHERE `team_id` = :team_id';
