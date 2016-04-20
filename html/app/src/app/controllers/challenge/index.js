@@ -9,8 +9,8 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
     };
 
     $scope.challenge = {};
-    $scope.my_team = {};
-    $scope.opponent_team = {};
+    $scope.my_team = {"players":[]};
+    $scope.opponent_team = {"players":[]};
 
     $scope.days_left = 0;
 
@@ -43,37 +43,37 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         if (team == 'my_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return String(1)+"/"+String($scope.challenge.repetitions);
+                return String($scope.my_team.players[index].user_progress)+"/"+String($scope.challenge.repetitions);
             }
             else {
-                return String(1)+"/"+String(($scope.challenge.repetitions/$scope.my_team.players.length).toFixed(1));
+                return String($scope.my_team.players[index].user_progress)+"/"+String(($scope.challenge.repetitions/$scope.my_team.players.length).toFixed(1));
             }
         }
         else if (team == 'opponent_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return String(1)+"/"+String($scope.challenge.repetitions);
+                return String($scope.opponent_team.players[index].user_progress)+"/"+String($scope.challenge.repetitions);
             }
             else {
-                return String(1)+"/"+String(($scope.challenge.repetitions/$scope.opponent_team.players.length).toFixed(1));
+                return String($scope.opponent_team.players[index].user_progress)+"/"+String(($scope.challenge.repetitions/$scope.opponent_team.players.length).toFixed(1));
             }
         }
         else if (team == 'all_my_team')
         {
             if ($scope.challenge.task_type == 'Individual') {
-                return String(10)+"/"+String(($scope.challenge.repetitions*$scope.my_team.players.length).toFixed(1));
+                return String($scope.my_team.team_progress)+"/"+String($scope.challenge.repetitions*$scope.my_team.players.length);
             }
             else {
-                return String(10)+"/"+String(($scope.challenge.repetitions));
+                return String($scope.my_team.team_progress)+"/"+String(($scope.challenge.repetitions));
             }
         }
         else
         {
             if ($scope.challenge.task_type == 'Individual') {
-                return String(10)+"/"+String(($scope.challenge.repetitions*$scope.opponent_team.players.length).toFixed(1));
+                return String($scope.opponent_team.team_progress)+"/"+String($scope.challenge.repetitions*$scope.opponent_team.players.length);
             }
             else {
-                return String(10)+"/"+String($scope.challenge.repetitions);
+                return String($scope.opponent_team.team_progress)+"/"+String($scope.challenge.repetitions);
             }
         }
     };
@@ -82,41 +82,44 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         if (team == 'my_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return 100 * 1/$scope.challenge.repetitions;
+                return 100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions;
             }
             else {
-                return (100 * 1/$scope.challenge.repetitions*$scope.my_team.players.length).toFixed(0);
+                return (100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions*$scope.my_team.players.length).toFixed(0);
             }
         }
         else if (team == 'opponent_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return 100 * 1/$scope.challenge.repetitions;
+                return 100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions;
             }
             else {
-                return (100 * 1/$scope.challenge.repetitions*$scope.opponent_team.players.length).toFixed(0);
+                return (100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions*$scope.opponent_team.players.length).toFixed(0);
             }
         }
         else if (team == 'all_my_team')
         {
             if ($scope.challenge.task_type == 'Individual') {
-                return (100 * 10/$scope.challenge.repetitions/$scope.my_team.players.length).toFixed(0);
+                return (100 * $scope.my_team.team_progress/$scope.challenge.repetitions/$scope.my_team.players.length).toFixed(0);
             }
             else {
-                return (100 * 10/$scope.challenge.repetitions).toFixed(0);
+                return (100 * $scope.my_team.team_progress/$scope.challenge.repetitions).toFixed(0);
             }
         }
         else
         {
             if ($scope.challenge.task_type == 'Individual') {
-                return (100 * 10/$scope.challenge.repetitions/$scope.opponent_team.players.length).toFixed(0);
+                return (100 * $scope.opponent_team.team_progress/$scope.challenge.repetitions/$scope.opponent_team.players.length).toFixed(0);
             }
             else {
-                return (100 * 10/$scope.challenge.repetitions).toFixed(0);
+                return (100 * $scope.opponent_team.team_progress/$scope.challenge.repetitions).toFixed(0);
             }
         }
     };
 
+    $timeout(function () {
+        $scope.updateProgress();
+    }, 700);
 
 
     $scope.this_user_id = Users.getCurrentUser();
@@ -135,79 +138,38 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         //     scrollTo.offset().top - container.offset().top + container.scrollTop()
         // );
 
-        $timeout(function () {
-            $scope.updateProgress();
-        }, 400);
+        Challenges.getChallengeProgress($stateParams.id).then(function(response){
+            console.log(response);
+
+            var team1 = response.data.oppo_team;
+            var team2 = response.data.user_team;
+
+            var found = false;
+            for (var index in team1.players) {
+                var player = team1.players[index];
+                if (player.user_id == Users.getCurrentUser()) {
+                    $scope.my_team = team1;
+                    found = true;
+                }
+            }
+
+            if (found){
+                $scope.opponent_team = team2;
+            }
+            else {
+                $scope.opponent_team = team1;
+                $scope.my_team = team2;
+            }
+        });
+
+
 
         Challenges.getChallengeById($stateParams.id).then(function(response){
             console.log(response);
-
             $scope.challenge = response.data[0];
-            var team1_id = $scope.challenge.to_team_id;
-            var team2_id = $scope.challenge.from_team_id;
-
-            Teams.getTeamById(team1_id).then(function(response){
-                var this_team = response.data;
-                for (var index in this_team.players) {
-                    var player = this_team.players[index];
-                    console.log(player);
-                    if (player.user_id == Users.getCurrentUser()) {
-                        console.log("Player is in this team!", team1_id);
-                        $scope.my_team = response.data;
-                        return response;
-                    }
-                }
-
-                console.log("Player not in this team", team1_id);
-                $scope.opponent_team = response.data;
-                return response;
-            });
-
-            Teams.getTeamById(team2_id).then(function(response){
-                var this_team = response.data;
-                for (var index in this_team.players) {
-                    var player = this_team.players[index];
-                    console.log(player);
-                    if (player.user_id == Users.getCurrentUser()) {
-                        console.log("Player is in this team!", team2_id);
-                        $scope.my_team = response.data;
-                        return response;
-                    }
-                }
-
-                console.log("Player not in this team", team2_id);
-                $scope.opponent_team = response.data;
-
-
-                return response;
-            });
-
             $scope.days_left = $scope.getDayDifference(new Date(),$scope.challenge.end_date)+1;
-
-
-
         });
     }
-
-
-
-
-    // if ($stateParams.id != "") {
-    //     $scope.team_id = $stateParams.id;
-    //     $scope.team_selected = true;
-    //
-    //     Teams.getTeamById($scope.team_id).then(function(response){
-    //         $scope.thisTeam = response.data;
-    //         console.log(response.data);
-    //         $scope.avatar = response.data.avatar;
-    //         $scope.players = response.data.players;
-    //     });
-    // }
-
-
-
-
-
 
 
 }
