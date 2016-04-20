@@ -1,2 +1,6 @@
+ErrorDocument 404 http://localhost:9000/
 RewriteEngine On
-ErrorDocument 404 /app/build/index.html
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} ^/404/$
+RewriteRule ^(.*)$ /app/build/index.html [L]
