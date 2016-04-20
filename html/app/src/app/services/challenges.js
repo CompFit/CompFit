@@ -2,9 +2,11 @@ export default class {
 
     constructor($http) {
         this.$http = $http;
+        this.currentSidebarScrollPosition = null;
         var self = this;
 
         self.challenges = [];
+
     }
 
     createChallenge(challenge) {
@@ -16,7 +18,7 @@ export default class {
     getChallengeById(challenge_id) {
         return this.$http({
               method: 'GET',
-              url: '/api/team/'+team_id
+              url: '/api/challenge/'+challenge_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
