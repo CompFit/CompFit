@@ -368,6 +368,20 @@ VALUES('1', '2016-4-07', 'Pullups');
 INSERT INTO exercises (user_id, date_completed, exercise_name)
 VALUES('1', '2016-4-07', 'Situps');
 
+# Mock Data for billybob -> teams he is on: 1
+-- INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units, task_type)
+-- VALUES ('2016-4-07', '2016-6-14', '1', '7', 'Cycling', 30, 'miles', 'Group');
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('2', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('1', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
+-- INSERT INTO exercises (user_id, date_completed, exercise_name, units, repetitions)
+-- VALUES('1', '2016-5-07', 'Cycling');
+-- INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+-- VALUES ('16', '22', '4', '2', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
+
+
+
 INSERT INTO exercises (user_id, date_completed, exercise_name)
 VALUES('1', '2016-4-07', 'Running');
 INSERT INTO exercises (user_id, date_completed, exercise_name)
