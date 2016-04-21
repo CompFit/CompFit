@@ -27,6 +27,7 @@ CREATE TABLE teams
   team_name VARCHAR(20),
   captain_id INT,
   avatar VARCHAR (255) NOT NULL,
+  team_color VARCHAR(6),
   created VARCHAR(19),
   PRIMARY KEY(team_id),
   FOREIGN KEY(captain_id) REFERENCES users(user_id)
