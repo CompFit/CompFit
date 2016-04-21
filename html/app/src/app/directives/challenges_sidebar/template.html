@@ -5,7 +5,7 @@
 
         <div class="nav list-group" id="challengelist">
             <div ng-repeat="challenge in challenges">
-                <a class="list-group-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
+                <a class="list-group-item side-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
                     <b>{{challenge.user_team}}</b> vs <b>{{challenge.oppo_team}}</b> <br>
                     {{challenge.task_name}} <br>
                     {{challenge.start_date}} to {{challenge.end_date}}
