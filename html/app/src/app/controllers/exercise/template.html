@@ -1,0 +1,21 @@
+<div id="exercise">
+    <exercises-sidebar></exercises-sidebar>
+    <div class="container">
+        <div class="topSection row" ng-show="exercise_selected">
+            <div class="col-sm-12">
+                <h1>{{exercise_name}}</h1>
+                <h3>Log Date: {{date_completed}}</h3>
+                <h3>{{repetitions}} {{units}}</h3>
+            </div>
+        </div>
+
+        <div class="topSection" ng-show="!exercise_selected">
+            <h2> Select an Exercise </h2>
+        </div>
+
+        <div class="bottomSection row" ng-show="exercise_selected">
+        </div>
+
+        <log-exercise-modal id="logexercisemodal" title="New Log"/>
+    </div>
+</div>

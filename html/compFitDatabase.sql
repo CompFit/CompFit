@@ -27,6 +27,10 @@ CREATE TABLE teams
   team_name VARCHAR(20),
   captain_id INT,
   avatar VARCHAR (255) NOT NULL,
+<<<<<<< HEAD
+=======
+  team_color VARCHAR(6),
+>>>>>>> master
   created VARCHAR(19),
   PRIMARY KEY(team_id),
   FOREIGN KEY(captain_id) REFERENCES users(user_id)
@@ -316,7 +320,11 @@ insert into team_participation (team_id, user_id) values (16, 32);
 
 
 INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
+<<<<<<< HEAD
 VALUES ('2016-3-30', '2016-4-06', '1', '4', 'Pullups', 200, 'Pullups');
+=======
+VALUES ('2016-3-30', '2016-4-06', '1', '4', 'Pullups', 200, 'repetitions');
+>>>>>>> master
 
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
 VALUES ('1', '1', 'Pullups', 0, 'repetitions', UTC_TIMESTAMP());
@@ -324,21 +332,34 @@ INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetition
 VALUES ('4', '1', 'Pullups', 0, 'repetitions', UTC_TIMESTAMP());
 
 INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
+<<<<<<< HEAD
 VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Swimming', 20, 'Miles');
+=======
+VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Swimming', 20, 'miles');
+>>>>>>> master
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
 VALUES ('2', '2', 'Swimming', 0, 'miles', UTC_TIMESTAMP());
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
 VALUES ('1', '2', 'Swimming', 0, 'miles', UTC_TIMESTAMP());
 
 INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
+<<<<<<< HEAD
 VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Running', 15, 'Miles');
+=======
+VALUES ('2016-4-07', '2016-6-14', '2', '1', 'Running', 15, 'miles');
+>>>>>>> master
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
 VALUES ('2', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
 VALUES ('1', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
 
+<<<<<<< HEAD
 INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
 VALUES ('2016-4-07', '2016-6-14', '2', '16', 'Pushups', 300, 'repetitions');
+=======
+INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units, task_type)
+VALUES ('2016-4-07', '2016-6-14', '2', '16', 'Pushups', 300, 'repetitions', 'Individual');
+>>>>>>> master
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
 VALUES ('2', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
 INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
@@ -437,6 +458,7 @@ INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'kilometers', 4);
 INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'meters', 4);
+<<<<<<< HEAD
 
 
 ####sorting the exercises, exercise list, and challenges####
@@ -456,3 +478,5 @@ SELECT * from exercise_list ORDER BY exercise_name
 #(don’t return the ones where the dates have already passed -- the challenges that are done)
 SELECT * from challenges ORDER BY end_date DESC
 
+=======
+>>>>>>> master

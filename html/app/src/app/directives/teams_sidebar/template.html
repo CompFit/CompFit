@@ -1,0 +1,18 @@
+<div class="teams-sidebar">
+  <div class="navbar navbar-default sidebar" role="navigation">
+    <div>
+        <h3>Your Teams <a ng-click="toggleModal()"><i class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
+
+        <div class="nav list-group" >
+            <div ng-repeat="team in teams">
+                <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.team({id:{{team.team_id}}})">
+                    <img src="{{team.avatar}}" alt="/img/team_avatars/default-avatar.png" class="side-thumbnail">
+                    <b>{{team.team_name}}</b> <br>
+                    Team Captain: {{team.captain_name}}<br>
+                    No. of members: {{team.players.length}}
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

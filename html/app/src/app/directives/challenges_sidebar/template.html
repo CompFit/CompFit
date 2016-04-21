@@ -1,0 +1,22 @@
+<div class="challenges-sidebar">
+  <div class="navbar navbar-default sidebar" role="navigation">
+    <div>
+        <h3>Your Challenges <a ui-sref-active="active" ui-sref="app.challenge"><i ng-click="toggleModal()" class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
+
+        <div class="nav list-group" id="challengelist">
+            <div ng-repeat="challenge in challenges">
+                <a class="list-group-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
+                    <h4>{{challenge.task_name}}</h4> <p>{{getDaysLeft(challenge)}} days left</p>
+                    <h5>{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h5>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
+                      aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%" ng-class="challenge.user_team.repetitions ? '' : 'dark-text'">
+                        {{getTeamProgress(challenge)}}% Complete
+                      </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
