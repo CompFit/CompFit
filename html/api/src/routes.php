@@ -1362,7 +1362,7 @@ $app->post('/exercise',
         $stmt->execute();
         $teams = $stmt->fetchALL(PDO::FETCH_OBJ);
         foreach($teams as $team){
-           $challengesql = 'SELECT challenge_id, to_team_id, from_team_id, units
+           $challengesql = 'SELECT challenge_id, to_team_id, from_team_id, units, repetitions
                       FROM challenges
                       WHERE (`status` = "OPEN")
                         AND (`to_team_id` = :team_id
@@ -1374,6 +1374,13 @@ $app->post('/exercise',
             $stmt->execute();
             $challenges = $stmt->fetchALL(PDO::FETCH_OBJ);
             foreach($challenges as $challenge){
+              $sql5 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id';
+                $stmt5 = $db->prepare($sql5);
+                $stmt5->bindParam(':challenge_id', $challenge->challenge_id);
+                $stmt5->bindParam(':user_id', $user_id);
+                $stmt5->execute();
+                $previousProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+              $cReps = $challenge->repetitions;
                 if($eUnits != $challenge->units){
                   if($challenge->units == 'miles'){
                     if($eUnits == 'meters'){
@@ -1434,12 +1441,20 @@ $app->post('/exercise',
                 echo json_encode($e->getMessage());
               }
               if($progress){
-                $progresssql = 'UPDATE challenge_progress
-                                SET repetitions = :repetitions
-                                WHERE `challenge_id` = :challenge_id
-                                AND `team_id` = :team_id';
+                $sql5 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id';
+                  $stmt5 = $db->prepare($sql5);
+                  $stmt5->bindParam(':challenge_id', $challenge->challenge_id);
+                  $stmt5->bindParam(':user_id', $user_id);
+                  $stmt5->execute();
+                  $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+                $progresssql = 'UPDATE challenge_progress SET repetitions = :repetitions WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
                 try {
-                  $newRepetitions = $progress->repetitions + $nRepetitions;
+                  if($playerProgress->reps >= $cReps){
+                    $newRepetitions = $cReps + ($progress->repetitions - $previousProgress->reps);
+                  }
+                  else{
+                    $newRepetitions = $progress->repetitions + $nRepetitions;
+                  }
                   $stmt = $db->prepare($progresssql);
                   $stmt->bindParam(':team_id', $team->team_id);
                   $stmt->bindParam(':challenge_id', $challenge->challenge_id);
