@@ -715,7 +715,7 @@ $app->get('/teams/opponents/{team_id}',
           $sql3 = 'SELECT u.user_id, u.username
                    FROM users u,
                       (SELECT * from team_participation
-                       WHERE team_id = "'.$team_id.'") as t
+                       WHERE team_id = "'.$team->team_id.'") as t
                    WHERE t.user_id = u.user_id';
           $stmt3 = $db->query($sql3);
           $users = $stmt3->fetchAll(PDO::FETCH_OBJ);
