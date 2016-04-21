@@ -10,6 +10,7 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
 
+            $scope.state = $state;
             $scope.fill_in_opponent = "[opponent team]";
             $scope.fill_in_exercise = "[task name]";
             $scope.fill_in_units = "[units]";

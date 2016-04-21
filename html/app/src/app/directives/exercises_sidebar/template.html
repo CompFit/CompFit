@@ -7,7 +7,7 @@
             <div ng-repeat="exercise in exercises">
                 <a class="list-group-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.exercise({id:{{exercise.exercise_id}}})">
                     <b>{{exercise.exercise_name}}</b> <br>
-                    {{exercise.date_completed}} <br>
+                    {{exercise.date_completed | date: 'shortDate'}} <br>
                     {{exercise.repetitions}} {{exercise.units}}
                 </a>
             </div>
