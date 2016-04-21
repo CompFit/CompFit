@@ -7,10 +7,9 @@
             </div>
             <div class="col-md-10">
                 <h1>{{team_name}}</h1>
-                <h4>Team Captain: {{team.captain_name}}</h4>
-                <h4>Members [{{players.length}}]: <span style="font-family: 'Droid Sans', sans-serif;" ng-repeat="player in players">{{player.username}},&nbsp;</span></h4>
+                <h4>Team Captain: {{captain_name}}</h4>
+                <h4>{{players.length}} Members: <span style="font-family: 'Droid Sans', sans-serif;" ng-repeat="player in players">{{player.username}},&nbsp;</span></h4>
             </div>
-            <hr>
         </div>
 
         <div class="topSection" ng-show="!team_selected">
@@ -20,6 +19,18 @@
         <div class="bottomSection row" ng-show="team_selected">
             <div class="col-md-12">
                 <h2>Challenges</h2>
+                <!--<div class="nav list-group" id="challengelist">
+                    <div ng-repeat="challenge in challenges">
+                        <h4>{{challenge.task_name}}</h4> <p>{{getDaysLeft(challenge)}} days left</p>
+                        <h5>{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h5>
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
+                          aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%" ng-class="challenge.user_team.repetitions ? '' : 'dark-text'">
+                            {{getTeamProgress(challenge)}}% Complete
+                          </div>
+                        </div>
+                    </div>
+                </div>-->
             </div>
         </div>
     </div>
