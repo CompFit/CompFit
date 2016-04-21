@@ -11,7 +11,7 @@ export default class {
     getCurrentUser() {
         return this.user_id;
     }
-    
+
     setCurrentUser(new_id) {
         this.user_id = new_id;
     }
@@ -30,12 +30,6 @@ export default class {
     createUser(newUser) {
         var data = newUser;
         return this.$http.post("/api/user",data).then(function (response) {
-            if (response.data.error != undefined) {
-                console.log("ERROR! in creating User", response.data.error);
-            }
-            else {
-                alert("New User created with id: " + String(response.data.user_id));
-            }
             return response;
         });
     }

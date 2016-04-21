@@ -24,14 +24,14 @@
                         <h5>{{challenge.user_team.team_name}} progress</h4>
                         <div class="progress">
                           <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
-                          aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%" ng-class="challenge.user_team.team_progress && challenge.user_team.team_progress>0 ? '' : 'dark-text'">
+                          aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%" ng-class="challenge.user_team.team_progress && challenge.user_team.team_progress>5 ? '' : 'dark-text'">
                             {{getTeamProgress(challenge)}}% Complete
                           </div>
                         </div>
                         <h5> Your progress </h4>
                         <div class="progress">
                           <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getUserProgress(challenge)}}"
-                          aria-valuemin="0" aria-valuemax="100" style="width:{{getUserProgress(challenge)}}%" ng-class="challenge.user_progress && challenge.user_progress>0 ? '' : 'dark-text'">
+                          aria-valuemin="0" aria-valuemax="100" style="width:{{getUserProgress(challenge)}}%" ng-class="challenge.user_progress && challenge.user_progress>5 ? '' : 'dark-text'">
                             {{getUserProgress(challenge)}}% Complete
                           </div>
                         </div>

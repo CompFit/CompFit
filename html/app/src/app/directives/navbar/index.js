@@ -29,6 +29,9 @@ export default function(Authentication, Users,Teams,Challenges,Exercises, $state
 
             var updateLoggedIn = function(){
                 $scope.loggedIn = Authentication.loggedIn;
+                $scope.first_team = '';
+                $scope.first_exercise = '';
+                $scope.first_challenge = '';
 
                 $scope.user_id = Users.getCurrentUser();
 
