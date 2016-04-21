@@ -316,57 +316,57 @@ insert into team_participation (team_id, user_id) values (16, 22);
 insert into team_participation (team_id, user_id) values (16, 32);
 
 
-INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
-VALUES ('2016-3-30', '2016-4-06', '1', '4', 'Pullups', 200, 'repetitions');
-
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('1', '1', 'Pullups', 0, 'repetitions', UTC_TIMESTAMP());
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('4', '1', 'Pullups', 0, 'repetitions', UTC_TIMESTAMP());
-
-INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
-VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Swimming', 20, 'miles');
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('2', '2', 'Swimming', 0, 'miles', UTC_TIMESTAMP());
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('1', '2', 'Swimming', 0, 'miles', UTC_TIMESTAMP());
-
-INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
-VALUES ('2016-4-07', '2016-6-14', '2', '1', 'Running', 15, 'miles');
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('2', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('1', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
-
-INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units, task_type)
-VALUES ('2016-4-07', '2016-6-14', '2', '16', 'Pushups', 300, 'repetitions', 'Individual');
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('2', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
-INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
-VALUES ('16', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
-
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Pushups');
-INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
-VALUES ('2', '2', '4', '1', 'Pushups', 10, 'repetitions', UTC_TIMESTAMP());
-INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
-VALUES ('2', '2', '4', '1', 'Pushups', 18, 'repetitions', UTC_TIMESTAMP());
-INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
-VALUES ('2', '2', '4', '1', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
-UPDATE challenge_progress SET repetitions = 48 WHERE team_id = 2 AND challenge_id = 4;
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('22', '2016-4-07', 'Pushups');
-INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
-VALUES ('16', '22', '4', '2', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
-INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
-VALUES ('16', '22', '4', '2', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
-INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
-VALUES ('16', '22', '4', '2', 'Pushups', 30, 'repetitions', UTC_TIMESTAMP());
-UPDATE challenge_progress SET repetitions = 70 WHERE team_id = 16 AND challenge_id = 4;
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Pullups');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Situps');
+-- INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
+-- VALUES ('2016-3-30', '2016-4-06', '1', '4', 'Pullups', 200, 'repetitions');
+--
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('1', '1', 'Pullups', 0, 'repetitions', UTC_TIMESTAMP());
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('4', '1', 'Pullups', 0, 'repetitions', UTC_TIMESTAMP());
+--
+-- INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
+-- VALUES ('2016-4-07', '2016-4-14', '2', '1', 'Swimming', 20, 'miles');
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('2', '2', 'Swimming', 0, 'miles', UTC_TIMESTAMP());
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('1', '2', 'Swimming', 0, 'miles', UTC_TIMESTAMP());
+--
+-- INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units)
+-- VALUES ('2016-4-07', '2016-6-14', '2', '1', 'Running', 15, 'miles');
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('2', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('1', '3', 'Running', 0, 'miles', UTC_TIMESTAMP());
+--
+-- INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units, task_type)
+-- VALUES ('2016-4-07', '2016-6-14', '2', '16', 'Pushups', 300, 'repetitions', 'Individual');
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('2', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
+-- INSERT INTO challenge_progress (team_id, challenge_id, exercise_name, repetitions, units, created)
+-- VALUES ('16', '4', 'Pushups', 0, 'repetitions', UTC_TIMESTAMP());
+--
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('1', '2016-4-07', 'Pushups');
+-- INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+-- VALUES ('2', '2', '4', '1', 'Pushups', 10, 'repetitions', UTC_TIMESTAMP());
+-- INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+-- VALUES ('2', '2', '4', '1', 'Pushups', 18, 'repetitions', UTC_TIMESTAMP());
+-- INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+-- VALUES ('2', '2', '4', '1', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
+-- UPDATE challenge_progress SET repetitions = 48 WHERE team_id = 2 AND challenge_id = 4;
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('22', '2016-4-07', 'Pushups');
+-- INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+-- VALUES ('16', '22', '4', '2', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
+-- INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+-- VALUES ('16', '22', '4', '2', 'Pushups', 20, 'repetitions', UTC_TIMESTAMP());
+-- INSERT INTO individual_progress (team_id, user_id, challenge_id, exercise_id, exercise_name, repetitions, units, created)
+-- VALUES ('16', '22', '4', '2', 'Pushups', 30, 'repetitions', UTC_TIMESTAMP());
+-- UPDATE challenge_progress SET repetitions = 70 WHERE team_id = 16 AND challenge_id = 4;
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('1', '2016-4-07', 'Pullups');
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('1', '2016-4-07', 'Situps');
 
 # Mock Data for billybob -> teams he is on: 1
 -- INSERT INTO challenges (start_date, end_date, to_team_id, from_team_id, task_name, repetitions, units, task_type)
@@ -382,14 +382,14 @@ VALUES('1', '2016-4-07', 'Situps');
 
 
 
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-07', 'Running');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('2', '2016-4-07', 'Running');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('1', '2016-4-15', 'Swimming');
-INSERT INTO exercises (user_id, date_completed, exercise_name)
-VALUES('2', '2016-4-07', 'Swimming');
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('1', '2016-4-07', 'Running');
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('2', '2016-4-07', 'Running');
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('1', '2016-4-15', 'Swimming');
+-- INSERT INTO exercises (user_id, date_completed, exercise_name)
+-- VALUES('2', '2016-4-07', 'Swimming');
 
 INSERT INTO exercise_list (exercise_name, units)
 VALUES( 'Running', 'NULL');
