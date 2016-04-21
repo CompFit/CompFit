@@ -1,7 +1,7 @@
 import './style.styl';
 import template from 'directives/log_exercise_modal/template.html';
 
-export default function(Exercises, Users, $timeout) {
+export default function(Exercises, Users, $timeout, $state) {
 
     return {
         restrict: 'E',
@@ -52,7 +52,7 @@ export default function(Exercises, Users, $timeout) {
                 else {
                     $scope.new_log.user_id = Users.user_id;
                     var dateObj = new Date();
-                    $scope.new_log.date = dateObj.getUTCFullYear() + "-" + (dateObj.getUTCMonth() + 1) + "-" + dateObj.getUTCDate();
+                    $scope.new_log.date_completed = dateObj;
                     $scope.new_log.exercise_name = $scope.selected_exercise.exercise_name;
                     $scope.new_log.repetitions = $scope.selected_repetitions;
                     $scope.new_log.units = $scope.selected_units.unit_name;
