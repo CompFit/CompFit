@@ -3,9 +3,13 @@
     <div>
         <h3>Exercise Log<a ng-click="toggleModal()"><i class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
 
-        <div class="nav list-group" >
-            <div ng-repeat="exercise in log">
-                <a class="list-group-item" ui-sref-active="active" ui-sref="app.exercise({id:{{exercise.exercise_id}}})">{{exercise.exercise_name}}</a>
+        <div class="nav list-group" id="exerciselist">
+            <div ng-repeat="exercise in exercises">
+                <a class="list-group-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.exercise({id:{{exercise.exercise_id}}})">
+                    <b>{{exercise.exercise_name}}</b> <br>
+                    {{exercise.date_completed}} <br>
+                    {{exercise.repetitions}} {{exercise.units}}
+                </a>
             </div>
         </div>
     </div>
