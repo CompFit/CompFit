@@ -6,6 +6,7 @@
   //-2 => Sent when no teams are found from a get
   //-3 => Returns for POST user, when the username is not unique
   //-4 => Returns for POST user when the user's email has already been used
+  //-5 => Returns when no current challenges are found
 
 // Function to check if a password hashes to the same thing as str2
 function hash_equals($str1, $str2) {
@@ -71,7 +72,7 @@ $app->group('/user', function(){
         catch(PDOException $e) {
           echo json_encode($e->getMessage());
         }
-        $strToReturn = json_encode($users);
+        $strToReturn = json_encode($users, JSON_PRETTY_PRINT);
         return $response->write('' . $strToReturn);
     }
     if($request->isPost()){
@@ -151,7 +152,7 @@ $app->group('/user', function(){
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($users);
+    $test = json_encode($users, JSON_PRETTY_PRINT);
     if($test == '[]'){
       return $response->write(json_encode(array("No users found" => -1)));
     }
@@ -178,7 +179,7 @@ $app->get('/username/{username}',
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    $test = json_encode($users);
+    $test = json_encode($users, JSON_PRETTY_PRINT);
     if($test == 'false'){
       return $response->write(json_encode(array("error" => -1)));
     }
@@ -205,7 +206,7 @@ $app->get('/useremail/{email}',
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($users);
+    $test = json_encode($users, JSON_PRETTY_PRINT);
     if($test == '[]'){
       return $response->write(json_encode(array("No users found" => -1)));
     }
@@ -280,7 +281,7 @@ $app->group('/users', function(){
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($users);
+    $test = json_encode($users, JSON_PRETTY_PRINT);
     if($test == '[]'){
       return $response->write(json_encode(array("No users found" => -1)));
     }
@@ -308,7 +309,7 @@ $app->group('/users', function(){
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($users);
+    $test = json_encode($users, JSON_PRETTY_PRINT);
     if($test == '[]'){
       return $response->write(json_encode(array("No users found" => -1)));
     }
@@ -349,7 +350,7 @@ $app->get('/teams',
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    $strToReturn = json_encode($final);
+    $strToReturn = json_encode($final, JSON_PRETTY_PRINT);
     return $response->write('' . $strToReturn);
     }
 );
@@ -389,7 +390,7 @@ $app->get('/team/{team_id}',
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($new);
+    $test = json_encode($new, JSON_PRETTY_PRINT);
     if($test == '[]'){
       return $response->write(json_encode(array("No teams found" => -2)));
     }
@@ -437,7 +438,7 @@ function ($request, $response, $args){
       echo json_encode($e->getMessage());
     }
 
-  $test = json_encode($new);
+  $test = json_encode($new, JSON_PRETTY_PRINT);
   if($test == '[]'){
     return $response->write(json_encode(array("No teams found" => -2)));
   }
@@ -585,7 +586,7 @@ $app->get('/teams/{user_id}',
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($new);
+    $test = json_encode($new, JSON_PRETTY_PRINT);
     return $response->write('' . $test);
   }
 );
@@ -629,7 +630,7 @@ $app->get('/teams/captain_id/{captain_id}',
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($new);
+    $test = json_encode($new, JSON_PRETTY_PRINT);
     if($test == '[]'){
       return $response->write(json_encode(array("No teams found" => -2)));
     }
@@ -721,7 +722,7 @@ $app->get('/teams/opponents/{team_id}',
       catch(PDOException $e) {
         echo json_encode($e->getMessage());
       }
-    $test = json_encode($new);
+    $test = json_encode($new, JSON_PRETTY_PRINT);
     if($test == '[]'){
       return $response->write(json_encode(array("No teams found" => -2)));
     }
@@ -820,7 +821,7 @@ $app->get('/challenge',
     $strToReturn = '';
     $challenges = '';
     $sql = 'SELECT challenge_id, task_name, end_date, to_team_id, from_team_id
-            FROM challenges';
+            FROM challenges WHERE end_date >= CURDATE()';
     try {
       $stmt = $db->query($sql);
       $challenges = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -828,21 +829,23 @@ $app->get('/challenge',
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    $strToReturn = json_encode($challenges);
-      return $response->write('' . $strToReturn);
+    $test = json_encode($challenges, JSON_PRETTY_PRINT);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
     }
-);
+    else {
+      return $response->write('' . $test);
+    }
+});
 
-//GOOD
 $app->get('/challenge/{challenge_id}',
   function ($request, $response, $args){
-    $db = $this->dbConn;
-    $strToReturn = '';
+    $body = $request->getBody();
+    $decode = json_decode($body);
     $challenge_id = $request->getAttribute('challenge_id');
+    $db = $this->dbConn;
 
-    $sql = 'SELECT *
-            FROM challenges
-            WHERE challenge_id = "'.$challenge_id.'"';
+    $sql = 'SELECT * FROM challenges WHERE challenge_id = "'.$challenge_id.'" AND end_date >= CURDATE()';
 
     try {
       $stmt = $db->query($sql);
@@ -851,32 +854,193 @@ $app->get('/challenge/{challenge_id}',
     catch(PDOException $e) {
       echo json_encode($e -> getMessage());
     }
-    $test = json_encode($challenge);
-    return $response -> write('' . $test);
+    $test = json_encode($challenge, JSON_PRETTY_PRINT);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
 //GOOD
-$app->get('/challenges/{team_id}',
+$app->get('/team_challenges/{team_id}',
   function ($request, $response, $args){
+    $new = array();
+    $final = array();
+    $final_loop = 0;
+    $array_loop = 0;
     $db = $this->dbConn;
     $strToReturn = '';
     $team_id = $request->getAttribute('team_id');
     $challenges = '';
 
-    $sql = 'SELECT * from challenges WHERE to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id;
+    $sql = 'SELECT challenge_id, to_team_id, from_team_id from challenges WHERE (to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id . ') AND end_date >= CURDATE()';
+    $sql2 = 'SELECT team_name FROM teams WHERE `team_id` = :team_id';
+    $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
+    $sql4 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
+    $sql5 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id';
 
-      try {
+    try {
       $stmt = $db->query($sql);
-      $challenges = $stmt -> fetchALL(PDO::FETCH_OBJ);
+      $stmt->execute();
+      $challenges = $stmt->fetchAll(PDO::FETCH_OBJ);
+      foreach($challenges as $challenge){
+        $final[$final_loop]['challenge_id'] = $challenge->challenge_id;
+        if($team_id == $challenge->to_team_id){
+          $final[$final_loop]['user_team']['team_id'] = $team_id;
+            $stmt2 = $db->prepare($sql2);
+            $stmt2->bindParam(':team_id', $team_id);
+            $stmt2->execute();
+            $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
+          $final[$final_loop]['user_team']['team_name'] = $team_name->team_name;
+            $stmt3 = $db->prepare($sql3);
+            $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+            $stmt3->bindParam(':team_id', $team_id);
+            $stmt3->execute();
+            $progress = $stmt3->fetch(PDO::FETCH_OBJ);
+          $final[$final_loop]['user_team']['team_progress'] = $progress->repetitions;
+            $stmt4 = $db->prepare($sql4);
+            $stmt4->bindParam(':team_id', $team_id);
+            $stmt4->execute();
+            $players = $stmt4->fetchAll(PDO::FETCH_OBJ);
+            foreach ($players as $player){
+              $new[$array_loop]['user_id'] = $player->user_id;
+              $new[$array_loop]['username'] = $player->username;
+                $stmt5 = $db->prepare($sql5);
+                $stmt5->bindParam(':challenge_id', $challenge_id);
+                $stmt5->bindParam(':user_id', $player->user_id);
+                $stmt5->execute();
+                $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+                if($playerProgress->reps != null){
+                  $new[$array_loop]['user_progress'] = $playerProgress->reps;
+                }
+                else{
+                  $new[$array_loop]['user_progress'] = 0;
+                }
+              $array_loop++;
+            }
+            $array_loop = 0;
+            $final[$final_loop]['user_team']['players'] = $new;
+            $final[$final_loop]['oppo_team']['team_id'] = $challenge->from_team_id;
+              $stmt2 = $db->prepare($sql2);
+              $stmt2->bindParam(':team_id', $challenge->from_team_id);
+              $stmt2->execute();
+              $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
+            $final[$final_loop]['oppo_team']['team_name'] = $team_name->team_name;
+              $stmt3 = $db->prepare($sql3);
+              $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+              $stmt3->bindParam(':team_id', $challenge->from_team_id);
+              $stmt3->execute();
+              $progress = $stmt3->fetch(PDO::FETCH_OBJ);
+            $final[$final_loop]['oppo_team']['team_progress'] = $progress->repetitions;
+              $stmt4 = $db->prepare($sql4);
+              $stmt4->bindParam(':team_id', $challenge->from_team_id);
+              $stmt4->execute();
+              $players = $stmt4->fetchAll(PDO::FETCH_OBJ);
+              foreach ($players as $player){
+                $new[$array_loop]['user_id'] = $player->user_id;
+                $new[$array_loop]['username'] = $player->username;
+                  $stmt5 = $db->prepare($sql5);
+                  $stmt5->bindParam(':challenge_id', $challenge->challenge_id);
+                  $stmt5->bindParam(':user_id', $player->user_id);
+                  $stmt5->execute();
+                  $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+                  if($playerProgress->reps != null){
+                    $new[$array_loop]['user_progress'] = $playerProgress->reps;
+                  }
+                  else{
+                    $new[$array_loop]['user_progress'] = 0;
+                  }
+                  $array_loop++;
+              }
+              $final[$final_loop]['oppo_team']['players'] = $new;
+        }
+        else{
+          $final[$final_loop]['user_team']['team_id'] = $challenge->from_team_id;
+          $final[$final_loop]['user_team']['team_id'] = $challenge->from_team_id;
+            $stmt2 = $db->prepare($sql2);
+            $stmt2->bindParam(':team_id', $challenge->from_team_id);
+            $stmt2->execute();
+            $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
+          $final[$final_loop]['user_team']['team_name'] = $team_name->team_name;
+            $stmt3 = $db->prepare($sql3);
+            $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+            $stmt3->bindParam(':team_id', $challenge->from_team_id);
+            $stmt3->execute();
+            $progress = $stmt3->fetch(PDO::FETCH_OBJ);
+          $final[$final_loop]['user_team']['team_progress'] = $progress->repetitions;
+            $stmt4 = $db->prepare($sql4);
+            $stmt4->bindParam(':team_id', $challenge->from_team_id);
+            $stmt4->execute();
+            $players = $stmt4->fetchAll(PDO::FETCH_OBJ);
+            foreach ($players as $player){
+              $new[$array_loop]['user_id'] = $player->user_id;
+              $new[$array_loop]['username'] = $player->username;
+                $stmt5 = $db->prepare($sql5);
+                $stmt5->bindParam(':challenge_id', $challenge->challenge_id);
+                $stmt5->bindParam(':user_id', $player->user_id);
+                $stmt5->execute();
+                $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+                if($playerProgress->reps != null){
+                  $new[$array_loop]['user_progress'] = $playerProgress->reps;
+                }
+                else{
+                  $new[$array_loop]['user_progress'] = 0;
+                }
+                $array_loop++;
+            }
+            $final[$final_loop]['user_team']['players'] = $new;
+            $array_loop = 0;
+            $final[$final_loop]['oppo_team']['team_id'] = $challenge->to_team_id;
+              $stmt2 = $db->prepare($sql2);
+              $stmt2->bindParam(':team_id', $challenge->to_team_id);
+              $stmt2->execute();
+              $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
+            $final[$final_loop]['oppo_team']['team_name'] = $team_name->team_name;
+              $stmt3 = $db->prepare($sql3);
+              $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+              $stmt3->bindParam(':team_id', $challenge->to_team_id);
+              $stmt3->execute();
+              $progress = $stmt3->fetch(PDO::FETCH_OBJ);
+            $final[$final_loop]['oppo_team']['team_progress'] = $progress->repetitions;
+              $stmt4 = $db->prepare($sql4);
+              $stmt4->bindParam(':team_id', $challenge->to_team_id);
+              $stmt4->execute();
+              $players = $stmt4->fetchAll(PDO::FETCH_OBJ);
+              foreach ($players as $player){
+                $new[$array_loop]['user_id'] = $player->user_id;
+                $new[$array_loop]['username'] = $player->username;
+                  $stmt5 = $db->prepare($sql5);
+                  $stmt5->bindParam(':challenge_id', $challenge->challenge_id);
+                  $stmt5->bindParam(':user_id', $player->user_id);
+                  $stmt5->execute();
+                  $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+                  if($playerProgress->reps != null){
+                    $new[$array_loop]['user_progress'] = $playerProgress->reps;
+                  }
+                  else{
+                    $new[$array_loop]['user_progress'] = 0;
+                  }
+                  $array_loop++;
+              }
+              $final[$final_loop]['oppo_team']['players'] = $new;
+        }
+        $final_loop++;
       }
+    }
     catch(PDOException $e) {
       echo json_encode($e -> getMessage());
-      }
-    $test = json_encode($challenges);
-    return $response -> write('' . $test);
     }
-  );
+    $test = json_encode($final, JSON_PRETTY_PRINT);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
+});
 
 $app->get('/challenges/user_id/{user_id}',
   function ($request, $response, $args){
@@ -889,7 +1053,11 @@ $app->get('/challenges/user_id/{user_id}',
     $challenges = '';
 
     $sql = 'SELECT team_id FROM team_participation WHERE user_id = '. $user_id;
-    $sql2 = 'SELECT * FROM challenges WHERE to_team_id = :team_id OR from_team_id = :team_id';
+    $sql2 = 'SELECT * FROM challenges WHERE (to_team_id = :team_id OR from_team_id = :team_id) AND end_date >= CURDATE()';
+    $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
+    $sql4 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE `challenge_id` = :challenge_id AND `user_id` = :user_id';
+    $sql5 = 'SELECT team_name FROM teams WHERE `team_id` = :team_id';
+    $sql6 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
 
     try {
       $stmt = $db->query($sql);
@@ -908,13 +1076,111 @@ $app->get('/challenges/user_id/{user_id}',
           $new[$array_loop]['repetitions'] = $challenge->repetitions;
           $new[$array_loop]['units'] = $challenge->units;
           $new[$array_loop]['task_type'] = $challenge->task_type;
+            $stmt4 = $db->prepare($sql4);
+            $stmt4->bindParam(':challenge_id', $challenge->challenge_id);
+            $stmt4->bindParam(':user_id', $user_id);
+            $stmt4->execute();
+            $indiProgress = $stmt4->fetch(PDO::FETCH_OBJ);
+          $new[$array_loop]['user_progress'] = $indiProgress->reps;
           if($team_id == $challenge->to_team_id){
-            $new[$array_loop]['user_team'] = $challenge->to_team_id;
-            $new[$array_loop]['oppo_team'] = $challenge->from_team_id;
+            $new[$array_loop]['user_team']['team_id'] = $challenge->to_team_id;
+              $stmt5 = $db->prepare($sql5);
+              $stmt5->bindParam(':team_id', $challenge->to_team_id);
+              $stmt5->execute();
+              $team_name = $stmt5->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['user_team']['team_name'] = $team_name->team_name;
+              $stmt3 = $db->prepare($sql3);
+              $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+              $stmt3->bindParam(':team_id', $challenge->to_team_id);
+              $stmt3->execute();
+              $teamProgress = $stmt3->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['user_team']['team_progress'] = $teamProgress->repetitions;
+              $stmt6 = $db->prepare($sql6);
+              $stmt6->bindParam(':team_id', $challenge->to_team_id);
+              $stmt6->execute();
+              $players = $stmt6->fetchAll(PDO::FETCH_OBJ);
+              $newP = array();
+              $playerCount = 0;
+              foreach ($players as $player){
+                $newP[$playerCount]['user_id'] = $player->user_id;
+                $newP[$playerCount]['username'] = $player->username;
+                $playerCount++;
+              }
+            $new[$array_loop]['user_team']['players'] = $newP;
+            $new[$array_loop]['oppo_team']['team_id'] = $challenge->from_team_id;
+              $stmt5 = $db->prepare($sql5);
+              $stmt5->bindParam(':team_id', $challenge->from_team_id);
+              $stmt5->execute();
+              $team_name = $stmt5->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['oppo_team']['team_name'] = $team_name->team_name;
+              $stmt3 = $db->prepare($sql3);
+              $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+              $stmt3->bindParam(':team_id', $challenge->from_team_id);
+              $stmt3->execute();
+              $teamProgress = $stmt3->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['oppo_team']['team_progress'] = $teamProgress->repetitions;
+              $stmt6 = $db->prepare($sql6);
+              $stmt6->bindParam(':team_id', $challenge->from_team_id);
+              $stmt6->execute();
+              $players = $stmt6->fetchAll(PDO::FETCH_OBJ);
+              $newP = array();
+              $playerCount = 0;
+              foreach ($players as $player){
+                $newP[$playerCount]['user_id'] = $player->user_id;
+                $newP[$playerCount]['username'] = $player->username;
+                $playerCount++;
+              }
+            $new[$array_loop]['oppo_team']['players'] = $newP;
           }
           else{
-            $new[$array_loop]['user_team'] = $challenge->from_team_id;
-            $new[$array_loop]['oppo_team'] = $challenge->to_team_id;
+            $new[$array_loop]['user_team']['team_id'] = $challenge->from_team_id;
+              $stmt5 = $db->prepare($sql5);
+              $stmt5->bindParam(':team_id', $challenge->from_team_id);
+              $stmt5->execute();
+              $team_name = $stmt5->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['user_team']['team_name'] = $team_name->team_name;
+              $stmt3 = $db->prepare($sql3);
+              $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+              $stmt3->bindParam(':team_id', $challenge->from_team_id);
+              $stmt3->execute();
+              $teamProgress = $stmt3->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['user_team']['team_progress'] = $teamProgress->repetitions;
+              $stmt6 = $db->prepare($sql6);
+              $stmt6->bindParam(':team_id', $challenge->from_team_id);
+              $stmt6->execute();
+              $players = $stmt6->fetchAll(PDO::FETCH_OBJ);
+              $newP = array();
+              $playerCount = 0;
+              foreach ($players as $player){
+                $newP[$playerCount]['user_id'] = $player->user_id;
+                $newP[$playerCount]['username'] = $player->username;
+                $playerCount++;
+              }
+            $new[$array_loop]['user_team']['players'] = $newP;
+            $new[$array_loop]['oppo_team']['team_id'] = $challenge->to_team_id;
+              $stmt5 = $db->prepare($sql5);
+              $stmt5->bindParam(':team_id', $challenge->to_team_id);
+              $stmt5->execute();
+              $team_name = $stmt5->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['oppo_team']['team_name'] = $team_name->team_name;
+              $stmt3 = $db->prepare($sql3);
+              $stmt3->bindParam(':challenge_id', $challenge->challenge_id);
+              $stmt3->bindParam(':team_id', $challenge->to_team_id);
+              $stmt3->execute();
+              $teamProgress = $stmt3->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['oppo_team']['team_progress'] = $teamProgress->repetitions;
+              $stmt6 = $db->prepare($sql6);
+              $stmt6->bindParam(':team_id', $challenge->to_team_id);
+              $stmt6->execute();
+              $players = $stmt6->fetchAll(PDO::FETCH_OBJ);
+              $newP = array();
+              $playerCount = 0;
+              foreach ($players as $player){
+                $newP[$playerCount]['user_id'] = $player->user_id;
+                $newP[$playerCount]['username'] = $player->username;
+                $playerCount++;
+              }
+            $new[$array_loop]['oppo_team']['players'] = $newP;
           }
           $array_loop++;
         }
@@ -923,14 +1189,19 @@ $app->get('/challenges/user_id/{user_id}',
     catch(PDOException $e) {
       echo json_encode($e -> getMessage());
     }
-    $test = json_encode($new);
-    return $response -> write('' . $test);
+    $test = json_encode($new, JSON_PRETTY_PRINT);
+    if($test == '[]'){
+      return $response->write(json_encode(array("No current challenges found" => -5)));
+    }
+    else {
+      return $response->write('' . $test);
+    }
   }
 );
 
 $app->get('/challenges/search/{end_date}',
   function ($request, $response, $args){
-     $db = $this->dbConn;
+    $db = $this->dbConn;
     $strToReturn = '';
     $end_date = $request->getAttribute('end_date');
     $challenges = '';
@@ -944,11 +1215,106 @@ $app->get('/challenges/search/{end_date}',
     catch(PDOException $e) {
       echo json_encode($e -> getMessage());
     }
-    $test = json_encode($challenges);
+    $test = json_encode($challenges, JSON_PRETTY_PRINT);
     return $response -> write('' . $test);
 });
 
+$app->get('/challenge_progress/{challenge_id}',
+  function ($request, $response, $args){
+    $db = $this->dbConn;
+    $final = array();
+    $new = [];
+    $array_loop = 0;
+    $challenge_id = $request->getAttribute('challenge_id');
+    $sql = 'SELECT to_team_id, from_team_id FROM challenges WHERE `challenge_id` = :challenge_id';
+    $sql2 = 'SELECT team_name, avatar, captain_id FROM teams WHERE `team_id` = :team_id';
+    $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
+    $sql4 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
+    $sql5 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id';
+    try {
+      $stmt = $db->prepare($sql);
+      $stmt->bindParam(':challenge_id', $challenge_id);
+      $stmt->execute();
+      $teams = $stmt->fetch(PDO::FETCH_OBJ);
+      $final['user_team']['team_id'] = $teams->to_team_id;
+        $stmt2 = $db->prepare($sql2);
+        $stmt2->bindParam(':team_id', $teams->to_team_id);
+        $stmt2->execute();
+        $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
+      $final['user_team']['team_name'] = $team_name->team_name;
+      $final['user_team']['team_avatar'] = $team_name->avatar;
+      $final['user_team']['captain_id'] = $team_name->captain_id;
+        $stmt3 = $db->prepare($sql3);
+        $stmt3->bindParam(':challenge_id', $challenge_id);
+        $stmt3->bindParam(':team_id', $teams->to_team_id);
+        $stmt3->execute();
+        $progress = $stmt3->fetch(PDO::FETCH_OBJ);
+      $final['user_team']['team_progress'] = $progress->repetitions;
+        $stmt4 = $db->prepare($sql4);
+        $stmt4->bindParam(':team_id', $teams->to_team_id);
+        $stmt4->execute();
+        $players = $stmt4->fetchAll(PDO::FETCH_OBJ);
+        foreach ($players as $player){
+          $new[$array_loop]['user_id'] = $player->user_id;
+          $new[$array_loop]['username'] = $player->username;
+            $stmt5 = $db->prepare($sql5);
+            $stmt5->bindParam(':challenge_id', $challenge_id);
+            $stmt5->bindParam(':user_id', $player->user_id);
+            $stmt5->execute();
+            $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+            if($playerProgress->reps != null){
+              $new[$array_loop]['user_progress'] = $playerProgress->reps;
+            }
+            else{
+              $new[$array_loop]['user_progress'] = 0;
+            }
+          $array_loop++;
+        }
+      $array_loop = 0;
+      $final['user_team']['players'] = $new;
+      $final['oppo_team']['team_id'] = $teams->from_team_id;
+        $stmt2 = $db->prepare($sql2);
+        $stmt2->bindParam(':team_id', $teams->from_team_id);
+        $stmt2->execute();
+        $team_name = $stmt2->fetch(PDO::FETCH_OBJ);
+      $final['oppo_team']['team_name'] = $team_name->team_name;
+      $final['oppo_team']['team_avatar'] = $team_name->avatar;
+      $final['oppo_team']['captain_id'] = $team_name->captain_id;
+        $stmt3 = $db->prepare($sql3);
+        $stmt3->bindParam(':challenge_id', $challenge_id);
+        $stmt3->bindParam(':team_id', $teams->from_team_id);
+        $stmt3->execute();
+        $progress = $stmt3->fetch(PDO::FETCH_OBJ);
+      $final['oppo_team']['team_progress'] = $progress->repetitions;
+        $stmt4 = $db->prepare($sql4);
+        $stmt4->bindParam(':team_id', $teams->from_team_id);
+        $stmt4->execute();
+        $players = $stmt4->fetchAll(PDO::FETCH_OBJ);
+        foreach ($players as $player){
+          $new[$array_loop]['user_id'] = $player->user_id;
+          $new[$array_loop]['username'] = $player->username;
+            $stmt5 = $db->prepare($sql5);
+            $stmt5->bindParam(':challenge_id', $challenge_id);
+            $stmt5->bindParam(':user_id', $player->user_id);
+            $stmt5->execute();
+            $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
+            if($playerProgress->reps != null){
+              $new[$array_loop]['user_progress'] = $playerProgress->reps;
+            }
+            else{
+              $new[$array_loop]['user_progress'] = 0;
+            }
+            $array_loop++;
+        }
+        $final['oppo_team']['players'] = $new;
+    }
+    catch(PDOException $e) {
+      echo json_encode($e -> getMessage());
+    }
+    $test = json_encode($final, JSON_PRETTY_PRINT);
+    return $response -> write('' . $test);
 
+});
 
 
 
@@ -1128,7 +1494,7 @@ $app->get('/exercise',
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    $strToReturn = json_encode($exercises);
+    $strToReturn = json_encode($exercises, JSON_PRETTY_PRINT);
       return $response->write('' . $strToReturn);
     }
 );
@@ -1166,7 +1532,7 @@ $app->get('/exercise/{exercise_id}',
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    $test = json_encode($new);
+    $test = json_encode($new, JSON_PRETTY_PRINT);
     return $response -> write('' . $test);
     }
 );
@@ -1208,7 +1574,7 @@ $app->get('/exercises/user_id/{user_id}',
     catch(PDOException $e) {
       echo json_encode($e->getMessage());
     }
-    $test = json_encode($new);
+    $test = json_encode($new, JSON_PRETTY_PRINT);
     return $response -> write('' . $test);
   }
 );
@@ -1263,7 +1629,7 @@ $app->get('/exercises/exercise/{exercise_name}',
     catch(PDOException $e) {
       echo json_encode($e -> getMessage());
     }
-    $test = json_encode($exercises);
+    $test = json_encode($exercises, JSON_PRETTY_PRINT);
     return $response -> write('' . $test);
     }
 );
@@ -1280,7 +1646,7 @@ $app->get('/exercise_list', function ($request, $response, $args){
     catch(PDOException $e) {
       echo json_encode($e -> getMessage());
     }
-    $test = json_encode($exercises);
+    $test = json_encode($exercises, JSON_PRETTY_PRINT);
     return $response -> write('' . $test);
 });
 
@@ -1299,7 +1665,7 @@ $app->get('/units/{exercise_list_id}', function ($request, $response, $args){
     catch(PDOException $e) {
       echo json_encode($e -> getMessage());
     }
-    $test = json_encode($exercises);
+    $test = json_encode($exercises, JSON_PRETTY_PRINT);
     if($test == '[]'){
         $test = json_encode(array(array("unit_name" => "repetitions")));
     }

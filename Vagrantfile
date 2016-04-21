@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
 		vb.name = "CompFit_Dev"
 	end
 	config.vm.provider "virtualbox" do |v|
-		v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on', "--memory", "1024"]
+		v.customize ['modifyvm', :id, '--natdnshostresolver1', 'on', "--memory", "2048"]
 	end
 
 	config.vm.provision "shell", inline: <<-SHELL
