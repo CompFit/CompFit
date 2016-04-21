@@ -48,7 +48,7 @@
                               <td>{{getProgressFraction('my_team', $index)}}</td>
                               <td>{{getProgress('my_team', $index)}}%
                                   <i class="fa fa-trophy" ng-show="player.user_id==my_team.captain_id"></i>
-                                  <i class="fa fa-user" ng-show="player.user_id==current_user_id"></i>
+                                  <i class="fa fa-star" style="color:#FFD200" ng-show="player.user_id==current_user_id"></i>
                               </td>
                           </tr>
                       </tbody>
