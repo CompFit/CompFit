@@ -3,8 +3,9 @@
     <div class="container">
       <div class="topSection row" ng-show="challenge_selected">
           <div class="col-sm-12">
-              <h3> {{challenge.task_name}} | {{challenge.task_type}} | {{days_left}} days left</h3>
-              <h4> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h4>
+              <h3> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h3>
+              <h4> {{challenge.task_name}} | {{days_left}} days left </h4>
+              <h5>{{challenge.task_type}}</h5>
               <p> Each player will do <b ng-show="challenge.task_type=='Individual'">{{challenge.repetitions}}</b>
                   <b ng-show="challenge.task_type=='Group'">~{{(challenge.repetitions/my_team.players.length).toFixed(1)}}</b>
                   <b>{{challenge.units}}</b> of
@@ -19,8 +20,8 @@
       <div class="bottomSection row" ng-show="challenge_selected">
           <div class="col-sm-6">
               <div class="panel panel-default">
-                  <div class="panel-heading">
-                      <img src="{{my_team.avatar}}" alt="/img/team_avatars/default-avatar.png" class="thumbnail">
+                  <div class="panel-heading my-panel-heading" ng-click="goToMyTeam()">
+                      <img src="{{my_team.team_avatar}}" alt="/img/team_avatars/default-avatar.png" class="thumbnail">
                       <p>{{my_team.team_name}}</p>
                   </div>
                   <table class="table">
@@ -45,7 +46,10 @@
                               <th scope="row"><div class="progress"></div>{{$index+1}}</th>
                               <td>{{player.username}}</td>
                               <td>{{getProgressFraction('my_team', $index)}}</td>
-                              <td>{{getProgress('my_team', $index)}}%</td>
+                              <td>{{getProgress('my_team', $index)}}%
+                                  <i class="fa fa-trophy" ng-show="player.user_id==my_team.captain_id"></i>
+                                  <i class="fa fa-star" style="color:#FFD200" ng-show="player.user_id==current_user_id"></i>
+                              </td>
                           </tr>
                       </tbody>
                   </table>
@@ -53,8 +57,8 @@
           </div>
           <div class="col-sm-6">
               <div class="panel panel-default">
-                  <div class="panel-heading">
-                      <img src="{{opponent_team.avatar}}" alt="/img/team_avatars/default-avatar.png" class="thumbnail">
+                  <div class="panel-heading opponent-panel-heading">
+                      <img src="{{opponent_team.team_avatar}}" alt="/img/team_avatars/default-avatar.png" class="thumbnail">
                       <p>{{opponent_team.team_name}}</p>
                   </div>
                   <table class="table">
@@ -79,7 +83,9 @@
                               <th scope="row"><div class="progress"></div>{{$index+1}}</th>
                               <td>{{player.username}}</td>
                               <td>{{getProgressFraction('opponent_team', $index)}}</td>
-                              <td>{{getProgress('opponent_team', $index)}}%</td>
+                              <td>{{getProgress('opponent_team', $index)}}%
+                                  <i class="fa fa-trophy" ng-show="player.user_id==opponent_team.captain_id"></i>
+                              </td>
                           </tr>
                       </tbody>
                   </table>
