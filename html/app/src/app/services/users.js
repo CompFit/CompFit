@@ -11,6 +11,7 @@ export default class {
     getCurrentUser() {
         return this.user_id;
     }
+    
     setCurrentUser(new_id) {
         this.user_id = new_id;
     }

@@ -1,6 +1,6 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Teams) {
+export default function($scope, $stateParams, Teams, Users, $state) {
     'ngInject';
 
     $scope.toggleModal = function(){
@@ -18,7 +18,17 @@ export default function($scope, $stateParams, Teams) {
 
 
 
-    if ($stateParams.id != "") {
+    if ($stateParams.id == "") {
+        Teams.getTeamsForUser(Users.getCurrentUser()).then(function(response){
+            var teams = response.data;
+            if (teams !== undefined) {
+                if (teams[0] !== undefined) {
+                    $state.go('app.team', {'id': teams[0].team_id});
+                }
+            }
+        });
+    }
+    else {
         $scope.team_id = $stateParams.id;
         $scope.team_selected = true;
         Teams.getTeamById($scope.team_id).then(function(response){
@@ -29,11 +39,4 @@ export default function($scope, $stateParams, Teams) {
             $scope.team_name = response.data.team_name;
         });
     }
-
-
-
-
-
-
-
 }
