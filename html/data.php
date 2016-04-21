@@ -56,7 +56,7 @@ $data['task_name'] = 'Russian Twists';
 $data['start_date'] = '2016-4-25';
 $data['end_date'] = '2016-5-29';
 $data['to_team_id'] = '1';
-$data['from_team_id'] = '10';
+$data['from_team_id'] = '7';
 $data['repetitions'] = '1200';
 $data['units'] = 'repetitions';
 $data['task_type'] = 'Group';
@@ -98,7 +98,7 @@ sendPostData($url_send, $str_data);
 
 $data = array();
 $data['exercise_name'] = 'Russian Twists';
-$data['user_id'] = '24';
+$data['user_id'] = '38';
 $data['date_completed'] = '2016-4-21';
 $data['repetitions'] = '34';
 $data['units'] = 'repetitions';
