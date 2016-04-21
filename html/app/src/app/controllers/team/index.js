@@ -1,6 +1,6 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Teams, Users, $state) {
+export default function($scope, $stateParams, Teams, Users, Challenges, $state) {
     'ngInject';
 
     $scope.toggleModal = function(){
@@ -37,6 +37,28 @@ export default function($scope, $stateParams, Teams, Users, $state) {
             $scope.avatar = response.data.avatar;
             $scope.players = response.data.players;
             $scope.team_name = response.data.team_name;
+
+            Challenges.getChallengesForTeam($scope.team_id).then(function(response){
+                console.log("challenges:",response);
+                $scope.challenges = response.data;
+            });
         });
     }
+
+    $scope.getTeamProgress = function(challenge) {
+        if (challenge.task_type == 'Individual') {
+            return (100 * challenge.user_team.team_progress/challenge.repetitions/challenge.user_team.num_members).toFixed(0);
+        }
+        else {
+            return (100 * challenge.user_team.team_progress/challenge.repetitions).toFixed(0);
+        }
+    };
+    $scope.getUserProgress = function(challenge) {
+        if (challenge.task_type == 'Individual') {
+            return (100 * challenge.user_progress/challenge.repetitions).toFixed(0);
+        }
+        else {
+            return (100 * challenge.user_progress/challenge.repetitions/challenge.user_team.num_members).toFixed(1);
+        }
+    };
 }
