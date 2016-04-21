@@ -15,13 +15,15 @@ export default function(Authentication, Users,Teams,Challenges,Exercises, $state
             $scope.state = $state;
 
             $scope.gotoFirstTeam = function() {
+                console.log($scope.first_team, typeof($scope.first_team));
                 $state.go('app.team', {'id': $scope.first_team});
             };
             $scope.gotoFirstChallenge = function() {
+                console.log($scope.first_challenge, typeof($scope.first_challenge));
                 $state.go('app.challenge', {'id': $scope.first_challenge});
             };
             $scope.gotoFirstExercise = function() {
-
+                console.log($scope.first_exercise, typeof($scope.first_exercise));
                 $state.go('app.exercise', {'id': $scope.first_exercise});
             };
 
