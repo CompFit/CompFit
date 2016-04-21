@@ -28,7 +28,7 @@
                           <button class="btn btn-primary" type="submit">Add</button>
                         </span>
                     </div>
-                    <ul class='{{state}}' ng-show='showQuery()'>
+                    <ul class='{{stateitem}}' ng-show='showQuery()'>
                         <li ng-click='addPlayerForNewTeam(user.username)' ng-repeat='user in all_users | filter: {"username" : test_player_name} | limitTo:5'>
                           <div class="playerNameInSearch">{{user.username}}</div>
                         </li>

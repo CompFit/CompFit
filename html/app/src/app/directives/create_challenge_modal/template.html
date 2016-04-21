@@ -28,7 +28,7 @@
                         <input id="teamsearch" type="text" class="form-control" placeholder="Find team"
                         ng-disabled="selected_opponent" autocomplete="off" ng-model="query" required>
                     </div>
-                    <ul class='{{state}}' ng-show='showQuery()'>
+                    <ul class='{{stateitem}}' ng-show='showQuery()'>
                         <li ng-click='selectOpponent(team)' ng-repeat='team in all_teams | filter: query | limitTo:5'>
                           <div class="teamNameInSearch">{{team.team_name}}</div> <div class="captainNameInSearch">{{team.captain_name}}</div>
                         </li>
