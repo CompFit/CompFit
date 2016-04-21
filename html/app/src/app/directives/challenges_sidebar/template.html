@@ -5,7 +5,7 @@
 
         <div class="nav list-group" id="challengelist" ng-show="challenges.length > 0">
             <div ng-repeat="challenge in challenges track by $index">
-                <a class="list-group-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
+                <a class="list-group-item side-side-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
                     <h4>{{challenge.task_name}}</h4> <p>{{getDaysLeft(challenge)}} days left</p>
                     <h5>{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h5>
                     <div class="progress">
