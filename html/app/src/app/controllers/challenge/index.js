@@ -13,7 +13,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
     $scope.opponent_team = {"players":[]};
 
     $scope.current_user_id = Users.getCurrentUser();
-    
+
     $scope.days_left = 0;
 
     $scope.getDayDifference = function(date1_obj,date2_obj) {
@@ -150,6 +150,17 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
     if ($stateParams.id == '') {
         $scope.challenge_selected = false;
+
+        Challenges.getChallengesForUser($scope.this_user_id).then(function(response){
+            var challenges = response.data;
+            if (challenges !== undefined) {
+                if (challenges[0] !== undefined) {
+                    $state.go('app.challenge', {'id': challenges[0].challenge_id});
+                }
+            }
+        });
+
+
 
     }
     else {
