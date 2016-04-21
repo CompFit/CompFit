@@ -8,8 +8,9 @@
             <div class="col-md-10">
                 <h1>{{team_name}}</h1>
                 <h4>Team Captain: {{team.captain_name}}</h4>
-                <h4>No. of members: {{players.length}}</h4>
+                <h4>Members [{{players.length}}]: <span style="font-family: 'Droid Sans', sans-serif;" ng-repeat="player in players">{{player.username}},&nbsp;</span></h4>
             </div>
+            <hr>
         </div>
 
         <div class="topSection" ng-show="!team_selected">
@@ -18,10 +19,6 @@
 
         <div class="bottomSection row" ng-show="team_selected">
             <div class="col-md-12">
-                <h2>Members</h2>
-                <ul class="list-group" ng-repeat="player in players">
-                     <li class="list-group-item">{{player.username}}</li>
-                </ul>
                 <h2>Challenges</h2>
             </div>
         </div>
