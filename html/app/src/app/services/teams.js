@@ -27,7 +27,6 @@ export default class {
             });
     }
 
-
     getTeamsByCaptianId(captain_id) {
         return this.$http({
               method: 'GET',
