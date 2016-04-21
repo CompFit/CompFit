@@ -1362,7 +1362,7 @@ $app->post('/exercise',
         $stmt->execute();
         $teams = $stmt->fetchALL(PDO::FETCH_OBJ);
         foreach($teams as $team){
-           $challengesql = 'SELECT challenge_id, to_team_id, from_team_id, units, repetitions
+           $challengesql = 'SELECT challenge_id, to_team_id, from_team_id, units, repetitions, task_type
                       FROM challenges
                       WHERE (`status` = "OPEN")
                         AND (`to_team_id` = :team_id
@@ -1441,6 +1441,21 @@ $app->post('/exercise',
                 echo json_encode($e->getMessage());
               }
               if($progress){
+                $pProgress = 0;
+                $sql6 = 'SELECT user_id, sum(repetitions) as reps FROM individual_progress WHERE `team_id` = :team_id AND `challenge_id` = :challenge_id';
+                  $stmt6 = $db->prepare($sql6);
+                  $stmt6->bindParam(':team_id', $team->team_id);
+                  $stmt6->bindParam(':challenge_id', $challenge->challenge_id);
+                  $stmt6->execute();
+                  $ppProgress = $stmt6->fetchAll(PDO::FETCH_OBJ);
+                  foreach($ppProgress as $temp){
+                    if($temp->reps >= $cReps){
+                      $pProgress += $cReps;
+                    }
+                    else{
+                      $pProgress += $temp->reps;
+                    }
+                  }
                 $sql5 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id';
                   $stmt5 = $db->prepare($sql5);
                   $stmt5->bindParam(':challenge_id', $challenge->challenge_id);
@@ -1449,8 +1464,11 @@ $app->post('/exercise',
                   $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
                 $progresssql = 'UPDATE challenge_progress SET repetitions = :repetitions WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
                 try {
-                  if($playerProgress->reps >= $cReps){
-                    $newRepetitions = $cReps + ($progress->repetitions - $previousProgress->reps);
+                  if($challenge->task_type == 'Individual' && $playerProgress->reps == $cReps){
+                    $newRepetitions = $pProgress->repetitions;
+                  }
+                  if($challenge->task_type == 'Individual' && $playerProgress->reps > $cReps){
+                    $newRepetitions = $cReps + ($progress->repetitions - ($pProgress->reps - $playerProgress->reps));
                   }
                   else{
                     $newRepetitions = $progress->repetitions + $nRepetitions;
