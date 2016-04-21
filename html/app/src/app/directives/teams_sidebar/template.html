@@ -7,9 +7,9 @@
             <div ng-repeat="team in teams">
                 <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.team({id:{{team.team_id}}})">
                     <img src="{{team.avatar}}" alt="/img/team_avatars/default-avatar.png" class="side-thumbnail">
-                    <b>{{team.team_name}}</b> <br>
-                    Team Captain: {{team.captain_name}}<br>
-                    No. of members: {{team.players.length}}
+                    <h4>{{team.team_name}}</h4>
+                    <b>Captain:</b> {{team.captain_name}}<br>
+                    <b>No. Members:</b> {{team.players.length}}
                 </a>
             </div>
         </div>
