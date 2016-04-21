@@ -2,23 +2,26 @@
     <seed-sidebar></seed-sidebar>
     <div class="container">
         <div class="topSection row" ng-show="team_selected">
-            <div class="col-sm-2">
+            <div class="col-md-2">
                 <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
             </div>
-            <div class="col-sm-10" >
+            <div class="col-md-10">
                 <h1>{{team_name}}</h1>
-<!--                <h2>Team Captain: {{captain_name}}</h2>-->
-                <br>
-                <ul class="list-group">
-                    <li class="list-group-item disabled">Players</li>
-                    <li class="list-group-item" ng-repeat="player in players">{{player.username}}</li>
-                </ul>
+                <h4>Team Captain: {{team.captain_name}}</h4>
+                <h4>Members [{{players.length}}]: <span style="font-family: 'Droid Sans', sans-serif;" ng-repeat="player in players">{{player.username}},&nbsp;</span></h4>
+            </div>
+            <hr>
+        </div>
+
+        <div class="topSection" ng-show="!team_selected">
+            <h2> Select a Team </h2>
+        </div>
+
+        <div class="bottomSection row" ng-show="team_selected">
+            <div class="col-md-12">
+                <h2>Challenges</h2>
             </div>
         </div>
-    </div>
-
-    <div class="topSection" ng-show="!team_selected">
-        <h2> Select a Team </h2>
     </div>
     <create-team-modal id="createteammodal" title="New Team"/>
 </div>

@@ -3,7 +3,7 @@
     <div>
         <h3>Your Challenges <a ui-sref-active="active" ui-sref="app.challenge"><i ng-click="toggleModal()" class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
 
-        <div class="nav list-group" id="challengelist" >
+        <div class="nav list-group" id="challengelist">
             <div ng-repeat="challenge in challenges">
                 <a class="list-group-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
                     <h4>{{challenge.task_name}}</h4> <p>{{getDaysLeft(challenge)}} days left</p>
