@@ -52,21 +52,22 @@ export default function(Exercises, Users, $timeout) {
                 else {
                     $scope.new_log.user_id = Users.user_id;
                     var dateObj = new Date();
-                    $scope.new_log.date = dateObj.getUTCFullYear() + "-" + (dateObj.getUTCMonth() + 1) + "-" + dateObj.getUTCDate();  
+                    $scope.new_log.date = dateObj.getUTCFullYear() + "-" + (dateObj.getUTCMonth() + 1) + "-" + dateObj.getUTCDate();
                     $scope.new_log.exercise_name = $scope.selected_exercise.exercise_name;
                     $scope.new_log.repetitions = $scope.selected_repetitions;
                     $scope.new_log.units = $scope.selected_units.unit_name;
 
                     Exercises.logExercise($scope.new_log).then(function (response) {
                         console.log(response.data);
+                        var exercise_id = response.data.exercise_id;
+
                         $(element).modal('hide');
+                        $(".modal-backdrop").fadeOut("slow");
 
-                        //update teams
-                        Exercises.getExercisesForUser(Users.user_id);
+                        Exercises.getExercisesForUser(Users.getCurrentUser()).then(function(response){
+                            $state.go('app.exercise', {'id': exercise_id});
+                        });
 
-                        // $timeout(function(){
-                        //
-                        // }, 500);
                     });
                 }
             };

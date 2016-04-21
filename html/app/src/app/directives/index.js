@@ -17,6 +17,6 @@ export default angular
     .directive( 'challengesSidebar', ['Challenges','Users','$timeout', challenges_sidebar] )
     .directive( 'exercisesSidebar', ['Exercises', 'Users', exercises_sidebar] )
     .directive( 'logExerciseModal', ['Exercises','Users', '$timeout', log_exercise_modal] )
-    .directive( 'seedNavbar', ['Authentication', navbar] )
+    .directive( 'seedNavbar', ['Authentication','Users','Teams','Challenges','Exercises','$state', navbar] )
     .directive( 'seedLogbutton', logbutton )
     .name;

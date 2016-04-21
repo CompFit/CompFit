@@ -8,10 +8,10 @@
             <div class="col-md-10">
                 <h1>{{team_name}}</h1>
                 <h4>Team Captain: {{captain_name}}</h4>
-                <h4>Members [{{players.length}}]: <span style="font-family: 'Droid Sans', sans-serif;" ng-repeat="player in players">{{player.username}},&nbsp;</span></h4>
+                <h4>{{players.length}} Members: <span style="font-family: 'Droid Sans', sans-serif;" ng-repeat="player in players">{{player.username}},&nbsp;</span></h4>
             </div>
         </div>
-        <hr>
+
         <div class="topSection" ng-show="!team_selected">
             <h2> Select a Team </h2>
         </div>
