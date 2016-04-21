@@ -29,11 +29,4 @@ export default function($scope, $stateParams, Teams) {
             $scope.team_name = response.data.team_name;
         });
     }
-
-
-
-
-
-
-
 }

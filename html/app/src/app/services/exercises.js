@@ -14,10 +14,10 @@ export default class {
         });
     }
 
-    getExerciseById(challenge_id) {
+    getExerciseById(exercise_id) {
         return this.$http({
               method: 'GET',
-              url: '/api/team/'+team_id
+              url: '/api/exercise/'+exercise_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
@@ -28,7 +28,7 @@ export default class {
     getExercisesForUser(user_id) {
         return this.$http({
               method: 'GET',
-              url: '/api/teams/'+user_id
+              url: '/api/exercises/user_id/'+user_id
             }).then(function successCallback(response) {
                 self.exercises = response.data;
                 return response;
@@ -60,7 +60,7 @@ export default class {
     }
 
     getExercises() {
-        return self.exercise;
+        return self.exercises;
     }
 
 }
