@@ -60,6 +60,17 @@ export default class {
             });
     }
 
+    getChallengesForTeam(team_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/challenges/team_id/'+exercise_id
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     getChallenges() {
         return self.challenges;
     }
