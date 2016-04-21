@@ -13,6 +13,7 @@ export default function($scope, $stateParams, Exercises, Users, $state) {
 
     $scope.exercises = [];
 
+
     $scope.new_log = {};
 
     if ($stateParams.id == "") {
@@ -20,6 +21,7 @@ export default function($scope, $stateParams, Exercises, Users, $state) {
             var exercises = response.data;
             if (exercises !== undefined) {
                 if (exercises[0] !== undefined) {
+                    
                     $state.go('app.exercise', {'id': exercises[0].exercise_id});
                 }
             }
