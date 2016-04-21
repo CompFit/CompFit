@@ -26,6 +26,17 @@ export default class {
             });
     }
 
+    getChallengeProgress(challenge_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/challenge_progress/'+challenge_id
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     getChallengesForUser(user_id) {
         return this.$http({
               method: 'GET',
