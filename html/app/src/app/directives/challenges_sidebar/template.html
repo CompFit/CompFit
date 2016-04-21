@@ -11,7 +11,7 @@
                     <div class="progress">
                       <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
                       aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%">
-                        {{getTeamProgress(challenge)}}% Complete
+                        <div ng-class="{'black-text':(getTeamProgress(challenge)>=2)}">{{getTeamProgress(challenge)}}% Complete</div>
                       </div>
                     </div>
                 </a>
