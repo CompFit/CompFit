@@ -1442,9 +1442,10 @@ $app->post('/exercise',
               }
               if($progress){
                 $pProgress = 0;
-                $sql6 = 'SELECT user_id, sum(repetitions) as reps FROM individual_progress WHERE `team_id` = :team_id AND `challenge_id` = :challenge_id';
+                $sql6 = 'SELECT user_id, sum(repetitions) as reps FROM individual_progress WHERE `team_id` = :team_id AND `challenge_id` = :challenge_id AND user_id != :player';
                   $stmt6 = $db->prepare($sql6);
                   $stmt6->bindParam(':team_id', $team->team_id);
+                  $stmt6->bindParam(':player', $user_id);
                   $stmt6->bindParam(':challenge_id', $challenge->challenge_id);
                   $stmt6->execute();
                   $ppProgress = $stmt6->fetchAll(PDO::FETCH_OBJ);
@@ -1464,11 +1465,8 @@ $app->post('/exercise',
                   $playerProgress = $stmt5->fetch(PDO::FETCH_OBJ);
                 $progresssql = 'UPDATE challenge_progress SET repetitions = :repetitions WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
                 try {
-                  if($challenge->task_type == 'Individual' && $playerProgress->reps == $cReps){
-                    $newRepetitions = $pProgress->repetitions;
-                  }
-                  if($challenge->task_type == 'Individual' && $playerProgress->reps > $cReps){
-                    $newRepetitions = $cReps + ($progress->repetitions - ($pProgress->reps - $playerProgress->reps));
+                  if($challenge->task_type == 'Individual' && $playerProgress->reps >= $cReps){
+                    $newRepetitions = $cReps + $pProgress;
                   }
                   else{
                     $newRepetitions = $progress->repetitions + $nRepetitions;
