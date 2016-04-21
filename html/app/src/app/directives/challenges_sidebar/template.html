@@ -10,8 +10,8 @@
                     <h5>{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h5>
                     <div class="progress">
                       <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
-                      aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%">
-                        <div ng-class="{'black-text':(getTeamProgress(challenge)>=2)}">{{getTeamProgress(challenge)}}% Complete</div>
+                      aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%" ng-class="challenge.user_team.repetitions ? '' : 'dark-text'">
+                        {{getTeamProgress(challenge)}}% Complete
                       </div>
                     </div>
                 </a>
