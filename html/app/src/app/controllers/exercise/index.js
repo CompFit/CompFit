@@ -1,6 +1,6 @@
 import './style.styl';
 
-export default function($scope, $stateParams, Exercises) {
+export default function($scope, $stateParams, Exercises, Users, $state) {
     'ngInject';
 
     $scope.toggleModal = function(){
@@ -15,7 +15,17 @@ export default function($scope, $stateParams, Exercises) {
 
     $scope.new_log = {};
 
-    if ($stateParams.id != "") {
+    if ($stateParams.id == "") {
+        Exercises.getExercisesForUser(Users.getCurrentUser()).then(function(response){
+            var exercises = response.data;
+            if (exercises !== undefined) {
+                if (exercises[0] !== undefined) {
+                    $state.go('app.exercise', {'id': exercises[0].exercise_id});
+                }
+            }
+        });
+    }
+    else  {
         $scope.exercise_id = $stateParams.id;
         $scope.exercise_selected = true;
 
