@@ -19,7 +19,7 @@ export default function( $scope, $state, Authentication, Users ) {
                 // Users.user_id = response.data.user_id;
                 // console.log("user id:",Users.user_id);
                 // Authentication.logIn();
-                $state.go( 'app.my.profile' );
+                $state.go( 'app.team' );
             }
         });
 
