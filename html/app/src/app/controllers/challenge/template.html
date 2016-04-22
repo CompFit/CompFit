@@ -3,15 +3,13 @@
     <div class="container">
       <div class="topSection row" ng-show="challenge_selected">
           <div class="col-sm-12">
-              <h3> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h3>
-              <h4> {{challenge.task_name}} | {{days_left}} days left </h4>
-              <h5>{{challenge.task_type}}</h5>
-              <p> Each player will do <b ng-show="challenge.task_type=='Individual'">{{challenge.repetitions}}</b>
-                  <b ng-show="challenge.task_type=='Group'">~{{(challenge.repetitions/my_team.players.length).toFixed(1)}}</b>
-                  <b>{{challenge.units}}</b> of
-                  <b>{{challenge.task_name}}</b>
-                  from <b>{{challenge.start_date | date: 'shortDate'}}</b> to <b>{{challenge.end_date | date:'shortDate'}}</b>.
-              </p>
+              <h2> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h2>
+              <h3> {{challenge.task_name}} |
+                  {{challenge.task_type=='Individual' ? challenge.repetitions : '~'+(challenge.repetitions/my_team.players.length).toFixed(1)}}
+                  {{challenge.units}} per player | {{days_left}} days left
+              </h3>
+              <h4>{{challenge.task_type}}</h4>
+              <h4>{{challenge.start_date | date: 'shortDate'}} - {{challenge.end_date | date:'shortDate'}}</h4>
           </div>
       </div>
       <div class="topSection" ng-show="!challenge_selected">
