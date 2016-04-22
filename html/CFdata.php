@@ -1,5 +1,5 @@
 <?php
-$url_send = 'http://127.0.0.1/api/challenge';
+$url_send = 'http://compfit.us/api/challenge';
 function sendPostData($url, $post){
   $ch = curl_init($url);
   curl_setopt($ch, CURLOPT_POST, true);
@@ -64,7 +64,7 @@ $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
 sendPostData($url_send, $str_data);
 
-$url_send = 'http://127.0.0.1/api/exercise';
+$url_send = 'http://compfit.us/api/exercise';
 
 $data = array();
 $data['exercise_name'] = 'Cycling';
