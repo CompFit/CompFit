@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body">
           <div id="log_exercise_modal">
-              <form role="form">
+              <form role="form" ng-submit="submitLog()">
                 <div class="form-group">
                     <label for="exercise_name">Exercise Name</label>
                     <select class="form-control" ng-model="selected_exercise" ng-options="exercise.exercise_name for exercise in exerciseList" ng-change="updateUnits()" required>
@@ -24,11 +24,11 @@
                     <select class="form-control" ng-model="selected_units" ng-options="unit.unit_name for unit in unitsForExercise" required>
                     </select>
                 </div>
+                <button type="submit" class="btn btn-success pull-right">Create</button>
               </form>
           </div>
       </div>
       <div class="modal-footer">
-        <button ng-click="submitLog()" type="button" class="btn btn-success pull-right">Create</button>
         <button data-dismiss="modal" type="button" class="btn btn-default pull-right" style="margin-right: 10px;">Cancel</button>
       </div>
     </div>
