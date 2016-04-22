@@ -1,46 +1,52 @@
 <div id="team">
-    <seed-sidebar></seed-sidebar>
-    <div class="container">
-        <div class="topSection row" ng-show="team_selected">
-            <div class="col-md-2">
-                <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <seed-sidebar></seed-sidebar>
             </div>
-            <div class="col-md-10">
-                <h1>{{team_name}}</h1>
-                <h4>{{players.length}} Members: <span ng-repeat="player in players">{{player.username}}</span></h4>
-            </div>
-        </div>
-
-        <div class="topSection" ng-show="!team_selected">
-            <h2> Select a Team </h2>
-        </div>
-
-        <div class="bottomSection row" ng-show="exercise_selected">
-            <h3> Challenges</h3>
-            <div class="list-group" id="teamchallengelist">
-                <div ng-repeat="challenge in challenges">
-                    <a class="list-group-item" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
-                        <h4 class="challenge-title">{{challenge.task_name}}</h4>
-                        <h4 class="challenge-teams">{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h4>
-                        <br><br>
-                        <h5>{{challenge.user_team.team_name}} progress</h4>
-                        <div class="progress">
-                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
-                          aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%" ng-class="challenge.user_team.team_progress && challenge.user_team.team_progress>0 ? '' : 'dark-text'">
-                            {{getTeamProgress(challenge)}}% Complete
-                          </div>
-                        </div>
-                        <h5> Your progress </h4>
-                        <div class="progress">
-                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getUserProgress(challenge)}}"
-                          aria-valuemin="0" aria-valuemax="100" style="width:{{getUserProgress(challenge)}}%" ng-class="challenge.user_progress && challenge.user_progress>0 ? '' : 'dark-text'">
-                            {{getUserProgress(challenge)}}% Complete
-                          </div>
-                        </div>
-                    </a>
+            <div class="col-md-9">
+                <div class="topSection row" ng-show="team_selected">
+                    <div class="col-md-2">
+                        <img src="{{avatar}}" alt="/img/team_avatars/default-avatar.png" class="img-thumbnail">
+                    </div>
+                    <div class="col-md-10">
+                        <h1>{{team_name}}</h1>
+                        <h4>{{players.length}} Members: <span ng-repeat="player in players">{{player.username}}</span></h4>
+                    </div>
                 </div>
+
+                <div class="topSection" ng-show="!team_selected">
+                    <h2> Select a Team </h2>
+                </div>
+
+                <div class="bottomSection row" ng-show="exercise_selected">
+                    <h3> Challenges</h3>
+                    <div class="list-group" id="teamchallengelist">
+                        <div ng-repeat="challenge in challenges">
+                            <a class="list-group-item" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
+                                <h4 class="challenge-title">{{challenge.task_name}}</h4>
+                                <h4 class="challenge-teams">{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h4>
+                                <br><br>
+                                <h5>{{challenge.user_team.team_name}} progress</h4>
+                                <div class="progress">
+                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
+                                  aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%" ng-class="challenge.user_team.team_progress && challenge.user_team.team_progress>0 ? '' : 'dark-text'">
+                                    {{getTeamProgress(challenge)}}% Complete
+                                  </div>
+                                </div>
+                                <h5> Your progress </h4>
+                                <div class="progress">
+                                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getUserProgress(challenge)}}"
+                                  aria-valuemin="0" aria-valuemax="100" style="width:{{getUserProgress(challenge)}}%" ng-class="challenge.user_progress && challenge.user_progress>0 ? '' : 'dark-text'">
+                                    {{getUserProgress(challenge)}}% Complete
+                                  </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <create-team-modal id="createteammodal" title="New Team"/>
             </div>
         </div>
     </div>
-    <create-team-modal id="createteammodal" title="New Team"/>
 </div>
