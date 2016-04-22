@@ -28,7 +28,7 @@
                         <input id="teamsearch" type="text" class="form-control" placeholder="Find team"
                         ng-disabled="selected_opponent" autocomplete="off" ng-model="query" required>
                     </div>
-                    <ul class='{{state}}' ng-show='showQuery()'>
+                    <ul class='{{stateitem}}' ng-show='showQuery()'>
                         <li ng-click='selectOpponent(team)' ng-repeat='team in all_teams | filter: query | limitTo:5'>
                           <div class="teamNameInSearch">{{team.team_name}}</div> <div class="captainNameInSearch">{{team.captain_name}}</div>
                         </li>
@@ -50,7 +50,7 @@
 
                     <div class="form-group col-sm-4">
                         <label for="exercise_repetitions">Amount</label>
-                        <input type="text" class="form-control" placeholder="Enter {{selected_units.unit_name}}"
+                        <input type="number" class="form-control" placeholder="Enter {{selected_units.unit_name}}"
                                 ng-model="new_challenge.repetitions" required>
                     </div>
 
