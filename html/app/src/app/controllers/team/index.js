@@ -37,11 +37,13 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
             $scope.avatar = response.data.avatar;
             $scope.players = response.data.players;
             $scope.team_name = response.data.team_name;
-
-            Challenges.getChallengesForTeam($scope.team_id).then(function(response){
-                console.log("challenges:",response);
-                $scope.challenges = response.data;
-            });
+            $scope.captain_id = response.data.captain_id;
+            $scope.isCaptain = Users.getCurrentUser() == response.data.captain_id;
+            console.log($scope.isCaptain);
+        });
+        Challenges.getChallengesForTeam($scope.team_id).then(function(response){
+            $scope.challenges = response.data;
+            console.log("challenges: ",response);
         });
     }
 
@@ -53,6 +55,16 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
             return (100 * challenge.user_team.team_progress/challenge.repetitions).toFixed(0);
         }
     };
+
+    $scope.getOppoTeamProgress = function(challenge) {
+        if (challenge.task_type == 'Individual') {
+            return (100 * challenge.oppo_team.team_progress/challenge.repetitions/challenge.oppo_team.num_members).toFixed(0);
+        }
+        else {
+            return (100 * challenge.oppo_team.team_progress/challenge.repetitions).toFixed(0);
+        }
+    };
+
     $scope.getUserProgress = function(challenge) {
         if (challenge.task_type == 'Individual') {
             return (100 * challenge.user_progress/challenge.repetitions).toFixed(0);
