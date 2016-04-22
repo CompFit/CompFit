@@ -48,20 +48,6 @@ export default class {
                 return response;
             });
     }
-    
-    getChallengesByTeamId(team_id) {
-        return this.$http({
-            method: 'GET',
-            url:'/api/challenges/'+team_id
-        }).then(function successCallback(response) {
-            self.challenges = response.data;
-            console.log(response);
-            return response;
-        }, function errorCallback(response){
-            console.log(response);
-            return response;
-        });
-    }
 
     getChallengesForExercise(exercise_id) {
         return this.$http({
