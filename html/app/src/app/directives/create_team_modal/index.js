@@ -9,7 +9,6 @@ export default function(Teams, Users, $timeout) {
         scope:true,
         link: function postLink($scope, element, attrs) {
             $scope.title = attrs.title;
-
             $scope.new_team.name = "";
             $scope.new_team.players = [];
 

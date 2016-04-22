@@ -1,7 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700,900);
+@import url('https://fonts.googleapis.com/css?family=Oswald|Droid+Sans' rel='stylesheet' type='text/css')
 @import 'root';
-@import '../../app/controllers/**/style'
-@import '../../app/directives/**/style'
+@import '../../app/controllers/**/style';
+@import '../../app/directives/**/style';
 
 
 html, body {
@@ -10,6 +10,24 @@ html, body {
 }
 
 body {
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Droid Sans', sans-serif;
 	margin-top: 50px;
+	height: 90%;
+	background-color: #EEE;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Oswald', sans-serif;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.container-fluid {
+	padding-left: 0px;
+}
+
+.col-md-9 {
+    padding-left: 30px;
 }

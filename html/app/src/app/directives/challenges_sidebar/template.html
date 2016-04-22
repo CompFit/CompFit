@@ -3,12 +3,22 @@
     <div>
         <h3>Your Challenges <a ui-sref-active="active" ui-sref="app.challenge"><i ng-click="toggleModal()" class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
 
-        <div class="nav list-group" >
-            <div ng-repeat="challenge in challenges">
-                <a class="list-group-item" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
-                    {{challenge.task_name}}
+        <div class="nav list-group" id="challengelist" ng-show="challenges.length > 0">
+            <div ng-repeat="challenge in challenges track by $index">
+                <a class="list-group-item side-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
+                    <h4>{{challenge.task_name}}</h4> <p>{{getDaysLeft(challenge)}} days left</p>
+                    <h5>{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h5>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-success dark-text" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
+                      aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%">
+                        {{getTeamProgress(challenge)}}% Complete
+                      </div>
+                    </div>
                 </a>
             </div>
+        </div>
+        <div class="no-challenges" ng-show="challenges.length <= 0">
+            <h4>No challenges to show</h4>
         </div>
     </div>
   </div>
