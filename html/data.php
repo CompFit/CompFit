@@ -64,7 +64,7 @@ $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
 sendPostData($url_send, $str_data);
 
-sendPostData($url_send, $str_data);
+$url_send = 'http://compfit.us/api/exercise';
 
 $data = array();
 $data['exercise_name'] = 'Cycling';
