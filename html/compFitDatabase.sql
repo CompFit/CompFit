@@ -517,24 +517,3 @@ INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'kilometers', 4);
 INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'meters', 4);
-<<<<<<< HEAD
-
-
-
-
-####sorting the exercises, exercise list, and challenges####
-
-#sort exercise by date you logged it (most recent)
-SELECT * from exercises ORDER BY date_completed DESC
-
-#sort exercise list alphabetically
-SELECT * from exercise_list ORDER BY exercise_name
-
-#sort challenges by end date (the ones closing soonest are at the top)
-#(don’t return the ones where the dates have already passed -- the challenges that are done)
-SELECT * from challenges ORDER BY end_date DESC
-
-
-
-=======
->>>>>>> master
