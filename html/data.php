@@ -179,10 +179,18 @@ $data = array();
 $data['exercise_name'] = 'Cycling';
 $data['user_id'] = '21';
 $data['date_completed'] = '2016-4-27';
-$data['repetitions'] = '.25';
+$data['repetitions'] = '2.25';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
 
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '21';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '2.50';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
 sendPostData($url_send, $str_data);
 
 $data = array();
