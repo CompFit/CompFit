@@ -1,33 +1,22 @@
 #team {
-    .topSection,
+    .topSection {
+        span {
+            font-family: 'Droid Sans', sans-serif;
+        }
+
+        span+span::before {
+            content: ", ";
+            display: inline;
+        }
+
+        img {
+            width: 130px;
+            height: 130px;
+            float:left;
+            margin-top: 20px;
+        }
+    }
     .bottomSection {
-        margin: 20px 0 0 200px;
+    
     }
-
-    .topSection img {
-        width: 130px;
-        height: 130px;
-        float:left;
-    }
-
-    .topSection h1 {
-    }
-
-    .topSection .players_dropdown_btn {
-        display: block;
-    }
-
-    .topSection .players_dropdown {
-        width: 100px;
-    }
-
-    .topSection .players_dropdown .list-group-item{
-        display: block;
-        padding-top: 3px;
-        padding-bottom: 3px;
-        padding-left: 5px;
-        padding-right: 5px;
-        margin: -1px;
-    }
-
 }

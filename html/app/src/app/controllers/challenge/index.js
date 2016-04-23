@@ -100,7 +100,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         if (team == 'my_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return 100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions;
+                return (100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions).toFixed(0);
             }
             else {
                 return (100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions*$scope.my_team.players.length).toFixed(0);
@@ -109,7 +109,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         else if (team == 'opponent_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return 100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions;
+                return (100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions).toFixed(0);
             }
             else {
                 return (100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions*$scope.opponent_team.players.length).toFixed(0);
