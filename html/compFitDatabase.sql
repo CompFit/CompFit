@@ -52,8 +52,6 @@ CREATE TABLE challenges
   to_team_id  INT,
   from_team_id  INT,
   task_name VARCHAR(40),
-  #Overarching challenge name - challenge_name so challenges can have more than one exercise, but each exercise is stored in a different row in the challenges table
-  #exercise_name VARCHAR(40),
   repetitions INT,
   units VARCHAR(20),
   task_type VARCHAR(20),
@@ -115,7 +113,8 @@ CREATE TABLE challenge_progress
   units VARCHAR(20),
   created VARCHAR(19),
   PRIMARY KEY(challenge_progress_id),
-  FOREIGN KEY(challenge_id) REFERENCES challenges(challenge_id)
+  FOREIGN KEY(challenge_id) REFERENCES challenges(challenge_id),
+  FOREIGN KEY(team_id) REFERENCES teams(team_id)
   #FOREIGN KEY(exercise_name) REFERENCES exercise_list(exercise_name)
 );
 

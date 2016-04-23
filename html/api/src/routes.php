@@ -1238,6 +1238,7 @@ $app->get('/challenges/exercise_id/{exercise_id}',
       $sql4 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE `challenge_id` = :challenge_id AND `user_id` = :user_id';
       $sql5 = 'SELECT team_name, team_color FROM teams WHERE `team_id` = :team_id';
       $sql7 = 'SELECT count(user_id) as count FROM team_participation WHERE `team_id` = :team_id';
+      $sql9 = 'SELECT repetitions FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id AND `exercise_id` = :exercise_id';
 
       try {
         $stmt8 = $db->prepare($sql8);
@@ -1270,7 +1271,14 @@ $app->get('/challenges/exercise_id/{exercise_id}',
               $stmt4->execute();
               $indiProgress = $stmt4->fetch(PDO::FETCH_OBJ);
             $new[$array_loop]['user_progress'] = $indiProgress->reps;
-              $new[$array_loop]['user_team']['team_id'] = $challenge_id->team_id;
+              $stmt9 = $db->prepare($sql9);
+              $stmt9->bindParam(':challenge_id', $challenge->challenge_id);
+              $stmt9->bindParam(':user_id', $user_id->user_id);
+              $stmt9->bindParam(':exercise_id', $exercise_id);
+              $stmt9->execute();
+              $indiChalProg = $stmt9->fetch(PDO::FETCH_OBJ);
+            $new[$array_loop]['exercise_progress'] = $indiChalProg->repetitions;
+            $new[$array_loop]['user_team']['team_id'] = $challenge_id->team_id;
                 $stmt5 = $db->prepare($sql5);
                 $stmt5->bindParam(':team_id', $challenge_id->team_id);
                 $stmt5->execute();
@@ -1668,6 +1676,7 @@ $app->get('/exercise/{exercise_id}',
                       WHERE user_id = :user_id
                       AND exercise_id = :exercise_id';
 
+
     try {
       $new;
       $stmt = $db->query($sql);
@@ -1708,7 +1717,7 @@ $app->get('/exercises/user_id/{user_id}',
     $exercise = '';
     $sql = 'SELECT *
           FROM exercises
-          WHERE user_id = "'.$user_id.'"';
+          WHERE user_id = "'.$user_id.'" ORDER BY date_completed DESC';
     $getChallenges = 'SELECT challenge_id
                     FROM individual_progress
                     WHERE user_id = :user_id
