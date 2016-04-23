@@ -6,9 +6,9 @@
         <div class="nav list-group" id="exerciselist">
             <div ng-repeat="exercise in exercises">
                 <a class="list-group-item side-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.exercise({id:{{exercise.exercise_id}}})">
-                    <b>{{exercise.exercise_name}}</b> <br>
-                    {{exercise.date_completed | date: 'shortDate'}} <br>
-                    {{exercise.repetitions}} {{exercise.units}}
+                    <h4>{{exercise.exercise_name}}</h4>
+                    <p>{{exercise.date_completed | date: 'shortDate'}}</p>
+                    <p>{{exercise.repetitions}} {{exercise.units}}</p>
                 </a>
             </div>
         </div>
