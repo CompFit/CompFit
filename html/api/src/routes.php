@@ -883,7 +883,7 @@ $app->get('/team_challenges/{team_id}',
     $team_id = $request->getAttribute('team_id');
     $challenges = '';
 
-    $sql = 'SELECT challenge_id, to_team_id, from_team_id from challenges WHERE (to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id . ') AND end_date >= CURDATE()';
+    $sql = 'SELECT challenge_id, task_name, start_date, end_date, repetitions, units, task_type, status, to_team_id, from_team_id from challenges WHERE (to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id . ') AND end_date >= CURDATE()';
     $sql2 = 'SELECT team_name, team_color FROM teams WHERE `team_id` = :team_id';
     $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
     $sql4 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
@@ -895,6 +895,13 @@ $app->get('/team_challenges/{team_id}',
       $challenges = $stmt->fetchAll(PDO::FETCH_OBJ);
       foreach($challenges as $challenge){
         $final[$final_loop]['challenge_id'] = $challenge->challenge_id;
+        $final[$final_loop]['task_name'] = $challenge->task_name;
+        $final[$final_loop]['start_date'] = $challenge->start_date;
+        $final[$final_loop]['end_date'] = $challenge->end_date;
+        $final[$final_loop]['repetitions'] = $challenge->repetitions;
+        $final[$final_loop]['units'] = $challenge->units;
+        $final[$final_loop]['task_type'] = $challenge->task_type;
+        $final[$final_loop]['status'] = $challenge->status;
         if($team_id == $challenge->to_team_id){
           $final[$final_loop]['user_team']['team_id'] = $team_id;
             $stmt2 = $db->prepare($sql2);
