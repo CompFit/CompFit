@@ -63,11 +63,15 @@ export default function($scope, $stateParams, Exercises, Users, Challenges, Team
 
     $scope.getUserAddition = function(challenge) {
         if (challenge.task_type == 'Individual') {
-            return (100 * $scope.exercise.repetitions/challenge.repetitions/challenge.user_team.num_members).toFixed(0);
+            return (100 * challenge.exercise_progress/challenge.repetitions/challenge.user_team.num_members).toFixed(0);
         }
         else {
-            return (100 * $scope.exercise.repetitions/challenge.repetitions).toFixed(0);
+            return (100 * challenge.exercise_progress/challenge.repetitions).toFixed(0);
         }
+    };
+
+    $scope.getAdjustedTeamProgress = function(challenge) {
+        return $scope.getTeamProgress(challenge) - $scope.getUserAddition(challenge);
     };
 
 }

@@ -16,7 +16,7 @@
 
                 <div class="bottomSection row" ng-show="exercise_selected">
                     <div class="col-sm-12">
-                        <h3> Challenges Helped </h3>
+                        <h3> Challenge Contribution </h3>
                         <div class="list-group" id="exercisechallengelist">
                             <div ng-repeat="challenge in challenges">
                                 <a class="list-group-item" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
@@ -27,25 +27,20 @@
                                     <h5>{{challenge.user_team.team_name}} progress</h5>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-success dark-text" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
-                                          aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%">
+                                          aria-valuemin="0" aria-valuemax="100" style="width:{{getAdjustedTeamProgress(challenge)}}%">
                                             {{getTeamProgress(challenge)}}% Complete
                                         </div>
                                         <div class="progress-bar progress-bar-warning" style="width: {{getUserAddition(challenge)}}%">
                                             <span class="sr-only">{{getUserAddition(challenge)}}% Complete (warning)</span>
                                         </div>
                                     </div>
-                                    <h5> Your progress </h5>
+                                    <!-- <h5> Your progress </h5>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-success dark-text" role="progressbar" aria-valuenow="{{getUserProgress(challenge)}}"
                                           aria-valuemin="0" aria-valuemax="100" style="width:{{getUserProgress(challenge)}}%">
                                             {{getUserProgress(challenge)}}% Complete
                                         </div>
-                                        <!-- <div class="progress-bar progress-bar-striped active" role="progressbar"
-                                        aria-valuenow="{{getUserAddition(challenge)}}" aria-valuemin="0" aria-valuemax="100"
-                                        style="width: {{getUserAddition(challenge)}}%">
-                                            <span class="sr-only">45% Complete</span>
-                                        </div> -->
-                                    </div>
+                                    </div> -->
                                 </a>
                             </div>
                         </div>
