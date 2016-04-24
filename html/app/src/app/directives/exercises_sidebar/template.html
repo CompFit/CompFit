@@ -5,10 +5,11 @@
 
         <div class="nav list-group" id="exerciselist">
             <div ng-repeat="exercise in exercises">
-                <a class="list-group-item side-item" ng-click="saveScrollPosition()" ui-sref-active="active" ui-sref="app.exercise({id:{{exercise.exercise_id}}})">
+                <a class="list-group-item side-item" ng-click="saveScrollPosition()"
+                    ui-sref-active="active" ui-sref="app.exercise({id:{{exercise.exercise_id}}})">
                     <h4>{{exercise.exercise_name}}</h4>
-                    <p>{{exercise.date_completed | date: 'shortDate'}}</p>
-                    <p>{{exercise.repetitions}} {{exercise.units}}</p>
+                    <h5 class="date">{{exercise.date_completed | date: 'shortDate'}}</h5>
+                    <h5>{{exercise.repetitions}} {{exercise.units}}</h5>
                 </a>
             </div>
         </div>
