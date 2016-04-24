@@ -1,9 +1,14 @@
-@media (min-width: 768px) {
+/* Landscape tablets and medium-to-large desktops */
+@media (min-width: 992px) {
   .teams-sidebar {
   	position:fixed;
     height: 100%;
     border-right: 2px solid #7D7D7D;
     width: inherit;
+
+    .navbar-header {
+      float: none;
+    }
 
     h3 {
       padding-left: 20px;
@@ -73,5 +78,80 @@
   .no-teams h4 {
     border-top: 1px solid #888;
     padding: 40px;
+  }
+}
+
+/* Portrait tablets and small desktops */
+/* Landscape phones and portrait tablets */
+/* Portrait phones and smaller */
+@media (max-width: 991px) {
+  .teams-sidebar {
+    position:fixed;
+    right: 0;
+    left: 0;
+
+    .navbar-header {
+      float: none;
+    }
+
+    .collapse {
+      display: none !important;
+    }
+
+    .collapse.in {
+      display: block !important;
+    }
+
+    .navbar-toggle {
+      display: block;
+      margin-left: 20px;
+    }
+
+    h3 {
+      padding-left: 20px;
+      padding-right: 10px;
+      
+      i {
+        cursor: pointer;
+      }
+    }
+
+    .fa {
+      background-color: white;
+      border-radius: 100%;
+    }
+
+    .navbar .navbar-collapse {
+      padding: 0;
+    }
+
+    .side-thumbnail {
+      max-width: 60px;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      float: left;
+      margin-right: 10px;
+    }
+
+    .side-item {
+      height: 100px;
+      border-radius: 0px;
+      padding: 15px;
+
+      h4 {
+        display: inline;
+      }
+
+      p {
+        margin-top: -2px;
+      }
+    }
+
+    .list-group {
+      overflow-y: auto;
+      max-height: 670px;
+      overflow-x: hidden;
+    }
   }
 }
