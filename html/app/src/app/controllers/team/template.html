@@ -4,6 +4,7 @@
             <div class="col-md-3">
                 <seed-sidebar></seed-sidebar>
             </div>
+
             <div class="col-md-9">
                 <div class="topSection row" ng-show="team_selected">
                     <div class="col-sm-2">
@@ -14,10 +15,6 @@
                         <h4>{{players.length}} Members</h4>
                         <span ng-repeat="player in players" class="label label-default">{{player.username}} <span class="glyphicon glyphicon-envelope pull-right"></span></span>
                     </div>
-                </div>
-
-                <div class="topSection" ng-show="!team_selected">
-                    <h2> Select a Team </h2>
                 </div>
 
                 <div class="bottomSection row" ng-show="team_selected">
