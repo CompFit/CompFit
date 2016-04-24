@@ -1,8 +1,13 @@
 .challenges-sidebar {
   position:fixed;
-  height: 100%;
-  border-right: 2px solid #7D7D7D;
-  width: inherit;
+
+  .navbar-header {
+    float: none;
+  }
+
+  .navbar .navbar-collapse {
+    padding: 0;
+  }
 
   h3 {
     margin-left: 15px;
@@ -16,15 +21,6 @@
   .fa {
     background-color: white;
     border-radius: 100%;
-  }
-
-  .navbar {
-  	border-radius: 0;
-
-      .navbar-collapse {
-        padding: 0;
-        max-height: none;
-      }
   }
 
   .side-item {
@@ -50,9 +46,37 @@
   .dark-text {
       color: black;
   }
-}
 
-.no-challenges h4 {
-  border-top: 1px solid #888;
-  padding: 40px;
+  .no-challenges h4 {
+    border-top: 1px solid #888;
+    padding: 40px;
+  }
+
+  /* Landscape tablets and medium-to-large desktops */
+  @media (min-width: 992px) {
+    height: 100%;
+    border-right: 2px solid #7D7D7D;
+    width: inherit;
+  }
+
+  /* Portrait tablets and small desktops */
+  /* Landscape phones and portrait tablets */
+  /* Portrait phones and smaller */
+  @media (max-width: 991px) {
+    right: 0;
+    left: 0;
+
+    .collapse {
+      display: none !important;
+    }
+
+    .collapse.in {
+      display: block !important;
+    }
+
+    .navbar-toggle {
+      display: block;
+      margin-left: 20px;
+    }
+  }
 }
