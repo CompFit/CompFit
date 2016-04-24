@@ -540,6 +540,8 @@ $app->post('/team',
 //   }
 // );
 
+
+
 $app->get('/teams/{user_id}',
   function ($request, $response, $args){
     $db = $this->dbConn;
@@ -557,6 +559,9 @@ $app->get('/teams/{user_id}',
     $cName = 'SELECT user_id, username
               FROM users
               WHERE user_id = :captain_id';
+    $sql1 = 'SELECT c.challenge_id, c.task_name, c.start_date, c.end_date, c.repetitions, c.units, c.task_type, c.status, c.to_team_id, c.from_team_id
+             FROM challenges c WHERE (c.to_team_id = :team_id OR c.from_team_id = :team_id) AND c.end_date >= CURDATE() ORDER BY c.end_date ASC';
+
 
 
              try {
@@ -584,6 +589,11 @@ $app->get('/teams/{user_id}',
                  $new[$array_loop]['avatar'] = $val->avatar;
                  $new[$array_loop]['team_color'] = $val->team_color;
                  $new[$array_loop]['created'] = $val->created;
+                 $stmt3 = $db->prepare($sql1);
+                 $stmt3->bindParam('team_id', $val->team_id);
+                 $stmt3->execute();
+                 $challenges = $stmt3->fetchAll(PDO::FETCH_OBJ);
+                 $new[$array_loop]['challenges'] = $challenges;
                  $array_loop++;
 
                }
@@ -609,6 +619,7 @@ $app->get('/teams/captain_id/{captain_id}',
     $cName = 'SELECT user_id, username
           FROM users
           WHERE user_id = :captain_id';
+
 
       try {
         $new = array();
