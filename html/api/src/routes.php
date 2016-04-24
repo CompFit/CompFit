@@ -1372,6 +1372,8 @@ $app->get('/challenge_progress/{challenge_id}',
     $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
     $sql4 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
     $sql5 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE  `user_id` = :user_id AND `challenge_id` = :challenge_id';
+    $sql10 = 'SELECT * FROM individual_progress WHERE `user_id` = :user_id AND `challenge_id` = :challenge_id';
+
     try {
       $stmt = $db->prepare($sql);
       $stmt->bindParam(':challenge_id', $challenge_id);
@@ -1410,6 +1412,12 @@ $app->get('/challenge_progress/{challenge_id}',
             else{
               $new[$array_loop]['user_progress'] = 0;
             }
+            $stmt10 = $db->prepare($sql10);
+            $stmt10->bindParam(':challenge_id', $challenge_id);
+            $stmt10->bindParam(':user_id', $player->user_id);
+            $stmt10->execute();
+            $exercises = $stmt10->fetchAll(PDO::FETCH_OBJ);
+          $new[$array_loop]['user_exercises'] = $exercises;
           $array_loop++;
         }
       $array_loop = 0;
@@ -1447,6 +1455,12 @@ $app->get('/challenge_progress/{challenge_id}',
             else{
               $new[$array_loop]['user_progress'] = 0;
             }
+              $stmt10 = $db->prepare($sql10);
+              $stmt10->bindParam(':challenge_id', $challenge_id);
+              $stmt10->bindParam(':user_id', $player->user_id);
+              $stmt10->execute();
+              $exercises = $stmt10->fetchAll(PDO::FETCH_OBJ);
+            $new[$array_loop]['user_exercises'] = $exercises;
             $array_loop++;
         }
         $final['oppo_team']['players'] = $new;
