@@ -8,8 +8,9 @@
                 <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.team({id:{{team.team_id}}})">
                     <img src="{{team.avatar}}" alt="group by Alexandra Coscovelnita from the Noun Project" class="side-thumbnail">
                     <h4>{{team.team_name}}</h4>
-                    <b>Captain:</b> {{team.captain_name}}<br>
-                    <b>No. Members:</b> {{team.players.length}}
+                    <div><img src="/img/application/captain-icon.png"/> {{team.captain_name}} <b>|</b> <img src="/img/application/challenge-icon.png"/><span class="badge">3</span></div>
+                    <!--<b>Captain:</b> {{team.captain_name}}<br>
+                    <b>{{team.players.length}}</b> Members Total-->
                 </a>
             </div>
         </div>
