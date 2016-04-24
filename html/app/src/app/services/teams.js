@@ -8,7 +8,7 @@ export default class {
         self.user_for_teams = 1;
     }
 
-    createTeam(team_name,captain_id,players,avatar="/img/team_avatars/default-avatar.png") {
+    createTeam(team_name,captain_id,players,avatar="/img/team_avatars/default-team.png") {
         var data = {"team_name":team_name,"captain_id":captain_id,"players":players,"avatar":avatar};
         console.log(data);
         return this.$http.post("/api/team",data).then(function (response) {
