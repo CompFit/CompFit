@@ -9,7 +9,7 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     };
     $scope.team_id = -1;
     $scope.team_name = "";
-    $scope.avatar = "/img/team_avatars/default-avatar.png";
+    $scope.avatar = "/img/team_avatars/default-team.png";
     $scope.players = [];
     $scope.players_dropdown = false;
     $scope.team_selected = false;
