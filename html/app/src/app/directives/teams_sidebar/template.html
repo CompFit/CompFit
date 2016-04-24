@@ -9,7 +9,7 @@
                     <img src="{{team.avatar}}" alt="/img/team_avatars/default-avatar.png" class="side-thumbnail">
                     <h4>{{team.team_name}}</h4>
                     <h6>{{team.players.length}} members</h6>
-                    <p>Challenge ends in 3 days</p>
+                    <p ng-if="team.challenges">Challenge ends in {{getDaysLeft(team.challenges[0])}} days</p>
                 </a>
             </div>
         </div>
