@@ -1,4 +1,3 @@
-
 <div class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -10,15 +9,13 @@
           <div id="create_challenge_modal">
               <form role="form" ng-submit="submitChallenge()">
                 <div class="form-group">
-                    <label for="teamSelect"> Select your team </label><br>
-                    <select class="form-control" name="teamSelect" ng-model="selected_team"
-                         ng-options="team.team_name for team in usersTeams"></select>
+                    <label for="teamSelect">Select your team</label>
+                    <br>
+                    <select class="form-control" name="teamSelect" ng-model="selected_team" ng-options="team.team_name for team in usersTeams"></select>
                 </div>
 
-
-
                 <div class="form-group searchTeam">
-                    <label> Search opponent team </label>
+                    <label>Search opponent team</label>
                     <i class='fa fa-close' ng-click='clearOpponent()' ng-show='selected_opponent'></i>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
@@ -35,8 +32,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label for="exercise_name">Exercise</label>
@@ -47,14 +42,12 @@
 
                     <div class="form-group col-sm-4">
                         <label for="exercise_repetitions">Amount</label>
-                        <input type="number" class="form-control" placeholder="Enter {{selected_units.unit_name}}"
-                                ng-model="new_challenge.repetitions" min="0" max="10000" required>
+                        <input type="number" class="form-control" placeholder="Enter {{selected_units.unit_name}}" ng-model="new_challenge.repetitions" min="0" max="10000" required>
                     </div>
 
                     <div class="form-group col-sm-4">
                         <label for="exercise_units">Units</label>
-                        <select class="form-control" ng-model="selected_units"
-                            ng-options="unit.unit_name for unit in unitsForExercise" required>
+                        <select class="form-control" ng-model="selected_units" ng-options="unit.unit_name for unit in unitsForExercise" required>
                         </select>
                     </div>
                 </div>
@@ -63,15 +56,11 @@
                     <div class="col-sm-2"> </div>
                     <div class="form-group col-sm-4 radioBtnList">
                         <label for="individual_radio">
-                        <input type="radio" name="individual_radio"
-                            ng-model="new_challenge.task_type" value="Individual">
-                            Individual Task
-                        </label>
+                        <input type="radio" name="individual_radio" ng-model="new_challenge.task_type" value="Individual">Individual Task</label>
                     </div>
                     <div class="form-group col-sm-4 radioBtnList">
                         <label for="group_radio">
-                        <input type="radio" name="group_radio"
-                            ng-model="new_challenge.task_type" value="Group">
+                        <input type="radio" name="group_radio" ng-model="new_challenge.task_type" value="Group">
                             Group Task
                         </label>
                     </div>
@@ -80,36 +69,36 @@
 
                 <div class="row">
                     <div class="form-group col-sm-6">
-                        <label for="start_date"> Start date </label><br>
-                        <input class="form-control" id="startDatePicker" type="date" name="start_date" ng-change="updateStartDate()"
-                            ng-model="new_challenge.start_date" min="{{minChallengeStartDate}}" required>
+                        <label for="start_date">Start date</label>
+                        <br>
+                        <input class="form-control" id="startDatePicker" type="date" name="start_date" ng-change="updateStartDate()" ng-model="new_challenge.start_date" min="{{minChallengeStartDate}}" required>
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="end_date"> End date </label><br>
-                        <input class="form-control" type="date" name="end_date" ng-model="new_challenge.end_date"
-                            min="{{minChallengeEndDate}}" required>
+                        <input class="form-control" type="date" name="end_date" ng-model="new_challenge.end_date" min="{{minChallengeEndDate}}" required>
                     </div>
                 </div>
-
-
 
                 <div class="row formSummary">
                     <div class="col-sm-12">
                         <h4>{{selected_team.team_name}} vs. {{selected_opponent.team_name ? selected_opponent.team_name : fill_in_opponent}}</h4>
-                        <p> Each player will do <b ng-show="new_challenge.task_type=='Individual'">{{new_challenge.repetitions ? new_challenge.repetitions : fill_in_repetitions}}</b>
-                            <b ng-show="new_challenge.task_type=='Group'">~{{new_challenge.repetitions ? (new_challenge.repetitions/selected_team.players.length).toFixed(1) : fill_in_repetitions}}</b>
+                        <p>
+                            Each player
+                            <span ng-show="new_challenge.task_type=='Individual'">must do <b>{{new_challenge.repetitions ? new_challenge.repetitions : fill_in_repetitions}}</b></span>
+                            <span ng-show="new_challenge.task_type=='Group'">should do about <b>~{{new_challenge.repetitions ? (new_challenge.repetitions/selected_team.players.length).toFixed(1) : fill_in_repetitions}}</b></span>
                             <b>{{selected_exercise.exercise_name ? selected_units.unit_name : fill_in_units}}</b> of
                             <b>{{selected_exercise.exercise_name ? selected_exercise.exercise_name : fill_in_exercise}}</b>
-                            from <b>{{new_challenge.start_date | date: 'shortDate'}}</b> to <b>{{new_challenge.end_date | date:'shortDate'}}</b>.
+                            between
+                            <b>{{new_challenge.start_date | date: 'shortDate'}}</b>
+                            and
+                            <b>{{new_challenge.end_date | date:'shortDate'}}</b>.
                         </p>
                     </div>
                 </div>
 
-
                 <button type="submit" class="btn btn-success">Create</button>
               </form>
           </div>
-
 
       </div>
       <div class="modal-footer">

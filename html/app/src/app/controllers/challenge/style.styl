@@ -13,67 +13,63 @@
     }
 
     .topSection{
-        img {
-            width: 130px;
-            height: 130px;
-            float:left;
-            margin-top: 20px;
-        }
-    }
-
-    table {
-        position: relative;
-        overflow: hidden;
-        /*width: 600px;*/
-        border-collapse: collapse;
-
-        td i {
-            float: right;
-            padding-left: 5px;
-            z-index: 2;
-        }
-    }
-
-    .opponent-panel-heading {
-        background-color: #17607D;
-    }
-
-    .my-panel-heading {
-        background-color: #17607D;
-        cursor: pointer;
-    }
-
-    .panel-heading {
-        height: 80px;
-        padding:10px;
-
-        img {
-            width: 60px;
-            height: 60px;
-            float:left;
-            /*background-color: */
-        }
-
-        p {
-            padding-top: 0px;
-            padding-left: 10px;
-            margin-left: 60px;
-            font-size: 28px;
-            color: white;
-        }
-
-        .progress {
-            margin-top: -10px;
-            margin-left: 70px;
-        }
-
     }
 
     .bottomSection {
         padding-right: 50px;
 
-        tr, td {
-            background: none;
+        .opponent-panel-heading {
+            background-color: #17607D;
+            /*background-color: #DC3522;*/
+        }
+
+        .my-panel-heading {
+            background-color: #17607D;
+            cursor: pointer;
+        }
+
+        .panel-heading {
+            height: 80px;
+            padding: 10px;
+
+            img {
+                width: 60px;
+                height: 60px;
+                float:left;
+            }
+
+            p {
+                padding-top: 0px;
+                padding-left: 10px;
+                margin-left: 60px;
+                font-size: 28px;
+                color: white;
+            }
+
+            .progress {
+                margin-top: -10px;
+                margin-left: 70px;
+
+                .progress-bar {
+                    color: black;
+                }
+            }
+        }
+
+        table {
+            position: relative;
+            overflow: hidden;
+            border-collapse: collapse;
+
+            tr, td {
+                background: none;
+            }
+
+            td i {
+                float: right;
+                padding-left: 5px;
+                z-index: 2;
+            }
         }
 
         .player-progress {
@@ -89,4 +85,14 @@
         }
     }
 
+    /* Portrait tablets and small desktops */
+    /* Landscape phones and portrait tablets */
+    /* Portrait phones and smaller */
+    @media (max-width: 991px) {
+        .col-md-3 {
+            position:fixed;
+            top: 50px;
+            z-index: 1029;
+        }
+    }
 }

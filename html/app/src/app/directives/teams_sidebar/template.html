@@ -15,25 +15,11 @@
                         <h4>{{team.team_name}}</h4>
                         <h5>{{team.players.length}} members</h5>
                         <p ng-if="team.challenges[0]">Challenge ends in {{getDaysLeft(team.challenges[0])}} days</p>
-
+                        <p ng-if="team.challenges.length == 0">No ongoing challenges</p>
                         <!--<div><img src="/img/application/captain-icon.png"/> {{team.captain_name}} <b>|</b> <img src="/img/application/challenge-icon.png"/><span class="badge">3</span></div>-->
                     </a>
                 </li>
             </ul>
-
-            <!--<div class="nav list-group" >
-                <div ng-repeat="team in teams">
-                    <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.team({id:{{team.team_id}}})">
-                        <img src="{{team.avatar}}" alt="group by Alexandra Coscovelnita from the Noun Project" class="side-thumbnail">
-                        <h4>{{team.team_name}}</h4>
-                        <h5>{{team.players.length}} members</h5>
-                        <p ng-if="team.challenges">Challenge ends in {{getDaysLeft(team.challenges[0])}} days</p>
-
-                        <div><img src="/img/application/captain-icon.png" alt="Crown by Andrey Vasiliev from the Noun Project"/> {{team.captain_name}} <b>|</b> <img src="/img/application/challenge-icon.png"/><span class="badge">3</span></div>
-
-                    </a>
-                </div>
-            </div>-->
             <div class="no-teams" ng-show="teams.length <= 0">
                 <h4>No teams to show</h4>
             </div>
