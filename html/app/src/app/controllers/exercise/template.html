@@ -20,9 +20,11 @@
                         <div class="list-group" id="exercisechallengelist">
                             <div ng-repeat="challenge in challenges">
                                 <a class="list-group-item" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
-                                    <h3 class="challenge-title">{{challenge.task_name}} |
-                                        {{challenge.task_type=='Individual' ? challenge.repetitions : '~'+(challenge.repetitions/challenge.user_team.num_members).toFixed(1)}}
-                                        {{challenge.units}} per player</h3>
+                                    <h3 class="challenge-title">
+                                        {{challenge.task_name}} |
+                                        {{challenge.task_type=='Individual' ? challenge.repetitions : challenge.repetitions}}
+                                        {{challenge.units}} {{challenge.task_type=='Individual' ? 'per player' : ''}}
+                                    </h3>
                                     <h4 class="challenge-teams">{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h4>
                                     <h5>{{challenge.user_team.team_name}} progress</h5>
                                     <div class="progress">
@@ -31,7 +33,7 @@
                                             {{getTeamProgress(challenge)}}% Complete
                                         </div>
                                         <div class="progress-bar progress-bar-warning" style="width: {{getUserAddition(challenge)}}%">
-                                            <span class="sr-only">{{getUserAddition(challenge)}}% Complete (warning)</span>
+                                            <span class="sr-only">{{getUserAddition(challenge)}}% Complete</span>
                                         </div>
                                     </div>
                                     <!-- <h5> Your progress </h5>
