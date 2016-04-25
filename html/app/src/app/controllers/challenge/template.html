@@ -9,11 +9,12 @@
                 <div class="topSection row" ng-show="challenge_selected">
                     <div class="col-sm-12">
                         <h2> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h2>
-                        <h3> {{challenge.task_name}} |
-                            {{challenge.task_type=='Individual' ? challenge.repetitions : '~'+(challenge.repetitions/my_team.players.length).toFixed(1)}}
-                            {{challenge.units}} per player | {{days_left}} days left
-                        </h3>
-                        <h4>{{challenge.task_type}}</h4>
+                        <h3> {{challenge.task_name}} | {{challenge.task_type=='Individual' ? challenge.repetitions : challenge.repetitions}}
+                        {{challenge.units}} {{challenge.task_type=='Individual' ? 'per player' : ''}} | {{days_left}} days left</h3>
+                        <h4>
+                            {{challenge.task_type}} Challenge
+
+                        </h4>
                         <h4>{{challenge.start_date | date: 'shortDate'}} - {{challenge.end_date | date:'shortDate'}}</h4>
                     </div>
                 </div>
@@ -71,7 +72,7 @@
                                 <p>{{opponent_team.team_name}}</p>
                                 <div class="team-progress">
                                     <div class="progress">
-                                      <div class="progress-bar progress-bar-warning dark-text" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
+                                      <div class="progress-bar progress-bar-danger dark-text" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
                                       aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_opponent_team')}}%">
                                         {{getProgress('all_opponent_team')}}% Complete
                                       </div>

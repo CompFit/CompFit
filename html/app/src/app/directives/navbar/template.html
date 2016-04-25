@@ -17,7 +17,7 @@
                 <!-- <li ng-show="loggedInTest && !first_team" ui-sref-active="active"><a ui-sref="app.team({id:'-1'})">Teams</a></li> -->
                 <li ng-show="loggedInTest" ng-class="state.current.name == 'app.team' ? 'active' : ''"><a class="pointer" ng-click="gotoFirstTeam()">Teams</a></li>
                 <li ng-show="loggedInTest" ng-class="state.current.name == 'app.challenge' ? 'active' : ''"><a class="pointer" ng-click="gotoFirstChallenge()">Challenges</a></li>
-                <li ng-show="loggedInTest" ng-class="state.current.name == 'app.exercise' ? 'active' : ''"><a class="pointer" ng-click="gotoFirstExercise()">Exercises</a></li>
+                <li ng-show="loggedInTest" ng-class="state.current.name == 'app.exercise' ? 'active' : ''"><a class="pointer" ng-click="gotoFirstExercise()">Exercise Log</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="!loggedIn" ui-sref-active="active"><a ui-sref="app.login">Login</a></li>
