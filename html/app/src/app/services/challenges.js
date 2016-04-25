@@ -3,6 +3,7 @@ export default class {
     constructor($http) {
         this.$http = $http;
         this.currentSidebarScrollPosition = null;
+        this.observerCallbacks = [];
         var self = this;
 
         self.challenges = [];
@@ -73,6 +74,19 @@ export default class {
 
     getChallenges() {
         return self.challenges;
+    }
+
+
+
+    //register an observer
+   registerObserverCallback(callback){
+      this.observerCallbacks.push(callback);
+    }
+
+    notifyObservers(){
+       angular.forEach(this.observerCallbacks, function(callback){
+         callback();
+       });
     }
 
 
