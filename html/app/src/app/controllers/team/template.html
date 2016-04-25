@@ -38,9 +38,9 @@
                                     </div>
                                     <h4> {{challenge.oppo_team.team_name}} progress </h4>
                                     <div class="progress">
-                                      <div class="progress-bar progress-bar-success dark-text" role="progressbar" aria-valuenow="{{getOppoTeamProgress(challenge)}}"
+                                      <div class="progress-bar progress-bar-danger dark-text" role="progressbar" aria-valuenow="{{getOppoTeamProgress(challenge)}}"
                                       aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(challenge)}}%">
-                                        {{getUserProgress(challenge)}}% Complete
+                                        {{getOppoTeamProgress(challenge)}}% Complete
                                       </div>
                                     </div>
                                 </a>
