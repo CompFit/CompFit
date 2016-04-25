@@ -9,11 +9,12 @@
                 <div class="topSection row" ng-show="challenge_selected">
                     <div class="col-sm-12">
                         <h2> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h2>
-                        <h3> {{challenge.task_name}} |
-                            {{challenge.task_type=='Individual' ? challenge.repetitions : '~'+(challenge.repetitions/my_team.players.length).toFixed(1)}}
-                            {{challenge.units}} per player | {{days_left}} days left
-                        </h3>
-                        <h4>{{challenge.task_type}}</h4>
+                        <h3> {{challenge.task_name}} | {{challenge.task_type=='Individual' ? challenge.repetitions : challenge.repetitions}}
+                        {{challenge.units}} {{challenge.task_type=='Individual' ? 'per player' : ''}} | {{days_left}} days left</h3>
+                        <h4>
+                            {{challenge.task_type}} Challenge
+
+                        </h4>
                         <h4>{{challenge.start_date | date: 'shortDate'}} - {{challenge.end_date | date:'shortDate'}}</h4>
                     </div>
                 </div>
@@ -24,6 +25,14 @@
                             <div class="panel-heading my-panel-heading" ng-click="goToMyTeam()">
                                 <img src="{{my_team.team_avatar}}" alt="group by Alexandra Coscovelnita from the Noun Project" class="thumbnail">
                                 <p>{{my_team.team_name}}</p>
+                                <div class="team-progress">
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-success dark-text" role="progressbar" aria-valuenow="{{getProgress('all_my_team')}}"
+                                      aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_my_team')}}%">
+                                        {{getProgress('all_my_team')}}% Complete
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                             <table class="table">
                                 <thead>
@@ -44,7 +53,7 @@
                                 </tfoot>
                                 <tbody class="table-body">
                                     <tr data-progress="{{getProgress('my_team', $index)}}" ng-repeat="player in my_team.players track by $index">
-                                        <th scope="row"><div class="progress"></div>{{$index+1}}</th>
+                                        <th scope="row"><div class="player-progress"></div>{{$index+1}}</th>
                                         <td>{{player.username}}</td>
                                         <td>{{getProgressFraction('my_team', $index)}}</td>
                                         <td>{{getProgress('my_team', $index)}}%
@@ -61,6 +70,14 @@
                             <div class="panel-heading opponent-panel-heading">
                                 <img src="{{opponent_team.team_avatar}}" alt="group by Alexandra Coscovelnita from the Noun Project" class="thumbnail">
                                 <p>{{opponent_team.team_name}}</p>
+                                <div class="team-progress">
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-danger dark-text" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
+                                      aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_opponent_team')}}%">
+                                        {{getProgress('all_opponent_team')}}% Complete
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                             <table class="table">
                                 <thead>
@@ -81,7 +98,7 @@
                                 </tfoot>
                                 <tbody class="table-body">
                                     <tr data-progress="{{getProgress('opponent_team', $index)}}" ng-repeat="player in opponent_team.players track by $index">
-                                        <th scope="row"><div class="progress"></div>{{$index+1}}</th>
+                                        <th scope="row"><div class="player-progress"></div>{{$index+1}}</th>
                                         <td>{{player.username}}</td>
                                         <td>{{getProgressFraction('opponent_team', $index)}}</td>
                                         <td>{{getProgress('opponent_team', $index)}}%
