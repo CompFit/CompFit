@@ -25,6 +25,7 @@ module.exports = function ( options ) {
                 // 'angular-animate',
                 // 'angular-aria',
                 'angular-ui-router',
+                // 'highcharts-ng',
 
                 'angular-strap/dist/angular-strap.min.js'
                 // 'angular-strap/dist/angular-strap.tpl.min.js'

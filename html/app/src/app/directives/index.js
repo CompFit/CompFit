@@ -8,6 +8,7 @@ import exercises_sidebar from './exercises_sidebar';
 import log_exercise_modal from './log_exercise_modal';
 import navbar from './navbar';
 import logbutton from './logbutton';
+import player_progress_chart from './player_progress_chart';
 
 export default angular
     .module( 'app.directives', [] )
@@ -19,4 +20,5 @@ export default angular
     .directive( 'logExerciseModal', ['Exercises','Users', '$timeout', '$state', log_exercise_modal] )
     .directive( 'seedNavbar', ['Authentication','Users','Teams','Challenges','Exercises','$state', navbar] )
     .directive( 'seedLogbutton', logbutton )
+    .directive( 'playerProgressChart', ['Challenges',player_progress_chart] )
     .name;
