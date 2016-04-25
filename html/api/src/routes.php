@@ -1567,8 +1567,8 @@ $app->post('/exercise',
                 else{
                   $nRepetitions = $eRepetitions;
                 }
-              $indiProgress = 'INSERT INTO individual_progress (`team_id`, `user_id`, `challenge_id`, `exercise_id`, `exercise_name`, `repetitions`, `units`, `created`)
-                               VALUES (:team_id, :user_id, :challenge_id, :exercise_id, :exercise_name, :repetitions, :units, UTC_TIMESTAMP())';
+              $indiProgress = 'INSERT INTO individual_progress (`team_id`, `user_id`, `challenge_id`, `exercise_id`, `exercise_name`, `repetitions`, `units`, `date_completed`, `created`)
+                               VALUES (:team_id, :user_id, :challenge_id, :exercise_id, :exercise_name, :repetitions, :units, :date_completed, UTC_TIMESTAMP())';
               try {
                 $stmt = $db->prepare($indiProgress);
                 $stmt->bindParam(':team_id', $team->team_id);
@@ -1578,6 +1578,7 @@ $app->post('/exercise',
                 $stmt->bindParam(':exercise_name', $decode->exercise_name);
                 $stmt->bindParam(':repetitions', $nRepetitions);
                 $stmt->bindParam(':units', $challenge->units);
+                $stmt->bindParam(':date_completed', $decode->date_completed);
                 $stmt->execute();
               }
               catch(PDOException $e) {
