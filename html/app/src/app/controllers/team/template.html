@@ -11,7 +11,10 @@
                     </div>
                     <div class="col-sm-10">
                         <h1>{{team_name}}</h1>
-                        <h4>{{players.length}} Members: <span ng-repeat="player in players">{{player.username}}</span></h4>
+                        <h4>{{players.length}} Members:</h4>
+                        <ul class="list-group row">
+                            <li class="list-group-item col-xs-3" ng-repeat="player in players">{{player.username}}<i class="fa fa-envelope pull-right" aria-hidden="true"></i><i class="fa fa-phone pull-right" aria-hidden="true"></i></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -37,9 +40,9 @@
                                     </div>
                                     <h4> {{challenge.oppo_team.team_name}} progress </h4>
                                     <div class="progress">
-                                      <div class="progress-bar progress-bar-success dark-text" role="progressbar" aria-valuenow="{{getOppoTeamProgress(challenge)}}"
+                                      <div class="progress-bar progress-bar-danger dark-text" role="progressbar" aria-valuenow="{{getOppoTeamProgress(challenge)}}"
                                       aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(challenge)}}%">
-                                        {{getUserProgress(challenge)}}% Complete
+                                        {{getOppoTeamProgress(challenge)}}% Complete
                                       </div>
                                     </div>
                                 </a>
