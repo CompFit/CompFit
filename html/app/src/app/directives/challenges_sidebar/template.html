@@ -20,6 +20,12 @@
                             {{getTeamProgress(challenge)}}% Complete
                             </div>
                         </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger dark-text" role="progressbar" aria-valuenow="{{getOppoTeamProgress(challenge)}}"
+                            aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(challenge)}}%">
+                                {{getOppoTeamProgress(challenge)}}% Complete
+                            </div>
+                        </div>
                     </a>
                 </li>
             </ul>
