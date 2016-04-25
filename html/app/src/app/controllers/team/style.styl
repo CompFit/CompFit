@@ -1,34 +1,47 @@
 #team {
+    .row {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .col-md-3 {
+        padding: 0px;
+    }
+
+    .col-md-9 {
+        padding: 0px;
+    }
+
     .topSection {
-        span {
-            font-family: 'Droid Sans', sans-serif;
-        }
-
-        span+span::before {
-            content: ", ";
-            display: inline;
-        }
-
         img {
             width: 130px;
             height: 130px;
             float:left;
             margin-top: 20px;
         }
-        li {
-            padding-top: 2px;
-            padding-bottom: 2px;
-            margin-bottom: 5px;
-            margin-left: 10px;
-        }
-        .fa-envelope {
-            padding-top: 2px;
-        }
-        .fa-phone {
-            padding-top: 3px;
+
+        .label {
+            font-size: 12px;
+            padding: 7px 10px;
+            text-align: left;
+            display: inline-block;
+            width: 150px;
+            margin: 2px;
         }
     }
+
     .bottomSection {
     
+    }
+
+    /* Portrait tablets and small desktops */
+    /* Landscape phones and portrait tablets */
+    /* Portrait phones and smaller */
+    @media (max-width: 991px) {
+        .col-md-3 {
+            position:fixed;
+            top: 50px;
+            z-index: 1029;
+        }
     }
 }

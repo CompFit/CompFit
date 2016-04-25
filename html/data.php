@@ -22,7 +22,18 @@ $data['repetitions'] = '50';
 $data['units'] = 'miles';
 $data['task_type'] = 'Group';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
 
+$data = array();
+$data['task_name'] = 'Cycling';
+$data['start_date'] = '2016-4-25';
+$data['end_date'] = '2016-5-3';
+$data['to_team_id'] = '2';
+$data['from_team_id'] = '1';
+$data['repetitions'] = '20';
+$data['units'] = 'miles';
+$data['task_type'] = 'Individual';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
 sendPostData($url_send, $str_data);
 
 $data = array();
@@ -66,6 +77,84 @@ sendPostData($url_send, $str_data);
 
 $url_send = 'http://127.0.0.1/api/exercise';
 
+// $data['start_date'] = '2016-4-25';
+// $data['end_date'] = '2016-5-3';
+// $data['to_team_id'] = '1';
+// $data['from_team_id'] = '2';
+// $data['repetitions'] = '20';
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '2';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '4.3';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '32';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '2.5';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '28';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '5.4';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '42';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '5.4';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '3';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '1.4';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '26';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '3.7';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '5';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '2.9';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '8';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '4.2';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
 $data = array();
 $data['exercise_name'] = 'Cycling';
 $data['user_id'] = '38';
@@ -90,10 +179,18 @@ $data = array();
 $data['exercise_name'] = 'Cycling';
 $data['user_id'] = '21';
 $data['date_completed'] = '2016-4-27';
-$data['repetitions'] = '.25';
+$data['repetitions'] = '2.25';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
 
+$data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '21';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '2.50';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
 sendPostData($url_send, $str_data);
 
 $data = array();

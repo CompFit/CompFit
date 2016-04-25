@@ -1,62 +1,58 @@
-@media (min-width: 768px) {
-  .challenges-sidebar {
-    position:fixed;
-    height: 100%;
-    border-right: 2px solid #7D7D7D;
-    width: inherit;
+.challenges-sidebar {
+  position:fixed;
+  height: 100%;
+  border-right: 2px solid #7D7D7D;
+  width: inherit;
 
-    h3 {
-      padding-left: 10px;
-      padding-right: 10px;
-      i {
-        cursor: pointer;
+  h3 {
+    margin-left: 15px;
+    margin-right: 10px;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .fa {
+    background-color: white;
+    border-radius: 100%;
+  }
+
+  .navbar {
+  	border-radius: 0;
+
+      .navbar-collapse {
+        padding: 0;
+        max-height: none;
       }
+  }
+
+  .side-item {
+    height: 150px;
+    border-radius: 0px;
+    padding: 15px;
+
+    h4 {
+      display: inline;
     }
 
-    .fa {
-      background-color: white;
-      border-radius: 100%;
-    }
-
-    .navbar {
-    	border-radius: 0;
-
-        .navbar-collapse {
-          padding: 0;
-          max-height: none;
-        }
-    }
-
-    .side-item {
-      height: 100px;
-      border-radius: 0px;
-    }
-
-    .list-group {
-        overflow-y: auto;
-        max-height: 670px;
-        overflow-x: hidden;
-
-        a {
-            padding: 5px;
-            padding-left: 8px;
-            padding-right: 8px;
-
-            p {
-                margin-top: -30px;
-                float:right;
-            }
-        }
-    }
-
-    .dark-text {
-        color: black;
+    p {
+      float:right;
     }
   }
 
-  .no-challenges h4 {
-    border-top: 1px solid #888;
-    padding: 40px;
+  .list-group {
+      overflow-y: auto;
+      max-height: 670px;
+      overflow-x: hidden;
   }
 
+  .dark-text {
+      color: black;
+  }
+}
+
+.no-challenges h4 {
+  border-top: 1px solid #888;
+  padding: 40px;
 }
