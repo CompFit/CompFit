@@ -94,6 +94,7 @@ CREATE TABLE individual_progress
   exercise_name VARCHAR(40),
   repetitions FLOAT,
   units VARCHAR(20),
+  date_completed DATE,
   created VARCHAR(19),
   PRIMARY KEY(individual_progress_id),
   FOREIGN KEY(user_id) REFERENCES users(user_id),
