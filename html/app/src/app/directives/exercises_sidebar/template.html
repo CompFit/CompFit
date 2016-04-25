@@ -8,7 +8,7 @@
             <h3>Exercise Log<a ng-click="toggleModal()"><i class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
         </div>
         <div class="navbar-collapse collapse" id="side-nav">
-            <ul class="nav list-group" id="exerciselist">
+            <ul class="nav list-group" id="exerciselist" ng-show="exercises.length > 0">
                 <li ng-repeat="exercise in exercises">
                     <a class="list-group-item side-item" ng-click="saveScrollPosition()"
                         ui-sref-active="active" ui-sref="app.exercise({id:{{exercise.exercise_id}}})">
