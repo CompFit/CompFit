@@ -28,7 +28,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         var trs = document.querySelectorAll('.table-body tr');
         for (var i=0; i<trs.length; i++) {
             var tr = trs[i];
-            var pr = tr.querySelector('.progress');
+            var pr = tr.querySelector('.player-progress');
 
             if (tr.dataset.progress > 100) {
                 pr.style.left = (0)+'%';
