@@ -7,10 +7,10 @@
 
             <div class="col-md-9">
                 <div class="topSection row" ng-show="team_selected">
-                    <div class="col-sm-2">
+                    <div class="col-sm-2 col-xs-2">
                         <img src="{{avatar}}" alt="group by Alexandra Coscovelnita from the Noun Project" class="img-thumbnail">
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10 col-xs-10">
                         <h2>{{team_name}}</h2>
                         <h4>{{players.length}} Members</h4>
                         <span ng-repeat="player in players" class="label label-default">{{player.username}} <span class="glyphicon glyphicon-envelope pull-right"></span></span>
@@ -23,9 +23,13 @@
                         <div class="list-group" id="teamchallengelist">
                             <div ng-repeat="challenge in challenges">
                                 <a class="list-group-item" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
-                                    <h4 class="challenge-title">{{challenge.task_name}}</h4>
-                                    <h4 class="challenge-teams">{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h4>
-                                    <br><br>
+                                    <h3 class="challenge-teams">{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h3>
+                                    <h4 class="challenge-title">
+                                        {{challenge.task_name}} |
+                                        {{challenge.repetitions}} {{challenge.units}} |
+                                        {{getDaysLeft(challenge)}} days left
+                                    </h4>
+
                                     <h4>{{challenge.user_team.team_name}} progress</h4>
                                     <div class="progress">
                                       <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
