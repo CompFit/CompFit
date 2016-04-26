@@ -8,7 +8,7 @@ export default function(Exercises, Users) {
         replace: true,
         link: function ($scope, $element, $attrs) {
             $scope.exercises = Exercises.getExercises();
-
+            console.log($scope.exercises);
             $scope.scrollTo = Exercises.currentSidebarScrollPosition;
               if ($scope.scrollTo != null) {
                   $('#exerciselist').scrollTop($scope.scrollTo);

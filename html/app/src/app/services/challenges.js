@@ -3,10 +3,31 @@ export default class {
     constructor($http) {
         this.$http = $http;
         this.currentSidebarScrollPosition = null;
+        this.observerCallbacks = [];
+
+        this.observeToDestroy = [];
+
+        this.maxYaxis = 0;
         var self = this;
 
         self.challenges = [];
 
+    }
+
+    resetChartAxis() {
+        this.maxYaxis = 0;
+    }
+
+    getChartHeight() {
+        return this.maxYaxis;
+    }
+
+    setChartHeight(num) {
+        if (num > this.maxYaxis) {
+            this.maxYaxis = num;
+            this.notifyObservers();
+        }
+        // return this.maxYaxis;
     }
 
     createChallenge(challenge) {
@@ -73,6 +94,23 @@ export default class {
 
     getChallenges() {
         return self.challenges;
+    }
+
+
+
+    //register an observer
+   registerObserverCallback(callback){
+
+      this.observerCallbacks.push(callback);
+      if (this.observerCallbacks.length > 2) {
+          this.observerCallbacks = this.observerCallbacks.slice(-2);
+      }
+    }
+
+    notifyObservers(){
+       angular.forEach(this.observerCallbacks, function(callback){
+         callback();
+       });
     }
 
 

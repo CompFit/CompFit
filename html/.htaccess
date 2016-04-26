@@ -1,4 +1,4 @@
-ErrorDocument 404 http://compfit.us/
+ErrorDocument 404 http://localhost:9000/
 RewriteEngine On
 RewriteBase /
 

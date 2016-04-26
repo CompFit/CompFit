@@ -8,10 +8,11 @@ import exercises_sidebar from './exercises_sidebar';
 import log_exercise_modal from './log_exercise_modal';
 import navbar from './navbar';
 import logbutton from './logbutton';
+import player_progress_chart from './player_progress_chart';
 
 export default angular
     .module( 'app.directives', [] )
-    .directive( 'seedSidebar', ['Teams', 'Users', teams_sidebar] )
+    .directive( 'seedSidebar', ['Teams', 'Users', 'Challenges', teams_sidebar] )
     .directive( 'createChallengeModal', ['Teams','Users','Challenges','Exercises', '$timeout', '$state', create_challenge_modal] )
     .directive( 'createTeamModal', ['Teams','Users', '$timeout', create_team_modal] )
     .directive( 'challengesSidebar', ['Challenges','Users','$timeout', challenges_sidebar] )
@@ -19,4 +20,5 @@ export default angular
     .directive( 'logExerciseModal', ['Exercises','Users', '$timeout', '$state', log_exercise_modal] )
     .directive( 'seedNavbar', ['Authentication','Users','Teams','Challenges','Exercises','$state', navbar] )
     .directive( 'seedLogbutton', logbutton )
+    .directive( 'playerProgressChart', ['Challenges',player_progress_chart] )
     .name;

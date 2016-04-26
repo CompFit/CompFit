@@ -9,93 +9,123 @@
                 <div class="topSection row" ng-show="challenge_selected">
                     <div class="col-sm-12">
                         <h2> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h2>
-                        <h3> {{challenge.task_name}} |
-                            {{challenge.task_type=='Individual' ? challenge.repetitions : '~'+(challenge.repetitions/my_team.players.length).toFixed(1)}}
-                            {{challenge.units}} per player | {{days_left}} days left
-                        </h3>
-                        <h4>{{challenge.task_type}}</h4>
+                        <h3> {{challenge.task_name}} | {{challenge.task_type=='Individual' ? challenge.repetitions : challenge.repetitions}}
+                        {{challenge.units}} {{challenge.task_type=='Individual' ? 'per player' : ''}} | {{days_left}} days left</h3>
+                        <h4>
+                            {{challenge.task_type}} Challenge
+
+                        </h4>
                         <h4>{{challenge.start_date | date: 'shortDate'}} - {{challenge.end_date | date:'shortDate'}}</h4>
                     </div>
                 </div>
 
-                <div class="bottomSection row" ng-show="challenge_selected">
-                    <div class="col-sm-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading my-panel-heading" ng-click="goToMyTeam()">
-                                <img src="{{my_team.team_avatar}}" alt="/img/team_avatars/default-avatar.png" class="thumbnail">
-                                <p>{{my_team.team_name}}</p>
+                <div class="bottomSection" ng-show="challenge_selected">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading my-panel-heading" ng-click="goToMyTeam()">
+                                    <img src="{{my_team.team_avatar}}" alt="group by Alexandra Coscovelnita from the Noun Project" class="thumbnail">
+                                    <p>{{my_team.team_name}}</p>
+                                    <div class="team-progress">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getProgress('all_my_team')}}"
+                                          aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_my_team')}}%">
+                                            {{getProgress('all_my_team')}}% Complete
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Player</th>
+                                            <th>{{challenge.units | capitalize}} Done</th>
+                                            <th>Progress</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>All Players</th>
+                                            <th>{{getProgressFraction('all_my_team')}}</th>
+                                            <th>{{getProgress('all_my_team')}}%</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody class="table-body">
+                                        <tr data-progress="{{getProgress('my_team', $index)}}" ng-repeat="player in my_team.players track by $index">
+                                            <th scope="row"><div class="player-progress"></div>{{$index+1}}</th>
+                                            <td>{{player.username}}</td>
+                                            <td>{{getProgressFraction('my_team', $index)}}</td>
+                                            <td>{{getProgress('my_team', $index)}}%
+                                                <i class="fa fa-trophy" ng-show="player.user_id==my_team.captain_id"></i>
+                                                <i class="fa fa-star" style="color:#FFD200" ng-show="player.user_id==current_user_id"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Player</th>
-                                        <th>{{challenge.units | capitalize}} Done</th>
-                                        <th>Progress</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th>All Players</th>
-                                        <th>{{getProgressFraction('all_my_team')}}</th>
-                                        <th>{{getProgress('all_my_team')}}%</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody class="table-body">
-                                    <tr data-progress="{{getProgress('my_team', $index)}}" ng-repeat="player in my_team.players track by $index">
-                                        <th scope="row"><div class="progress"></div>{{$index+1}}</th>
-                                        <td>{{player.username}}</td>
-                                        <td>{{getProgressFraction('my_team', $index)}}</td>
-                                        <td>{{getProgress('my_team', $index)}}%
-                                            <i class="fa fa-trophy" ng-show="player.user_id==my_team.captain_id"></i>
-                                            <i class="fa fa-star" style="color:#FFD200" ng-show="player.user_id==current_user_id"></i>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading opponent-panel-heading">
+                                    <img src="{{opponent_team.team_avatar}}" alt="group by Alexandra Coscovelnita from the Noun Project" class="thumbnail">
+                                    <p>{{opponent_team.team_name}}</p>
+                                    <div class="team-progress">
+                                        <div class="progress">
+                                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
+                                          aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_opponent_team')}}%">
+                                            {{getProgress('all_opponent_team')}}% Complete
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Player</th>
+                                            <th>{{challenge.units | capitalize}} Done</th>
+                                            <th>Progress</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th>All Players</th>
+                                            <th>{{getProgressFraction('all_opponent_team')}}</th>
+                                            <th>{{getProgress('all_opponent_team')}}%</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody class="table-body">
+                                        <tr data-progress="{{getProgress('opponent_team', $index)}}" ng-repeat="player in opponent_team.players track by $index">
+                                            <th scope="row"><div class="player-progress"></div>{{$index+1}}</th>
+                                            <td>{{player.username}}</td>
+                                            <td>{{getProgressFraction('opponent_team', $index)}}</td>
+                                            <td>{{getProgress('opponent_team', $index)}}%
+                                                <i class="fa fa-trophy" ng-show="player.user_id==opponent_team.captain_id"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading opponent-panel-heading">
-                                <img src="{{opponent_team.team_avatar}}" alt="/img/team_avatars/default-avatar.png" class="thumbnail">
-                                <p>{{opponent_team.team_name}}</p>
-                            </div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Player</th>
-                                        <th>{{challenge.units | capitalize}} Done</th>
-                                        <th>Progress</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th>All Players</th>
-                                        <th>{{getProgressFraction('all_opponent_team')}}</th>
-                                        <th>{{getProgress('all_opponent_team')}}%</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody class="table-body">
-                                    <tr data-progress="{{getProgress('opponent_team', $index)}}" ng-repeat="player in opponent_team.players track by $index">
-                                        <th scope="row"><div class="progress"></div>{{$index+1}}</th>
-                                        <td>{{player.username}}</td>
-                                        <td>{{getProgressFraction('opponent_team', $index)}}</td>
-                                        <td>{{getProgress('opponent_team', $index)}}%
-                                            <i class="fa fa-trophy" ng-show="player.user_id==opponent_team.captain_id"></i>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                    <div class="row" style="margin-top:0px; margin-bottom: 0px;">
+                        <div class="col-sm-12">
+                            <hr>
                         </div>
                     </div>
+                    <div class="row" style="padding-top:20px">
+                            <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" options="myTeamChartData"></player-progress-chart>
+                            <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" options="opponentTeamChartData"></player-progress-chart>
+                    </div>
+                    <br>
+                    <br>
                 </div>
                 <create-challenge-modal id="createchallengemodal" title="New Challenge"/>
             </div>
         </div>
->>>>>>> master
     </div>
 </div>
