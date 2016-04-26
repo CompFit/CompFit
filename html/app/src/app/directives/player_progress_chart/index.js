@@ -9,8 +9,23 @@ export default function(Challenges) {
             options: '='
         },
         link: function (scope, element) {
+            var chart = Highcharts.chart(element[0], scope.options);
+
+            var destroyChart = function() {
+                try{
+                    chart.destroy();
+                }catch(ex){
+                    // fail silently as highcharts will throw exception if element doesn't exist
+                }
+            }
+
             var updateChart = function() {
-                Highcharts.chart(element[0], scope.options);
+                destroyChart();
+                chart = Highcharts.chart(element[0], scope.options);
+                // Challenges.setChartHeight(chart.yAxis[0].max);
+                // chart.yAxis[0].update({
+                //     max: Challenges.getChartHeight()
+                // });
             };
 
             Challenges.registerObserverCallback(updateChart);

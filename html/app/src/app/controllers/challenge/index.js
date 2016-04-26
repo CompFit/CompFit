@@ -192,6 +192,12 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
             $scope.myTeamChartData.tooltip.valueSuffix = ' ' + $scope.challenge.units;
             $scope.myTeamChartData.yAxis.title.text = $filter('capitalize')($scope.challenge.units);
 
+            $scope.opponentTeamChartData.tooltip.valueSuffix = ' ' + $scope.challenge.units;
+            $scope.opponentTeamChartData.yAxis.title.text = $filter('capitalize')($scope.challenge.units);
+
+
+
+
 
             Challenges.getChallengeProgress($stateParams.id).then(function(response){
                 console.log(response);
@@ -224,6 +230,11 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
                 $scope.myTeamChartData.xAxis.categories = dateList;
                 $scope.opponentTeamChartData.xAxis.categories = dateList;
+
+                var maxYaxis = Math.max($scope.my_team.team_progress,$scope.opponent_team.team_progress)
+                // $scope.myTeamChartData.yAxis.max = maxYaxis;
+                // $scope.opponentTeamChartData.yAxis.max = maxYaxis;
+
 
                 for (var i = 0; i < $scope.my_team.players.length; i++) {
                     var seriesData = {
@@ -267,6 +278,9 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                     $scope.opponentTeamChartData.series.push(seriesData);
                 }
 
+
+                // yAxis: {min: 0, max: 100}
+                Challenges.resetChartAxis();
                 Challenges.notifyObservers();
             });
         });

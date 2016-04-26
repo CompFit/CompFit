@@ -115,8 +115,8 @@
                     <div class="row">
 
                             <!-- <div id="myteamchart" style="height: 400px;"></div> -->
-                            <player-progress-chart class="col-sm-6" style="height: 350px;" options="myTeamChartData"></player-progress-chart>
-                            <player-progress-chart class="col-sm-6" style="height: 350px;" options="opponentTeamChartData"></player-progress-chart>
+                            <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" style="height: 350px;" options="myTeamChartData"></player-progress-chart>
+                            <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" style="height: 350px;" options="opponentTeamChartData"></player-progress-chart>
                             <!-- <highchart id="chart1" config="chartConfig"></highchart> -->
                     </div>
                     <br>
