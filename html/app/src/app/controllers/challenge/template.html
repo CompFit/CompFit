@@ -111,13 +111,15 @@
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
 
-                            <!-- <div id="myteamchart" style="height: 400px;"></div> -->
-                            <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" style="height: 350px;" options="myTeamChartData"></player-progress-chart>
-                            <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" style="height: 350px;" options="opponentTeamChartData"></player-progress-chart>
-                            <!-- <highchart id="chart1" config="chartConfig"></highchart> -->
+                    <div class="row" style="margin-top:0px; margin-bottom: 0px;">
+                        <div class="col-sm-12">
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top:20px">
+                            <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" options="myTeamChartData"></player-progress-chart>
+                            <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" options="opponentTeamChartData"></player-progress-chart>
                     </div>
                     <br>
                     <br>

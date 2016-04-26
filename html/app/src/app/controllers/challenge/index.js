@@ -224,8 +224,8 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
                 $scope.myTeamChartData.series = [];
                 $scope.opponentTeamChartData.series = [];
-                $scope.myTeamChartData.title.text = 'Cumulative Player Contribution by Day for ' + $scope.my_team.team_name;
-                $scope.opponentTeamChartData.title.text = 'Cumulative Player Contribution by Day for ' + $scope.opponent_team.team_name;
+                $scope.myTeamChartData.title.text = $scope.my_team.team_name + ' Cumulative Player Contribution';
+                $scope.opponentTeamChartData.title.text = $scope.opponent_team.team_name + ' Cumulative Player Contribution';
                 var dateList = $scope.getDays(new Date($scope.challenge.start_date),new Date());
 
                 $scope.myTeamChartData.xAxis.categories = dateList;
