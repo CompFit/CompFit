@@ -863,7 +863,7 @@ $app->get('/challenge/{challenge_id}',
     $challenge_id = $request->getAttribute('challenge_id');
     $db = $this->dbConn;
 
-    $sql = 'SELECT * FROM challenges WHERE challenge_id = "'.$challenge_id.'" AND end_date >= CURDATE() ORDER BY end_date';
+    $sql = 'SELECT * FROM challenges WHERE challenge_id = "'.$challenge_id.'" AND end_date >= CURDATE() ORDER BY end_date ASC';
 
     try {
       $stmt = $db->query($sql);
@@ -894,7 +894,7 @@ $app->get('/team_challenges/{team_id}',
     $team_id = $request->getAttribute('team_id');
     $challenges = '';
 
-    $sql = 'SELECT challenge_id, task_name, start_date, end_date, repetitions, units, task_type, status, to_team_id, from_team_id from challenges WHERE (to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id . ') AND end_date >= CURDATE() ORDER BY end_date';
+    $sql = 'SELECT challenge_id, task_name, start_date, end_date, repetitions, units, task_type, status, to_team_id, from_team_id from challenges WHERE (to_team_id = ' . $team_id . ' OR from_team_id = ' . $team_id . ') AND end_date >= CURDATE() ORDER BY end_date ASC';
     $sql2 = 'SELECT team_name, team_color FROM teams WHERE `team_id` = :team_id';
     $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
     $sql4 = 'SELECT u.user_id, u.username FROM users u, (SELECT * from team_participation WHERE `team_id` = :team_id) as t WHERE t.user_id = u.user_id';
@@ -1081,7 +1081,7 @@ $app->get('/challenges/user_id/{user_id}',
     $challenges = '';
 
     $sql = 'SELECT team_id FROM team_participation WHERE user_id = '. $user_id;
-    $sql2 = 'SELECT * FROM challenges WHERE (to_team_id = :team_id OR from_team_id = :team_id) AND end_date >= CURDATE() ORDER BY end_date';
+    $sql2 = 'SELECT * FROM challenges WHERE (to_team_id = :team_id OR from_team_id = :team_id) AND end_date >= CURDATE() ORDER BY end_date ASC';
     $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
     $sql4 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE `challenge_id` = :challenge_id AND `user_id` = :user_id';
     $sql5 = 'SELECT team_name, team_color FROM teams WHERE `team_id` = :team_id';
@@ -1244,7 +1244,7 @@ $app->get('/challenges/exercise_id/{exercise_id}',
         $user_id = $stmt6->fetch(PDO::FETCH_OBJ);
       $sql8 = 'SELECT DISTINCT challenge_id, team_id FROM individual_progress WHERE `user_id` = :user_id AND `exercise_id` = :exercise_id';
       $sql = 'SELECT team_id FROM team_participation WHERE user_id = '. $user_id->user_id;
-      $sql2 = 'SELECT * FROM challenges WHERE `challenge_id` = :challenge_id AND end_date >= CURDATE() ORDER BY end_date';
+      $sql2 = 'SELECT * FROM challenges WHERE `challenge_id` = :challenge_id AND end_date >= CURDATE() ORDER BY end_date ASC';
       $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
       $sql4 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE `challenge_id` = :challenge_id AND `user_id` = :user_id';
       $sql5 = 'SELECT team_name, team_color FROM teams WHERE `team_id` = :team_id';
@@ -1347,7 +1347,7 @@ $app->get('/challenges/search/{end_date}',
     $end_date = $request->getAttribute('end_date');
     $challenges = '';
 
-    $sql = 'SELECT * FROM challenges WHERE end_date = "'.$end_date.'" ORDER BY end_date';
+    $sql = 'SELECT * FROM challenges WHERE end_date = "'.$end_date.'" ORDER BY end_date ASC';
 
     try {
       $stmt = $db->query($sql);
