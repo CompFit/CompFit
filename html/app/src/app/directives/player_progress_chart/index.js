@@ -22,6 +22,7 @@ export default function(Challenges) {
             var updateChart = function() {
                 destroyChart();
                 chart = Highcharts.chart(element[0], scope.options);
+                // console.log("options: ",scope.options);
             };
 
             var reflowChart = function() {
