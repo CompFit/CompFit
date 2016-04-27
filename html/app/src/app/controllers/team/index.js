@@ -13,8 +13,9 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     $scope.players = [];
     $scope.players_dropdown = false;
     $scope.team_selected = false;
-
     $scope.new_team = {};
+    $scope.currentUser = Users.getCurrentUser();
+    console.log("currentUser: " + $scope.currentUser);
 
 
     $scope.getDayDifference = function(date1_obj,date2_obj) {
