@@ -296,7 +296,8 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                     for(var d = 0; d < dateList.length; d++) {
                         var amountForDay = 0;
                         for(var j = 0; j <$scope.my_team.players[i].user_exercises.length; j++) {
-                            var date_logged = $filter('date')(new Date($scope.my_team.players[i].user_exercises[j].date_completed),'M/dd');
+
+                            var date_logged = $filter('date')((new Date($scope.my_team.players[i].user_exercises[j].date_completed)).addDays(1),'M/dd');
                             if (date_logged==dateList[d]) {
                                 amountForDay += parseInt($scope.my_team.players[i].user_exercises[j].repetitions);
                             }
@@ -317,7 +318,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                     for(var d = 0; d < dateList.length; d++) {
                         var amountForDay = 0;
                         for(var j = 0; j <$scope.opponent_team.players[i].user_exercises.length; j++) {
-                            var date_logged = $filter('date')(new Date($scope.opponent_team.players[i].user_exercises[j].date_completed),'M/dd');
+                            var date_logged = $filter('date')((new Date($scope.opponent_team.players[i].user_exercises[j].date_completed)).addDays(1),'M/dd');
                             if (date_logged==dateList[d]) {
                                 amountForDay += parseInt($scope.opponent_team.players[i].user_exercises[j].repetitions);
                             }
