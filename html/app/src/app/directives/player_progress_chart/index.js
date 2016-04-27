@@ -22,12 +22,14 @@ export default function(Challenges) {
             var updateChart = function() {
                 destroyChart();
                 chart = Highcharts.chart(element[0], scope.options);
-                // Challenges.setChartHeight(chart.yAxis[0].max);
-                // chart.yAxis[0].update({
-                //     max: Challenges.getChartHeight()
-                // });
             };
 
+            var reflowChart = function() {
+                chart.reflow();
+            };
+
+
+            Challenges.registerReflowCallback(reflowChart);
             Challenges.registerObserverCallback(updateChart);
             updateChart();
         }
