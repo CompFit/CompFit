@@ -130,7 +130,7 @@ CREATE TABLE units
 );
 
 INSERT INTO users (first_name, last_name, username, email, password, avatar) VALUES ('Mary Charles', 'Byers', 'marycharles', 'mcharles@gmail.com', 'IVJOvLjkY7', '/img/user_avatars/basic_avatar0.png');
-INSERT INTO users (first_name, last_name, username, email, password, avatar) VALUES ('Jane', 'doe', 'jjdoe', 'jjdoe@urmom.com', 'EirXgVZzZcA', '/img/user_avatars/basic_avatar1.png');
+INSERT INTO users (first_name, last_name, username, email, password, avatar) VALUES ('Gabe', 'Vargas', 'gvargas', 'gvargas@urmom.com', 'EirXgVZzZcA', '/img/user_avatars/basic_avatar1.png');
 insert into users (first_name, last_name, email, password, avatar, username) values ('Annie', 'Allen', 'aallen0@accuweather.com', 'GZq0qt2VL', '/img/user_avatars/basic_avatar0.png', 'aallen0');
 insert into users (first_name, last_name, email, password, avatar, username) values ('Fred', 'Hicks', 'fhicks1@edublogs.org', 'IDHOvLjkY8', '/img/user_avatars/basic_avatar1.png', 'fhicks1');
 insert into users (first_name, last_name, email, password, avatar, username) values ('Ruth', 'Frazier', 'rfrazier2@bing.com', 'BP35m3sGJj', '/img/user_avatars/basic_avatar2.png', 'rfrazier2');
