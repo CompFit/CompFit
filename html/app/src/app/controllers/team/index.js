@@ -85,4 +85,25 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
             return (100 * challenge.user_progress/challenge.repetitions/challenge.user_team.num_members).toFixed(1);
         }
     };
+
+    $scope.getProgressLongFraction = function(challenge, team) {
+        if (team == 'my_team')
+        {
+            if (challenge.task_type == 'Individual') {
+                return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.user_team.players.length);
+            }
+            else {
+                return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String((challenge.repetitions));
+            }
+        }
+        else
+        {
+            if (challenge.task_type == 'Individual') {
+                return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.oppo_team.players.length);
+            }
+            else {
+                return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions);
+            }
+        }
+    };
 }

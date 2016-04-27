@@ -74,4 +74,26 @@ export default function($scope, $stateParams, Exercises, Users, Challenges, Team
         return Math.round($scope.getTeamProgress(challenge) - $scope.getUserAddition(challenge));
     };
 
+
+    $scope.getProgressFraction = function(challenge, team) {
+        if (team == 'my_team')
+        {
+            if (challenge.task_type == 'Individual') {
+                return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.user_team.num_members);
+            }
+            else {
+                return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String((challenge.repetitions));
+            }
+        }
+        else
+        {
+            if (challenge.task_type == 'Individual') {
+                return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.oppo_team.num_members);
+            }
+            else {
+                return String(Math.round(10*parseFloat(opponent_team.team_progress))/10)+" / "+String(challenge.repetitions);
+            }
+        }
+    };
+
 }

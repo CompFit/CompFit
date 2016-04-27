@@ -28,10 +28,10 @@
                                     <p>{{my_team.team_name}}</p>
                                     <div class="team-progress">
                                         <div class="progress">
-                                          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getProgress('all_my_team')}}"
-                                          aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_my_team')}}%">
-                                            {{getProgress('all_my_team')}}% Complete
-                                          </div>
+                                            <span class="progress-value">{{getProgressLongFraction(challenge,'my_team')}} {{challenge.units}}</span>
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getProgress('all_my_team')}}"
+                                                aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_my_team')}}%">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -73,10 +73,10 @@
                                     <p>{{opponent_team.team_name}}</p>
                                     <div class="team-progress">
                                         <div class="progress">
-                                          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
-                                          aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_opponent_team')}}%">
-                                            {{getProgress('all_opponent_team')}}% Complete
-                                          </div>
+                                            <span class="progress-value">{{getProgressLongFraction(challenge,'opponent_team')}} {{challenge.units}}</span>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
+                                                    aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_opponent_team')}}%">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
