@@ -1406,7 +1406,7 @@ $app->get('/challenges/exercise_id/{exercise_id}',
         $user_id = $stmt6->fetch(PDO::FETCH_OBJ);
       $sql8 = 'SELECT DISTINCT challenge_id, team_id FROM individual_progress WHERE `user_id` = :user_id AND `exercise_id` = :exercise_id';
       $sql = 'SELECT team_id FROM team_participation WHERE user_id = '. $user_id->user_id;
-      $sql2 = 'SELECT * FROM challenges WHERE `challenge_id` = :challenge_id AND end_date >= CURDATE() AND status = "OPEN" ORDER BY end_date ASC';
+      $sql2 = 'SELECT * FROM challenges WHERE `challenge_id` = :challenge_id';
       $sql3 = 'SELECT repetitions FROM challenge_progress WHERE `challenge_id` = :challenge_id AND `team_id` = :team_id';
       $sql4 = 'SELECT sum(repetitions) as reps FROM individual_progress WHERE `challenge_id` = :challenge_id AND `user_id` = :user_id';
       $sql5 = 'SELECT team_name, team_color FROM teams WHERE `team_id` = :team_id';
