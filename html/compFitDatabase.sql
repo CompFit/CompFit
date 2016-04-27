@@ -112,6 +112,7 @@ CREATE TABLE challenge_progress
   exercise_name VARCHAR(40),
   repetitions FLOAT,
   units VARCHAR(20),
+  status VARCHAR(20) DEFAULT 'ONGOING',
   created VARCHAR(19),
   PRIMARY KEY(challenge_progress_id),
   FOREIGN KEY(challenge_id) REFERENCES challenges(challenge_id),
