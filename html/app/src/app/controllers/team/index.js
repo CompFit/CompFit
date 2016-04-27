@@ -43,6 +43,10 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
             leaveTeam = confirm("Are you sure you want to leave " + $scope.team_name + "?");
         }
     };
+    
+    $scope.showEmail = function(email) {
+        alert(email);
+    };
 
 
     if ($stateParams.id == "") {
