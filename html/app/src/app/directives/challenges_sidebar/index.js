@@ -8,6 +8,7 @@ export default function(Challenges, Users, $timeout) {
         replace: true,
         link: function ($scope, $element, $attrs) {
               $scope.challenges = Challenges.getChallenges();
+              /*$scope.past = Challenges.getPast();*/
 
               $scope.getDayDifference = function(date1_obj,date2_obj) {
                   var date2 = new Date(date2_obj);
