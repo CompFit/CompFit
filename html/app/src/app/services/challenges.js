@@ -5,7 +5,7 @@ export default class {
         this.currentSidebarScrollPosition = null;
         this.observerCallbacks = [];
 
-        this.observeToDestroy = [];
+        this.observeToReflow = [];
 
         this.maxYaxis = 0;
         var self = this;
@@ -134,6 +134,20 @@ export default class {
           this.observerCallbacks = this.observerCallbacks.slice(-2);
       }
     }
+
+    registerReflowCallback(callback){
+
+       this.observeToReflow.push(callback);
+       if (this.observeToReflow.length > 2) {
+           this.observeToReflow = this.observeToReflow.slice(-2);
+       }
+     }
+
+     reflowCharts(){
+        angular.forEach(this.observeToReflow, function(callback){
+          callback();
+        });
+     }
 
     notifyObservers(){
        angular.forEach(this.observerCallbacks, function(callback){

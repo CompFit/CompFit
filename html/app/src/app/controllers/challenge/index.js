@@ -8,6 +8,16 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
           $('#createchallengemodal').modal('show');
     };
 
+    $scope.overview = true;
+
+    $scope.showCharts = function() {
+        $scope.overview = false;
+    }
+
+    jQuery(document).on( 'shown.bs.tab', 'a[data-toggle="tab"]', function (e) { // on tab selection event
+        Challenges.reflowCharts();
+    })
+
     $scope.challenge = {};
     $scope.my_team = {"players":[],"team_id":null};
     $scope.opponent_team = {"players":[]};

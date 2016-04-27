@@ -23,15 +23,15 @@
                         <h2>Progress</h2>
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a>
+                                <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab" ng-click="overview=true">Overview</a>
                             </li>
                             <li role="presentation">
-                                <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Timeline</a>
+                                <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab" ng-click="showCharts()">Timeline</a>
                             </li>
                         </ul>
 
                         <div id="tabs" class="panel panel-default tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="overview">
+                            <div role="tabpanel" class="tab-pane active" id="overview" ng-if="overview">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="panel panel-default">
@@ -125,12 +125,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="timeline">
-                                <div class="row">
-                                    <div class="row">
-                                        <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" options="myTeamChartData"></player-progress-chart>
-                                        <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" options="opponentTeamChartData"></player-progress-chart>
-                                    </div>
+                            <div role="tabpanel" class="tab-pane" id="timeline" >
+                                <div class="row" ng-if="!overview">
+                                    <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" options="myTeamChartData"></player-progress-chart>
+                                    <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" options="opponentTeamChartData"></player-progress-chart>
                                 </div>
                             </div>
                         </div>
