@@ -6,6 +6,7 @@
 
     .col-md-3 {
         padding: 0px;
+        z-index: 1029;
     }
 
     .col-md-9 {
@@ -16,7 +17,7 @@
         img {
             width: 130px;
             height: 130px;
-            float:left;
+            float: left;
             margin-top: 20px;
         }
 
@@ -25,13 +26,40 @@
             padding: 7px 10px;
             text-align: left;
             display: inline-block;
-            width: 150px;
+            width: 210px;
             margin: 2px;
+        }
+
+        .glyphicon {
+            cursor: pointer;
+        }
+
+        .col-sm-10 {
+            padding-left: 0px;
         }
     }
 
     .bottomSection {
-    
+        h3 {
+            margin-top: 7px;
+        }
+
+        .progress {
+            margin-botton: 10px;
+            text-align: center;
+
+            .progress-value {
+                color: black;
+
+                position:absolute;
+                right:0;
+                left:0;
+            }
+
+            .progress-bar {
+                color: black;
+            }
+        }
     }
 
     /* Portrait tablets and small desktops */
@@ -41,7 +69,6 @@
         .col-md-3 {
             position:fixed;
             top: 50px;
-            z-index: 1029;
         }
     }
 }

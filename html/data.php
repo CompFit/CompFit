@@ -64,7 +64,7 @@ sendPostData($url_send, $str_data);
 
 $data = array();
 $data['task_name'] = 'Russian Twists';
-$data['start_date'] = '2016-4-25';
+$data['start_date'] = '2016-4-21';
 $data['end_date'] = '2016-5-29';
 $data['to_team_id'] = '1';
 $data['from_team_id'] = '7';

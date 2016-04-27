@@ -1,5 +1,6 @@
 import angular from 'angular';
 import angularUIRouter from 'angular-ui-router';
+// import highchartsNG from 'highcharts-ng';
 
 import routes from './routes';
 
@@ -11,7 +12,7 @@ export default angular
     .module( 'app', [
         'mgcrea.ngStrap',
         angularUIRouter,
-
+        // highchartsNG,
         controllers,
         directives,
         services
