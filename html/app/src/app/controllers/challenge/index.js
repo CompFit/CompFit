@@ -8,6 +8,17 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
           $('#createchallengemodal').modal('show');
     };
 
+    $scope.overview = true;
+
+    $scope.showCharts = function() {
+        $scope.overview = false;
+    }
+
+    jQuery(document).on( 'shown.bs.tab', 'a[data-toggle="tab"]', function (e) { // on tab selection event
+        Challenges.reflowCharts();
+        $scope.updateProgress();
+    })
+
     $scope.challenge = {};
     $scope.my_team = {"players":[],"team_id":null};
     $scope.opponent_team = {"players":[]};
@@ -263,6 +274,16 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                     $scope.my_team = team2;
                 }
 
+                if ($scope.my_team.players[0].user_id != Users.getCurrentUser()) {
+                    for (var i = 1; i < $scope.my_team.players.length; i++) {
+                        if ($scope.my_team.players[i].user_id == Users.getCurrentUser()) {
+                            var temp = $scope.my_team.players[0];
+                            $scope.my_team.players[0] = $scope.my_team.players[i];
+                            $scope.my_team.players[i] = temp;
+                        }
+                    }
+                }
+
                 $scope.myTeamChartData.series = [];
                 $scope.opponentTeamChartData.series = [];
                 $scope.myTeamChartData.title.text = $scope.my_team.team_name + ' Cumulative Player Contribution';
@@ -286,7 +307,8 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                     for(var d = 0; d < dateList.length; d++) {
                         var amountForDay = 0;
                         for(var j = 0; j <$scope.my_team.players[i].user_exercises.length; j++) {
-                            var date_logged = $filter('date')(new Date($scope.my_team.players[i].user_exercises[j].date_completed),'M/dd');
+
+                            var date_logged = $filter('date')((new Date($scope.my_team.players[i].user_exercises[j].date_completed)).addDays(1),'M/dd');
                             if (date_logged==dateList[d]) {
                                 amountForDay += parseInt($scope.my_team.players[i].user_exercises[j].repetitions);
                             }
@@ -307,7 +329,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                     for(var d = 0; d < dateList.length; d++) {
                         var amountForDay = 0;
                         for(var j = 0; j <$scope.opponent_team.players[i].user_exercises.length; j++) {
-                            var date_logged = $filter('date')(new Date($scope.opponent_team.players[i].user_exercises[j].date_completed),'M/dd');
+                            var date_logged = $filter('date')((new Date($scope.opponent_team.players[i].user_exercises[j].date_completed)).addDays(1),'M/dd');
                             if (date_logged==dateList[d]) {
                                 amountForDay += parseInt($scope.opponent_team.players[i].user_exercises[j].repetitions);
                             }
