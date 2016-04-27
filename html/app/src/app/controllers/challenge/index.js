@@ -153,6 +153,47 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         }
     };
 
+    $scope.getProgressLongFraction = function(challenge, team) {
+        if (team == 'my_team')
+        {
+            if (challenge.my_team != undefined) {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.user_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String((challenge.repetitions));
+                }
+            }
+            else {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat($scope.my_team.team_progress))/10)+" / "+String(challenge.repetitions*$scope.my_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat($scope.my_team.team_progress))/10)+" / "+String((challenge.repetitions));
+                }
+            }
+        }
+        else
+        {
+            if (challenge.oppo_team != undefined) {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.oppo_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions);
+                }
+            }
+            else {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat($scope.opponent_team.team_progress))/10)+" / "+String(challenge.repetitions*$scope.opponent_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat($scope.opponent_team.team_progress))/10)+" / "+String(challenge.repetitions);
+                }
+            }
+        }
+    };
+
     $scope.isCaptain = function(team,index) {
         // if (team == 'my_team') {
         //     return $scope.my_team.captain_id

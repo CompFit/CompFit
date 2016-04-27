@@ -411,6 +411,16 @@ $str_data = json_encode($data, JSON_PRETTY_PRINT);
 sendPostData($url_send, $str_data);
 
 $data = array();
+$data['exercise_name'] = 'Cycling';
+$data['user_id'] = '38';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '17.6';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
 $data['exercise_name'] = 'Russian Twists';
 $data['user_id'] = '21';
 $data['date_completed'] = '2016-4-26';
@@ -566,7 +576,7 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '4';
 $data['date_completed'] = '2016-4-26';
-$data['repetitions'] = '1.5';
+$data['repetitions'] = '4';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
@@ -576,8 +586,8 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '22';
 $data['date_completed'] = '2016-4-23';
-$data['repetitions'] = '3.2';
-$data['units'] = 'kilometers';
+$data['repetitions'] = '4';
+$data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
 sendPostData($url_send, $str_data);
@@ -586,7 +596,7 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '32';
 $data['date_completed'] = '2016-4-23';
-$data['repetitions'] = '0.2';
+$data['repetitions'] = '4.3';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
@@ -596,7 +606,7 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '1';
 $data['date_completed'] = '2016-4-26';
-$data['repetitions'] = '.5';
+$data['repetitions'] = '4.5';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
@@ -606,7 +616,7 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '37';
 $data['date_completed'] = '2016-4-26';
-$data['repetitions'] = '1.25';
+$data['repetitions'] = '4.25';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
@@ -616,7 +626,7 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '11';
 $data['date_completed'] = '2016-4-26';
-$data['repetitions'] = '.35';
+$data['repetitions'] = '4.35';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
@@ -626,7 +636,7 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '13';
 $data['date_completed'] = '2016-4-26';
-$data['repetitions'] = '.45';
+$data['repetitions'] = '4.45';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
@@ -636,7 +646,7 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '16';
 $data['date_completed'] = '2016-4-26';
-$data['repetitions'] = '.75';
+$data['repetitions'] = '4.75';
 $data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
@@ -646,8 +656,8 @@ $data = array();
 $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '41';
 $data['date_completed'] = '2016-4-25';
-$data['repetitions'] = '3.6';
-$data['units'] = 'kilometers';
+$data['repetitions'] = '4.6';
+$data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
 sendPostData($url_send, $str_data);
@@ -657,7 +667,7 @@ $data['exercise_name'] = 'Swimming';
 $data['user_id'] = '18';
 $data['date_completed'] = '2016-4-25';
 $data['repetitions'] = '4';
-$data['units'] = 'kilometers';
+$data['units'] = 'miles';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
 sendPostData($url_send, $str_data);
@@ -795,7 +805,7 @@ sendPostData($url_send, $str_data);
 $data = array();
 $data['exercise_name'] = 'Yoga';
 $data['user_id'] = '3';
-$data['date_completed'] = '2016-4-24';
+$data['date_completed'] = '2016-4-26';
 $data['repetitions'] = '78';
 $data['units'] = 'minutes';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
@@ -805,7 +815,7 @@ sendPostData($url_send, $str_data);
 $data = array();
 $data['exercise_name'] = 'Yoga';
 $data['user_id'] = '26';
-$data['date_completed'] = '2016-4-23';
+$data['date_completed'] = '2016-4-25';
 $data['repetitions'] = '39';
 $data['units'] = 'minutes';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
@@ -815,7 +825,7 @@ sendPostData($url_send, $str_data);
 $data = array();
 $data['exercise_name'] = 'Yoga';
 $data['user_id'] = '5';
-$data['date_completed'] = '2016-4-24';
+$data['date_completed'] = '2016-4-25';
 $data['repetitions'] = '25';
 $data['units'] = 'minutes';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
