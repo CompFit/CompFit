@@ -72,8 +72,75 @@ $data['repetitions'] = '1200';
 $data['units'] = 'repetitions';
 $data['task_type'] = 'Group';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
-
 sendPostData($url_send, $str_data);
+
+
+
+
+
+
+
+
+$data = array();
+$data['task_name'] = 'Squats';
+$data['start_date'] = '2016-4-20';
+$data['end_date'] = '2016-4-27';
+$data['to_team_id'] = '1';
+$data['from_team_id'] = '17';
+$data['repetitions'] = '1000';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Group';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Burpees';
+$data['start_date'] = '2016-4-23';
+$data['end_date'] = '2016-4-30';
+$data['to_team_id'] = '18';
+$data['from_team_id'] = '1';
+$data['repetitions'] = '500';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Group';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Running';
+$data['start_date'] = '2016-4-23';
+$data['end_date'] = '2016-4-29';
+$data['to_team_id'] = '6';
+$data['from_team_id'] = '19';
+$data['repetitions'] = '5';
+$data['units'] = 'miles';
+$data['task_type'] = 'Individual';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Box Jumps';
+$data['start_date'] = '2016-4-24';
+$data['end_date'] = '2016-5-1';
+$data['to_team_id'] = '8';
+$data['from_team_id'] = '19';
+$data['repetitions'] = '500';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Group';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Crunches';
+$data['start_date'] = '2016-4-21';
+$data['end_date'] = '2016-4-29';
+$data['to_team_id'] = '14';
+$data['from_team_id'] = '20';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Individual';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
 
 $url_send = 'http://127.0.0.1/api/exercise';
 
@@ -774,5 +841,1049 @@ $data['units'] = 'minutes';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
 
 sendPostData($url_send, $str_data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-21';
+$data['repetitions'] = '30';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '43';
+$data['date_completed'] = '2016-4-22';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-22';
+$data['repetitions'] = '100';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '44';
+$data['date_completed'] = '2016-4-22';
+$data['repetitions'] = '150';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '41';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '200';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '44';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '37';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '44';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '16';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '150';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '45';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '16';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '46';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '200';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '13';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '150';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '43';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '100';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '18';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '180';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '46';
+$data['date_completed'] = '2016-4-21';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Squats';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '90';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '47';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '47';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '30';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '41';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '48';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '37';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '49';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '16';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '70';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '50';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '13';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '18';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '60';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '11';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '30';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Burpees';
+$data['user_id'] = '49';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '51';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '2';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '51';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '3';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '2';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '12';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '2';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '52';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '12';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '52';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '12';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '52';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '12';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '52';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '24';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '3';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '52';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '24';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '3';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '2';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '4';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '5';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '20';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '2';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '20';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '2';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '20';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-29';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '20';
+$data['date_completed'] = '2016-4-29';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '40';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '3';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '40';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '3';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '9';
+$data['date_completed'] = '2016-4-23';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '9';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '9';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '9';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '9';
+$data['date_completed'] = '2016-4-29';
+$data['repetitions'] = '1';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Running';
+$data['user_id'] = '31';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '5';
+$data['units'] = 'miles';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '37';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '51';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '10';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '37';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '10';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '51';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '11';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '51';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '10';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '11';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '30';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '52';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '10';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '10';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '10';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '10';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '30';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '1';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '10';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '2';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '40';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '18';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '30';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '18';
+$data['date_completed'] = '2016-4-30';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '36';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '53';
+$data['date_completed'] = '2016-4-30';
+$data['repetitions'] = '40';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-24';
+$data['repetitions'] = '25';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-25';
+$data['repetitions'] = '25';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-26';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-27';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-28';
+$data['repetitions'] = '20';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-29';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['exercise_name'] = 'Box Jumps';
+$data['user_id'] = '54';
+$data['date_completed'] = '2016-4-30';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+
+sendPostData($url_send, $str_data);
+
 
 ?>
