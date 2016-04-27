@@ -8,6 +8,16 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
           $('#createchallengemodal').modal('show');
     };
 
+    $scope.overview = true;
+
+    $scope.showCharts = function() {
+        $scope.overview = false;
+    }
+
+    jQuery(document).on( 'shown.bs.tab', 'a[data-toggle="tab"]', function (e) { // on tab selection event
+        Challenges.reflowCharts();
+    })
+
     $scope.challenge = {};
     $scope.my_team = {"players":[],"team_id":null};
     $scope.opponent_team = {"players":[]};
@@ -149,6 +159,47 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
             }
             else {
                 return (100 * $scope.opponent_team.team_progress/$scope.challenge.repetitions).toFixed(0);
+            }
+        }
+    };
+
+    $scope.getProgressLongFraction = function(challenge, team) {
+        if (team == 'my_team')
+        {
+            if (challenge.my_team != undefined) {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.user_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String((challenge.repetitions));
+                }
+            }
+            else {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat($scope.my_team.team_progress))/10)+" / "+String(challenge.repetitions*$scope.my_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat($scope.my_team.team_progress))/10)+" / "+String((challenge.repetitions));
+                }
+            }
+        }
+        else
+        {
+            if (challenge.oppo_team != undefined) {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.oppo_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions);
+                }
+            }
+            else {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat($scope.opponent_team.team_progress))/10)+" / "+String(challenge.repetitions*$scope.opponent_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat($scope.opponent_team.team_progress))/10)+" / "+String(challenge.repetitions);
+                }
             }
         }
     };

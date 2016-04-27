@@ -30,7 +30,7 @@ export default function(Challenges, Users, $timeout) {
                   }
 
               };
-            
+
               $scope.getOppoTeamProgress = function(challenge) {
                   if (challenge.task_type == 'Individual') {
                       return (100 * challenge.oppo_team.team_progress/challenge.repetitions/challenge.oppo_team.players.length).toFixed(0);

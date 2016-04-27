@@ -23,15 +23,15 @@
                         <h2>Progress</h2>
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a>
+                                <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab" ng-click="overview=true">Overview</a>
                             </li>
                             <li role="presentation">
-                                <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab">Timeline</a>
+                                <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab" ng-click="showCharts()">Timeline</a>
                             </li>
                         </ul>
 
                         <div id="tabs" class="panel panel-default tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="overview">
+                            <div role="tabpanel" class="tab-pane active" id="overview" ng-if="overview">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="panel panel-default">
@@ -40,10 +40,10 @@
                                                 <p>{{my_team.team_name}}</p>
                                                 <div class="team-progress">
                                                     <div class="progress">
-                                                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getProgress('all_my_team')}}"
-                                                      aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_my_team')}}%">
-                                                        {{getProgress('all_my_team')}}% Complete
-                                                      </div>
+                                                        <span class="progress-value">{{getProgressLongFraction(challenge,'my_team')}} {{challenge.units}}</span>
+                                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getProgress('all_my_team')}}"
+                                                            aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_my_team')}}%">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,10 +85,10 @@
                                                 <p>{{opponent_team.team_name}}</p>
                                                 <div class="team-progress">
                                                     <div class="progress">
-                                                      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
-                                                      aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_opponent_team')}}%">
-                                                        {{getProgress('all_opponent_team')}}% Complete
-                                                      </div>
+                                                        <span class="progress-value">{{getProgressLongFraction(challenge,'opponent_team')}} {{challenge.units}}</span>
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getProgress('all_opponent_team')}}"
+                                                                aria-valuemin="0" aria-valuemax="100" style="width:{{getProgress('all_opponent_team')}}%">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,7 +115,8 @@
                                                         <td>{{player.username}}</td>
                                                         <td>{{getProgressFraction('opponent_team', $index)}}</td>
                                                         <td>{{getProgress('opponent_team', $index)}}%
-                                                            <i class="fa fa-trophy" ng-show="player.user_id==opponent_team.captain_id"></i>
+                                                            <!-- <i class="fa fa-trophy" ng-show="player.user_id==opponent_team.captain_id"></i> -->
+                                                            <img src="/img/application/captain-icon.png" ng-show="player.user_id==opponent_team.captain_id" style="height: 16px; float: right;"/>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -124,12 +125,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="timeline">
-                                <div class="row">
-                                    <div class="row">
-                                        <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" options="myTeamChartData"></player-progress-chart>
-                                        <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" options="opponentTeamChartData"></player-progress-chart>
-                                    </div>
+                            <div role="tabpanel" class="tab-pane" id="timeline" >
+                                <div class="row" ng-if="!overview">
+                                    <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" options="myTeamChartData"></player-progress-chart>
+                                    <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" options="opponentTeamChartData"></player-progress-chart>
                                 </div>
                             </div>
                         </div>
