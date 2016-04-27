@@ -16,6 +16,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
     jQuery(document).on( 'shown.bs.tab', 'a[data-toggle="tab"]', function (e) { // on tab selection event
         Challenges.reflowCharts();
+        $scope.updateProgress();
     })
 
     $scope.challenge = {};
@@ -271,6 +272,16 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                 else {
                     $scope.opponent_team = team1;
                     $scope.my_team = team2;
+                }
+
+                if ($scope.my_team.players[0].user_id != Users.getCurrentUser()) {
+                    for (var i = 1; i < $scope.my_team.players.length; i++) {
+                        if ($scope.my_team.players[i].user_id == Users.getCurrentUser()) {
+                            var temp = $scope.my_team.players[0];
+                            $scope.my_team.players[0] = $scope.my_team.players[i];
+                            $scope.my_team.players[i] = temp;
+                        }
+                    }
                 }
 
                 $scope.myTeamChartData.series = [];
