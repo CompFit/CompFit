@@ -72,8 +72,75 @@ $data['repetitions'] = '1200';
 $data['units'] = 'repetitions';
 $data['task_type'] = 'Group';
 $str_data = json_encode($data, JSON_PRETTY_PRINT);
-
 sendPostData($url_send, $str_data);
+
+
+
+
+
+
+
+
+$data = array();
+$data['task_name'] = 'Squats';
+$data['start_date'] = '2016-4-20';
+$data['end_date'] = '2016-4-27';
+$data['to_team_id'] = '1';
+$data['from_team_id'] = '17';
+$data['repetitions'] = '1000';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Group';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Burpees';
+$data['start_date'] = '2016-4-23';
+$data['end_date'] = '2016-4-30';
+$data['to_team_id'] = '18';
+$data['from_team_id'] = '1';
+$data['repetitions'] = '1000';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Group';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Running';
+$data['start_date'] = '2016-4-23';
+$data['end_date'] = '2016-4-29';
+$data['to_team_id'] = '6';
+$data['from_team_id'] = '19';
+$data['repetitions'] = '5';
+$data['units'] = 'miles';
+$data['task_type'] = 'Individual';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Box Jumps';
+$data['start_date'] = '2016-4-24';
+$data['end_date'] = '2016-5-1';
+$data['to_team_id'] = '8';
+$data['from_team_id'] = '19';
+$data['repetitions'] = '500';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Group';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
+$data = array();
+$data['task_name'] = 'Crunches';
+$data['start_date'] = '2016-4-21';
+$data['end_date'] = '2016-4-29';
+$data['to_team_id'] = '14';
+$data['from_team_id'] = '20';
+$data['repetitions'] = '50';
+$data['units'] = 'repetitions';
+$data['task_type'] = 'Individual';
+$str_data = json_encode($data, JSON_PRETTY_PRINT);
+sendPostData($url_send, $str_data);
+
 
 $url_send = 'http://127.0.0.1/api/exercise';
 
