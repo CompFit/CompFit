@@ -367,7 +367,7 @@ $app->get('/team/{team_id}',
              FROM teams
              WHERE team_id = "'.$team_id.'"';
 
-    $sql2 = 'SELECT u.user_id, u.username
+    $sql2 = 'SELECT u.user_id, u.username, u.email
              FROM users u,
                 (SELECT * from team_participation
                  WHERE team_id = "'.$team_id.'") as t
