@@ -37,9 +37,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .topSection {
-    height: 175px;
+    min-height: 175px;
+    height: initial;
+    padding-bottom: 15px;
     background-color: white;
     overflow-x: hidden;
-    margin-bottom: 20px;
     border-bottom: 2px solid #888;
 }
+
+.bottomSection {
+	padding-bottom: 20px;
+
+	.col-sm-12 {
+		.list-group {
+			margin-bottom: 0px;
+		}
+	}
+}
+

@@ -153,6 +153,47 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         }
     };
 
+    $scope.getProgressLongFraction = function(challenge, team) {
+        if (team == 'my_team')
+        {
+            if (challenge.my_team != undefined) {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.user_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String((challenge.repetitions));
+                }
+            }
+            else {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat($scope.my_team.team_progress))/10)+" / "+String(challenge.repetitions*$scope.my_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat($scope.my_team.team_progress))/10)+" / "+String((challenge.repetitions));
+                }
+            }
+        }
+        else
+        {
+            if (challenge.oppo_team != undefined) {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.oppo_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions);
+                }
+            }
+            else {
+                if (challenge.task_type == 'Individual') {
+                    return String(Math.round(10*parseFloat($scope.opponent_team.team_progress))/10)+" / "+String(challenge.repetitions*$scope.opponent_team.players.length);
+                }
+                else if(challenge.task_type == 'Group') {
+                    return String(Math.round(10*parseFloat($scope.opponent_team.team_progress))/10)+" / "+String(challenge.repetitions);
+                }
+            }
+        }
+    };
+
     $scope.isCaptain = function(team,index) {
         // if (team == 'my_team') {
         //     return $scope.my_team.captain_id
@@ -192,6 +233,12 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
             $scope.myTeamChartData.tooltip.valueSuffix = ' ' + $scope.challenge.units;
             $scope.myTeamChartData.yAxis.title.text = $filter('capitalize')($scope.challenge.units);
 
+            $scope.opponentTeamChartData.tooltip.valueSuffix = ' ' + $scope.challenge.units;
+            $scope.opponentTeamChartData.yAxis.title.text = $filter('capitalize')($scope.challenge.units);
+
+
+
+
 
             Challenges.getChallengeProgress($stateParams.id).then(function(response){
                 console.log(response);
@@ -218,12 +265,17 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
                 $scope.myTeamChartData.series = [];
                 $scope.opponentTeamChartData.series = [];
-                $scope.myTeamChartData.title.text = 'Cumulative Player Contribution by Day for ' + $scope.my_team.team_name;
-                $scope.opponentTeamChartData.title.text = 'Cumulative Player Contribution by Day for ' + $scope.opponent_team.team_name;
+                $scope.myTeamChartData.title.text = $scope.my_team.team_name + ' Cumulative Player Contribution';
+                $scope.opponentTeamChartData.title.text = $scope.opponent_team.team_name + ' Cumulative Player Contribution';
                 var dateList = $scope.getDays(new Date($scope.challenge.start_date),new Date());
 
                 $scope.myTeamChartData.xAxis.categories = dateList;
                 $scope.opponentTeamChartData.xAxis.categories = dateList;
+
+                var maxYaxis = Math.max($scope.my_team.team_progress,$scope.opponent_team.team_progress)
+                // $scope.myTeamChartData.yAxis.max = maxYaxis;
+                // $scope.opponentTeamChartData.yAxis.max = maxYaxis;
+
 
                 for (var i = 0; i < $scope.my_team.players.length; i++) {
                     var seriesData = {
@@ -267,6 +319,9 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                     $scope.opponentTeamChartData.series.push(seriesData);
                 }
 
+
+                // yAxis: {min: 0, max: 100}
+                Challenges.resetChartAxis();
                 Challenges.notifyObservers();
             });
         });
