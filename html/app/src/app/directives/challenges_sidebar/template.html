@@ -41,7 +41,27 @@
                     </ul>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="past">
-                    <p>Stuff goes here</p>
+                    <ul class="nav list-group" id="pastchallengelist" ng-show="past_challenges.length > 0" ng-click="saveScrollPosition()">
+                        <li ng-repeat="past_challenge in past_challenges track by $index">
+                            <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.past_challenge({id:{{past_challenge.challenge_id}}})">
+                                <h4>{{past_challenge.task_name}}</h4>
+                                <p>{{getDaysLeft(past_challenge)}} days left</p>
+                                <h5>{{past_challenge.user_team.team_name}} vs. {{past_challenge.oppo_team.team_name}}</h5>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(past_challenge)}}"
+                                  aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(past_challenge)}}%">
+                                    {{getTeamProgress(past_challenge)}}% Complete
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getOppoTeamProgress(past_challenge)}}"
+                                    aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(past_challenge)}}%">
+                                        {{getOppoTeamProgress(past_challenge)}}% Complete
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="no-challenges" ng-show="challenges.length <= 0">

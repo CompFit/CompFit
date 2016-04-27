@@ -8,7 +8,7 @@ export default function(Challenges, Users, $timeout) {
         replace: true,
         link: function ($scope, $element, $attrs) {
               $scope.challenges = Challenges.getChallenges();
-              /*$scope.past = Challenges.getPast();*/
+              $scope.past_challenges = Challenges.getPastChallenges();
 
               $scope.getDayDifference = function(date1_obj,date2_obj) {
                   var date2 = new Date(date2_obj);
@@ -58,6 +58,13 @@ export default function(Challenges, Users, $timeout) {
                   Challenges.getChallengesForUser(Users.getCurrentUser()).then( function(response) {
                       console.log(response.data);
                       $scope.challenges = response.data;
+                  });
+              }
+
+              if (!$scope.past_challenges) {
+                  Challenges.getPastChallengesForUser(Users.getCurrentUser()).then( function(response) {
+                      console.log(response.data);
+                      $scope.past_challenges = response.data;
                   });
               }
         },
