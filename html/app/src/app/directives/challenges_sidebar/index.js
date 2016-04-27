@@ -59,7 +59,6 @@ export default function(Challenges, Users, $timeout) {
                       $scope.challenges = response.data;
                   });
               }
-              console.log($scope.challenges)
         },
         templateUrl: template
     };

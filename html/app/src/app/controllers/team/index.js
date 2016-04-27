@@ -29,6 +29,20 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     $scope.getDaysLeft = function(challenge) {
         return getDayDifference(new Date(),challenge.end_date)+1;
     };
+    
+    $scope.leaveAlert = function(player_id, player_name) {
+        console.log("running leaveAlert("+player_id+")");
+        var disband, removePlayer, leaveTeam;
+        if($scope.isCaptain) {
+            if(player_id == $scope.currentUser) {
+                disband = confirm("You are currently team captain. If you leave this group, you will disband the team. Are you sure you want to disband the team?");
+            } else {
+                removePlayer = confirm("Are you sure you want to remove " + player_name + " from the team?");
+            }
+        } else {
+            leaveTeam = confirm("Are you sure you want to leave " + $scope.team_name + "?");
+        }
+    };
 
 
     if ($stateParams.id == "") {

@@ -5,7 +5,7 @@ export default class {
         this.currentSidebarScrollPosition = null;
         this.observerCallbacks = [];
 
-        this.observeToDestroy = [];
+        this.observeToReflow = [];
 
         this.maxYaxis = 0;
         var self = this;
@@ -63,7 +63,35 @@ export default class {
               method: 'GET',
               url: '/api/challenges/user_id/'+user_id
             }).then(function successCallback(response) {
-                self.challenges = response.data;
+                var challenges = response.data;
+                var getProgressLongFraction = function(challenge, team) {
+                    if (team == 'my_team')
+                    {
+                        if (challenge.task_type == 'Individual') {
+                            return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.user_team.players.length);
+                        }
+                        else if(challenge.task_type == 'Group') {
+                            return String(Math.round(10*parseFloat(challenge.user_team.team_progress))/10)+" / "+String((challenge.repetitions));
+                        }
+                    }
+                    else
+                    {
+                        if (challenge.task_type == 'Individual') {
+                            return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions*challenge.oppo_team.players.length);
+                        }
+                        else if(challenge.task_type == 'Group') {
+                            return String(Math.round(10*parseFloat(challenge.oppo_team.team_progress))/10)+" / "+String(challenge.repetitions);
+                        }
+                    }
+                }
+
+                for (var i = 0; i < challenges.length; i++) {
+                    challenges[i].user_team.fraction_team_progress = getProgressLongFraction(challenges[i],'my_team');
+                    challenges[i].oppo_team.fraction_team_progress = getProgressLongFraction(challenges[i],'opponent_team');
+                }
+                console.log("All the challenges",challenges)
+
+                self.challenges = challenges;
                 return response;
               }, function errorCallback(response) {
                 return response;
@@ -107,11 +135,26 @@ export default class {
       }
     }
 
+    registerReflowCallback(callback){
+
+       this.observeToReflow.push(callback);
+       if (this.observeToReflow.length > 2) {
+           this.observeToReflow = this.observeToReflow.slice(-2);
+       }
+     }
+
+     reflowCharts(){
+        angular.forEach(this.observeToReflow, function(callback){
+          callback();
+        });
+     }
+
     notifyObservers(){
        angular.forEach(this.observerCallbacks, function(callback){
          callback();
        });
     }
+
 
 
 }

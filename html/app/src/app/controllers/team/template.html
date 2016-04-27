@@ -13,12 +13,12 @@
                     <div class="col-sm-10 col-xs-10" ng-show="isCaptain">
                         <h2>{{team_name}}</h2>
                         <h4>{{players.length}} Members</h4>
-                        <span ng-repeat="player in players" class="label label-default">{{player.username}} <span class="glyphicon glyphicon-remove pull-right"></span><span class="glyphicon glyphicon-envelope pull-right"></span></span>
+                        <span ng-repeat="player in players" class="label label-default">{{player.username}} <span class="glyphicon glyphicon-remove pull-right" ng-click="leaveAlert(player.user_id, player.username)"></span><span class="glyphicon glyphicon-envelope pull-right"></span></span>
                     </div>
                     <div class="col-sm-10 col-xs-10" ng-show="!isCaptain">
                         <h2>{{team_name}}</h2>
                         <h4>{{players.length}} Members</h4>
-                        <span ng-repeat="player in players" class="label label-default">{{player.username}} <span class="glyphicon glyphicon-remove pull-right" ng-if="currentUser==player.user_id"></span><span class="glyphicon glyphicon-envelope pull-right"></span></span>
+                        <span ng-repeat="player in players" class="label label-default">{{player.username}} <span class="glyphicon glyphicon-remove pull-right" ng-if="currentUser==player.user_id" ng-click="leaveAlert()"></span><span class="glyphicon glyphicon-envelope pull-right"></span></span>
                     </div>
                 </div>
 
