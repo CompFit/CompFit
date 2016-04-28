@@ -15,6 +15,8 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     $scope.players_dropdown = false;
     $scope.team_selected = false;
     $scope.new_team = {};
+    $scope.challenges = [];
+    $scope.past_challenges = [];
     $scope.currentUser = Users.getCurrentUser();
     console.log("currentUser: " + $scope.currentUser);
 
@@ -77,6 +79,17 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
             $scope.challenges = response.data;
             console.log("challenges: ",response);
         });
+        Challenges.getPastChallengesForTeam($scope.team_id).then(function(response){
+            if (response.data.message == "Not found") {
+                console.log("past challenges for team not working yet")
+            }
+            else {
+                $scope.past_challenges = response.data;
+                console.log("past_challenges: ",response);
+            }
+
+        });
+
     }
 
     $scope.getTeamProgress = function(challenge) {

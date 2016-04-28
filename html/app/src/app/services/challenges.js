@@ -3,6 +3,7 @@ export default class {
     constructor($http) {
         this.$http = $http;
         this.currentSidebarScrollPosition = null;
+        this.showCurrentChallenges = true;
         this.observerCallbacks = [];
 
         this.observeToReflow = [];
@@ -132,6 +133,16 @@ export default class {
                 console.log("All the challenges",past_challenges)
 
                 self.past_challenges = past_challenges;
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+    getPastChallengesForTeam(team_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/past_challenges/team_id/'+team_id
+            }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
                 return response;
