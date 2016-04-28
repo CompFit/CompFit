@@ -367,7 +367,7 @@ $app->get('/team/{team_id}',
              FROM teams
              WHERE team_id = "'.$team_id.'"';
 
-    $sql2 = 'SELECT u.user_id, u.username
+    $sql2 = 'SELECT u.user_id, u.username, u.email
              FROM users u,
                 (SELECT * from team_participation
                  WHERE team_id = "'.$team_id.'") as t
@@ -560,7 +560,7 @@ $app->get('/teams/{user_id}',
               FROM users
               WHERE user_id = :captain_id';
     $sql1 = 'SELECT c.challenge_id, c.task_name, c.start_date, c.end_date, c.repetitions, c.units, c.task_type, c.status, c.to_team_id, c.from_team_id
-             FROM challenges c WHERE (c.to_team_id = :team_id OR c.from_team_id = :team_id) AND c.end_date >= CURDATE() ORDER BY c.end_date ASC';
+             FROM challenges c WHERE (c.to_team_id = :team_id OR c.from_team_id = :team_id) AND c.end_date >= CURDATE() AND c.status = "OPEN" ORDER BY c.end_date ASC';
 
 
 
