@@ -73,11 +73,13 @@
                                 <div class="list-group" id="teampastchallengelist" ng-if="past_challenges.length > 0">
                                     <div ng-repeat="past_challenge in past_challenges">
                                         <a class="list-group-item" ui-sref="app.challenge({id:{{past_challenge.challenge_id}}})">
-                                            <h3 class="challenge-teams">{{past_challenge.user_team.team_name}} vs. {{past_challenge.oppo_team.team_name}}</h3>
+                                            <h3 class="challenge-teams">
+                                                {{past_challenge.user_team.team_name}} vs. {{past_challenge.oppo_team.team_name}} |
+                                                You {{getTeamProgress(past_challenge) > getOppoTeamProgress(past_challenge) ? 'Won!! &#9786;' : 'Lost &#9785;'}}
+                                            </h3>
                                             <h4 class="challenge-title">
                                                 {{past_challenge.task_name}} |
-                                                {{past_challenge.repetitions}} {{past_challenge.units}} |
-                                                {{getDaysLeft(past_challenge)}} days left
+                                                {{past_challenge.repetitions}} {{past_challenge.units}}
                                             </h4>
 
                                             <h4>{{past_challenge.user_team.team_name}} progress</h4>
