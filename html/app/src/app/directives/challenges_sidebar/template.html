@@ -8,22 +8,6 @@
             <h3>Your Challenges <a ui-sref-active="active" ui-sref="app.challenge"><i ng-click="toggleModal()" class="fa fa-plus-circle fa-lg fa-pull-right"></i></a></h3>
         </div>
         <div class="navbar-collapse collapse" id="side-nav">
-
-            <!-- <ul class="nav list-group" id="challengelist" ng-show="challenges.length > 0" ng-click="saveScrollPosition()">
-                <li ng-repeat="challenge in challenges track by $index">
-                    <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
-                        <h4>{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h4>
-                        <p>{{getDaysLeft(challenge)}} days left</p>
-                        <h5 class="challenge-info">{{challenge.task_name}} | {{challenge.repetitions}} {{challenge.units}}</h5>
-                        <h5 class="team-name">{{challenge.user_team.team_name}} progress </h5>
-                        <div class="progress">
-
-                        </div>
-                        <h5 class="team-name">{{challenge.oppo_team.team_name}} progress</h5>
-                        <div class="progress">
-
-                        </div>
-                    </a> -->
             <ul class="nav nav-pills" role="tabnav">
                 <li role="presentation" class="active">
                     <a href="#current" aria-controls="current" role="tab" data-toggle="tab">Current</a>
