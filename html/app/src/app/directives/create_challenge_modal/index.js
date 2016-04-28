@@ -114,6 +114,9 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
             $scope.updateUnits = function() {
                 Exercises.getUnitsForExercise($scope.selected_exercise.exercise_list_id).then(function(response){
                     $scope.unitsForExercise = response.data;
+                    if ($scope.unitsForExercise.length == 0) {
+                        $scope.unitsForExercise = [{"unit_name":"repetitions"}];
+                    }
                     $scope.selected_units = $scope.unitsForExercise[0];
                 });
             };

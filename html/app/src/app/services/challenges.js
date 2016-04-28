@@ -11,7 +11,7 @@ export default class {
         var self = this;
 
         self.challenges = [];
-
+        self.past_challenges = [];
     }
 
     resetChartAxis() {
@@ -98,6 +98,46 @@ export default class {
             });
     }
 
+    getPastChallengesForUser(user_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/past_challenges/user_id/'+user_id
+            }).then(function successCallback(response) {
+                var past_challenges = response.data;
+                var getProgressLongFraction = function(past_challenge, team) {
+                    if (team == 'my_team')
+                    {
+                        if (past_challenge.task_type == 'Individual') {
+                            return String(Math.round(10*parseFloat(past_challenge.user_team.team_progress))/10)+" / "+String(past_challenge.repetitions*past_challenge.user_team.players.length);
+                        }
+                        else if(past_challenge.task_type == 'Group') {
+                            return String(Math.round(10*parseFloat(past_challenge.user_team.team_progress))/10)+" / "+String((past_challenge.repetitions));
+                        }
+                    }
+                    else
+                    {
+                        if (past_challenge.task_type == 'Individual') {
+                            return String(Math.round(10*parseFloat(past_challenge.oppo_team.team_progress))/10)+" / "+String(past_challenge.repetitions*past_challenge.oppo_team.players.length);
+                        }
+                        else if(past_challenge.task_type == 'Group') {
+                            return String(Math.round(10*parseFloat(past_challenge.oppo_team.team_progress))/10)+" / "+String(past_challenge.repetitions);
+                        }
+                    }
+                }
+
+                for (var i = 0; i < past_challenges.length; i++) {
+                    past_challenges[i].user_team.fraction_team_progress = getProgressLongFraction(past_challenges[i],'my_team');
+                    past_challenges[i].oppo_team.fraction_team_progress = getProgressLongFraction(past_challenges[i],'opponent_team');
+                }
+                console.log("All the challenges",past_challenges)
+
+                self.past_challenges = past_challenges;
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
+
     getChallengesForExercise(exercise_id) {
         return this.$http({
               method: 'GET',
@@ -124,7 +164,9 @@ export default class {
         return self.challenges;
     }
 
-
+    getPastChallenges() {
+        return self.past_challenges;
+    }
 
     //register an observer
    registerObserverCallback(callback){
