@@ -4,8 +4,11 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     'ngInject';
 
     $scope.toggleModal = function(){
-        console.log($scope.new_team);
           $('#createteammodal').modal('show');
+    };
+
+    $scope.toggleChallengeModal = function(){
+          $('#createchallengemodal').modal('show');
     };
     $scope.current = true;
     $scope.team_id = -1;

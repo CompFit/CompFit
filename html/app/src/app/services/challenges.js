@@ -65,6 +65,14 @@ export default class {
               url: '/api/challenges/user_id/'+user_id
             }).then(function successCallback(response) {
                 var challenges = response.data;
+
+                challenges.sort(function(a,b){
+                  return new Date(a.end_date) - new Date(b.end_date);
+                });
+
+                for (var i = 0; i < challenges.length; i++) {
+                    challenges[i]
+                }
                 var getProgressLongFraction = function(challenge, team) {
                     if (team == 'my_team')
                     {
