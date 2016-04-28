@@ -25,20 +25,20 @@ export default function(Challenges, Users, $timeout) {
 
               $scope.getTeamProgress = function(challenge) {
                   if (challenge.task_type == 'Individual') {
-                      return (100 * challenge.user_team.team_progress/challenge.repetitions/challenge.user_team.players.length).toFixed(0);
+                      return Math.round(100 * challenge.user_team.team_progress/challenge.repetitions/challenge.user_team.players.length);
                   }
                   else {
-                      return (100 * challenge.user_team.team_progress/challenge.repetitions).toFixed(0);
+                      return Math.round(100 * challenge.user_team.team_progress/challenge.repetitions);
                   }
 
               };
 
               $scope.getOppoTeamProgress = function(challenge) {
                   if (challenge.task_type == 'Individual') {
-                      return (100 * challenge.oppo_team.team_progress/challenge.repetitions/challenge.oppo_team.players.length).toFixed(0);
+                      return Math.round(100 * challenge.oppo_team.team_progress/challenge.repetitions/challenge.oppo_team.players.length);
                   }
                   else {
-                      return (100 * challenge.oppo_team.team_progress/challenge.repetitions).toFixed(0);
+                      return Math.round(100 * challenge.oppo_team.team_progress/challenge.repetitions);
                   }
               };
 

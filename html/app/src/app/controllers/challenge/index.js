@@ -6,6 +6,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
     $scope.new_challenge = {};
     $scope.toggleModal = function(){
           $('#createchallengemodal').modal('show');
+          $scope.selected_team = $scope.my_team;
     };
 
     $scope.overview = true;
@@ -16,8 +17,17 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
     jQuery(document).on( 'shown.bs.tab', 'a[data-toggle="tab"]', function (e) { // on tab selection event
         Challenges.reflowCharts();
-        $scope.updateProgress();
+        $timeout(function () {
+            $scope.updateProgress();
+        }, 300);
     })
+
+    $scope.showOverview = function() {
+        $scope.overview = true;
+        $timeout(function () {
+            $scope.updateProgress();
+        }, 300);
+    };
 
     $scope.challenge = {};
     $scope.past_challenge = {};
@@ -130,37 +140,37 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
         if (team == 'my_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return (100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions).toFixed(0);
+                return Math.round(100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions);
             }
             else {
-                return (100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions*$scope.my_team.players.length).toFixed(0);
+                return Math.round(100 * $scope.my_team.players[index].user_progress/$scope.challenge.repetitions*$scope.my_team.players.length);
             }
         }
         else if (team == 'opponent_team')
         {
             if( $scope.challenge.task_type == 'Individual') {
-                return (100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions).toFixed(0);
+                return Math.round(100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions);
             }
             else {
-                return (100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions*$scope.opponent_team.players.length).toFixed(0);
+                return Math.round(100 * $scope.opponent_team.players[index].user_progress/$scope.challenge.repetitions*$scope.opponent_team.players.length);
             }
         }
         else if (team == 'all_my_team')
         {
             if ($scope.challenge.task_type == 'Individual') {
-                return (100 * $scope.my_team.team_progress/$scope.challenge.repetitions/$scope.my_team.players.length).toFixed(0);
+                return Math.round(100 * $scope.my_team.team_progress/$scope.challenge.repetitions/$scope.my_team.players.length);
             }
             else {
-                return (100 * $scope.my_team.team_progress/$scope.challenge.repetitions).toFixed(0);
+                return Math.round(100 * $scope.my_team.team_progress/$scope.challenge.repetitions);
             }
         }
         else
         {
             if ($scope.challenge.task_type == 'Individual') {
-                return (100 * $scope.opponent_team.team_progress/$scope.challenge.repetitions/$scope.opponent_team.players.length).toFixed(0);
+                return Math.round(100 * $scope.opponent_team.team_progress/$scope.challenge.repetitions/$scope.opponent_team.players.length);
             }
             else {
-                return (100 * $scope.opponent_team.team_progress/$scope.challenge.repetitions).toFixed(0);
+                return Math.round(100 * $scope.opponent_team.team_progress/$scope.challenge.repetitions);
             }
         }
     };
@@ -339,6 +349,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                 // yAxis: {min: 0, max: 100}
                 Challenges.resetChartAxis();
                 Challenges.notifyObservers();
+
             });
         });
     }

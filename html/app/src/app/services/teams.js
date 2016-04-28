@@ -43,7 +43,19 @@ export default class {
               method: 'GET',
               url: '/api/teams/'+user_id
             }).then(function successCallback(response) {
-                self.teams = response.data;
+                var teams = response.data;
+
+                teams.sort(function(a,b){
+                    if (!a.challenges[0]) {
+                        return 1;
+                    }
+                    if(!b.challenges[0]) {
+                        return -1;
+                    }
+                    return new Date(a.challenges[0].end_date) - new Date(b.challenges[0].end_date);
+                });
+
+                self.teams = teams;
                 self.user_for_teams = user_id;
 
                 console.log(response);

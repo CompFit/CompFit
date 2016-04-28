@@ -8,9 +8,21 @@
             <div class="col-md-9">
                 <div class="topSection row" ng-show="challenge_selected">
                     <div class="col-sm-12">
-                        <h2> {{my_team.team_name}} vs. {{opponent_team.team_name}}</h2>
-                        <h3> {{challenge.task_name}} | {{challenge.task_type=='Individual' ? challenge.repetitions : challenge.repetitions}}
-                        {{challenge.units}} {{challenge.task_type=='Individual' ? 'per player' : ''}} | {{days_left}} days left</h3>
+                        <h2 ng-show="challenge.status == 'CLOSED'">
+                            {{my_team.team_name}} vs. {{opponent_team.team_name}} |
+                            You {{getProgress('all_my_team') > getProgress('all_opponent_team') ? 'Won!! &#9786;' : 'Lost &#9785;'}}
+                        </h2>
+                        <h2 ng-show="challenge.status != 'CLOSED'">
+                            {{my_team.team_name}} vs. {{opponent_team.team_name}}
+                        </h2>
+                        <h3 ng-show="challenge.status == 'CLOSED'">
+                            {{challenge.task_name}} | {{challenge.task_type=='Individual' ? challenge.repetitions : challenge.repetitions}}
+                            {{challenge.units}} {{challenge.task_type=='Individual' ? 'per player' : ''}}
+                        </h3>
+                        <h3 ng-show="challenge.status != 'CLOSED'">
+                            {{challenge.task_name}} | {{challenge.task_type=='Individual' ? challenge.repetitions : challenge.repetitions}}
+                            {{challenge.units}} {{challenge.task_type=='Individual' ? 'per player' : ''}} | {{days_left}} days left
+                        </h3>
                         <h4>
                             {{challenge.task_type}} Challenge
 
@@ -24,10 +36,10 @@
                         <h2>Progress</h2>
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" ng-class="{'active' : overview}">
-                                <a href="#overview" aria-controls="overview" role="tab" ng-click="overview=true">Overview</a>
+                                <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab" ng-click="showOverview()">Overview</a>
                             </li>
                             <li role="presentation" ng-class="{'active' : !overview}">
-                                <a href="#timeline" aria-controls="timeline" role="tab" ng-click="showCharts()">Timeline</a>
+                                <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab" ng-click="showCharts()">Timeline</a>
                             </li>
                         </ul>
 

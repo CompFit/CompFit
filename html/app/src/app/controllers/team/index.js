@@ -4,9 +4,14 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     'ngInject';
 
     $scope.toggleModal = function(){
-        console.log($scope.new_team);
           $('#createteammodal').modal('show');
     };
+
+    $scope.toggleChallengeModal = function(){
+          $('#createchallengemodalinteams').modal('show');
+    };
+
+    $scope.state_id = $stateParams.id;
     $scope.current = true;
     $scope.team_id = -1;
     $scope.team_name = "";
@@ -94,25 +99,25 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
 
     $scope.getTeamProgress = function(challenge) {
         if (challenge.task_type == 'Individual') {
-            return (100 * challenge.user_team.team_progress/challenge.repetitions/challenge.user_team.players.length).toFixed(0);
+            return Math.round(100 * challenge.user_team.team_progress/challenge.repetitions/challenge.user_team.players.length);
         }
         else {
-            return (100 * challenge.user_team.team_progress/challenge.repetitions).toFixed(0);
+            return Math.round(100 * challenge.user_team.team_progress/challenge.repetitions);
         }
     };
 
     $scope.getOppoTeamProgress = function(challenge) {
         if (challenge.task_type == 'Individual') {
-            return (100 * challenge.oppo_team.team_progress/challenge.repetitions/challenge.oppo_team.players.length).toFixed(0);
+            return Math.round(100 * challenge.oppo_team.team_progress/challenge.repetitions/challenge.oppo_team.players.length);
         }
         else {
-            return (100 * challenge.oppo_team.team_progress/challenge.repetitions).toFixed(0);
+            return Math.round(100 * challenge.oppo_team.team_progress/challenge.repetitions);
         }
     };
 
     $scope.getUserProgress = function(challenge) {
         if (challenge.task_type == 'Individual') {
-            return (100 * challenge.user_progress/challenge.repetitions).toFixed(0);
+            return Math.round(100 * challenge.user_progress/challenge.repetitions);
         }
         else {
             return (100 * challenge.user_progress/challenge.repetitions/challenge.user_team.num_members).toFixed(1);
