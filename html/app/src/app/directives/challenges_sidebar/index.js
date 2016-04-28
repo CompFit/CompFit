@@ -48,7 +48,7 @@ export default function(Challenges, Users, $timeout) {
                     //       scrollTop: $scope.scrollTo
                     //   });
 
-                    $('#challengelist').scrollTop($scope.scrollTo);
+                        $('#challengelist').scrollTop($scope.scrollTo);
                     }, 0);
               }
 
