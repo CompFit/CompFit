@@ -30,17 +30,17 @@
                         <h2> Challenges</h2>
 
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#current" role="tab" data-toggle="tab" ng-click="current=true">Current</a>
+                            <li role="presentation" ng-class="{'active' : current}">
+                                <a href="#current" role="tab"  ng-click="current=true">Current</a>
                             </li>
-                            <li role="presentation">
-                                <a href="#past" aria-controls="past" role="tab" data-toggle="tab" ng-click="current=false">Past</a>
+                            <li role="presentation" ng-class="{'active' : !current}">
+                                <a href="#past" aria-controls="past" role="tab" ng-click="current=false">Past</a>
                             </li>
                         </ul>
 
                         <div id="tabs" class="panel panel-default tab-content">
                             <div role="tabpanel" class="tab-pane active" ng-if="current">
-                                <div class="list-group" id="teamchallengelist">
+                                <div class="list-group" id="teamchallengelist" ng-if="challenges.length > 0">
                                     <div ng-repeat="challenge in challenges">
                                         <a class="list-group-item" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
                                             <h3 class="challenge-teams">{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h3>
@@ -67,6 +67,7 @@
                                         </a>
                                     </div>
                                 </div>
+                                <h2 ng-if="challenges.length <= 0" style="margin-left:10px; margin-bottom:10px; margin-top:12px">No current challenges</h2>
                             </div>
                             <div role="tabpanel" class="tab-pane active" ng-if="!current">
                                 <div class="list-group" id="teampastchallengelist">

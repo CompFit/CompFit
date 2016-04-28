@@ -3,6 +3,7 @@ export default class {
     constructor($http) {
         this.$http = $http;
         this.currentSidebarScrollPosition = null;
+        this.showCurrentChallenges = true;
         this.observerCallbacks = [];
 
         this.observeToReflow = [];
