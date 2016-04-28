@@ -7,6 +7,7 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
         console.log($scope.new_team);
           $('#createteammodal').modal('show');
     };
+    $scope.current = true;
     $scope.team_id = -1;
     $scope.team_name = "";
     $scope.avatar = "/img/team_avatars/default-team.png";
@@ -29,7 +30,7 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     $scope.getDaysLeft = function(challenge) {
         return getDayDifference(new Date(),challenge.end_date)+1;
     };
-    
+
     $scope.leaveAlert = function(player_id, player_name) {
         console.log("running leaveAlert("+player_id+")");
         var disband, removePlayer, leaveTeam;
@@ -43,7 +44,7 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
             leaveTeam = confirm("Are you sure you want to leave " + $scope.team_name + "?");
         }
     };
-    
+
     $scope.showEmail = function(email) {
         alert(email);
     };
