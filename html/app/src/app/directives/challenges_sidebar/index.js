@@ -44,11 +44,19 @@ export default function(Challenges, Users, $timeout) {
               $scope.scrollTo = Challenges.currentSidebarScrollPosition;
               if ($scope.scrollTo != null) {
                   $timeout(function(){
-                      $('#challengelist').animate({
-                          scrollTop: $scope.scrollTo
-                      });
-                  }, 0);
+                    //   $('#challengelist').animate({
+                    //       scrollTop: $scope.scrollTo
+                    //   });
+
+                    $('#challengelist').scrollTop($scope.scrollTo);
+                    }, 0);
               }
+
+              $('#challengelist').css('max-height', (window.innerHeight-146)+'px');
+
+              $(window).resize(function() {
+                $('#challengelist').css('max-height', (window.innerHeight-146)+'px');
+              });
 
               $scope.saveScrollPosition = function() {
                   Challenges.currentSidebarScrollPosition = $('#challengelist').scrollTop();
