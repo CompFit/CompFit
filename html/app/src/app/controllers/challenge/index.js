@@ -16,8 +16,17 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
     jQuery(document).on( 'shown.bs.tab', 'a[data-toggle="tab"]', function (e) { // on tab selection event
         Challenges.reflowCharts();
-        $scope.updateProgress();
+        $timeout(function () {
+            $scope.updateProgress();
+        }, 300);
     })
+
+    $scope.showOverview = function() {
+        $scope.overview = true;
+        $timeout(function () {
+            $scope.updateProgress();
+        }, 300);
+    };
 
     $scope.challenge = {};
     $scope.past_challenge = {};
@@ -339,6 +348,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                 // yAxis: {min: 0, max: 100}
                 Challenges.resetChartAxis();
                 Challenges.notifyObservers();
+
             });
         });
     }

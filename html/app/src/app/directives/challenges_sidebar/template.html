@@ -53,7 +53,7 @@
                         <li ng-repeat="past_challenge in past_challenges track by $index">
                             <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.challenge({id:{{past_challenge.challenge_id}}})">
                                 <h4>{{past_challenge.user_team.team_name}} vs. {{past_challenge.oppo_team.team_name}}</h4>
-                                <p>DONE</p>
+                                <p>{{getTeamProgress(past_challenge) > getOppoTeamProgress(past_challenge) ? 'Win &#9786;' : 'Loss &#9785;'}}</p>
                                 <h5 class="challenge-info">{{past_challenge.task_name}} | {{past_challenge.repetitions}} {{past_challenge.units}}</h5>
                                 <h6 class="team-name">{{past_challenge.user_team.team_name}}</h6>
                                 <div class="progress">
