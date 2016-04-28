@@ -8,6 +8,7 @@ export default function(Challenges, Users, $timeout) {
         replace: true,
         link: function ($scope, $element, $attrs) {
               $scope.challenges = Challenges.getChallenges();
+              $scope.past_challenges = Challenges.getPastChallenges();
 
               $scope.getDayDifference = function(date1_obj,date2_obj) {
                   var date2 = new Date(date2_obj);
@@ -51,10 +52,10 @@ export default function(Challenges, Users, $timeout) {
                     }, 0);
               }
 
-              $('#challengelist').css('max-height', (window.innerHeight-106)+'px');
+              $('#challengelist').css('max-height', (window.innerHeight-146)+'px');
 
               $(window).resize(function() {
-                $('#challengelist').css('max-height', (window.innerHeight-106)+'px');
+                $('#challengelist').css('max-height', (window.innerHeight-146)+'px');
               });
 
               $scope.saveScrollPosition = function() {
@@ -65,6 +66,13 @@ export default function(Challenges, Users, $timeout) {
                   Challenges.getChallengesForUser(Users.getCurrentUser()).then( function(response) {
                       console.log(response.data);
                       $scope.challenges = response.data;
+                  });
+              }
+
+              if (!$scope.past_challenges) {
+                  Challenges.getPastChallengesForUser(Users.getCurrentUser()).then( function(response) {
+                      console.log(response.data);
+                      $scope.past_challenges = response.data;
                   });
               }
         },
