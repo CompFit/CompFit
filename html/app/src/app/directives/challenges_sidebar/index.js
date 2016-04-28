@@ -46,9 +46,16 @@ export default function(Challenges, Users, $timeout) {
                     //   $('#challengelist').animate({
                     //       scrollTop: $scope.scrollTo
                     //   });
+
                     $('#challengelist').scrollTop($scope.scrollTo);
                     }, 0);
               }
+
+              $('#challengelist').css('max-height', (window.innerHeight-106)+'px');
+
+              $(window).resize(function() {
+                $('#challengelist').css('max-height', (window.innerHeight-106)+'px');
+              });
 
               $scope.saveScrollPosition = function() {
                   Challenges.currentSidebarScrollPosition = $('#challengelist').scrollTop();
