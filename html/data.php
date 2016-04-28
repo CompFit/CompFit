@@ -1,4 +1,26 @@
 <?php
+
+// $url_send = 'http://127.0.0.1/api/user';
+// function sendPostData($url, $post){
+//   $ch = curl_init($url);
+//   curl_setopt($ch, CURLOPT_POST, true);
+//   curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+//   //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//   curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//     'Content-Type: application/json'));
+//
+//     $result = curl_exec($ch);
+//     curl_close($ch);
+// }
+// $data = array();
+// $data['first_name'] = 'Mary Charles';
+// $data['last_name'] = 'Porter';
+// $data['username'] = 'marycharles2';
+// $data['email'] = 'mcharles2@gmail.com';
+// $data['password'] = '420blazeit2016';
+// $str_data = json_encode($data, JSON_PRETTY_PRINT);
+// sendPostData($url_send, $str_data);
+
 $url_send = 'http://127.0.0.1/api/challenge';
 function sendPostData($url, $post){
   $ch = curl_init($url);

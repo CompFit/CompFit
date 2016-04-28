@@ -130,7 +130,7 @@ CREATE TABLE units
   FOREIGN KEY(exercise_list_id) REFERENCES exercise_list(exercise_list_id)
 );
 
-INSERT INTO users (first_name, last_name, username, email, password, avatar) VALUES ('Mary Charles', 'Porter', 'marycharles', 'mcharles@gmail.com', '420blazeit2016', '/img/user_avatars/basic_avatar0.png');
+INSERT INTO users (first_name, last_name, username, email, password, salt, avatar) VALUES ('Mary Charles', 'Porter', 'marycharles', 'mcharles@gmail.com', '$2a$10$7Rzo9kUMhYlij9tT4uwFkeRwmkWVyLskALKW\/ogsgtbd.TS.sHB0e', '$2a$10$7Rzo9kUMhYlij9tT4uwFkg==', '/img/user_avatars/basic_avatar0.png');
 INSERT INTO users (first_name, last_name, username, email, password, avatar) VALUES ('Gabe', 'Vargas', 'gvargas', 'gvargas@urmom.com', 'EirXgVZzZcA', '/img/user_avatars/basic_avatar1.png');
 insert into users (first_name, last_name, email, password, avatar, username) values ('Annie', 'Allen', 'aallen0@accuweather.com', 'GZq0qt2VL', '/img/user_avatars/basic_avatar0.png', 'aallen0');
 insert into users (first_name, last_name, email, password, avatar, username) values ('Fred', 'Hicks', 'fhicks1@edublogs.org', 'IDHOvLjkY8', '/img/user_avatars/basic_avatar1.png', 'fhicks1');
