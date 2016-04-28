@@ -8,8 +8,10 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     };
 
     $scope.toggleChallengeModal = function(){
-          $('#createchallengemodal').modal('show');
+          $('#createchallengemodalinteams').modal('show');
     };
+
+    $scope.state_id = $stateParams.id;
     $scope.current = true;
     $scope.team_id = -1;
     $scope.team_name = "";

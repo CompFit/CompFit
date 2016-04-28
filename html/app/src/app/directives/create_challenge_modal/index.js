@@ -20,7 +20,6 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
 
             $scope.new_challenge.to_team_id = null;
             $scope.new_challenge.from_team_id = null;
-
             $scope.selected_team = null;
 
             $scope.new_challenge.task_type = "Individual";
@@ -41,7 +40,17 @@ export default function(Teams, Users, Challenges, Exercises, $timeout, $state) {
             Teams.getTeamsByCaptianId(Users.getCurrentUser()).then(function(response) {
                 $scope.usersTeams = response.data;
                 $scope.selected_team = $scope.usersTeams[0];
+                console.log("got teams")
+                if (attrs.selectedteam) {
+                    for (var i = 0; i < $scope.usersTeams.length; i++) {
+                        if ($scope.usersTeams[i].team_id == attrs.selectedteam) {
+                            $scope.selected_team = $scope.usersTeams[i];
+                            break;
+                        }
+                    }
+                }
             });
+
 
             Teams.getAllOpponentTeams(Users.getCurrentUser()).then(function(response) {
                 $scope.all_teams = response.data;

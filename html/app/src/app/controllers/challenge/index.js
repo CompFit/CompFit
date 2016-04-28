@@ -6,6 +6,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
     $scope.new_challenge = {};
     $scope.toggleModal = function(){
           $('#createchallengemodal').modal('show');
+          $scope.selected_team = $scope.my_team;
     };
 
     $scope.overview = true;

@@ -27,7 +27,7 @@
 
                 <div class="bottomSection row" ng-show="team_selected">
                     <div class="col-sm-12">
-                        <h2> Challenges <a ui-sref-active="active" ui-sref="app.team"><i ng-click="toggleChallengeModal()" class="fa fa-plus-square"></i></a></h2>
+                        <h2> Challenges <a ng-if="isCaptain" ui-sref-active="active" ui-sref="app.team"><i ng-click="toggleChallengeModal()" class="fa fa-plus-square"></i></a></h2>
 
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" ng-class="{'active' : current}">
@@ -105,8 +105,9 @@
                     </div>
                 </div>
                 <create-team-modal id="createteammodal" title="New Team"/>
-                <create-challenge-modal id="createchallengemodal" title="New Challenge"/>
+
             </div>
         </div>
     </div>
 </div>
+<create-challenge-modal id="createchallengemodalinteams" title="New Challenge" selectedteam="{{state_id}}"/>
