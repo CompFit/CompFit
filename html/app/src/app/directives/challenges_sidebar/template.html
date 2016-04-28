@@ -52,21 +52,27 @@
                     <ul class="nav list-group" id="pastchallengelist" ng-show="past_challenges.length > 0" ng-click="saveScrollPosition()">
                         <li ng-repeat="past_challenge in past_challenges track by $index">
                             <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.past_challenge({id:{{past_challenge.challenge_id}}})">
-                                <h5>{{past_challenge.user_team.team_name}} vs. {{past_challenge.oppo_team.team_name}}</h5>
+                                <h4>{{past_challenge.user_team.team_name}} vs. {{past_challenge.oppo_team.team_name}}</h4>
                                 <p>COMPLETED</p>
                                 <h5>{{past_challenge.task_name}} | {{past_challenge.repetitions}} {{past_challenge.units}}</h5>
-                                <h6>{{past_challenge.user_team.team_name}}</h6>
+                                <h6 class="team-name">{{past_challenge.user_team.team_name}}</h6>
                                 <div class="progress">
+                                    <span class="progress-value">
+                                        {{past_challenge.user_team.fraction_team_progress ? past_challenge.user_team.fraction_team_progress : getProgressLongFraction(past_challenge,'my_team')}}
+                                        {{past_challenge.units}}
+                                    </span>
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(past_challenge)}}"
-                                  aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(past_challenge)}}%">
-                                    {{getTeamProgress(past_challenge)}}% Complete
+                                        aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(past_challenge)}}%">
                                     </div>
                                 </div>
-                                <h6>{{past_challenge.oppo_team.team_name}}</h6>
+                                <h6 class="team-name">{{past_challenge.oppo_team.team_name}}</h6>
                                 <div class="progress">
+                                    <span class="progress-value">
+                                        {{past_challenge.oppo_team.fraction_team_progress ? past_challenge.oppo_team.fraction_team_progress : getProgressLongFraction(past_challenge,'opponent_team')}}
+                                        {{past_challenge.units}}
+                                    </span>
                                     <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getOppoTeamProgress(past_challenge)}}"
-                                    aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(past_challenge)}}%">
-                                        {{getOppoTeamProgress(past_challenge)}}% Complete
+                                        aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(past_challenge)}}%">
                                     </div>
                                 </div>
                             </a>
