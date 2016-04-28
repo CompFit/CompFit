@@ -14,20 +14,33 @@
     }
 
     .topSection {
-        img {
-            width: 130px;
-            height: 130px;
-            float: left;
-            margin-top: 20px;
+        .img-holder {
+            position: absolute;
+            height: 100%;
+
+            img {
+                width: 130px;
+                height: 130px;
+                margin-top: 20px;
+            }
+        }
+
+        .info-holder {
+            padding-left: 145px;
         }
 
         .label {
             font-size: 12px;
-            padding: 7px 10px;
+            padding: 10px;
             text-align: left;
             display: inline-block;
-            width: 210px;
+            width: 250px;
             margin: 2px;
+
+            .captain-icon {
+                height: 12px;
+                vertical-align: bottom;
+            }
         }
 
         .glyphicon {

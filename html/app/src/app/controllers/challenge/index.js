@@ -20,6 +20,7 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
     })
 
     $scope.challenge = {};
+    $scope.past_challenge = {};
     $scope.my_team = {"players":[],"team_id":null};
     $scope.opponent_team = {"players":[]};
 
@@ -229,9 +230,6 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
                 }
             }
         });
-
-
-
     }
     else {
         $scope.challenge_selected = true;
@@ -246,10 +244,6 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
 
             $scope.opponentTeamChartData.tooltip.valueSuffix = ' ' + $scope.challenge.units;
             $scope.opponentTeamChartData.yAxis.title.text = $filter('capitalize')($scope.challenge.units);
-
-
-
-
 
             Challenges.getChallengeProgress($stateParams.id).then(function(response){
                 console.log(response);
@@ -352,7 +346,6 @@ export default function($scope, $stateParams, Challenges, Teams, Users, $timeout
     $scope.goToMyTeam = function() {
         $state.go('app.team', {'id': $scope.my_team.team_id});
     };
-
 
 
     $scope.myTeamChartData = {
