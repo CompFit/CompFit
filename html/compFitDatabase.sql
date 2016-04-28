@@ -516,3 +516,7 @@ INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'kilometers', 4);
 INSERT INTO units (unit_name, exercise_list_id)
 VALUES( 'meters', 4);
+INSERT INTO units (unit_name, exercise_list_id)
+VALUES( 'minutes', 6);
+INSERT INTO units (unit_name, exercise_list_id)
+VALUES( 'hours', 6);
