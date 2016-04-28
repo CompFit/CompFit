@@ -7,6 +7,7 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
         console.log($scope.new_team);
           $('#createteammodal').modal('show');
     };
+    $scope.current = true;
     $scope.team_id = -1;
     $scope.team_name = "";
     $scope.avatar = "/img/team_avatars/default-team.png";
@@ -14,6 +15,8 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     $scope.players_dropdown = false;
     $scope.team_selected = false;
     $scope.new_team = {};
+    $scope.challenges = [];
+    $scope.past_challenges = [];
     $scope.currentUser = Users.getCurrentUser();
     console.log("currentUser: " + $scope.currentUser);
 
@@ -29,21 +32,21 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
     $scope.getDaysLeft = function(challenge) {
         return getDayDifference(new Date(),challenge.end_date)+1;
     };
-    
+
     $scope.leaveAlert = function(player_id, player_name) {
         console.log("running leaveAlert("+player_id+")");
         var disband, removePlayer, leaveTeam;
         if($scope.isCaptain) {
             if(player_id == $scope.currentUser) {
-                disband = confirm("You are currently team captain. If you leave this group, you will disband the team. Are you sure you want to disband the team?");
+                disband = confirm("You are currently team captain. If you leave this group, you will disband the team. Are you sure you want to disband the team?\n\n Disbanding teams is not yet available.");
             } else {
-                removePlayer = confirm("Are you sure you want to remove " + player_name + " from the team?");
+                removePlayer = confirm("Are you sure you want to remove " + player_name + " from the team?\n\n Removing members is not yet available.");
             }
         } else {
-            leaveTeam = confirm("Are you sure you want to leave " + $scope.team_name + "?");
+            leaveTeam = confirm("Are you sure you want to leave " + $scope.team_name + "?\n\n Leaving teams is not yet available.");
         }
     };
-    
+
     $scope.showEmail = function(email) {
         alert(email);
     };
@@ -76,6 +79,17 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
             $scope.challenges = response.data;
             console.log("challenges: ",response);
         });
+        Challenges.getPastChallengesForTeam($scope.team_id).then(function(response){
+            if (response.data.message == "Not found") {
+                console.log("past challenges for team not working yet")
+            }
+            else {
+                $scope.past_challenges = response.data;
+                console.log("past_challenges: ",response);
+            }
+
+        });
+
     }
 
     $scope.getTeamProgress = function(challenge) {

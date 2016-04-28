@@ -15,7 +15,7 @@ export default angular
     .directive( 'createChallengeModal', ['Teams','Users','Challenges','Exercises', '$timeout', '$state', create_challenge_modal] )
     .directive( 'createTeamModal', ['Teams','Users', '$timeout', create_team_modal] )
     .directive( 'challengesSidebar', ['Challenges','Users','$timeout', challenges_sidebar] )
-    .directive( 'exercisesSidebar', ['Exercises', 'Users', exercises_sidebar] )
+    .directive( 'exercisesSidebar', ['Exercises', 'Users', '$timeout', exercises_sidebar] )
     .directive( 'logExerciseModal', ['Exercises','Users', '$timeout', '$state', log_exercise_modal] )
     .directive( 'seedNavbar', ['Authentication','Users','Teams','Challenges','Exercises','$state', navbar] )
     .directive( 'playerProgressChart', ['Challenges',player_progress_chart] )

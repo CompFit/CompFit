@@ -18,15 +18,16 @@
                         <h4>{{challenge.start_date | date: 'shortDate'}} - {{challenge.end_date | date:'shortDate'}}</h4>
                     </div>
                 </div>
+
                 <div class="bottomSection row" ng-show="challenge_selected">
                     <div class="col-sm-12">
                         <h2>Progress</h2>
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab" ng-click="overview=true">Overview</a>
+                            <li role="presentation" ng-class="{'active' : overview}">
+                                <a href="#overview" aria-controls="overview" role="tab" ng-click="overview=true">Overview</a>
                             </li>
-                            <li role="presentation">
-                                <a href="#timeline" aria-controls="timeline" role="tab" data-toggle="tab" ng-click="showCharts()">Timeline</a>
+                            <li role="presentation" ng-class="{'active' : !overview}">
+                                <a href="#timeline" aria-controls="timeline" role="tab" ng-click="showCharts()">Timeline</a>
                             </li>
                         </ul>
 
@@ -70,8 +71,7 @@
                                                         <td>{{player.username}}</td>
                                                         <td>{{getProgressFraction('my_team', $index)}}</td>
                                                         <td>{{getProgress('my_team', $index)}}%
-                                                            <!--<i class="fa fa-trophy" ng-show="player.user_id==my_team.captain_id"></i>-->
-                                                            <img src="/img/application/captain-icon.png" ng-show="player.user_id==my_team.captain_id" style="height: 16px; float: right;"/>
+                                                            <img src="/img/application/captain-icon.png" ng-show="player.user_id==my_team.captain_id" class="captain-icon"/>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="timeline" >
+                            <div role="tabpanel" class="tab-pane active" id="timeline" >
                                 <div class="row" ng-if="!overview">
                                     <player-progress-chart ng-if="challenge" id="myteamchart" class="col-sm-6" options="myTeamChartData"></player-progress-chart>
                                     <player-progress-chart ng-if="challenge" id="opponentteamchart" class="col-sm-6" options="opponentTeamChartData"></player-progress-chart>
@@ -134,6 +134,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

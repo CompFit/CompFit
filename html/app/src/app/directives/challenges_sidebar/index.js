@@ -8,6 +8,8 @@ export default function(Challenges, Users, $timeout) {
         replace: true,
         link: function ($scope, $element, $attrs) {
               $scope.challenges = Challenges.getChallenges();
+              $scope.past_challenges = Challenges.getPastChallenges();
+              $scope.showCurrent = Challenges.showCurrentChallenges;
 
               $scope.getDayDifference = function(date1_obj,date2_obj) {
                   var date2 = new Date(date2_obj);
@@ -43,20 +45,68 @@ export default function(Challenges, Users, $timeout) {
               $scope.scrollTo = Challenges.currentSidebarScrollPosition;
               if ($scope.scrollTo != null) {
                   $timeout(function(){
-                      $('#challengelist').animate({
-                          scrollTop: $scope.scrollTo
-                      });
-                  }, 0);
+                    //   $('#challengelist').animate({
+                    //       scrollTop: $scope.scrollTo
+                    //   });
+
+                        if ($scope.showCurrent) {
+                            $('#challengelist').scrollTop($scope.scrollTo);
+                        }
+                        else {
+                            $('#pastchallengelist').scrollTop($scope.scrollTo);
+                        }
+
+                    }, 0);
               }
 
+              $('#challengelist').css('max-height', (window.innerHeight-146)+'px');
+              $('#pastchallengelist').css('max-height', (window.innerHeight-146)+'px');
+
+              $(window).resize(function() {
+                $('#challengelist').css('max-height', (window.innerHeight-146)+'px');
+                $('#pastchallengelist').css('max-height', (window.innerHeight-146)+'px');
+              });
+
               $scope.saveScrollPosition = function() {
-                  Challenges.currentSidebarScrollPosition = $('#challengelist').scrollTop();
+                  if ($scope.showCurrent) {
+                      Challenges.currentSidebarScrollPosition = $('#challengelist').scrollTop();
+                  }
+                  else {
+                      Challenges.currentSidebarScrollPosition = $('#pastchallengelist').scrollTop();
+                  }
               };
+
+              $scope.saveStateInfo = function() {
+                  $scope.saveScrollPosition();
+                  Challenges.showCurrentChallenges = $scope.showCurrent;
+              };
+
+              $scope.showCurrentChallenges = function() {
+                  $scope.showCurrent=true;
+                //   if ($scope.challenges !== undefined) {
+                //       if ($scope.challenges[0] !== undefined) {
+                //           $state.go('app.challenge', {'id': $scope.challenges[0].challenge_id});
+                //       }
+                //   }
+              };
+
+              $scope.showPastChallenges = function() {
+                  $scope.showCurrent=false;
+              };
+
+
 
               if (!$scope.challenges) {
                   Challenges.getChallengesForUser(Users.getCurrentUser()).then( function(response) {
                       console.log(response.data);
                       $scope.challenges = response.data;
+                  });
+              }
+
+              if (!$scope.past_challenges) {
+                  Challenges.getPastChallengesForUser(Users.getCurrentUser()).then( function(response) {
+                      console.log(response.data);
+                      $scope.past_challenges = response.data;
                   });
               }
         },
