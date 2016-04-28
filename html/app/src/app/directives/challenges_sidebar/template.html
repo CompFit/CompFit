@@ -23,19 +23,25 @@
                             <a class="list-group-item side-item" ui-sref-active="active" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
                                 <h4>{{challenge.user_team.team_name}} vs. {{challenge.oppo_team.team_name}}</h4>
                                 <p>{{getDaysLeft(challenge)}} days left</p>
-                                <h5>{{challenge.task_name}} | {{challenge.repetitions}} {{challenge.units}}</h5>
-                                <h6>{{challenge.user_team.team_name}}</h6>
+                                <h5 class="challenge-info">{{challenge.task_name}} | {{challenge.repetitions}} {{challenge.units}}</h5>
+                                <h6 class="team-name">{{challenge.user_team.team_name}}</h6>
                                 <div class="progress">
+                                    <span class="progress-value">
+                                        {{challenge.user_team.fraction_team_progress ? challenge.user_team.fraction_team_progress : getProgressLongFraction(challenge,'my_team')}}
+                                        {{challenge.units}}
+                                    </span>
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{getTeamProgress(challenge)}}"
-                                  aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%">
-                                    {{getTeamProgress(challenge)}}% Complete
+                                        aria-valuemin="0" aria-valuemax="100" style="width:{{getTeamProgress(challenge)}}%">
                                     </div>
                                 </div>
-                                <h6>{{challenge.oppo_team.team_name}}</h6>
+                                <h6 class="team-name">{{challenge.oppo_team.team_name}}</h6>
                                 <div class="progress">
+                                    <span class="progress-value">
+                                        {{challenge.oppo_team.fraction_team_progress ? challenge.oppo_team.fraction_team_progress : getProgressLongFraction(challenge,'opponent_team')}}
+                                        {{challenge.units}}
+                                    </span>
                                     <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{getOppoTeamProgress(challenge)}}"
-                                    aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(challenge)}}%">
-                                        {{getOppoTeamProgress(challenge)}}% Complete
+                                        aria-valuemin="0" aria-valuemax="100" style="width:{{getOppoTeamProgress(challenge)}}%">
                                     </div>
                                 </div>
                             </a>

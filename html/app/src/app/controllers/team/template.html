@@ -31,15 +31,15 @@
 
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#current" aria-controls="current" role="tab" data-toggle="tab" ng-click="current=true">Current</a>
+                                <a href="#current" role="tab" data-toggle="tab" ng-click="current=true">Current</a>
                             </li>
                             <li role="presentation">
-                                <a href="#past" aria-controls="past" role="tab" data-toggle="tab" ng-click="past=true">Past</a>
+                                <a href="#past" aria-controls="past" role="tab" data-toggle="tab" ng-click="current=false">Past</a>
                             </li>
                         </ul>
 
                         <div id="tabs" class="panel panel-default tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="current" ng-if="current">
+                            <div role="tabpanel" class="tab-pane active" ng-if="current">
                                 <div class="list-group" id="teamchallengelist">
                                     <div ng-repeat="challenge in challenges">
                                         <a class="list-group-item" ui-sref="app.challenge({id:{{challenge.challenge_id}}})">
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane active" id="past" ng-if="past">
+                            <div role="tabpanel" class="tab-pane active" ng-if="!current">
                                 <div class="list-group" id="teampastchallengelist">
                                     <div ng-repeat="past_challenge in past_challenges">
                                         <a class="list-group-item" ui-sref="app.challenge({id:{{past_challenge.challenge_id}}})">
