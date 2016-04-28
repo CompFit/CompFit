@@ -35,7 +35,7 @@ export default function($scope, $stateParams, Teams, Users, Challenges, $state) 
         var disband, removePlayer, leaveTeam;
         if($scope.isCaptain) {
             if(player_id == $scope.currentUser) {
-                disband = confirm("You are currently team captain. If you leave this group, you will disband the team. Are you sure you want to disband the team?");
+                disband = confirm("You are currently team captain. If you leave this group, you will disband the team. Are you sure you want to disband the team?\n\n Disbanding teams is currently a future feature.");
             } else {
                 removePlayer = confirm("Are you sure you want to remove " + player_name + " from the team?");
             }
