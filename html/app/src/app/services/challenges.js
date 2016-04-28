@@ -141,7 +141,7 @@ export default class {
     getPastChallengesForTeam(team_id) {
         return this.$http({
               method: 'GET',
-              url: '/api/past_challenges/team_id/'+team_id
+              url: '/api/past_team_challenges/'+team_id
             }).then(function successCallback(response) {
                 return response;
               }, function errorCallback(response) {
