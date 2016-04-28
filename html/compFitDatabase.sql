@@ -197,28 +197,28 @@ insert into users (first_name, last_name, email, password, avatar, username) val
 
 
 
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Tigers', '1', '/img/team_avatars/team_avatar0.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Ligers', '2', '/img/team_avatars/team_avatar1.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Tigers', '1', '/img/team_avatars/team_avatar_tiger.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Ligers', '2', '/img/team_avatars/team_avatar_liger.png');
 INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Ligons', '2', '/img/team_avatars/team_avatar2.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Lions', '2', '/img/team_avatars/team_avatar3.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Lions', '2', '/img/team_avatars/team_avatar_lion.png');
 INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Sabertooths', '2', '/img/team_avatars/team_avatar4.png');
-INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Victorious Secret', '1', '/img/team_avatars/team_avatar5.png');
+INSERT INTO teams (team_name, captain_id, avatar) VALUES ('Victorious Secret', '1', '/img/team_avatars/team_avatarvs.png');
 
 
-insert into teams (team_name, captain_id, avatar) values ('Angels', 38, '/img/team_avatars/team_avatar6.png');
-insert into teams (team_name, captain_id, avatar) values ('Demons', 37, '/img/team_avatars/team_avatar7.png');
+insert into teams (team_name, captain_id, avatar) values ('Angels', 38, '/img/team_avatars/team_avatar_angel.png');
+insert into teams (team_name, captain_id, avatar) values ('Demons', 37, '/img/team_avatars/team_avatar_demon.png');
 insert into teams (team_name, captain_id, avatar) values ('Crybabys', 32, '/img/team_avatars/team_avatar8.png');
 insert into teams (team_name, captain_id, avatar) values ('Cheetahs', 2, '/img/team_avatars/team_avatar9.png');
 insert into teams (team_name, captain_id, avatar) values ('Panthers', 38, '/img/team_avatars/team_avatar10.png');
 insert into teams (team_name, captain_id, avatar) values ('Sloths', 33, '/img/team_avatars/team_avatar11.png');
 insert into teams (team_name, captain_id, avatar) values ('Titans', 18, '/img/team_avatars/team_avatar0.png');
-insert into teams (team_name, captain_id, avatar) values ('Warriors', 7, '/img/team_avatars/team_avatar1.png');
-insert into teams (team_name, captain_id, avatar) values ('Bulls', 25, '/img/team_avatars/team_avatar2.png');
-insert into teams (team_name, captain_id, avatar) values ('Procrastinators', 4, '/img/team_avatars/team_avatar3.png');
+insert into teams (team_name, captain_id, avatar) values ('Warriors', 7, '/img/team_avatars/team_avatar_warrior.png');
+insert into teams (team_name, captain_id, avatar) values ('Bulls', 25, '/img/team_avatars/team_avatar_bull.png');
+insert into teams (team_name, captain_id, avatar) values ('Bandits', 4, '/img/team_avatars/team_avatar_bandit.png');
 
 insert into teams (team_name, captain_id, avatar) values ('Oklahomies', 43, '/img/team_avatars/team_avatar3.png');
-insert into teams (team_name, captain_id, avatar) values ('Wii Not Fit', 47, '/img/team_avatars/team_avatar4.png');
-insert into teams (team_name, captain_id, avatar) values ('Foo Fighters', 51, '/img/team_avatars/team_avatar5.png');
+insert into teams (team_name, captain_id, avatar) values ('Wii Not Fit', 47, '/img/team_avatars/team_avatar_wii.png');
+insert into teams (team_name, captain_id, avatar) values ('Foo Fighters', 51, '/img/team_avatars/team_avatar_foo.png');
 insert into teams (team_name, captain_id, avatar) values ('Devpool', 55, '/img/team_avatars/team_avatar7.png');
 insert into teams (team_name, captain_id, avatar) values ('Thunder', 59, '/img/team_avatars/team_avatar9.png');
 
