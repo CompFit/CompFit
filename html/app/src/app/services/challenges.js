@@ -138,6 +138,16 @@ export default class {
                 return response;
             });
     }
+    getPastChallengesForTeam(team_id) {
+        return this.$http({
+              method: 'GET',
+              url: '/api/past_challenges/team_id/'+team_id
+            }).then(function successCallback(response) {
+                return response;
+              }, function errorCallback(response) {
+                return response;
+            });
+    }
 
     getChallengesForExercise(exercise_id) {
         return this.$http({

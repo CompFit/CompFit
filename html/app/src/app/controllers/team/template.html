@@ -67,10 +67,10 @@
                                         </a>
                                     </div>
                                 </div>
-                                <h2 ng-if="challenges.length <= 0" style="margin-left:10px; margin-bottom:10px; margin-top:12px">No current challenges</h2>
+                                <h2 ng-if="challenges.length <= 0" class="no-challenges">No current challenges</h2>
                             </div>
                             <div role="tabpanel" class="tab-pane active" ng-if="!current">
-                                <div class="list-group" id="teampastchallengelist">
+                                <div class="list-group" id="teampastchallengelist" ng-if="past_challenges.length > 0">
                                     <div ng-repeat="past_challenge in past_challenges">
                                         <a class="list-group-item" ui-sref="app.challenge({id:{{past_challenge.challenge_id}}})">
                                             <h3 class="challenge-teams">{{past_challenge.user_team.team_name}} vs. {{past_challenge.oppo_team.team_name}}</h3>
@@ -97,6 +97,7 @@
                                         </a>
                                     </div>
                                 </div>
+                                <h2 ng-if="past_challenges.length <= 0" class="no-challenges">No past challenges</h2>
                             </div>
                         </div>
                     </div>
