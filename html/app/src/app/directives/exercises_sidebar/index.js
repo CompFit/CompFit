@@ -18,6 +18,12 @@ export default function(Exercises, Users) {
               Exercises.currentSidebarScrollPosition = $('#exerciselist').scrollTop();
             };
 
+            $('#exerciselist').css('max-height', (window.innerHeight-106)+'px');
+
+            $(window).resize(function() {
+              $('#exerciselist').css('max-height', (window.innerHeight-106)+'px');
+            });
+
             if (!$scope.exercises) {
                 Exercises.getExercisesForUser(Users.getCurrentUser()).then( function(response) {
                     console.log(response.data);
