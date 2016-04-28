@@ -1,7 +1,7 @@
 import './style.styl';
 import template from 'directives/create_team_modal/template.html';
 
-export default function(Teams, Users, $timeout) {
+export default function(Teams, Users, $timeout, $state) {
 
     return {
         restrict: 'E',
@@ -111,11 +111,15 @@ export default function(Teams, Users, $timeout) {
                     Teams.createTeam($scope.new_team.name,captain_id,players).then(function (response) {
                         console.log(response.data);
                         // alert("Team_id =",response.data["team_id"]);
-                        $(element).modal('hide');
-
+                        var team_id = response.data.team_id;
                         //update teams
-                        Teams.getTeamsForUser(Users.user_id);
+                        // Teams.getTeamsForUser(Users.user_id);
 
+                        $(element).modal('hide');
+                        $(".modal-backdrop").fadeOut("slow");
+                        Teams.getTeamsForUser(Users.getCurrentUser()).then(function(response){
+                            $state.go('app.team', {'id': team_id});
+                        });
                         // $timeout(function(){
                         //
                         // }, 500);
